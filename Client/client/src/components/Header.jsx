@@ -14,7 +14,7 @@ const Header = () => {
   alt="Descripción de la imagen."
   src={miImagen}
 />      </Box>
-)
+) 
 }
 
 export default Header
