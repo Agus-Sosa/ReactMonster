@@ -1,32 +1,20 @@
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import titleGame from '../assets/img/title_game.png'
 const Header = () => {
   return (
-      <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
-)
+      <Box sx={{flex: 1,  }}>
+<Box
+  component="img"
+  sx={{
+    height: 233,
+    width: 350,
+    maxHeight: { xs: 233, md: 167 },
+    maxWidth: { xs: 350, md: 250 },
+  }}
+  alt="Descripción de la imagen."
+  src={miImagen}
+/>      </Box>
+) 
 }
 
 export default Header
