@@ -11,7 +11,7 @@ function Landing() {
     <section className='landing'>
     <img className="title-img" src={titulogame} alt="Nombre del juego"/>
 
-    <h2 id='eslogan'>Domina cada movimiento. la victoria es para quien mejor la planifica</h2>
+    <h2 id='eslogan'>Domina la guerra, controla la carne, gobierna el mundo.</h2>
 
     <Button className='btn-play'
     sx={{
@@ -20,13 +20,14 @@ function Landing() {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     color: "yellow",
-    border: "2px solid red",
-    borderRadius: "8px",
+    border: "1px solid red",
+    borderRadius: "5px",
     padding: "20px 60px",
     fontWeight: "bold",
     textTransform: "uppercase",
     "&:hover": {
-      background: "linear-gradient(45deg, #ff4b2b, #ff416c)",
+      backgroundBlendMode: "luminosity",
+      backgroundColor:'rgba(255, 0, 0, 0.95)'
     },
     textShadow: "-1px -1px 0 red,  1px -1px 0 red,-1px  1px 0 red,1px  1px 0 red; "
   }}
