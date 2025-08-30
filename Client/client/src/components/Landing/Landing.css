@@ -15,16 +15,6 @@
 }
 
 .title-img{
-<<<<<<< HEAD
-    height: 55vh;
-}
-#eslogan{
-    position: relative;
-    bottom: 100px;
-    color: White;
-    font-size: 3em;
-    font-family: 'Lobster';
-=======
   height: 55vh;
 }
 #eslogan{
@@ -33,7 +23,6 @@
   color: White;
   font-size: 3em;
   font-family: 'Lobster';
->>>>>>> 241f269352de9c814b0fe75a81802b0ebda6db95
 }
 /*vista cel*/
 
