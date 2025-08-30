@@ -25,11 +25,13 @@ function Landing() {
     padding: "20px 60px",
     fontWeight: "bold",
     textTransform: "uppercase",
+    textShadow: "-1px -1px 0 red,  1px -1px 0 red,-1px  1px 0 red,1px  1px 0 red; ",
     "&:hover": {
       backgroundBlendMode: "luminosity",
-      backgroundColor:'rgba(255, 0, 0, 0.95)'
+      backgroundColor:'rgba(255, 0, 0, 0.95)',
+      textShadow: "-1px -1px 0 red,  1px -1px 0 red,-1px  2px 0 red,2px  2px 0 red; ",
     },
-    textShadow: "-1px -1px 0 red,  1px -1px 0 red,-1px  1px 0 red,1px  1px 0 red; "
+    
   }}
     > JUGAR AHORA</Button>
     
@@ -37,5 +39,4 @@ function Landing() {
     </>
   )
 }
-
 export default Landing
