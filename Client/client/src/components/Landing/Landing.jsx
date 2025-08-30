@@ -4,11 +4,12 @@ import { styled } from '@mui/material/styles';
 import "./Landing.css";
 import btnbg from '../../assets/img/test.png';
 import titulogame from "../../assets/img/title_game.png";
+import Box from '@mui/material/Box';
 
 function Landing() {
   return (
     <>
-    <section className='landing'>
+    <Box component='section' className='landing'>
     <img className="title-img" src={titulogame} alt="Nombre del juego"/>
 
     <h2 id='eslogan'>Domina la guerra, controla la carne, gobierna el mundo.</h2>
@@ -35,7 +36,7 @@ function Landing() {
   }}
     > JUGAR AHORA</Button>
     
-    </section>
+    </Box>
     </>
   )
 }
