@@ -1,11 +1,22 @@
 .landing{
     background-image: url('../../assets/img/hero_bg_home.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 100vh;
+    display: flex;          
+    flex-direction: column;   
+    justify-content: center;    
+    align-items: center;  
+    background-blend-mode: color;
+    background-color: rgba(39, 39, 39, 0.699);
 }
-.btn-play {
-  padding: 10px 20px;
-  background: blue;
-  color: white;
-  border: none;
-  border-radius: 5px;
+
+.title-img{
+  height: 55vh;
 }
+#eslogan{
+  position: relative;
+  bottom: 100px;
+  color: White;
+}
+
