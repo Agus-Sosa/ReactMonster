@@ -3,7 +3,7 @@ import title_game from '../assets/img/title_game.png'
 import Button from '@mui/material/Button'
 import useMediaQuery from '@mui/material/useMediaQuery'
 const Footer = () => {
-  const mobile = useMediaQuery('(max-width:600px)')
+  const mobile = useMediaQuery('(max-width:700px)')
   return (
     <Box component="footer" sx={{backgroundColor:"#1e1e1e", color:"white", m:"auto", px:mobile ? 3 : 10 , py:5 }}>
       <Box component="img" sx={{width:"100px"}} src={title_game} alt=""/>
