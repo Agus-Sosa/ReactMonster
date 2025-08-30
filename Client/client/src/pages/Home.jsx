@@ -6,6 +6,7 @@ import Landing from '../components/Landing/Landing'
 const Home = () => {
   return (
     <>
+    <Header/>
     <Landing/>
     <Footer/>
     

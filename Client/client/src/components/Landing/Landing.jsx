@@ -33,6 +33,7 @@ function Landing() {
       textShadow: "-1px -1px 0 black,  1px -1px 0 red,-1px  2px 0 red,2px  2px 0 black; ",
     },
     
+    
   }}
     > JUGAR AHORA</Button>
     
@@ -40,5 +41,4 @@ function Landing() {
     </>
   )
 }
-
 export default Landing
