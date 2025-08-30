@@ -25,7 +25,6 @@ function Landing() {
     padding: "20px 60px",
     fontWeight: "bold",
     textTransform: "uppercase",
-<<<<<<< HEAD
     textShadow: "-1px -1px 0 red,  1px -1px 0 red,-1px  1px 0 red,1px  1px 0 red; ",
     "&:hover": {
       backgroundBlendMode: "luminosity",
@@ -33,13 +32,6 @@ function Landing() {
       textShadow: "-1px -1px 0 red,  1px -1px 0 red,-1px  2px 0 red,2px  2px 0 red; ",
     },
     
-=======
-    "&:hover": {
-      backgroundBlendMode: "luminosity",
-      backgroundColor:'rgba(255, 0, 0, 0.95)'
-    },
-    textShadow: "-1px -1px 0 red,  1px -1px 0 red,-1px  1px 0 red,1px  1px 0 red; "
->>>>>>> 241f269352de9c814b0fe75a81802b0ebda6db95
   }}
     > JUGAR AHORA</Button>
     
