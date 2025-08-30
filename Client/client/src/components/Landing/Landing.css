@@ -1,0 +1,11 @@
+.landing{
+    background-image: url('../../assets/img/hero_bg_home.png');
+    height: 100vh;
+}
+.btn-play {
+  padding: 10px 20px;
+  background: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
