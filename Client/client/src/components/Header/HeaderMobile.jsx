@@ -33,7 +33,7 @@ const HeaderMobile = () => {
                 ))}
 
                 <Box 
-                sx={{width:"100%", mt:2, background:"#D84040", textAlign:"center", p:"10px", borderRadius:"2px", fontSize:"20px", cursor:"pointer", transition:"all .5s", "&:hover":{backgroundColor:"#8E1616"}}}
+                sx={{ mt:2, background:"#D84040", textAlign:"center", p:"10px", borderRadius:"2px", fontSize:"20px", cursor:"pointer", transition:"all .5s", "&:hover":{backgroundColor:"#8E1616"}}}
                 >
                     Jugar Ahora
 
