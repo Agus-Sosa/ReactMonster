@@ -25,12 +25,14 @@ function Landing() {
     borderRadius: "5px",
     padding: "20px 60px",
     fontWeight: "bold",
+    boxShadow: '2px 5px 5px black',
     textTransform: "uppercase",
     textShadow: "-1px -1px 0 black,  1px -1px 0 black,-1px  1px 0 black,1px  1px 0 black; ",
     "&:hover": {
       backgroundBlendMode: "luminosity",
       backgroundColor:'rgba(255, 0, 0, 0.95)',
       textShadow: "-1px -1px 0 black,  1px -1px 0 red,-1px  2px 0 red,2px  2px 0 black; ",
+      boxShadow: '1px 2px 2px black',
     },
     
     
