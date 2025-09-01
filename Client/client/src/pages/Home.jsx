@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import Landing from '../components/Landing/Landing'
 import News from '../components/News/News'
 import Header from '../components/Header/Header'
+import ArenaSection from '../components/AboutGame/ArenaSection'
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
     <Header/>
     <Landing/>
     <News/>
+    <ArenaSection/>
     <Footer/>
      
     </>
