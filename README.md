@@ -19,11 +19,11 @@
 
 ## 📌 Funcionalidades previstas
 
-[x] Foro.
-[ ] Juego Base.
-[ ] Multiplayer.
-[ ] Sistema de Ranked.
-[ ] Sistema de Emparejamiento.
+- [x] Foro.
+- [ ] Juego Base.
+- [ ] Multiplayer.
+- [ ] Sistema de Ranked.
+- [ ] Sistema de Emparejamiento.
 
 ## 🔒 Seguridad
 
