@@ -4,6 +4,15 @@
 
 > Proyecto desarrollado para la asignatura **Programacion III**, impartida por **Prof. Selene Danyluk** y **Prof. Marcelo Cepeda**.
 
---
+## 👥 Autores
 
-## INTEGRANTES
+- 👩‍💻 - Barthelemy Tomás.
+- 👩‍💻 - Sosa Agustin.
+- 👩‍💻 - Ivo Bertoni.
+- 👩‍💻 - Volpe Andres.
+
+## ⚙️ Tecnologias Utilizadas
+
+- **Frontend:** React,MUI, CSS, JS
+- **Backend:** express
+- **Otras herramientas:** Figma, GitHub
