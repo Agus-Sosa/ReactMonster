@@ -2,6 +2,6 @@
 
 # TPI PROGRAMACION III UTN 2TUP7 2025
 
-## **Materia impartida por: **Selene Danyluk** y **Marcelo Cepeda\*\*\*\*
+## **Materia impartida por:** **Selene Danyluk** y **Marcelo Cepeda**
 
 ## INTEGRANTES
