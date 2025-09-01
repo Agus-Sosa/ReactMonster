@@ -8,7 +8,7 @@
 
 - 👩‍💻 - Barthelemy Tomás.
 - 👩‍💻 - Sosa Agustin.
-- 👩‍💻 - Ivo Bertoni.
+- 👩‍💻 - Bertoni Ivo.
 - 👩‍💻 - Volpe Andres.
 
 ## ⚙️ Tecnologias Utilizadas
