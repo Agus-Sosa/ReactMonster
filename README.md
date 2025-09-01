@@ -16,3 +16,15 @@
 - **Frontend:** React,MUI, CSS, JS
 - **Backend:** express
 - **Otras herramientas:** Figma, GitHub
+
+## 📌 Funcionalidades previstas
+
+[x] Foro.
+[ ] Juego Base.
+[ ] Multiplayer.
+[ ] Sistema de Ranked.
+[ ] Sistema de Emparejamiento.
+
+## 🔒 Seguridad
+
+- Encriptacion de contraseñas mediante hashing con SHA-256
