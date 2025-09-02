@@ -13,7 +13,7 @@ const Home = () => {
     <News/>
     <ArenaSection/>
     <Footer/>
-     
+    
     </>
 )
 }
