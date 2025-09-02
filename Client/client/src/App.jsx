@@ -3,6 +3,7 @@ import './App.css'
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Foro from './pages/Foro';
+import Register from './components/Authentication/Register';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/foro" element={<Foro />} />
+        <Route path='/register' element={<Register/>}/>
       </Routes>
     </Router>
     </>
