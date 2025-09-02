@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, height } from '@mui/system'
+import { Box, color, height } from '@mui/system'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -11,13 +11,13 @@ import CardActions from '@mui/material/CardActions';
 
 function Joins({informacion}) {
   return (
-    <Card sx={{ width:'75%', height:'95px', margin:'20px'}}>
+    <Card sx={{ width:'100%', height:'95px', margin:'20px',backgroundColor:'transparent',color:'white',border: '1px solid white'}}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {informacion.titulo}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          <Typography variant="body2" sx={{ color: 'white' }}>
             {informacion.description}
           </Typography>
         </CardContent>
