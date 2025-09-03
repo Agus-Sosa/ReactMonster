@@ -5,6 +5,7 @@ import Drawer from "@mui/material/Drawer";
 import title_game from '../../assets/img/title_game.png'
 import Button from "@mui/material/Button";
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from "react-router-dom";
 
 const HeaderMobile = () => {
     const [openMenu, setOpenMenu]= useState(false);
@@ -21,7 +22,9 @@ const HeaderMobile = () => {
     const listMobileMenu = (
         <Box component={"nav"} sx={{height:"100%", backgroundColor:"#1e1e1e", color:"white", display:"flex", flexDirection:"column", alignItems:"start",p:2, gap:2}}>
             <Box component="div" sx={{display: 'flex', justifyContent:"space-between", alignItems:"center", width:"100%"}}>
-            <Box component="img" src={title_game} sx={{width:"100px"}}></Box>
+            <Link to='/'>
+              <Box component="img" src={title_game} sx={{width:"100px"}}></Box>
+            </Link>
             <Button onClick={handleOpenMenu(false)} sx={{color:"white", fontSize:"30px"}}>
                 <CloseIcon/>
             </Button>   
