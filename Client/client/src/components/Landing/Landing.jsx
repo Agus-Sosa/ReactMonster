@@ -7,6 +7,7 @@ import Modal from '@mui/material/Modal';
 import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
+import ModalAuthPrev from '../Authentication/ModalAuthPrev';
 
 function Landing() {
   const [openModal, setOpenModal] = useState(false);
@@ -73,35 +74,9 @@ const styleButton = {
   }}
   onClick={handleOpenModal}
     > JUGAR AHORA</Button>
-    
+    <ModalAuthPrev openModal={openModal} handleCloseModal={handleCloseModal}/>
 
-   <Modal
-        keepMounted
-        open={openModal}
-        onClose={handleCloseModal}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
-      >
-        <Box sx={style}>
-          <Button onClick={handleCloseModal} sx={{color:"black", background:"#E3E0C3", position:"absolute", borderRadius:"0px"}}><CloseIcon/></Button>
-
-          <Box sx={{padding:"35px"}}>
-
-          <Box component="h2" sx={{textAlign:'center',mb:"50px"}}>
-              Preparate para Jugar
-          </Box>
-          <Box component="div" sx={{display:"flex", gap:"10px", justifyContent:'center'}}>
-              <Button   variant='contained'  sx={{...styleButton, backgroundColor:"#8E1616", color:"white"}}  component={Link} to="/login" >
-                  Iniciar Sesion
-              </Button>
-              <Button variant='contained' sx={{...styleButton, backgroundColor:"#E3E0C3", color:"black"}} component={Link} to="/register">
-                  Registrarse
-              </Button>
-          </Box>
-          </Box>
-
-        </Box>
-      </Modal>
+ 
     </Box>
     </>
   )
