@@ -7,6 +7,7 @@
 
 .ultimate-news{
     color: rgb(238, 238, 238);
+    margin-right: 800px;
 }
 
 .news-button{
@@ -31,6 +32,9 @@
         font-size: 1rem;     
         padding: 0.3rem 0.6rem;
     }
+    .ultimate-news{
+    margin-right: 0;
+}
 }
 
 @media (max-width: 480px) {
@@ -46,4 +50,6 @@
         font-size: 0.9rem;
         padding: 0.2rem 0.5rem;
     }
+    .ultimate-news{
+    margin-right: 100px;}
 }

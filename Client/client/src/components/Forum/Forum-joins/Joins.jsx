@@ -7,7 +7,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 
+import './joins.css'
 
 function Joins({informacion}) {
   return (
@@ -15,6 +17,7 @@ function Joins({informacion}) {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
+            <img src={informacion.image} className='forum-icons'/>
             {informacion.titulo}
           </Typography>
           <Typography variant="body2" sx={{ color: 'white' }}>

@@ -1,5 +1,5 @@
 .landing-foro{
-    background-image: url('../../../assets/img/hero_bg_home.png');
+    background-image: url('../../../assets/img/hero_bg_foro.png');
     background-repeat: no-repeat;
     background-size: cover;
     height: 60vh;
@@ -14,4 +14,11 @@
 .foro-img{
     height: 30vh;
     margin-left: 5%;
+}
+
+@media (max-width: 767px) {
+    .foro-img{
+    height: 30vh;
+    margin-left: 0;
+}
 }
