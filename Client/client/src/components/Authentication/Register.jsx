@@ -2,7 +2,8 @@ import { Box, Button, FormControl, Input, TextField, useMediaQuery } from '@mui/
 import { Link } from 'react-router-dom'
 const Register = () => {
 
- 
+     const mobile = useMediaQuery("(max-width:700px)")
+
 
     const style_input = {
         p:2,
@@ -20,7 +21,7 @@ const Register = () => {
         <Box component={Link} sx={{position:"absolute", top:5, left:5, textDecoration:"none", color:"white" , padding:1, m:1, background:"#8E1616", borderRadius:"4px"}} to="/">Volver atras</Box>
     <Box sx={{backgroundColor:"#212121", color:"white", height:"100vh", display:'flex', justifyContent:"center", alignItems:"center"}}>
         
-        <FormControl sx={{textAlign:"center", width:"30%"}}>
+        <FormControl sx={{textAlign:"center", width:`${mobile ? 'auto' : "30%"}`}}>
             <Box component="h1" sx={{color:"white", mb:10}}>
             Registrarse
         </Box>
