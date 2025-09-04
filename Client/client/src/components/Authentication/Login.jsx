@@ -1,6 +1,7 @@
-import { Box, Button, FormControl } from '@mui/material'
+import { Box, Button, FormControl, useMediaQuery } from '@mui/material'
 import { Link } from 'react-router-dom'
 const Login = () => {
+    const mobile = useMediaQuery("(max-width:700px)")
     const style_input = {
         p:2,
         border:"none",
@@ -18,7 +19,7 @@ const Login = () => {
 
     <Box sx={{backgroundColor:"#212121", color:"white", height:"100vh", display:'flex', justifyContent:"center", alignItems:"center"}}>
         
-        <FormControl sx={{textAlign:"center", width:"30%"}}>
+        <FormControl sx={{textAlign:"center", width:`${mobile ? 'auto' : "30%"}`}}>
             <Box component="h1" sx={{color:"white", mb:10}}>
             Iniciar Sesion
         </Box>

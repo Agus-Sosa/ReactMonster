@@ -2,11 +2,14 @@ import { Box, useMediaQuery } from '@mui/material'
 import React from 'react'
 import error_page from '../../assets/img/error_page.png'
 import { Link } from 'react-router-dom'
+import Footer from '../Footer'
+import Header from '../Header/Header'
 const ErrorPage = () => {
 const mobile = useMediaQuery("(max-width:600px)")
   return (
     <>
-    <Box  component="div" sx={{background: mobile ? 'black' : `url(${error_page})`, height:"100vh", display:`${mobile? 'block' : 'flex'}`, justifyContent:"end", alignItems:"center", p:2}}>
+    <Header/>
+    <Box  component="div" sx={{background: mobile ? 'black' : `url(${error_page})`, backgroundPosition:"center", backgroundSize:"cover",height:"100vh", display:`${mobile? 'block' : 'flex'}`, justifyContent:"end", alignItems:"center", p:2}}>
 
     <Box component="div" sx={{width:`${mobile ? 'auto' :'40%'}`, backgroundColor:"#380e00ad", color:"white", display:"flex", flexDirection:"column", gap:"14px", padding:2, border:"solid 0.5px"}} >
         <Box>
@@ -39,6 +42,7 @@ const mobile = useMediaQuery("(max-width:600px)")
 }
 
     </Box>
+    <Footer/>
     </>
   )
 }
