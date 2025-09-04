@@ -1,12 +1,13 @@
 import { Box, display, height } from '@mui/system'
 import React, { useState } from 'react'
 import Joins from './joins'
-import infor  from './info.js'
+
 import forumtexture from '../../../assets/img/foro-bck.png'
 
-function ForoJoins({info}) {
+function ForoJoins({info,data}) {
     const rute = info.pathname
     console.log(rute)
+    const [grlData, setData]= useState(data)
     let text_to_route = rute.replace("/","/ ").toUpperCase()
     if (text_to_route === '/ FORO'){
         text_to_route = text_to_route.replace("/ FORO"," ")
@@ -41,7 +42,7 @@ function ForoJoins({info}) {
                 </Box>
 
                 <Box sx={{ flexDirection: 'column', display: 'flex', margin:'5%' }}> 
-                    {infor.map(inf => (
+                    {grlData.map(inf => (
                         <Joins key={inf.id} informacion={inf} />
                         ))}
                     
