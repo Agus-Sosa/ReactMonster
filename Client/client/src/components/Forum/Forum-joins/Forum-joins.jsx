@@ -1,14 +1,19 @@
 import { Box, display, height } from '@mui/system'
-import React from 'react'
+import React, { useState } from 'react'
 import Joins from './joins'
 import infor  from './info.js'
-import forumtexture from '../../../assets/img/testback.png'
+import forumtexture from '../../../assets/img/foro-bck.png'
 
 function ForoJoins({info}) {
     const rute = info.pathname
     console.log(rute)
-    const text_to_route = rute.replace("/","").toUpperCase()
-  return (
+    let text_to_route = rute.replace("/","/ ").toUpperCase()
+    if (text_to_route === '/ FORO'){
+        text_to_route = text_to_route.replace("/ FORO"," ")
+        console.log(text_to_route)
+    }
+
+    return (
         <Box
             sx={{
                 height: '100vh',
@@ -16,7 +21,7 @@ function ForoJoins({info}) {
                 backgroundSize:'cover',
                 backgroundRepeat:'no-repeat',
                 backgroundColor: '#1a1a1a',
-                backgroundBlendMode: 'overlay',
+                backgroundBlendMode: 'color-dodge',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -32,7 +37,7 @@ function ForoJoins({info}) {
                 }}
             >
                 <Box sx={{ fontSize:'1.2em',width: '100%',marginLeft:'6%' }}>
-                    <h2>COMUNIDAD / {text_to_route}</h2>
+                    <h2>COMUNIDAD / FORO {text_to_route}</h2>
                 </Box>
 
                 <Box sx={{ flexDirection: 'column', display: 'flex', margin:'5%' }}> 

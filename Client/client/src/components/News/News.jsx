@@ -22,10 +22,9 @@ const News = () => {
       <Box
         sx={{
           display: 'flex',
-          flexWrap: 'wrap',
-          gap: 2,
           justifyContent: 'center',
           alignItems: 'center'
+          
         }}
       >
         <h1 className='ultimate-news'>Ultimas noticias</h1>
