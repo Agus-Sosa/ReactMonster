@@ -10,6 +10,8 @@ const News = () => {
   const mobile = useMediaQuery('(max-width:700px)')
 
 
+
+
   return (
     <Box
       sx={{
@@ -52,7 +54,7 @@ const News = () => {
       {   
         !mobile ? (   
           
-        noticias.map((inf) => (
+        noticias.slice(-3).map((inf) => (
           <Box
             key={inf.id}
             sx={{
