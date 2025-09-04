@@ -9,7 +9,7 @@ const News = () => {
     <Box
       sx={{
         backgroundColor:'#380E00',
-        minHeight: '100vh',            
+        minHeight: '60vh',            
         display: 'flex',
         flexDirection: 'column',       
         justifyContent: 'center',      

@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 
 export default function ActionAreaCard({inf}) {
-    console.log(inf.titulo)
   return (
 
     <Card sx={{ maxWidth: 345, color:'#E3E0C3', backgroundColor: '#380E00', border:'1px solid #E3E0C3'}}>
