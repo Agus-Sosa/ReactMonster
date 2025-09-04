@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Foro from './pages/Foro';
 import Register from './components/Authentication/Register';
 import Login from './components/Authentication/Login';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/foro" element={<Foro />} />
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='*' element={<ErrorPage/>}/>
       </Routes>
     </Router>
     </>
