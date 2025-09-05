@@ -39,12 +39,10 @@ function ForoJoins({info}) {
                 <Box sx={{ fontSize:'1.2em',width: '100%',marginLeft:'6%' }}>
                     <h2>COMUNIDAD / FORO {text_to_route}</h2>
                 </Box>
-
                 <Box sx={{ flexDirection: 'column', display: 'flex', margin:'5%' }}> 
                     {infor.map(inf => (
                         <Joins key={inf.id} informacion={inf} />
                         ))}
-                    
                 </Box>
             </Box>
         </Box>
