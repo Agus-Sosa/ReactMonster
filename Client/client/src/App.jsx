@@ -6,6 +6,7 @@ import Foro from './pages/Foro';
 import Register from './components/Authentication/Register';
 import Login from './components/Authentication/Login';
 import ErrorPage from './components/ErrorPage/ErrorPage';
+import Sands from './pages/Sands';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='*' element={<ErrorPage/>}/>
+        <Route path='/arenas' element={<Sands/>}/>
       </Routes>
     </Router>
     </>
