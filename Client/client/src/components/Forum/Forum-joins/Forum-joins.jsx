@@ -1,22 +1,22 @@
-import { Box, display, height } from '@mui/system'
 import React, { useState } from 'react'
+import { Box } from '@mui/system'
 import Joins from './joins'
 
 import forumtexture from '../../../assets/img/foro-bck.png'
 
-function ForoJoins({info,data}) {
+function ForoJoins({ info, data }) {
     const rute = info.pathname
-    console.log(rute)
-    const [grlData, setData]= useState(data)
-    let text_to_route = rute.replace("/","/ ").toUpperCase()
-    if (text_to_route === '/ FORO'){
-        text_to_route = text_to_route.replace("/ FORO"," ")
-        console.log(text_to_route)
-    }
+    const [grlData, setData] = useState(data)
+    const [selected, setSelected] = useState(null)
+    let text_to_route = rute.replace("/","/ ").toUpperCase() 
 
-    return (
-<Box
-    sx={{
+  const handleSelect = (item) => {
+    setSelected(item)
+
+  }
+  return (
+    <Box
+      sx={{
         minHeight: '100vh',
         backgroundImage: `url(${forumtexture})`,
         backgroundSize: 'cover',
@@ -25,30 +25,44 @@ function ForoJoins({info,data}) {
         backgroundBlendMode: 'color-dodge',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start', 
-    }}
->
-  <Box
-    sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '85vh',   
-        width: '80%',
-        color: 'white',
-    }}
+        alignItems: 'flex-start',
+      }}
     >
-    <Box sx={{ fontSize: '1.2em', width: '100%', marginLeft: '6%' }}>
-        <h2>COMUNIDAD / FORO {text_to_route}</h2>
-    </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '85vh',
+          width: '80%',
+          color: 'white',
+        }}
+      >
+        <Box sx={{ fontSize: '1.2em', width: '100%', marginLeft: '6%' }}>
+            {/* solo se va a mostrar el seleccionado si existe si no,nino */}
+                <h2>COMUNIDAD {text_to_route} / {selected && (
+                    selected.titulo)
+                    }</h2>
+        </Box>
 
-    <Box sx={{ flexDirection: 'column', display: 'flex', margin: '5%' }}>
-        {grlData.map((inf) => (
-        <Joins key={inf.id} informacion={inf} />
-        ))}
+        <Box sx={{ flexDirection: 'column', display: 'flex', margin: '5%' }}>
+          {grlData.map((inf) => (
+            <Joins
+              key={inf.id}
+              informacion={inf}
+              onSelect={handleSelect}
+            />
+          ))}
+        </Box>
+
+        {selected && (
+
+          <Box sx={{ marginTop: '20px' }}>
+            <h3>Si ves esto agus es para ver si esta seleccionado {selected.titulo}</h3>
+          </Box>
+        )}
+      </Box>
     </Box>
-  </Box>
-</Box>
-    );
+  )
 }
 
 export default ForoJoins
