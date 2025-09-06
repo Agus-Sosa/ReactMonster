@@ -11,13 +11,24 @@ import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 
 import './joins.css'
 
-function Joins({informacion}) {
+function Joins({ informacion, onSelect }) {
   return (
-    <Card sx={{ width:'100%', height:'95px', margin:'20px',backgroundColor:'transparent',color:'white',border: '1px solid white'}}>
+    <Card
+      sx={{
+        width: '100%',
+        height: '95px',
+        margin: '20px',
+        backgroundColor: 'transparent',
+        color: 'white',
+        border: '1px solid white',
+        cursor: 'pointer'
+      }}
+      onClick={() => onSelect(informacion)}
+    >
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            <img src={informacion.image} className='forum-icons'/>
+            <img src={informacion.image} className='forum-icons' alt='icono de tarjeta' />
             {informacion.titulo}
           </Typography>
           <Typography variant="body2" sx={{ color: 'white' }}>
