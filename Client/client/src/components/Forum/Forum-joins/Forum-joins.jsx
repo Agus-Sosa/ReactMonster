@@ -45,7 +45,7 @@ function ForoJoins({ info, data }) {
       >
         <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
           <h2>
-            COMUNIDAD {text_to_route}
+            Comunidad {text_to_route}
             {selectedCategory && ` / ${selectedCategory.titulo}`}
             {selectedPost && ` / ${selectedPost.titulo}`}
           </h2>
