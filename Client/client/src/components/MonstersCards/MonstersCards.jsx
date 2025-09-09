@@ -12,10 +12,12 @@ const MonsterCard = ({ name, description }) => {
         position: "relative",
         width: 250,
         margin: 2,
+        backgroundColor: "transparent", 
+        boxShadow: "0px 4px 15px rgba(0,0,0,0.5)",
+        // boxShadow: "0px 6px 20px rgba(0,0,0,0.6)",
         transition: "transform 0.3s, box-shadow 0.3s",
         "&:hover": {
           transform: "translateY(-5px)",
-          boxShadow: "0px 6px 20px rgba(0,0,0,0.6)",
         },
       }}
     >
