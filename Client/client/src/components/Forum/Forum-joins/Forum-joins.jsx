@@ -1,68 +1,84 @@
-import React, { useState } from 'react'
-import { Box } from '@mui/system'
-import Joins from './joins'
-
-import forumtexture from '../../../assets/img/foro-bck.png'
+import React, { useState } from "react";
+import { Box } from "@mui/system";
+import Joins from "./joins";
+import forumtexture from "../../../assets/img/foro-bck.png";
+import POST from "./post"; 
 
 function ForoJoins({ info, data }) {
-    const rute = info.pathname
-    const [grlData, setData] = useState(data)
-    const [selected, setSelected] = useState(null)
-    let text_to_route = rute.replace("/","/ ").toUpperCase() 
+  const rute = info.pathname;
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedPost, setSelectedPost] = useState(null);
 
-  const handleSelect = (item) => {
-    setSelected(item)
+  let text_to_route = rute.replace("/", "/ ").toUpperCase();
 
-  }
+  const handleSelectCategory = (category) => {
+    setSelectedCategory(category);
+    setSelectedPost(null); 
+  };
+
+  const handleSelectPost = (post) => {
+    setSelectedPost(post);
+  };
+
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        minHeight: "100vh",
         backgroundImage: `url(${forumtexture})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundColor: '#1a1a1a',
-        backgroundBlendMode: 'color-dodge',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "#1a1a1a",
+        backgroundBlendMode: "color-dodge",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
       }}
     >
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: '85vh',
-          width: '80%',
-          color: 'white',
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "85vh",
+          width: "80%",
+          color: "white",
         }}
       >
-        <Box sx={{ fontSize: '1.2em', width: '100%', marginLeft: '6%' }}>
-            {/* solo se va a mostrar el seleccionado si existe si no,nino */}
-                <h2>COMUNIDAD {text_to_route} / {selected && (
-                    selected.titulo)
-                    }</h2>
+        <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
+          <h2>
+            Comunidad {text_to_route}
+            {selectedCategory && ` / ${selectedCategory.titulo}`}
+            {selectedPost && ` / ${selectedPost.titulo}`}
+          </h2>
         </Box>
+        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
+          {!selectedCategory &&
+            data.map((cat) => (
+              <Joins
+                key={cat.id}
+                informacion={cat}
+                onSelect={handleSelectCategory}
+              />
+            ))}
 
-        <Box sx={{ flexDirection: 'column', display: 'flex', margin: '5%' }}>
-          {grlData.map((inf) => (
-            <Joins
-              key={inf.id}
-              informacion={inf}
-              onSelect={handleSelect}
-            />
-          ))}
+          {selectedCategory &&
+            !selectedPost &&
+            POST.map((post) => (
+              <Joins
+                key={post.id}
+                informacion={post}
+                onSelect={handleSelectPost}
+              />
+            ))}
         </Box>
-
-        {selected && (
-
-          <Box sx={{ marginTop: '20px' }}>
-            <h3>Si ves esto agus es para ver si esta seleccionado {selected.titulo}</h3>
+        {selectedPost && (
+          <Box sx={{ marginTop: "20px" }}>
+            <h3>{selectedPost.titulo}</h3>
+            <p>{selectedPost.description}</p>
           </Box>
         )}
       </Box>
     </Box>
-  )
+  );
 }
 
-export default ForoJoins
+export default ForoJoins;
