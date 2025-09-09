@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { Card, CardMedia, CardContent, Typography, IconButton, Box } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { Card, CardMedia, Typography, Box } from "@mui/material";
 import monsterImage from '../../assets/img/monster-test.png'; 
+import ToggleButton from "../MonstersCards/ToggleButton";
 
 const MonsterCard = ({ name, description }) => {
   const [showOverlay, setShowOverlay] = useState(false);
 
   return (
-    <Card sx={{ position: "relative", width: 250, margin: 2 }}>
+    <Card
+      sx={{
+        position: "relative",
+        width: 250,
+        margin: 2,
+        transition: "transform 0.3s, box-shadow 0.3s",
+        "&:hover": {
+          transform: "translateY(-5px)",
+          boxShadow: "0px 6px 20px rgba(0,0,0,0.6)",
+        },
+      }}
+    >
       <CardMedia
         component="img"
         image={monsterImage}
@@ -15,19 +26,11 @@ const MonsterCard = ({ name, description }) => {
         sx={{
           height: 300,
           filter: showOverlay ? "brightness(30%)" : "brightness(100%)",
-          transition: "filter 0.3s"
+          transition: "filter 0.3s",
         }}
       />
 
-      {/* BOTON */}
-      <IconButton
-        onClick={() => setShowOverlay(!showOverlay)}
-        sx={{ position: "absolute", top: 5, right: 5, color: "white" }}
-      >
-        <AddIcon />
-      </IconButton>
-
-      {/* INFO MONSTRUO */}
+      {/* MAS INFO */}
       {showOverlay && (
         <Box
           sx={{
@@ -42,13 +45,21 @@ const MonsterCard = ({ name, description }) => {
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
-            padding: 2
+            padding: 2,
           }}
         >
           <Typography variant="h6">{name}</Typography>
           <Typography variant="body2">{description}</Typography>
         </Box>
       )}
+
+      {/* BOTON TOGLE */}
+      <Box sx={{ position: "absolute", bottom: 5, right: 5 }}>
+        <ToggleButton
+          open={showOverlay}
+          onToggle={() => setShowOverlay(!showOverlay)}
+        />
+      </Box>
     </Card>
   );
 };
@@ -60,18 +71,37 @@ export default function MonstersCards() {
     { name: "Monstruo 3", description: "Descripción del monstruo 3" },
     { name: "Monstruo 4", description: "Descripción del monstruo 4" },
     { name: "Monstruo 5", description: "Descripción del monstruo 5" },
-    { name: "Monstruo 6", description: "Descripción del monstruo 6" }
+    { name: "Monstruo 6", description: "Descripción del monstruo 6" },
   ];
 
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-      {monsters.map((monster, index) => (
-        <MonsterCard
-          key={index}
-          name={monster.name}
-          description={monster.description}
-        />
-      ))}
+    <Box
+      sx={{
+        backgroundColor: "#1a1a1a",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        padding: 4,
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: 4, 
+          maxWidth: "1200px",
+        }}
+      >
+        {monsters.map((monster, index) => (
+          <MonsterCard
+            key={index}
+            name={monster.name}
+            description={monster.description}
+          />
+        ))}
+      </Box>
     </Box>
   );
 }
