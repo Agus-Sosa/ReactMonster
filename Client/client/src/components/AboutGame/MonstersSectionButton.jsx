@@ -1,7 +1,15 @@
 import React from "react";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const MonstersSectionButton = ({ text, onClick }) => {
+
+    const navigate = useNavigate();
+    
+    const handleClick = () => {
+     navigate("/monsters");
+    };
+
   return (
     <Button
       variant="contained"
