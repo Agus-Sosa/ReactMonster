@@ -7,7 +7,7 @@ import { useMediaQuery } from '@mui/material';
 import NewCarouselMobile from './NewCarouselMobile';
 
 const News = () => {
-  const mobile = useMediaQuery('(max-width:700px)')
+  const mobile = useMediaQuery('(max-width:1010px)')
 
 
 

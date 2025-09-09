@@ -15,6 +15,7 @@ const MonstersSection = () => {
         flexDirection: { xs: "column", md: "row" },
         alignItems: "center",
         justifyContent: "center",
+        height:'100vh',
         gap: 6,
         p: 6,
         bgcolor: "#6B0F0F",

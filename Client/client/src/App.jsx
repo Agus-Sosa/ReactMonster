@@ -6,28 +6,10 @@ import Foro from './pages/Foro';
 import Register from './components/Authentication/Register';
 import Login from './components/Authentication/Login';
 import ErrorPage from './components/ErrorPage/ErrorPage';
-import Loader from './Loader';
-import { Box } from '@mui/material';
+import Sands from './pages/Sands';
 
 
 function App() {
-const [loading, setLoading] = useState(true);
-
-
-useEffect(()=> {
-
-  
-  const timer = setTimeout(()=> {
-    setLoading(false);
-
-  }, 2000)
-  
-}, [])
-
-
-if (loading) return <Box sx={{height:"100vh", background:"black", display:'flex', justifyContent:"center", alignItems:'center'}}><Loader/></Box>
-
-
 
   return (
     <>
@@ -38,6 +20,7 @@ if (loading) return <Box sx={{height:"100vh", background:"black", display:'flex'
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='*' element={<ErrorPage/>}/>
+        <Route path='/arenas' element={<Sands/>}/>
       </Routes>
     </Router>
     </>
