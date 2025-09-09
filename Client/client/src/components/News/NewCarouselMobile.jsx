@@ -19,7 +19,7 @@ const NewCarouselMobile = ({inf}) => {
         '::-webkit-scrollbar': { display: 'none' },
       }}
     >
-      {inf.map((item) => (
+      {inf.slice(-3).map((item) => (
        <NewCard key={item.id} inf={item}/>
       ))}
     </Box>  )
