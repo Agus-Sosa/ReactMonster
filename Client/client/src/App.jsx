@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -15,7 +15,7 @@ function App() {
     <>
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />}/>
         <Route path="/foro" element={<Foro />} />
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>

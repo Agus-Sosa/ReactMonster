@@ -20,6 +20,13 @@ const noticias=[
     fecha:"01/09/25",
     titulo:"El horror despierta",
     descripcion:"Una nueva criatura surge de las profundidades"
+    },
+    {
+    id:4,
+    url:imgNoticia,
+    fecha:"01/09/25",
+    titulo:"El horror despierta",
+    descripcion:"Una nueva criatura surge de las profundidades"
     }
 ]
 

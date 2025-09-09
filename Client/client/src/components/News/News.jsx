@@ -7,7 +7,9 @@ import { useMediaQuery } from '@mui/material';
 import NewCarouselMobile from './NewCarouselMobile';
 
 const News = () => {
-  const mobile = useMediaQuery('(max-width:700px)')
+  const mobile = useMediaQuery('(max-width:1010px)')
+
+
 
 
   return (
@@ -52,7 +54,7 @@ const News = () => {
       {   
         !mobile ? (   
           
-        noticias.map((inf) => (
+        noticias.slice(-3).map((inf) => (
           <Box
             key={inf.id}
             sx={{
