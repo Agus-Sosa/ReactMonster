@@ -15,7 +15,6 @@ const Home = () => {
     <MonstersSection/>
     <ArenaSection/>
     <Footer/>
-    
     </>
 )
 }

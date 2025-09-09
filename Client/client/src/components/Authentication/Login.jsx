@@ -15,15 +15,15 @@ const Login = () => {
 
     return (
       <>
-              <Box component={Link} sx={{position:"absolute", top:5, left:5, textDecoration:"none", color:"white" , padding:1, m:1, background:"#8E1616", borderRadius:"4px"}} to="/">Volver atras</Box>
 
-    <Box sx={{backgroundColor:"#212121", color:"white", height:"100vh", display:'flex', justifyContent:"center", alignItems:"center"}}>
-        
+    <Box sx={{backgroundColor:"#212121", color:"white", height:"100vh", display:'flex', justifyContent:"center", alignItems:"center", gap:1}}>
+                      <Box component={Link} sx={{textDecoration:"none", color:"white" , padding:1, m:1, background:"#8E1616", borderRadius:"4px"}} to="/">Volver atras</Box>
+
         <FormControl sx={{textAlign:"center", width:`${mobile ? 'auto' : "30%"}`}}>
             <Box component="h1" sx={{color:"white", mb:10}}>
             Iniciar Sesion
         </Box>
-        <Box sx={{display:"flex", flexDirection:"column", gap:3 }}>
+        <Box sx={{display:"flex", flexDirection:"column", gap:3, width: mobile ? "-webkit-fill-available" : '' , margin: mobile ? "0 30px" : '' }}>
             <Box placeholder='Nombre de usuario' component="input" sx={style_input}>
             </Box>
             <Box placeholder='Email' component="input" sx={style_input}>

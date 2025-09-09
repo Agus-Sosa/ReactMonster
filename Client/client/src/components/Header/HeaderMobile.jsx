@@ -6,9 +6,20 @@ import title_game from '../../assets/img/title_game.png'
 import Button from "@mui/material/Button";
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from "react-router-dom";
+import ModalAuthPrev from "../Authentication/ModalAuthPrev";
 
 const HeaderMobile = () => {
     const [openMenu, setOpenMenu]= useState(false);
+    const [openModal, setOpenModal] = useState(false);
+
+
+  const handleOpenModal =()=> {
+    setOpenModal(true);
+    setOpenMenu(false)
+  }
+  const handleCloseModal = ()=> {
+    setOpenModal(false);
+  }
 
    const handleOpenMenu = (newOpen) => () => {
     setOpenMenu(newOpen);
@@ -35,12 +46,15 @@ const HeaderMobile = () => {
                         <Box  key={item.name} style={{textDecoration:"none", color:"white", fontSize:"20px", padding:"10px", width:"100%", textAlign:"start"}} onClick={handleOpenMenu(false)}>{item.name}</Box>
                 ))}
 
-                <Box 
-                sx={{ mt:2, background:"#D84040", textAlign:"center", p:"10px", borderRadius:"2px", fontSize:"20px", cursor:"pointer", transition:"all .5s", "&:hover":{backgroundColor:"#8E1616"}}}
+                <Button
+                onClick={handleOpenModal}
+
+                sx={{width:"100%",color:"white", mt:2, background:"#D84040", textAlign:"center", p:"10px", borderRadius:"2px", fontSize:"20px", cursor:"pointer", transition:"all .5s", "&:hover":{backgroundColor:"#8E1616"}}}
+                
                 >
                     Jugar Ahora
 
-                </Box>
+                </Button>
 
             </Box>
         </Box>
@@ -60,7 +74,10 @@ const HeaderMobile = () => {
     <Drawer PaperProps={{sx:{width:"100%"}}} open={openMenu} onClose={handleOpenMenu(false)} anchor="right">
         {listMobileMenu}
     </Drawer>
+        <ModalAuthPrev handleCloseModal={handleCloseModal} openModal={openModal}/>
+
   </Box>
+  
 )
 }
 
