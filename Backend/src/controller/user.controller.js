@@ -36,11 +36,12 @@ class UserController {
                 user_email, 
                 user_password
             };
-            await this.userService.createNewUser(newUser);
+              await this.userService.createNewUser(newUser);
+
             res.status(200).json({status:"success", newUser:newUser});
         } catch (error) {
             console.log(error.message,'error')
-            res.status(500).json({status: "error", message:"Error al crear el usuario"})
+            res.status(500).json({status: "error", message:error.message})
         }
     }
 

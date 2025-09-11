@@ -17,6 +17,10 @@ class UserService {
 
 
     async createNewUser (newUser) {
+        const existingEmail = await this.modelUser.findOne({where: {user_email: newUser.user_email}})
+
+        if(existingEmail) throw new Error("El email ya fue registrado anteriomente");
+    
         return await this.modelUser.create(newUser);
     }
 
