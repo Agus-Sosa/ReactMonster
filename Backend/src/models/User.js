@@ -27,6 +27,7 @@ export const User = sequelize.define(config.modelData.user, {
     },
     range:{
         type: DataTypes.STRING,
+        defaultValue: 'bronze'
     },
     profile_picture: {
         type:DataTypes.STRING,
@@ -34,7 +35,8 @@ export const User = sequelize.define(config.modelData.user, {
     },
     total_post: {
         type: DataTypes.INTEGER,
-        references: config.modelData.post,
+        defaultValue: 0,
+      
     },
     create_date :{
         type:DataTypes.DATE,
@@ -42,6 +44,7 @@ export const User = sequelize.define(config.modelData.user, {
     },
     total_comments: {
         type:DataTypes.INTEGER,
+        defaultValue: 0,
     },
     role:{
         type:DataTypes.STRING,
@@ -56,11 +59,12 @@ export const User = sequelize.define(config.modelData.user, {
         defaultValue: 0,
     },
     total_give_like: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.INTEGER,
         defaultValue: 0
     },
     code_confirm: {
         type: DataTypes.STRING,
+        defaultValue: "",
     }
 
 })

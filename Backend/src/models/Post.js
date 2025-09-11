@@ -6,6 +6,7 @@ import { config } from "../config/config.js";
 export const Post = sequelize.define(config.modelData.post,{
     id_post: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         autoIncrement: true,
     },
     id_user: {
@@ -33,8 +34,8 @@ export const Post = sequelize.define(config.modelData.post,{
     admin_decide: {
         type: DataTypes.INTEGER,
         references: config.modelData.user,
-        
     }
+    
 
     
 })

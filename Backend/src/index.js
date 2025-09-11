@@ -2,6 +2,7 @@ import express from 'express'
 import { config } from './config/config.js';
 import { sequelize } from './config/db.js';
 import cors from 'cors' 
+import { UserRouter } from './router/user.routes.js';
 
 const app = express();
 const port = config.PORT
@@ -9,11 +10,13 @@ const port = config.PORT
 app.use(cors());
 app.use(express.json());
 
+app.use('/users', UserRouter);
+
+
+
 const startServer = async () => {
   try {
-    
-
-    await sequelize.sync();
+    await sequelize.sync({force:true});
     console.log("Base de datos sincronizada");
 
     app.listen(port, () => {
@@ -24,6 +27,8 @@ const startServer = async () => {
     console.log(`Ocurrió un error en la inicialización: ${error.message}`);
   }
 };
+
+
 
 startServer();
 
