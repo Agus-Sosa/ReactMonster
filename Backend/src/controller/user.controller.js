@@ -15,20 +15,21 @@ class UserController {
         }
     }
 
-    async getUserById(req, res){
+    async getUserById(req, res, next){
         try {
             const id= req.params.id;
             const user = await this.userService.getUserById(id);
-            await res.status(200).json({status: "success", user:user});
+            res.status(200).json({status: "success", user:user});
         } catch (error) {
-            res.status(500).json({status:"error", error:error.message})
+            next(error)
+
         }
     }
 
 
 
 
-    async createNewUser (req, res) {
+    async createNewUser (req, res, next) {
         try {
             const {user_name, user_email, user_password}= req.body;
             const newUser = {
@@ -36,12 +37,10 @@ class UserController {
                 user_email, 
                 user_password
             };
-              await this.userService.createNewUser(newUser);
-
-            res.status(200).json({status:"success", newUser:newUser});
+            const user =await this.userService.createNewUser(newUser);
+            res.status(200).json({status:"success", newUser:user});
         } catch (error) {
-            console.log(error.message,'error')
-            res.status(500).json({status: "error", message:error.message})
+            next(error)
         }
     }
 
@@ -51,7 +50,7 @@ class UserController {
             await this.userService.deleteUserById(id);
             await res.status(200).json({status:"success", messgae:"Usuario eliminado con exito"})
         } catch (error) {
-            res.status(500).json({status: "error", error:error.message});
+            next(error)
         }
     }
 

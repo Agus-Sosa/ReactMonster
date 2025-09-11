@@ -13,18 +13,18 @@ router.get('/', async(req, res)=> {
     await userController.getAllUser(req, res);
 })
 
-router.get("/:id", validateGetUserById,async(req, res)=> {
-    await userController.getUserById(req,res);
+router.get("/:id", validateGetUserById,async(req, res, next)=> {
+    await userController.getUserById(req,res, next);
 })  
 
 
-router.delete("/:id",validateGetUserById, async(req,res)=> {
-    await userController.deleteUserById(req,res)
+router.delete("/:id",validateGetUserById, async(req,res, next)=> {
+    await userController.deleteUserById(req,res, next)
 })
 
 
-router.post('/',validateNewUser, async(req, res)=>{ 
-    await userController.createNewUser(req, res)
+router.post('/',validateNewUser, async(req, res, next)=>{ 
+    await userController.createNewUser(req, res, next)
 })
 
 
