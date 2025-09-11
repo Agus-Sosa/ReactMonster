@@ -1,6 +1,11 @@
 import { User } from "../models/User.js";
 
 
+//El middleware es un filtro que revisa los datos antes de que el controller haga algo.
+// Si algo está mal, lo bloquea; si todo está bien, deja que siga.
+// Despues se coloco en los archivo routes , en este caso en user.routes
+// Para despues verificacion mas rebuscadas se hacen en los services
+
 export const validateNewUser=(req, res, next)=> {
     const {user_name, user_email, user_password} = req.body;
 
@@ -14,7 +19,7 @@ export const validateNewUser=(req, res, next)=> {
         res.status(404).json({status: "error", message: "Formato incorrecto de email ejemplo (agua@gmail.com)"})
     }
 
-      const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
 
     if(!user_password || !passwordRegex.test(user_password)) {
         res.status(404).json({status: "error", message: "La contraseña debe tener al menos 6 caracteres, una letra mayúscula y un número"})
