@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import './App.css'
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -12,6 +11,8 @@ import Sands from './pages/Sands';
 
 
 function App() {
+  
+
 
   return (
     <>
