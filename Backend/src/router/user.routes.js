@@ -27,6 +27,10 @@ router.post('/',validateNewUser, async(req, res, next)=>{
     await userController.createNewUser(req, res, next)
 })
 
+router.put('/:id', async(req, res, next)=> {
+    await userController.updateUser(req, res, next)
+} )
+
 
 
 

@@ -25,8 +25,17 @@ class UserService {
     }
 
 
-    async updateUser (newUpdate) {
-        return await this.modelUser.update(newUpdate);
+    async updateUser (id,newUpdate) {
+        
+        const [updateData]= await this.modelUser.update(newUpdate, {where:{id}});
+    
+    
+        if(updateData ===0) {
+            throw new Error("No hay cambios");
+        }
+
+        return await this.modelUser.findByPk(id);
+
     }
 
     async deleteUserById(id) {
