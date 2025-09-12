@@ -54,3 +54,8 @@ export const validateGetUserById= async(req, res, next)=> {
     next();
 
 }
+
+
+export const validateUpdateUser = async(req, res, next) => {
+ 
+} 
