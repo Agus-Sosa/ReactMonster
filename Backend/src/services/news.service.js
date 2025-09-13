@@ -20,3 +20,4 @@ class NewService{
     }
     
 }
+export default NewService;
