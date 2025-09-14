@@ -22,7 +22,20 @@ class NewController {
             next(error)
 
         }
-
+    }
+    async createNew (req, res, next) {
+        try {
+            const {title, resume, content}= req.body;
+            const newNew = {
+                title,
+                resume,
+                content,
+            };
+            const notice =await this.newService.createNew(newNew);
+            res.status(200).json({status:"success", newNew:notice});
+        } catch (error) {
+            next(error)
+        }
     }
         async deleteNewById (req, res) {
         try {

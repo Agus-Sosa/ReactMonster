@@ -18,6 +18,23 @@ class NewService{
             where: {id} 
         });
     }
+
+    async createNew (newNew) {    
+        return await this.modelNew.create(newNew);
+    }
+
+    async updateNew (id,newUpdate) {
+        
+        const [updateData]= await this.modelNew.update(newUpdate, {where:{id}});
     
+    
+        if(updateData ===0) {
+            throw new Error("No hay cambios");
+        }
+
+        return await this.modelNew.findByPk(id);
+
+    }
+
 }
 export default NewService;

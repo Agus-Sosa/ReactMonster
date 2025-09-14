@@ -12,6 +12,14 @@ export const News = sequelize.define(config.modelData.news, {
         type:DataTypes.INTEGER,
         references:config.modelData.user,
     },
+    title:{
+        type:DataTypes.STRING,
+        allowNull: false,
+    },
+    resume:{
+        type:DataTypes.STRING,
+        allowNull: false,
+    },
     content: {
         type:DataTypes.JSON,
         allowNull: false,
