@@ -22,3 +22,8 @@ router.get("/:id", validateGetNewById,async(req, res, next)=> {
 router.delete("/:id",validateGetNewById, async(req,res, next)=> {
     await newController.deleteNewById(req,res, next)
 })
+router.put('/:id', async(req, res, next)=> {
+    await newController.updateNew(req, res, next)
+} )
+
+export {router as NewsRouter};

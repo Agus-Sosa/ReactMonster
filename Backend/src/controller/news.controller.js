@@ -48,6 +48,21 @@ class NewController {
         }
     }
 
+       async updateUser(req,res,next) {
+        try {
+            const {id}=req.params;
+            const newData = req.body;
+
+            const updateNew = await this.newService.updateNew(id, newData);
+
+            res.status(200).json({status: "success", data:updateNew})
+
+        } catch (error) {
+            next(error);
+        }
+    } 
+
+
     
 }
 export default NewController;
