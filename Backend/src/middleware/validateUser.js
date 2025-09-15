@@ -19,7 +19,7 @@ export const validateNewUser=(req, res, next)=> {
         res.status(404).json({status: "error", message: "Formato incorrecto de email ejemplo (agua@gmail.com)"})
     }
 
-        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
 
     if(!user_password || !passwordRegex.test(user_password)) {
         res.status(404).json({status: "error", message: "La contraseña debe tener al menos 6 caracteres, una letra mayúscula y un número"})
@@ -57,5 +57,5 @@ export const validateGetUserById= async(req, res, next)=> {
 
 
 export const validateUpdateUser = async(req, res, next) => {
- 
-} 
+
+}

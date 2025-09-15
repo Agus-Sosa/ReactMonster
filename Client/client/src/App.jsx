@@ -7,6 +7,7 @@ import Login from './components/Authentication/Login';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Monsters from './pages/Monsters';
 import Sands from './pages/Sands';
+import DetailPublish from './components/Forum/detailPublic/DetailPublish';
 
 
 
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/foro" element={<Foro />} />
+        <Route path='/foro/:id' element={<DetailPublish/>}/>
         <Route path="/monsters" element={<Monsters />}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
