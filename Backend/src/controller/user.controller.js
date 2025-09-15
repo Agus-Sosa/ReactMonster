@@ -5,7 +5,6 @@ class UserController {
         this.userService = new UserService();
     }
 
-
     async getAllUser (req, res) {
         try {
             const users = await this.userService.getAllUser();
@@ -25,9 +24,6 @@ class UserController {
 
         }
     }
-
-
-
 
     async createNewUser (req, res, next) {
         try {
@@ -54,14 +50,12 @@ class UserController {
         }
     }
 
-
     async updateUser(req,res,next) {
         try {
             const {id}=req.params;
             const newData = req.body;
 
             const updateUser = await this.userService.updateUser(id, newData);
-
             res.status(200).json({status: "success", data:updateUser})
 
         } catch (error) {
