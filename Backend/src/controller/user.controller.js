@@ -34,7 +34,7 @@ class UserController {
                 user_password
             };
             const user =await this.userService.createNewUser(newUser);
-            res.status(200).json({status:"success", newUser:user});
+            res.status(200).json({status:"success", message:"usuario creado con exito"});
         } catch (error) {
             next(error)
         }

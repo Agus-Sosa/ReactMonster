@@ -3,7 +3,6 @@ import { Sequelize } from "sequelize";
 
 class DatabaseFactory {
     static createConnection(config) {
-
         try {
             let sequelize;
 
