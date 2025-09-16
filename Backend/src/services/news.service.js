@@ -5,7 +5,7 @@ class NewService{
         this.modelNew = News
     }
 
-    async getAllUser () {
+    async getAllNews () {
         return await this.modelNew.findAll();
     }
 

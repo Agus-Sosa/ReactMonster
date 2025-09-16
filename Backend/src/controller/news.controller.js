@@ -48,7 +48,7 @@ class NewController {
         }
     }
 
-       async updateUser(req,res,next) {
+       async updateNew(req,res,next) {
         try {
             const {id}=req.params;
             const newData = req.body;
