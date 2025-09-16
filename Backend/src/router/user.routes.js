@@ -23,9 +23,14 @@ router.delete("/:id",validateGetUserById, async(req,res, next)=> {
 })
 
 
-router.post('/',validateNewUser, async(req, res, next)=>{ 
+router.post('/register',validateNewUser, async(req, res, next)=>{ 
     await userController.createNewUser(req, res, next)
 })
+
+router.post("/login", async(req, res, next)=> {
+    await userController.getUserById(req, res, next);
+})
+
 
 router.put('/:id', async(req, res, next)=> {
     await userController.updateUser(req, res, next)

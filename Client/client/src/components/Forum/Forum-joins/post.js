@@ -8,7 +8,7 @@ const POST = [
   },
   {
     id: 2,
-    title: 'Guía para vencer a dragones',
+    titulo: 'Guía para vencer a dragones',
     description: 'Consejos para enfrentarte a dragones poderosos sin perder recursos',
     image: espadas
   },
