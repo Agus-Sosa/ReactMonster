@@ -5,7 +5,6 @@ class UserController {
         this.userService = new UserService();
     }
 
-
     async getAllUser (req, res) {
         try {
             const users = await this.userService.getAllUser();
@@ -26,9 +25,6 @@ class UserController {
         }
     }
 
-
-
-
     async createNewUser (req, res, next) {
         try {
             const {user_name, user_email, user_password}= req.body;
@@ -38,7 +34,7 @@ class UserController {
                 user_password
             };
             const user =await this.userService.createNewUser(newUser);
-            res.status(200).json({status:"success", newUser:user});
+            res.status(200).json({status:"success", message:"usuario creado con exito"});
         } catch (error) {
             next(error)
         }
@@ -54,14 +50,12 @@ class UserController {
         }
     }
 
-
     async updateUser(req,res,next) {
         try {
             const {id}=req.params;
             const newData = req.body;
 
             const updateUser = await this.userService.updateUser(id, newData);
-
             res.status(200).json({status: "success", data:updateUser})
 
         } catch (error) {

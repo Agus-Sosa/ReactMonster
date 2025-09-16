@@ -11,6 +11,7 @@ export const User = sequelize.define(config.modelData.user, {
     user_name: {
         type: DataTypes.STRING,
         allowNull:false,
+        unique: true,
     },
     user_email: {
         type:DataTypes.STRING,

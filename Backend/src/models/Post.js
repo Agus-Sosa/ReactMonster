@@ -9,6 +9,10 @@ export const Post = sequelize.define(config.modelData.post,{
         primaryKey: true,
         autoIncrement: true,
     },
+    title: {
+        type:DataTypes.STRING,
+        allowNull:false
+    },
     id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -17,10 +17,11 @@ class UserService {
 
 
     async createNewUser (newUser) {
+        console.log("nuevo", newUser);
         const existingEmail = await this.modelUser.findOne({where: {user_email: newUser.user_email}})
-
+        const existingName = await this.modelUser.findOne({where: {user_name: newUser.user_name}})
         if(existingEmail) throw new Error("El email ya fue registrado anteriomente");
-    
+        if(existingName) throw new Error("El nombre ya esta en uso");
         return await this.modelUser.create(newUser);
     }
 
