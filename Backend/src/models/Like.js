@@ -8,7 +8,7 @@ export const Like = sequelize.define(config.modelData.like,{
     },
     id_user: {
         type: DataTypes.INTEGER,
-        references:config.modelData.user,
+        references:config.modelData.user, // Foreing Key (id_user) references user(id)
     },
     id_post: {
         type: DataTypes.INTEGER,

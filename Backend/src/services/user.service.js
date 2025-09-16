@@ -1,5 +1,5 @@
 import { User } from "../models/User.js";
-
+import bcrypt from 'bcrypt';
 class UserService {
     constructor(){
         this.modelUser = User
@@ -20,10 +20,18 @@ class UserService {
         const existingEmail = await this.modelUser.findOne({where: {user_email: newUser.user_email}})
         const existingName = await this.modelUser.findOne({where: {user_name: newUser.user_name}})
         
-        if(existingEmail) throw new Error("El email ya fue registrado anteriomente");
+        if(existingEmail) throw new Error("Ocurrio un error, verifique sus credenciales");
         if(existingName) throw new Error("El nombre ya esta en uso");
 
-        return await this.modelUser.create(newUser);
+
+        const salt = await bcrypt.genSalt(10);
+        
+        const hashPassword = await bcrypt.hash(newUser.user_password, salt);
+        
+        await this.modelUser.create({
+            ...newUser,
+            user_password: hashPassword
+        });
     }
 
 
@@ -37,13 +45,11 @@ class UserService {
         }
 
         return await this.modelUser.findByPk(id);
-
     }
 
-    async deleteUserById(id) {
-        return await this.modelUser.destroy({
-            where: {id} 
-        });
+    async desactivateUserById(id) {
+        const user = await this.modelUser.findByPk(id);
+        return await user.update({count_state: false})
     }
 
 }
