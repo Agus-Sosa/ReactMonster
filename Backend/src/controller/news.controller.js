@@ -12,6 +12,16 @@ class NewController {
             res.status(500).json({status: "error", message:"Error al obtener todas las noticias"})
         }
     }
+    async getSomeNews(req,res){
+        try{
+            const limit = parseInt(req.query.limit)
+            const news = await this.newService.getSomeNews(limit);
+            res.status(200).json(news);
+        }
+        catch (error) {
+            res.status(500).json({status: "error", message:"Error al obtener las noticias"})
+        }
+    }
 
     async getNewById(req, res, next){
         try {

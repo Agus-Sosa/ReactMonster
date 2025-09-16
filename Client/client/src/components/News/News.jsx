@@ -2,15 +2,33 @@ import React from 'react'
 import Box from '@mui/material/Box';
 import './news.css'
 import NewCard from './NewCard'
-import noticias from './informacionNot'
 import { useMediaQuery } from '@mui/material';
 import NewCarouselMobile from './NewCarouselMobile';
+import { useState, useEffect } from 'react';
 
 const News = () => {
   const mobile = useMediaQuery('(max-width:1010px)')
+  const [noticias, setNoticias] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-
-
+  useEffect(() => {
+    fetch("http://localhost:3001/api/news/someNews?limit=6")
+      .then(res => {
+        if (!res.ok) throw new Error("error al cargar noticias");
+        return res.json();
+      })
+      .then(data => {
+        setNoticias(data);   
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+  if (loading) {
+    return <p style={{ color: 'white' }}>cargando noticias...</p>;
+  }
 
   return (
     <Box

@@ -9,6 +9,13 @@ class NewService{
         return await this.modelNew.findAll();
     }
 
+    async getSomeNews(limit){
+        return await this.modelNew.findAll({
+            limit:limit,
+            order: [['createdAt', 'DESC']]
+        })
+    }
+
     async getNewById (id) {
         return await this.modelNew.findByPk(id);
     }

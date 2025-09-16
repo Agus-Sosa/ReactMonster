@@ -9,6 +9,9 @@ const newController = new  NewService()
 router.get('/', async(req, res)=> {
     await newController.getAllNews(req, res);
 })
+router.get('/someNews',async(req,res)=>{
+    await newController.getSomeNews(req,res);
+})
 
 // para crear nuevas publicaciones
 router.post('/',validateNew, async(req, res, next)=>{ 
