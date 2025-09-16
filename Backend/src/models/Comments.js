@@ -1,37 +1,34 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../config/db.js";
-import { config } from "../config/config.js";
+import { DataTypes } from 'sequelize';
+import { sequelize } from '../config/db.js';
 
-export const Comments = sequelize.define(config.modelData.comments, {
+export const Comments = sequelize.define('Comments', {
   id_comment: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  id_post: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: config.modelData.post,
-  },
   id_user: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: config.modelData.user,
+  },
+  id_post: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  comment: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   date: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
-  content: {
-    type: DataTypes.STRING,
-    allowNull: false,
+  edited: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
-  coment_state: {
+  comment_state: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
-  },
-  admin_decide: {
-    type: DataTypes.INTEGER,
-    references: config.modelData.user,
-  },
+  }
 });

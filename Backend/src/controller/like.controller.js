@@ -1,10 +1,11 @@
-import * as likeService from "../services/like.service.js";
+import * as likeService from '../services/like.service.js';
 
 export const toggleLike = async (req, res, next) => {
   try {
-    const id_user = req.user.id; // validateUser proveedor
+    const { id_user } = req.user;
     const { id_post } = req.params;
-    const result = await likeService.toggleLike(Number(id_user), Number(id_post));
+
+    const result = await likeService.toggleLike(id_user, Number(id_post));
     res.json(result);
   } catch (err) {
     next(err);
@@ -14,8 +15,8 @@ export const toggleLike = async (req, res, next) => {
 export const getLikes = async (req, res, next) => {
   try {
     const { id_post } = req.params;
-    const likes = await likeService.countLikes(Number(id_post));
-    res.json({ id_post: Number(id_post), likes });
+    const count = await likeService.countLikes(Number(id_post));
+    res.json({ likes: count });
   } catch (err) {
     next(err);
   }
@@ -23,10 +24,11 @@ export const getLikes = async (req, res, next) => {
 
 export const checkUserLike = async (req, res, next) => {
   try {
-    const id_user = req.user.id;
+    const { id_user } = req.user;
     const { id_post } = req.params;
-    const liked = await likeService.userLikedPost(Number(id_user), Number(id_post));
-    res.json({ id_post: Number(id_post), liked });
+
+    const liked = await likeService.userLikedPost(id_user, Number(id_post));
+    res.json({ liked });
   } catch (err) {
     next(err);
   }

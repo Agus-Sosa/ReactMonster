@@ -1,12 +1,13 @@
-import * as commentService from "../services/comment.service.js";
+import * as commentService from '../services/comment.service.js';
 
 export const createComment = async (req, res, next) => {
   try {
-    const id_user = req.user.id;
+    const { id_user } = req.user;
     const { id_post } = req.params;
-    const { content } = req.body;
-    const comment = await commentService.createComment(Number(id_user), Number(id_post), content);
-    res.status(201).json(comment);
+    const { comment } = req.body;
+
+    const newComment = await commentService.createComment(id_user, Number(id_post), comment);
+    res.status(201).json(newComment);
   } catch (err) {
     next(err);
   }
@@ -25,10 +26,10 @@ export const getCommentsByPost = async (req, res, next) => {
 export const deleteComment = async (req, res, next) => {
   try {
     const { id_comment } = req.params;
-    const requesterId = req.user.id;
-    const requesterRole = req.user.role;
-    const deleted = await commentService.deleteComment(Number(id_comment), requesterId, requesterRole);
-    res.json({ deleted: true, comment: deleted });
+    const { id_user, role } = req.user;
+
+    const deleted = await commentService.deleteComment(Number(id_comment), id_user, role);
+    res.json(deleted);
   } catch (err) {
     next(err);
   }
