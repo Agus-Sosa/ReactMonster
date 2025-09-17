@@ -1,6 +1,7 @@
 import { Box, Button, FormControl, Input, InputBase, useMediaQuery } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
+import {toast, ToastContainer} from 'react-toastify'
 
 const AuthForm = ({ isForLogin}) => {
     const mobile = useMediaQuery("(max-width:700px)")
@@ -14,8 +15,8 @@ const AuthForm = ({ isForLogin}) => {
 
 
         const fieldTypes = isForLogin ? [
-        {name:"email", placeholder: "Email", type: "email", value:formData.user_email},
-        {name: "password", placeholder: "Contraseña", type: "password", value: formData.user_password}
+        {name:"user_email", placeholder: "Email", type: "email", value:formData.user_email},
+        {name: "user_password", placeholder: "Contraseña", type: "password", value: formData.user_password}
     ]: [
         {name:"user_name", placeholder: "Nombre de usuario", type: "text", value:formData.user_name},
         {name: "user_email", placeholder: "Email", type:"email", value: formData.user_email},
@@ -34,31 +35,47 @@ const AuthForm = ({ isForLogin}) => {
         border:"0.5px solid gray"
     }
 
-       const handleChange = (e) => {
+    const handleChange = (e) => {
     setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+        ...formData,
+        [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit=(e)=> {
+  const handleSubmit= async(e)=> {
     e.preventDefault();
+    try {
+        
+   
         const typeForm = isForLogin ? "login" : "register";
-        fetch(`http://localhost:8080/users/${typeForm}`, {
+        const res = await fetch(`http://localhost:8080/users/${typeForm}`, {
             headers: {
                     'Content-Type': 'application/json',
             },
             method:"POST",
             body: JSON.stringify(formData)
         })
-        .then(res => res.json())
-        .catch(err =>console.log(err.message));
+
+        console.log(res);
+        if(!res.ok) {
+            const errorMessage = await res.json();
+            toast.error(errorMessage.message);
+            return;
+        }
+
+        toast.success(
+            isForLogin ? "Se inicio correctamente" : "Se regitro el usuario correctamente"
+        )
+
         
         setFormData({
             user_email:"",
             user_name:"",
             user_password:"",
         })
+         } catch (error) {
+        console.log(error, "error")
+    }
 
    
   }
@@ -73,6 +90,9 @@ const AuthForm = ({ isForLogin}) => {
             {isForLogin ? "Iniciar Sesion" :"Registrarse"}
         </Button>
         </form>
+
+                <ToastContainer />
+
        
     </>
 )
