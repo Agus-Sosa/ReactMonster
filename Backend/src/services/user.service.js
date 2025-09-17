@@ -25,7 +25,6 @@ class UserService {
 
 
         const salt = await bcrypt.genSalt(10);
-        
         const hashPassword = await bcrypt.hash(newUser.user_password, salt);
         
         await this.modelUser.create({
