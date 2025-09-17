@@ -28,6 +28,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='*' element={<ErrorPage/>}/>
         <Route path='/arenas' element={<Sands/>}/>
+        
       </Routes>
     </Router>
     </>
