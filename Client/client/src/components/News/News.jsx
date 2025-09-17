@@ -26,6 +26,7 @@ const News = () => {
         setLoading(false);
       });
   }, []);
+  /* tengo que charlar de esto con agus lo vi en internet me parecio piola */
   if (loading) {
     return <p style={{ color: 'white' }}>cargando noticias...</p>;
   }
