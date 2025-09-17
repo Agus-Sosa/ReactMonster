@@ -19,7 +19,7 @@ export const validateNew=(req, res, next)=> {
         res.status(404).json({status: "error", message: "El titulo contiene palabras no permitidas."})
     }
     if (haveBadWord(resume)){
-        res.status(404).json({status: "error", message: "El resumen contiiene palabras no permitidas."})
+        res.status(404).json({status: "error", message: "El resumen contiene palabras no permitidas."})
     }
     if (haveBadWord(content)){
         res.status(404).json({status: "error", message: "El contiene contiene palabras no permitidas."})
