@@ -13,8 +13,8 @@ router.get('/someNews',async(req,res)=>{
     await newController.getSomeNews(req,res);
 })
 
-// para crear nuevas publicaciones
-router.post('/',validateNew, async(req, res, next)=>{ 
+// para crear nuevas noticias
+router.post('/createNew',validateNew, async(req, res, next)=>{ 
     await newController.createNew(req, res, next)
 })
 // obtener mediante id
