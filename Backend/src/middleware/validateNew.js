@@ -1,4 +1,5 @@
 import { News } from "../models/News.js";
+import haveBadWord from "./badwords.js"
 
 export const validateNew=(req, res, next)=> {
     const {title, resume, content} = req.body;
@@ -14,7 +15,15 @@ export const validateNew=(req, res, next)=> {
     if (!content || content.length < 20 ){
         res.status(404).json({status: "error", message: "El contenido de la noticia debe ser mayor a 20 caracteres y."})
     }
-
+    if (haveBadWord(title)){
+        res.status(404).json({status: "error", message: "El titulo contiene palabras no permitidas."})
+    }
+    if (haveBadWord(resume)){
+        res.status(404).json({status: "error", message: "El resumen contiiene palabras no permitidas."})
+    }
+    if (haveBadWord(content)){
+        res.status(404).json({status: "error", message: "El contiene contiene palabras no permitidas."})
+    }
 
 
     next();
