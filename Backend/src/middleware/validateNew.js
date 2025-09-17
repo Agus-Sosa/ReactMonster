@@ -4,8 +4,6 @@ import haveBadWord from "./badwords.js"
 export const validateNew=(req, res, next)=> {
     const {title, resume, content} = req.body;
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     if (!title || title.length < 3){
         res.status(404).json({status: "error", message: "El titulo debe tener al menos 3 caracteres."})
     }

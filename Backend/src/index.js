@@ -4,6 +4,7 @@ import { sequelize } from './config/db.js';
 import cors from 'cors' 
 import { UserRouter } from './router/user.routes.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { NewsRouter} from './router/news.routes.js';
 
 const app = express();
 const port = config.PORT
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/users', UserRouter);
+app.use('/new', NewsRouter);
 
 app.use(errorHandler);
 
