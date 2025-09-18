@@ -5,7 +5,7 @@ import cors from 'cors'
 import { UserRouter } from './router/user.routes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { NewsRouter} from './router/news.routes.js';
-
+import { PostRouter } from './router/post.routes.js';
 const app = express();
 const port = config.PORT
 
@@ -14,6 +14,7 @@ app.use(express.json());
 
 app.use('/users', UserRouter);
 app.use('/new', NewsRouter);
+app.use('/post', PostRouter );
 
 app.use(errorHandler);
 
