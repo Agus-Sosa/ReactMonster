@@ -33,7 +33,6 @@ export const posts = [
 
 const DetailPublish = () => {
     const {id} = useParams();
-
     const post = posts.find((p)=> p.id_post  === parseInt(id));
 
   return (

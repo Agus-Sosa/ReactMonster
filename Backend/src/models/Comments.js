@@ -7,6 +7,7 @@ export const Comments = sequelize.define(config.modelData.comments,{
     id_comment: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
+        primaryKey: true,
     },
     id_post: {
         type: DataTypes.INTEGER,
