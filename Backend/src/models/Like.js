@@ -5,6 +5,7 @@ export const Like = sequelize.define(config.modelData.like,{
     id_like: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
+        primaryKey: true,
     },
     id_user: {
         type: DataTypes.INTEGER,

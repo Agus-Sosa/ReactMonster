@@ -2,7 +2,7 @@ import NewService from "../services/news.service.js";
 
 class NewController {
     constructor(){
-        this.newService = new NewService();
+        this.newService = new NewController();
     }
      async getAllNews (req, res) {
         try {
