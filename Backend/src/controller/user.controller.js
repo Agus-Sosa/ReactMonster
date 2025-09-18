@@ -5,7 +5,7 @@ class UserController {
         this.userService = new UserService();
     }
 
-    async getAllUser (req, res) {
+    async getAllUser(req, res) {
         try {
             const users = await this.userService.getAllUser();
             res.status(200).json(users)
@@ -40,10 +40,10 @@ class UserController {
         }
     }
 
-    async deleteUserById (req, res) {
+    async deleteUserById (req, res, next) {
         try {
             const {id}= req.params;
-            await this.userService.deleteUserById(id);
+            await this.userService.desactivateUserById(id);
             await res.status(200).json({status:"success", messgae:"Usuario eliminado con exito"})
         } catch (error) {
             next(error)

@@ -1,27 +1,38 @@
-import express from 'express';
-import { sequelize } from './config/db.js';
+import express from 'express'
 import { config } from './config/config.js';
-import commentRouter from './router/comment.router.js';
-import likeRouter from './router/like.router.js';
+import { sequelize } from './config/db.js';
+import cors from 'cors' 
+import { UserRouter } from './router/user.routes.js';
+import { errorHandler } from './middleware/errorHandler.js';
+import { NewsRouter} from './router/news.routes.js';
 
 const app = express();
-const port = config.PORT || 8080;
+const port = config.PORT
 
+app.use(cors());
 app.use(express.json());
-app.use('/comments', commentRouter);
-app.use('/likes', likeRouter);
+
+app.use('/users', UserRouter);
+app.use('/new', NewsRouter);
+
+app.use(errorHandler);
+
+
 
 const startServer = async () => {
   try {
-    await sequelize.sync({ force: true }); // cuidado esto borra y recrea las tablas cuidado para producción usar { alter:true } o sin opciones
-    console.log('Base de datos sincronizada');
+    await sequelize.sync({force:true});
+    console.log("Base de datos sincronizada");
 
     app.listen(port, () => {
-      console.log(`Servidor corriendo en puerto ${port}`);
+      console.log(`Servidor funcionando en puerto ${port}`);
     });
-  } catch (err) {
-    console.error('Error al iniciar el servidor:', err.message);
+
+  } catch (error) {
+    console.log(`Ocurrió un error en la inicialización: ${error.message}`);
   }
 };
+
+
 
 startServer();
