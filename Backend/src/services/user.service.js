@@ -23,11 +23,13 @@ class UserService {
         if(existingEmail) {
             const error = new Error("Ocurrio un error, verifique sus credenciales");
             error.status = 404;
+            throw error;
             }
 
         if(existingName) {
             const error = new Error("Este nombre ya esta en uso");
             error.status = 404;
+            throw error
         }
 
 
