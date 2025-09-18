@@ -1,11 +1,11 @@
 import express from 'express';
 import { sequelize } from './config/db.js';
-import config from './config/config.js';
+import { config } from './config/config.js';
 import commentRouter from './router/comment.router.js';
 import likeRouter from './router/like.router.js';
 
 const app = express();
-const port = config.PORT || 3000;
+const port = config.PORT || 8080;
 
 app.use(express.json());
 app.use('/comments', commentRouter);
