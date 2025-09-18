@@ -1,6 +1,7 @@
-import { Box, Button, FormControl, Input, InputBase, useMediaQuery } from '@mui/material'
+import { Alert, Box, Button, FormControl, Input, InputBase, useMediaQuery } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
+import { data } from 'react-router-dom'
 import {toast, ToastContainer} from 'react-toastify'
 
 const AuthForm = ({ isForLogin}) => {
@@ -10,6 +11,11 @@ const AuthForm = ({ isForLogin}) => {
         user_email: "",
         user_password: "",
     })
+
+    const [error, setError] = useState({});
+
+
+
 
 
 
@@ -40,6 +46,7 @@ const AuthForm = ({ isForLogin}) => {
         ...formData,
         [e.target.name]: e.target.value,
     });
+    // setError((prev)=> ({...prev, [name]: false}))
   };
 
   const handleSubmit= async(e)=> {
@@ -56,11 +63,11 @@ const AuthForm = ({ isForLogin}) => {
             body: JSON.stringify(formData)
         })
 
-        console.log(res);
+        const data = await res.json();
+        console.log(data, 'data');
+
         if(!res.ok) {
-            const errorMessage = await res.json();
-            toast.error(errorMessage.message);
-            return;
+            setError((prev)=> ({...prev, message:data.message}))
         }
 
         toast.success(
@@ -80,16 +87,23 @@ const AuthForm = ({ isForLogin}) => {
    
   }
 
+
+  console.log("error", error);
+
   return (
     <>
-    <form  onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", gap:3, width: mobile ? "-webkit-fill-available" : "100%" , margin: mobile ? "0 30px" : '' }}>
+    {error.message && 
+        <Alert sx={{my:1}} severity="warning">{error.message}</Alert>
+
+    }
+    <Box component={"form"} onSubmit={handleSubmit} sx={{display:"flex", flexDirection:"column", gap:3, width: mobile ? "-webkit-fill-available" : "100%" , margin: mobile ? "0 30px" : '' }}>
             {fieldTypes.map((field)=> (
                 <Input component="input" name={field.name} value={field.value} placeholder={field.placeholder} type={field.type} sx={style_input} onChange={handleChange}/>
             ))}
              <Button type='submit' variant='contained' sx={{my:3, py:2, background:'#8E1616', fontWeight:"bold"}}>
             {isForLogin ? "Iniciar Sesion" :"Registrarse"}
         </Button>
-        </form>
+        </Box>
 
                 <ToastContainer />
 

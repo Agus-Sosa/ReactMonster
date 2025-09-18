@@ -20,8 +20,6 @@ export const AuthenticationContextProvider = ({children}) => {
   const handleUserLogout = ()=>{
     localStorage.removeItem('react_monster_token');
     setToken(null);
-
-  
   }
 
 
