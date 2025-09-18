@@ -5,6 +5,8 @@ import cors from 'cors'
 import { UserRouter } from './router/user.routes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { NewsRouter} from './router/news.routes.js';
+import { LikeRouter } from './router/like.router.js';
+import { CommentRouter } from './router/comment.router.js';
 
 const app = express();
 const port = config.PORT
@@ -14,7 +16,8 @@ app.use(express.json());
 
 app.use('/users', UserRouter);
 app.use('/new', NewsRouter);
-
+app.use('/like', LikeRouter);
+app.use('/comment', CommentRouter)
 app.use(errorHandler);
 
 
@@ -36,4 +39,3 @@ const startServer = async () => {
 
 
 startServer();
-
