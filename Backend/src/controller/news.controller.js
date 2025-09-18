@@ -12,7 +12,7 @@ class NewController {
             res.status(500).json({status: "error", message:"Error al obtener todas las noticias"})
         }
     }
-    /*Obtiene entrevistas hay que pasar el limit por url */
+    /*Obtiene noticias hay que pasar el limit por url */
     async getSomeNews(req,res){
         try{
             const limit = parseInt(req.query.limit)
@@ -36,17 +36,23 @@ class NewController {
     }
     async createNew (req, res, next) {
         try {
-            const {title, resume, content}= req.body;
+            const {id_admin,title,resume, content}= req.body;
             const newNew = {
+                id_admin,
                 title,
                 resume,
-                content,
+                content
+                
             };
+            console.log(newNew)
             const notice =await this.newService.createNew(newNew);
             res.status(200).json({status:"success", newNew:notice});
+
         } catch (error) {
+            console.log(error)
             next(error)
         }
+
     }
         async deleteNewById (req, res) {
         try {
