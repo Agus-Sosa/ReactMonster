@@ -6,11 +6,13 @@ import { config } from "../config/config.js";
 export const News = sequelize.define(config.modelData.news, {
     id_news: {
         type: DataTypes.INTEGER,
+        primaryKey:true,
         autoIncrement: true,
     },
     id_admin: {
         type:DataTypes.INTEGER,
-        references:config.modelData.user,
+        references: { model: 'User', key: 'id' }
+        
     },
     title:{
         type:DataTypes.STRING,

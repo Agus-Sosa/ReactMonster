@@ -20,8 +20,15 @@ class UserService {
         const existingEmail = await this.modelUser.findOne({where: {user_email: newUser.user_email}})
         const existingName = await this.modelUser.findOne({where: {user_name: newUser.user_name}})
         
-        if(existingEmail) throw new Error("Ocurrio un error, verifique sus credenciales");
-        if(existingName) throw new Error("El nombre ya esta en uso");
+        if(existingEmail) {
+            const error = new Error("Ocurrio un error, verifique sus credenciales");
+            error.status = 404;
+            }
+
+        if(existingName) {
+            const error = new Error("Este nombre ya esta en uso");
+            error.status = 404;
+        }
 
 
         const salt = await bcrypt.genSalt(10);
