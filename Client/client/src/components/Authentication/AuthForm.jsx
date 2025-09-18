@@ -10,8 +10,14 @@ const AuthForm = ({ isForLogin}) => {
         user_email: "",
         user_password: "",
     })
+    const [error, setError] = useState({
+        user_name:false,
+        user_email: false,
+        user_password: false
+    });
 
 
+    
 
 
         const fieldTypes = isForLogin ? [
