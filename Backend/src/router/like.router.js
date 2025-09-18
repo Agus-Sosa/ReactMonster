@@ -8,4 +8,4 @@ router.post('/:id_post', validateGetUserById, toggleLike);
 router.get('/:id_post', getLikes);
 router.get('/:id_post/check', validateGetUserById, checkUserLike);
 
-export default router;
+export {router as LikeRouter};

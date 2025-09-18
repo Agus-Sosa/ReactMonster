@@ -8,4 +8,4 @@ router.post('/:id_post', validateGetUserById, createComment);
 router.get('/:id_post', getCommentsByPost);
 router.delete('/:id_comment', validateGetUserById, deleteComment);
 
-export default router;
+export {router as CommentRouter};
