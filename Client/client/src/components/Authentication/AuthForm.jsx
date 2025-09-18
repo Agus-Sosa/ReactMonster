@@ -10,6 +10,7 @@ const AuthForm = ({ isForLogin}) => {
         user_name: "",
         user_email: "",
         user_password: "",
+        repeat_password:"",
     })
 
     const [error, setError] = useState({});
@@ -21,7 +22,8 @@ const AuthForm = ({ isForLogin}) => {
     ]: [
         {name:"user_name", placeholder: "Nombre de usuario", type: "text", value:formData.user_name},
         {name: "user_email", placeholder: "Email", type:"email", value: formData.user_email},
-        {name:"user_password", placeholder:"password", type:"password", value: formData.user_password},
+        {name:"user_password", placeholder:"contraseña", type:"password", value: formData.user_password},
+        {name:"repeat_password", placeholder:"Repetir contraseña", type:"password", value:formData.repeat_password}
     ]
     
 
@@ -47,7 +49,13 @@ const AuthForm = ({ isForLogin}) => {
   const handleSubmit= async(e)=> {
     e.preventDefault();
     try {
-        
+    
+        if(!isForLogin) {
+            if(formData.user_password !== formData.repeat_password) {
+                setError((prev)=> ({...prev, message: "Las contraseñas no coiciden"}));
+                return;
+            }
+        }
    
         const typeForm = isForLogin ? "login" : "register";
         const res = await fetch(`http://localhost:8080/users/${typeForm}`, {
@@ -74,6 +82,7 @@ const AuthForm = ({ isForLogin}) => {
             user_email:"",
             user_name:"",
             user_password:"",
+            repeat_password: "",
         })
         } catch (error) {
         console.log(error, "error")
