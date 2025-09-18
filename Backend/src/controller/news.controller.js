@@ -12,6 +12,7 @@ class NewController {
             res.status(500).json({status: "error", message:"Error al obtener todas las noticias"})
         }
     }
+    /*Obtiene entrevistas hay que pasar el limit por url */
     async getSomeNews(req,res){
         try{
             const limit = parseInt(req.query.limit)
@@ -72,7 +73,5 @@ class NewController {
         }
     } 
 
-
-    
 }
 export default NewController;
