@@ -15,11 +15,6 @@ const AuthForm = ({ isForLogin}) => {
     const [error, setError] = useState({});
 
 
-
-
-
-
-
         const fieldTypes = isForLogin ? [
         {name:"user_email", placeholder: "Email", type: "email", value:formData.user_email},
         {name: "user_password", placeholder: "Contraseña", type: "password", value: formData.user_password}
@@ -30,7 +25,7 @@ const AuthForm = ({ isForLogin}) => {
     ]
     
 
-   const style_input = {
+    const style_input = {
         p:2,
         border:"none",
         outline: "none",
@@ -46,7 +41,7 @@ const AuthForm = ({ isForLogin}) => {
         ...formData,
         [e.target.name]: e.target.value,
     });
-    // setError((prev)=> ({...prev, [name]: false}))
+    setError((prev)=> ({...prev, [name]: false}))
   };
 
   const handleSubmit= async(e)=> {
@@ -64,11 +59,11 @@ const AuthForm = ({ isForLogin}) => {
         })
 
         const data = await res.json();
-        console.log(data, 'data');
 
         if(!res.ok) {
             setError((prev)=> ({...prev, message:data.message}))
-        }
+            return;
+        } 
 
         toast.success(
             isForLogin ? "Se inicio correctamente" : "Se regitro el usuario correctamente"
@@ -80,7 +75,7 @@ const AuthForm = ({ isForLogin}) => {
             user_name:"",
             user_password:"",
         })
-         } catch (error) {
+        } catch (error) {
         console.log(error, "error")
     }
 
@@ -88,7 +83,6 @@ const AuthForm = ({ isForLogin}) => {
   }
 
 
-  console.log("error", error);
 
   return (
     <>

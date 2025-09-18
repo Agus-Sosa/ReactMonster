@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 import { NewsRouter} from './router/news.routes.js';
 import { LikeRouter } from './router/like.router.js';
 import { CommentRouter } from './router/comment.router.js';
+import { seedUsers } from './utils/seedUser.js';
 
 const app = express();
 const port = config.PORT
@@ -26,6 +27,9 @@ const startServer = async () => {
   try {
     await sequelize.sync({force:true});
     console.log("Base de datos sincronizada");
+
+    await seedUsers(); // Funcion para crear usuarios automaticamente para no tener que crear a cada rato (ATTE: lo teni 👟)
+
 
     app.listen(port, () => {
       console.log(`Servidor funcionando en puerto ${port}`);
