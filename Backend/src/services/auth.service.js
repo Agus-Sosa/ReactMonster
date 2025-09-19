@@ -37,15 +37,16 @@ class AuthService {
 
 
     async login (email, password) {
-        const user = User.findOne({where: {user_email : email}});
+        
+
+        const user = await User.findOne({where: {user_email:email}});
         if(!user) {
             const error = new Error("Usuario no encontrado, por favor verifique sus credenciales");
             error.status = 404;
             throw error;
         }
 
-
-        const verifyPassword = bcrypt.compare(password, user.password)
+        const verifyPassword =await bcrypt.compare(password, user.user_password);
         if(!verifyPassword) {
 
             const error = new Error("Contraseña incorrecta, por favor vuelva a intentarlo");

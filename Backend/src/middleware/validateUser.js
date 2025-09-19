@@ -43,6 +43,8 @@ export const verifyRole=(role)=> {
 
 
 export const verifyLogin=(req,res, next)=> {
+    const {user_email, user_password} = req.body;
+ 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if(!user_email || !emailRegex.test(user_email)) {
