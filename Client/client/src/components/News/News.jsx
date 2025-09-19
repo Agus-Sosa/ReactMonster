@@ -12,7 +12,7 @@ const News = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/news/someNews?limit=6")
+    fetch("http://localhost:8080/news/")
       .then(res => {
         if (!res.ok) throw new Error("error al cargar noticias");
         return res.json();
