@@ -7,8 +7,8 @@ import { errorHandler } from './middleware/errorHandler.js';
 import { NewsRouter} from './router/news.routes.js';
 import { LikeRouter } from './router/like.router.js';
 import { CommentRouter } from './router/comment.router.js';
-import { seedUsers } from './utils/seedUser.js';
 import { AuthRouter } from './router/auth.routes.js';
+import { tempDataIndex } from './utils/temIndex.js';
 
 const app = express();
 const port = config.PORT
@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use('/users', UserRouter);
 app.use('/auth', AuthRouter)
-app.use('/new', NewsRouter);
+app.use('/news', NewsRouter);
 app.use('/like', LikeRouter);
 app.use('/comment', CommentRouter)
 app.use(errorHandler);
@@ -30,7 +30,7 @@ const startServer = async () => {
     await sequelize.sync({force:true});
     console.log("Base de datos sincronizada");
 
-    await seedUsers(); // Funcion para crear usuarios automaticamente para no tener que crear a cada rato (ATTE: lo teni 👟)
+    await tempDataIndex(); // Funcion para crear usuarios automaticamente para no tener que crear a cada rato (ATTE: lo teni 👟)
 
 
     app.listen(port, () => {

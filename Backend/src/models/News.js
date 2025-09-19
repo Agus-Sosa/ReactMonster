@@ -11,7 +11,7 @@ export const News = sequelize.define(config.modelData.news, {
     },
     id_admin: {
         type:DataTypes.INTEGER,
-        references: { model: 'User', key: 'id' }
+        references: { model: 'Users', key: 'id' }
         
     },
     title:{
