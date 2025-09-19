@@ -8,6 +8,7 @@ import { NewsRouter} from './router/news.routes.js';
 import { LikeRouter } from './router/like.router.js';
 import { CommentRouter } from './router/comment.router.js';
 import { seedUsers } from './utils/seedUser.js';
+import { AuthRouter } from './router/auth.routes.js';
 
 const app = express();
 const port = config.PORT
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/users', UserRouter);
+app.use('/auth', AuthRouter)
 app.use('/new', NewsRouter);
 app.use('/like', LikeRouter);
 app.use('/comment', CommentRouter)
