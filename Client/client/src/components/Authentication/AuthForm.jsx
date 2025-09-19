@@ -58,7 +58,7 @@ const AuthForm = ({ isForLogin}) => {
         }
    
         const typeForm = isForLogin ? "login" : "register";
-        const res = await fetch(`http://localhost:8080/users/${typeForm}`, {
+        const res = await fetch(`http://localhost:8080/auth/${typeForm}`, {
             headers: {
                     'Content-Type': 'application/json',
             },
@@ -77,6 +77,8 @@ const AuthForm = ({ isForLogin}) => {
             isForLogin ? "Se inicio correctamente" : "Se regitro el usuario correctamente"
         )
 
+
+        setError({})
         
         setFormData({
             user_email:"",
