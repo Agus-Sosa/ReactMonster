@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ArenaSection = () => {
   return (
-    <Box sx={{ background: "#E8E3CE", py: { xs: 6, md: 10 } }}>
+    <Box sx={{ background: "#E8E3CE", py: { xs: 6, md: 10 },height:"80vh", display:'flex', alignItems:"center" }}>
       <PageContainer>
         <Box
           sx={{
@@ -54,8 +54,8 @@ const ArenaSection = () => {
             src={arena_home}
             alt="Arena"
             sx={{
-              width: { xs: 260, md: 380 },
-              height: { xs: 260, md: 380 },
+              width: { xs: 260, md: 480 },
+              height: { xs: 260, md: 480 },
               borderRadius: "50%",
               boxShadow: 4,
               border: "4px solid #3B1F0B",

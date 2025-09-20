@@ -4,24 +4,22 @@ import MonsterContainer from './MonsterContainer';
 import PageContainer from '../Layout/PageContainer/PageContainer';
 function MonstersLanding() {
   return (
-    // Contenedor principal de la sección, ocupa todo el ancho
     <Box 
       sx={{ 
-        backgroundColor: '#f5f0e1', // Color de fondo que se extiende
-        py: 8 // Padding vertical
+        backgroundColor: '#212121',
+        py: 8 
       }}
     >
       <PageContainer>
-        {/* El contenido de la sección, incluyendo el título, queda centrado */}
-        <Typography 
-          variant="h1" 
-          sx={{ 
-            fontSize: "70px", 
-            color: 'white' // Asegúrate de que este color contraste con el fondo
-          }}
-        >
-          Engendros
-        </Typography>
+        <Box sx={{textAlign:"center", mb:5}}>
+          <Box component="h1" sx={{fontSize:"70px", fontWeight:"bold", color:"white", textAlign:"center" ,fontStyle:"italic"}}>
+            Engendros
+          </Box>
+          <Box component="p" sx={{  color:"white", textAlign:"center" }}>
+            Elige a tu compañero entre un sinfín de criaturas. Descubre sus habilidades únicas y domina el arte de la batalla por turnos.
+          </Box>
+          </Box>
+       
         <MonsterContainer />
       </PageContainer>
     </Box>

@@ -5,7 +5,7 @@ import Footer from "../Footer";
 
 const LayoutLanding = () => {
   return (
-    <Box>
+    <Box >
         <Header/>
       <Box
         sx={{
