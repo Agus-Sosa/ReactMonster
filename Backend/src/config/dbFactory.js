@@ -10,7 +10,8 @@ class DatabaseFactory {
             case "sqlite":
             sequelize = new Sequelize({
                 dialect:"sqlite",
-                storage: "./react_monster.db"
+                storage: "./react_monster.db",
+                logging: false,
             })
             break;
 

@@ -9,6 +9,8 @@ import { LikeRouter } from './router/like.router.js';
 import { CommentRouter } from './router/comment.router.js';
 import { AuthRouter } from './router/auth.routes.js';
 import { tempDataIndex } from './utils/temIndex.js';
+import { MonsterRouter } from './router/monster.routes.js';
+import { ArenaRouter } from './router/arena.routes.js';
 
 const app = express();
 const port = config.PORT
@@ -19,8 +21,10 @@ app.use(express.json());
 app.use('/users', UserRouter);
 app.use('/auth', AuthRouter)
 app.use('/news', NewsRouter);
-app.use('/like', LikeRouter);
-app.use('/comment', CommentRouter)
+app.use('/likes', LikeRouter);
+app.use('/comments', CommentRouter);
+app.use('/monsters',MonsterRouter);
+app.use('/arenas', ArenaRouter);
 app.use(errorHandler);
 
 

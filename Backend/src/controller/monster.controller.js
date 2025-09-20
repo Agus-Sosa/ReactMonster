@@ -1,0 +1,45 @@
+import MonsterService from "../services/monster.service.js";
+
+class MonsterController { 
+    constructor(){ 
+        this.monsterService = new MonsterService();
+    }
+
+
+
+    async getAllMonsters(req, res, next) {
+        try {
+            const monsters = await this.monsterService.getAllMonster();
+            res.status(200).json({status: "success", message:"Se obtuvieron los montruos con exito", monsters: monsters});
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
+    async getMonsterById(req, res, next) {
+        try {
+            const {id} =req.params;
+            const monster = await this.monsterService.getMonsterById(id);
+            res.status(200).json({status: "success", message: "Se obtuvo el monstruo con exito", monster:monster});
+        } catch (error) {
+            next(error)
+        }
+    }
+
+
+    async getMonsterByName(req, res, next) {
+        try {
+            const {monster_name} =req.body;
+            const monster = await this.monsterService.getMonsterByName(monster_name);
+            res.status(200).json({status: "success", message: "Se obtuvo el monstruo con exito", monster:monster});
+        } catch (error) {
+            next(error)
+        }
+    }
+
+ 
+}
+
+
+export default MonsterController;

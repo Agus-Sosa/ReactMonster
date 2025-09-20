@@ -6,6 +6,8 @@ export const config = {
     post: 'Posts',
     news: 'News',
     comments: 'Comments',
-    like: 'Likes'
+    like: 'Likes',
+    monster: "Monsters",
+    arena: "Arenas",
   }
 };
