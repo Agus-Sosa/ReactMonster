@@ -12,7 +12,6 @@ const [monster, setMonster]= useState([]);
         .then((data)=> setMonster(data.monsters))
         .catch(error => console.log(error))
     },[])
-    console.log(monster,'monster')
 
   return (
     <Box sx={{display:"flex", flexWrap:"wrap", gap:2, justifyContent:"center"}}>
