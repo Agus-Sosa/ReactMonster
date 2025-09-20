@@ -5,7 +5,6 @@ class CommentService {
     this.modelComment = Comments;
   }
 
-  // Crear un comentario
   async createComment(id_user, id_post, commentText) {
     return await this.modelComment.create({
       id_user,
@@ -15,8 +14,6 @@ class CommentService {
       comment_state: true
     });
   }
-
-  // Obtener todos los comentarios activos de un post, ordenados por fecha ascendente
   async getCommentsByPost(id_post) {
     return await this.modelComment.findAll({
       where: { id_post, comment_state: true },
@@ -24,7 +21,6 @@ class CommentService {
     });
   }
 
-  // Eliminar (soft delete) un comentario con control de permisos
   async deleteComment(id_comment, requesterId, requesterRole) {
     const comment = await this.modelComment.findByPk(id_comment);
     if (!comment) throw new Error("Comentario no encontrado");
