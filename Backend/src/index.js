@@ -5,12 +5,13 @@ import cors from 'cors'
 import { UserRouter } from './router/user.routes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { NewsRouter} from './router/news.routes.js';
-import { LikeRouter } from './router/like.router.js';
-import { CommentRouter } from './router/comment.router.js';
+
 import { AuthRouter } from './router/auth.routes.js';
 import { tempDataIndex } from './utils/temIndex.js';
 import { MonsterRouter } from './router/monster.routes.js';
 import { ArenaRouter } from './router/arena.routes.js';
+import { LikeRouter } from './router/like.routes.js';
+import { CommentRouter } from './router/comment.routes.js';
 
 const app = express();
 const port = config.PORT
