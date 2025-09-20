@@ -16,7 +16,7 @@ export const Post = sequelize.define(config.modelData.post,{
     id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: config.modelData.user
+        references: { model: 'User', key: 'id' }
     },
     
     date: {
@@ -37,7 +37,7 @@ export const Post = sequelize.define(config.modelData.post,{
     },
     admin_decide: {
         type: DataTypes.INTEGER,
-        references: config.modelData.user,
+        references: { model: 'User', key: 'id' },
     }
     
 

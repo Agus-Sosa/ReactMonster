@@ -11,6 +11,29 @@ class PostService {
         return await this.modelPost.findAll();
     }
 
-    // async getPostById
+     async getPostById (id) {
+        return await this.modelPost.findByPk(id);
+     }
+
+     async createNewPost (newPost) {
+        return await this.modelPost.create(newPost)
+     }
+
+     async deletePost (idPost){
+        return await this.modelPost.destroy(idPost)
+     }
+
+     async updatePost (idPost, newPost){ 
+        const [updateData]= await this.modelPost.update(newPost, {where:{idPost}});
+    
+    
+        if(updateData ===0) {
+            throw new Error("No hay cambios");
+        }
+
+        return await this.modelPost.findByPk(idPost);
+    }
+
+     
 }
 export default PostService;
