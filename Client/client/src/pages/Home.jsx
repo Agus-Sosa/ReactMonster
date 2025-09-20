@@ -9,12 +9,10 @@ import MonstersSection from '../components/AboutGame/MonstersSection'
 const Home = () => {
   return (
     <>
-    <Header/>
     <Landing/>
     <News/>
     <MonstersSection/>
     <ArenaSection/>
-    <Footer/>
     </>
 )
 }

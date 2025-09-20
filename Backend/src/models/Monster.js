@@ -5,12 +5,12 @@ import { config } from '../config/config.js';
 
 
 export const Monster = sequelize.define(config.modelData.monster, {
-    id_monster: {
+    monster_id: {
        type: DataTypes.INTEGER,
         autoIncrement:true,
         primaryKey: true,
     },
-    monster_class : {
+    monster_role : {
         type: DataTypes.STRING,
         allowNull:false,
 

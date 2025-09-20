@@ -14,7 +14,6 @@ const Sands = () => {
   return (
     <div style={{
     backgroundColor: '#212121'}}>
-        <Header/>
         <section className='hero'>
         <Box sx={{color: "#E3E0C3", fontFamily:"Anton", fontSize:"40px", flexBasis: '100%', textAlign: 'left', marginLeft: '140px', display:'flex', alignItems: 'center',}}>
         <img src={tituloArena} alt="titulo" height={'350px'} width={'500px'}/>
@@ -45,7 +44,6 @@ const Sands = () => {
           </Box>
         ))}
         </Box>
-        <Footer/>
     </div>
   )
 }
