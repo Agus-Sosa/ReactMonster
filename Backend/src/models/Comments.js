@@ -1,7 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/db.js';
+import { config } from '../config/config.js';
 
-export const Comments = sequelize.define('Comments', {
+export const Comments = sequelize.define(config.modelData.comments, {
   id_comment: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -10,10 +11,13 @@ export const Comments = sequelize.define('Comments', {
   id_user: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    references: {model: config.modelData.user, key:"id_user"}
   },
   id_post: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    references: {model: config.modelData.post, key:"id_post"}
+
   },
   comment: {
     type: DataTypes.STRING,

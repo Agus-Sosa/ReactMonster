@@ -10,14 +10,10 @@ const AuthForm = ({ isForLogin}) => {
         user_name: "",
         user_email: "",
         user_password: "",
+        repeat_password:"",
     })
 
     const [error, setError] = useState({});
-
-
-
-
-
 
 
         const fieldTypes = isForLogin ? [
@@ -26,11 +22,12 @@ const AuthForm = ({ isForLogin}) => {
     ]: [
         {name:"user_name", placeholder: "Nombre de usuario", type: "text", value:formData.user_name},
         {name: "user_email", placeholder: "Email", type:"email", value: formData.user_email},
-        {name:"user_password", placeholder:"password", type:"password", value: formData.user_password},
+        {name:"user_password", placeholder:"contraseña", type:"password", value: formData.user_password},
+        {name:"repeat_password", placeholder:"Repetir contraseña", type:"password", value:formData.repeat_password}
     ]
     
 
-   const style_input = {
+    const style_input = {
         p:2,
         border:"none",
         outline: "none",
@@ -46,16 +43,22 @@ const AuthForm = ({ isForLogin}) => {
         ...formData,
         [e.target.name]: e.target.value,
     });
-    // setError((prev)=> ({...prev, [name]: false}))
+    setError((prev)=> ({...prev, [name]: false}))
   };
 
   const handleSubmit= async(e)=> {
     e.preventDefault();
     try {
-        
+    
+        if(!isForLogin) {
+            if(formData.user_password !== formData.repeat_password) {
+                setError((prev)=> ({...prev, message: "Las contraseñas no coiciden"}));
+                return;
+            }
+        }
    
         const typeForm = isForLogin ? "login" : "register";
-        const res = await fetch(`http://localhost:8080/users/${typeForm}`, {
+        const res = await fetch(`http://localhost:8080/auth/${typeForm}`, {
             headers: {
                     'Content-Type': 'application/json',
             },
@@ -64,23 +67,26 @@ const AuthForm = ({ isForLogin}) => {
         })
 
         const data = await res.json();
-        console.log(data, 'data');
 
         if(!res.ok) {
             setError((prev)=> ({...prev, message:data.message}))
-        }
+            return;
+        } 
 
         toast.success(
             isForLogin ? "Se inicio correctamente" : "Se regitro el usuario correctamente"
         )
 
+
+        setError({})
         
         setFormData({
             user_email:"",
             user_name:"",
             user_password:"",
+            repeat_password: "",
         })
-         } catch (error) {
+        } catch (error) {
         console.log(error, "error")
     }
 
@@ -88,7 +94,6 @@ const AuthForm = ({ isForLogin}) => {
   }
 
 
-  console.log("error", error);
 
   return (
     <>

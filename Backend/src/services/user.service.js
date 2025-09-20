@@ -16,32 +16,6 @@ class UserService {
     }
 
 
-    async createNewUser (newUser) {
-        const existingEmail = await this.modelUser.findOne({where: {user_email: newUser.user_email}})
-        const existingName = await this.modelUser.findOne({where: {user_name: newUser.user_name}})
-        
-        if(existingEmail) {
-            const error = new Error("Ocurrio un error, verifique sus credenciales");
-            error.status = 404;
-            throw error;
-            }
-
-        if(existingName) {
-            const error = new Error("Este nombre ya esta en uso");
-            error.status = 404;
-            throw error
-        }
-
-
-        const salt = await bcrypt.genSalt(10);
-        const hashPassword = await bcrypt.hash(newUser.user_password, salt);
-        
-        await this.modelUser.create({
-            ...newUser,
-            user_password: hashPassword
-        });
-    }
-
 
     async updateUser (id,newUpdate) {
         
