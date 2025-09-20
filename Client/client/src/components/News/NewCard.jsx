@@ -13,18 +13,18 @@ export default function NewCard({inf}) {
         <CardMedia
           component="img"
           height="200"
-          image={inf.url}
+          image={inf.imageUrl}
           alt="noticia imagen"
         />
         <CardContent >
             <Typography variant="body2" sx={{ color: '#E3E0C3' }}>
-            {inf.fecha}
+            {inf.date}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            {inf.titulo}
+            {inf.title}
           </Typography>
           <Typography variant="body2" sx={{ color: '#E3E0C3' }}>
-            {inf.descripcion}
+            {inf.resume}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -75,7 +75,7 @@ const News = () => {
           
         noticias.slice(-3).map((inf) => (
           <Box
-            key={inf.id}
+            key={inf.id_news}
             sx={{
               flex: '1 1 300px',     
               display: 'flex',

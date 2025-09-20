@@ -3,7 +3,7 @@ export const config = {
   db_dialect: "sqlite",
   modelData: {
     user: 'Users',
-    post: 'Posts',
+    post: 'Post',
     news: 'News',
     comments: 'Comments',
     like: 'Likes',
