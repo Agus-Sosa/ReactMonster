@@ -19,15 +19,18 @@ export default function NewCard({id,imageUrl, title, resume,date}) {
   return (
 
     <Box component={Link} to={`/notice/${id}`} sx={{
-      
-      
+    
     textDecoration:"none", 
     color:"#E3E0C3",
     width: "100%",
     height: '450px',
     color:"black",
     display: "block", 
-
+    transition:"all 0.5s",
+    borderRadius:"10px",
+    border:"1px solid #E3E0C3",
+      ":hover": {border:"solid 1px #380E00"},
+    p: 1,
     }}>
       <Box sx={{width:"auto", height:{xs:"300px", md:"250px"}, mb:1}}>
         <Box component='img' src={imageUrl} sx={{ width:"100%", height:"100%",objectFit:"cover"}}/>
