@@ -11,7 +11,7 @@ export const News = sequelize.define(config.modelData.news, {
     },
     id_admin: {
         type:DataTypes.INTEGER,
-        references: { model: 'User', key: 'id' }
+        references: { model: 'Users', key: 'id_user' }
         
     },
     title:{
@@ -30,4 +30,8 @@ export const News = sequelize.define(config.modelData.news, {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     },
+    imageUrl:{
+        type: DataTypes.STRING,
+        defaultValue:'https://img.freepik.com/foto-gratis/rodaje-fantastic-alien_23-2151648335.jpg?semt=ais_incoming&w=740&q=80'
+    }
 })

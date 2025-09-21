@@ -1,6 +1,7 @@
-import { Box, Button, FormControl, Input, InputBase, useMediaQuery } from '@mui/material'
+import { Alert, Box, Button, FormControl, Input, InputBase, useMediaQuery } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
+import { data } from 'react-router-dom'
 import {toast, ToastContainer} from 'react-toastify'
 
 const AuthForm = ({ isForLogin}) => {
@@ -9,9 +10,10 @@ const AuthForm = ({ isForLogin}) => {
         user_name: "",
         user_email: "",
         user_password: "",
+        repeat_password:"",
     })
 
-
+    const [error, setError] = useState({});
 
 
         const fieldTypes = isForLogin ? [
@@ -20,11 +22,12 @@ const AuthForm = ({ isForLogin}) => {
     ]: [
         {name:"user_name", placeholder: "Nombre de usuario", type: "text", value:formData.user_name},
         {name: "user_email", placeholder: "Email", type:"email", value: formData.user_email},
-        {name:"user_password", placeholder:"password", type:"password", value: formData.user_password},
+        {name:"user_password", placeholder:"contraseña", type:"password", value: formData.user_password},
+        {name:"repeat_password", placeholder:"Repetir contraseña", type:"password", value:formData.repeat_password}
     ]
     
 
-   const style_input = {
+    const style_input = {
         p:2,
         border:"none",
         outline: "none",
@@ -40,15 +43,22 @@ const AuthForm = ({ isForLogin}) => {
         ...formData,
         [e.target.name]: e.target.value,
     });
+    setError((prev)=> ({...prev, [name]: false}))
   };
 
   const handleSubmit= async(e)=> {
     e.preventDefault();
     try {
-        
+    
+        if(!isForLogin) {
+            if(formData.user_password !== formData.repeat_password) {
+                setError((prev)=> ({...prev, message: "Las contraseñas no coiciden"}));
+                return;
+            }
+        }
    
         const typeForm = isForLogin ? "login" : "register";
-        const res = await fetch(`http://localhost:8080/users/${typeForm}`, {
+        const res = await fetch(`http://localhost:8080/auth/${typeForm}`, {
             headers: {
                     'Content-Type': 'application/json',
             },
@@ -56,40 +66,49 @@ const AuthForm = ({ isForLogin}) => {
             body: JSON.stringify(formData)
         })
 
-        console.log(res);
+        const data = await res.json();
+
         if(!res.ok) {
-            const errorMessage = await res.json();
-            toast.error(errorMessage.message);
+            setError((prev)=> ({...prev, message:data.message}))
             return;
-        }
+        } 
 
         toast.success(
             isForLogin ? "Se inicio correctamente" : "Se regitro el usuario correctamente"
         )
 
+
+        setError({})
         
         setFormData({
             user_email:"",
             user_name:"",
             user_password:"",
+            repeat_password: "",
         })
-         } catch (error) {
+        } catch (error) {
         console.log(error, "error")
     }
 
    
   }
 
+
+
   return (
     <>
-    <form  onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", gap:3, width: mobile ? "-webkit-fill-available" : "100%" , margin: mobile ? "0 30px" : '' }}>
+    {error.message && 
+        <Alert sx={{my:1}} severity="warning">{error.message}</Alert>
+
+    }
+    <Box component={"form"} onSubmit={handleSubmit} sx={{display:"flex", flexDirection:"column", gap:3, width: mobile ? "-webkit-fill-available" : "100%" , margin: mobile ? "0 30px" : '' }}>
             {fieldTypes.map((field)=> (
                 <Input component="input" name={field.name} value={field.value} placeholder={field.placeholder} type={field.type} sx={style_input} onChange={handleChange}/>
             ))}
              <Button type='submit' variant='contained' sx={{my:3, py:2, background:'#8E1616', fontWeight:"bold"}}>
             {isForLogin ? "Iniciar Sesion" :"Registrarse"}
         </Button>
-        </form>
+        </Box>
 
                 <ToastContainer />
 

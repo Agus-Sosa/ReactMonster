@@ -5,7 +5,7 @@ class UserController {
         this.userService = new UserService();
     }
 
-    async getAllUser (req, res) {
+    async getAllUser(req, res) {
         try {
             const users = await this.userService.getAllUser();
             res.status(200).json(users)
@@ -25,20 +25,7 @@ class UserController {
         }
     }
 
-    async createNewUser (req, res, next) {
-        try {
-            const {user_name, user_email, user_password}= req.body;
-            const newUser = {
-                user_name, 
-                user_email, 
-                user_password
-            };
-            const user =await this.userService.createNewUser(newUser);
-            res.status(200).json({status:"success", message:"usuario creado con exito"});
-        } catch (error) {
-            next(error)
-        }
-    }
+   
 
     async deleteUserById (req, res, next) {
         try {

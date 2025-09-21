@@ -12,7 +12,7 @@ const News = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/news/someNews?limit=6")
+    fetch("http://localhost:8080/news/someNews?limit=3")
       .then(res => {
         if (!res.ok) throw new Error("error al cargar noticias");
         return res.json();
@@ -75,7 +75,7 @@ const News = () => {
           
         noticias.slice(-3).map((inf) => (
           <Box
-            key={inf.id}
+            key={inf.id_news}
             sx={{
               flex: '1 1 300px',     
               display: 'flex',

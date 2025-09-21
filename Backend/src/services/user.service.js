@@ -16,24 +16,6 @@ class UserService {
     }
 
 
-    async createNewUser (newUser) {
-        const existingEmail = await this.modelUser.findOne({where: {user_email: newUser.user_email}})
-        const existingName = await this.modelUser.findOne({where: {user_name: newUser.user_name}})
-        
-        if(existingEmail) throw new Error("Ocurrio un error, verifique sus credenciales");
-        if(existingName) throw new Error("El nombre ya esta en uso");
-
-
-        const salt = await bcrypt.genSalt(10);
-        
-        const hashPassword = await bcrypt.hash(newUser.user_password, salt);
-        
-        await this.modelUser.create({
-            ...newUser,
-            user_password: hashPassword
-        });
-    }
-
 
     async updateUser (id,newUpdate) {
         

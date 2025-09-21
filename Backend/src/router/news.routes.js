@@ -9,8 +9,8 @@ const newController = new  NewService()
 router.get('/', async(req, res)=> {
     await newController.getAllNews(req, res);
 })
-router.get('/someNews',async(req,res)=>{
-    await newController.getSomeNews(req,res);
+router.get('/someNews',async(req,res,next)=>{
+    await newController.getSomeNews(req,res,next);
 })
 
 // para crear nuevas noticias

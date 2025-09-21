@@ -8,31 +8,34 @@ import ErrorPage from './components/ErrorPage/ErrorPage';
 import Monsters from './pages/Monsters';
 import Sands from './pages/Sands';
 import DetailPublish from './components/Forum/detailPublic/DetailPublish';
-
-
+import LayoutLanding from './components/Layout/LayoutLanding';
+import MonsterDetail from './components/MonstersSection/MonsterDetail';
 
 function App() {
-  
-
-
   return (
     <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/foro" element={<Foro />} />
-        <Route path='/foro/:id' element={<DetailPublish/>}/>
-        <Route path="/monsters" element={<Monsters />}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='*' element={<ErrorPage/>}/>
-        <Route path='/arenas' element={<Sands/>}/>
-        
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          {/* Rutas que usan el LayoutLanding */}
+          <Route element={<LayoutLanding />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/foro" element={<Foro />} />
+            <Route path="/foro/:id" element={<DetailPublish />} />
+            <Route path="/monsters" element={<Monsters />} />
+            <Route path='/monsters/:id'element={<MonsterDetail/>}/>
+            <Route path="/arenas" element={<Sands />} />
+          </Route>
+
+          {/* Rutas sin un layout */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* Ruta para manejar errores */}
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
