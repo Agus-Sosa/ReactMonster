@@ -1,28 +1,37 @@
-import { Box } from '@mui/material'
-import NewCard from './NewCard'
+import { Box } from '@mui/material';
+import NewCard from './NewCard';
 
-const NewCarouselMobile = ({inf}) => {
+const NewCarouselMobile = ({ inf }) => {
   return (
-<Box
+    <Box
       sx={{
         display: 'flex',
-        gap: 1,
-        py: 1,
-        overflow: 'auto',
+        gap: 2,
+        
+        overflowX: 'auto', 
         width: '100%',
-        maxWidth:"400",
         scrollSnapType: 'x mandatory',
+        scrollBehavior: 'smooth',
         '& > *': {
-          flex: '0 0 auto',
+          flex: '0 0 80%', 
+          maxWidth: '350px', 
           scrollSnapAlign: 'center',
         },
         '::-webkit-scrollbar': { display: 'none' },
       }}
     >
-      {inf.slice(-3).map((item) => (
-       <NewCard key={item.id} inf={item}/>
+      {inf.map((notice) => (
+        <NewCard
+          key={notice.id}
+          id={notice.id}
+          imageUrl={notice.imageUrl}
+          resume={notice.resume}
+          title={notice.title}
+          date={notice.date}
+        />
       ))}
-    </Box>  )
-}
+    </Box>
+  );
+};
 
-export default NewCarouselMobile
+export default NewCarouselMobile;

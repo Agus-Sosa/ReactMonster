@@ -4,11 +4,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
+import { Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-export default function NewCard({inf}) {
+export default function NewCard({id,imageUrl, title, resume,date}) {
 
   /*Formateo la fecha que trae el sv */
-  const d = new Date(inf.date);
+  const d = new Date(date);
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
@@ -16,27 +18,27 @@ export default function NewCard({inf}) {
   const fechaFormateada = `${day}/${m}/${y}`
   return (
 
-    <Card sx={{ maxWidth: 345, color:'#E3E0C3', backgroundColor: '#380E00', border:'1px solid #E3E0C3'}}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image={inf.imageUrl}
-          alt="noticia imagen"
-        />
-        <CardContent >
-            <Typography variant="body2" sx={{ color: '#E3E0C3' }}>
-            {fechaFormateada}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-            {inf.title}
-          </Typography>
-          <Typography variant="body2" sx={{ color: '#E3E0C3' }}>
-            {inf.resume}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <Box component={Link} to={`/notice/${id}`} sx={{
+      
+      
+    textDecoration:"none", 
+    color:"#E3E0C3",
+    width: "100%",
+    height: '450px',
+    color:"black",
+    display: "block", 
+
+    }}>
+      <Box sx={{width:"auto", height:{xs:"300px", md:"250px"}, mb:1}}>
+        <Box component='img' src={imageUrl} sx={{ width:"100%", height:"100%",objectFit:"cover"}}/>
+
+      </Box>
+      <Box component="div">
+        <Box component="p" sx={{fontWeight:"bold", color:"#380E00"}}>{fechaFormateada}</Box>
+        <Box component="h4" sx={{fontSize:{xs:"14px", md:"20px"}}}>{title}</Box>
+        <Box component='p'>{resume}</Box>
+      </Box>
+    </Box>
     
   );
 }
