@@ -9,6 +9,7 @@ import Monsters from './pages/Monsters';
 import Sands from './pages/Sands';
 import DetailPublish from './components/Forum/detailPublic/DetailPublish';
 import LayoutLanding from './components/Layout/LayoutLanding';
+import MonsterDetail from './components/MonstersSection/MonsterDetail';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/foro" element={<Foro />} />
             <Route path="/foro/:id" element={<DetailPublish />} />
             <Route path="/monsters" element={<Monsters />} />
+            <Route path='/monsters/:id'element={<MonsterDetail/>}/>
             <Route path="/arenas" element={<Sands />} />
           </Route>
 

@@ -13,7 +13,7 @@ const MonstersCard = ({id, name, image}) => {
     position: "relative" 
   }} 
   component={Link} 
-  to={`/monster/${id}`}
+  to={`/monsters/${id}`}
 >
   <Box
     sx={{

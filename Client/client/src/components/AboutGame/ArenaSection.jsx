@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ArenaSection = () => {
   return (
-    <Box sx={{ background: "#E8E3CE", py: { xs: 6, md: 10 } }}>
+    <Box sx={{ background: "#E8E3CE", py: { xs: 2, md: 5 },height:{ md:"80vh"}, display:'flex', alignItems:"center" }}>
       <PageContainer>
         <Box
           sx={{
@@ -17,11 +17,8 @@ const ArenaSection = () => {
             color: "#3B1F0B",
           }}
         >
-          {/* Imagen */}
-        
-
-          {/* Texto */}
-          <Box sx={{ width: { xs: "100%", md: "50%" }, textAlign: { xs: "center", md: "left" } }}>
+         
+          <Box sx={{ width: { xs: "100%", md: "50%" }, textAlign: { xs: "left", md: "left" } }}>
             <Box component="h1" sx={{ fontSize: { xs: "2.5rem", md: "3.5rem" }, fontWeight: "bold", mb: 2 }}>
               ARENAS
             </Box>
@@ -54,8 +51,8 @@ const ArenaSection = () => {
             src={arena_home}
             alt="Arena"
             sx={{
-              width: { xs: 260, md: 380 },
-              height: { xs: 260, md: 380 },
+              width: { xs: 260, md: 480 },
+              height: { xs: 260, md: 480 },
               borderRadius: "50%",
               boxShadow: 4,
               border: "4px solid #3B1F0B",

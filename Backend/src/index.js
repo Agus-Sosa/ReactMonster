@@ -5,7 +5,7 @@ import cors from 'cors'
 import { UserRouter } from './router/user.routes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { NewsRouter} from './router/news.routes.js';
-
+import { PostRouter } from './router/post.routes.js';
 import { AuthRouter } from './router/auth.routes.js';
 import { tempDataIndex } from './utils/temIndex.js';
 import { MonsterRouter } from './router/monster.routes.js';
@@ -20,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/users', UserRouter);
+app.use('/post', PostRouter );
 app.use('/auth', AuthRouter)
 app.use('/news', NewsRouter);
 app.use('/likes', LikeRouter);
