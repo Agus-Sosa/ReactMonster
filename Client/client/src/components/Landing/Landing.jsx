@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import "./Landing.css";
 import btnbg from '../../assets/img/test.png';
 import titulogame from "../../assets/img/title_game.png";
@@ -8,14 +8,29 @@ import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import ModalAuthPrev from '../Authentication/ModalAuthPrev';
+import sound from './background_01.mp3'
 
 function Landing() {
   const [openModal, setOpenModal] = useState(false);
-
+  const audioRef = useRef(null);
 
   const handleOpenModal =()=> {
     setOpenModal(true);
   }
+ 
+  
+ /*para que esto funcione el usuario tiene que hacer click en algun lado de la pagina*/
+  const handleMouseEnter = () => {
+    audioRef.current.currentTime = 0; 
+    audioRef.current.play();
+  };
+
+  const handleMouseLeave = () => {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0; 
+  };
+  /*finaliza sonido en el btn*/
+
   const handleCloseModal = ()=> {
     setOpenModal(false);
   }
@@ -39,6 +54,7 @@ const styleButton = {
   textDecoration: "none",
   p:2
 }
+
 
 
   return (
@@ -73,11 +89,14 @@ const styleButton = {
         },
   }}
   onClick={handleOpenModal}
+  onMouseEnter={handleMouseEnter}
+  onMouseLeave={handleMouseLeave}
     > JUGAR AHORA</Button>
     <ModalAuthPrev openModal={openModal} handleCloseModal={handleCloseModal}/>
 
  
     </Box>
+    <audio ref={audioRef} src={sound} loop />
     </>
   )
 }
