@@ -16,7 +16,7 @@ class AuthController {
             next(error)
         }
     }
-
+    /*Crea un nuevo usuario */
     async createNewUser (req, res, next) {
         try {
             const {user_name, user_email, user_password}= req.body;

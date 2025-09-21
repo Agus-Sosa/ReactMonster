@@ -15,7 +15,6 @@ const Foro = () => {
 
     return (
         <>
-        <Header/>
         <LandingForo/>
         <ForoJoins info={location} data={informacion}/>
         <Footer/>

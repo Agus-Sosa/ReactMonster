@@ -6,7 +6,7 @@ class MonsterController {
     }
 
 
-
+    /*Obtiene todos los monsters */
     async getAllMonsters(req, res, next) {
         try {
             const monsters = await this.monsterService.getAllMonster();
@@ -16,7 +16,7 @@ class MonsterController {
         }
     }
 
-
+    /*Obtiene monster por id */
     async getMonsterById(req, res, next) {
         try {
             const {id} =req.params;
