@@ -11,7 +11,7 @@ const MonstersSection = () => {
     <PageContainer>
     <Box sx={{ display: 'flex', flexDirection: { xs: 'column-reverse', md: 'row' }, justifyContent: 'center', alignItems: 'center', gap: {xs:2, md:5}, color: "#E3E0C3" }}>
 
-      <Box component='img'src={monsters_categorie} sx={{width: { xs: 260, md: 480 },}}/>
+      <Box component='img'src={monsters_categorie} sx={{width: { xs: 360, md: 480 },}}/>
 
         <Box sx={{ width: { xs: "100%", md: "50%" }, textAlign: { xs: "left", md: "left" } }}>
           <Box component="h1" sx={{fontSize:{ xs: "2.5rem", md: "3.5rem" }}}>Engendros</Box>
