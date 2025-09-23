@@ -36,7 +36,7 @@ export default function NewCard({id,imageUrl, title, resume,date}) {
         <Box component='img' src={imageUrl} sx={{ width:"100%", height:"100%",objectFit:"cover"}}/>
 
       </Box>
-      <Box component="div">
+      <Box component="div" sx={{width:"auto"}}>
         <Box component="p" sx={{fontWeight:"bold", color:"#380E00"}}>{fechaFormateada}</Box>
         <Box component="h4" sx={{fontSize:{xs:"14px", md:"20px"}}}>{title}</Box>
         <Box component='p'>{resume}</Box>

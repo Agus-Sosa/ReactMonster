@@ -42,6 +42,7 @@ const News = () => {
     minHeight: { md: "70vh" },
     display: "flex",
     alignItems: "center",
+    py:4
   }}
 >
   <PageContainer>
@@ -49,6 +50,7 @@ const News = () => {
       component="header"
       sx={{
         display: "flex",
+        mb: 2,
         justifyContent: "space-between",
         alignItems: "center",
       }}
@@ -74,6 +76,7 @@ const News = () => {
           alignItems: "center",
           gap: "0px",
           transition: "all .5s ease",
+          
           ":hover": { gap: "8px" },
         }}
       >
