@@ -15,8 +15,24 @@ const Sands = () => {
     <div style={{
     backgroundColor: '#212121'}}>
         <section className='hero'>
-        <Box sx={{color: "#E3E0C3", fontFamily:"Anton", fontSize:"40px", flexBasis: '100%', textAlign: 'left', marginLeft: '140px', display:'flex', alignItems: 'center',}}>
-        <img src={tituloArena} alt="titulo" height={'350px'} width={'500px'}/>
+        <Box sx={{
+          color: "#E3E0C3",
+          fontFamily:"Anton",
+          fontSize:{ xs: "20px", sm: "30px", md: "40px" }, // tipografía que escala
+          flexBasis: '100%',
+          textAlign:{ xs: "center", md: "left" }, // en cel centrado, en desktop a la izq
+          ml: { xs: 0, md: 14 }, // margen izq solo en desktop
+          display:'flex',
+          justifyContent: { xs: "center", md: "flex-start" },
+          alignItems: 'center',}}>
+        <img 
+        src={tituloArena}
+         alt="titulo"
+          style={{
+            maxWidth: "100%",  // se adapta al ancho del contenedor
+            height: "auto",    // mantiene proporción
+            maxHeight: "350px" // opcional: límite máximo
+          }}/>
         {/* <img src={iconoArena} alt="espadas" height={'350px'} width={'500px'}  style={{ backgroundColor: 'transparent' }}/> */}
          </Box>
          </section>
