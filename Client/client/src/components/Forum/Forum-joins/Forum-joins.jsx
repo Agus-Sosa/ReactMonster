@@ -1,24 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 import Joins from "./joins";
 import forumtexture from "../../../assets/img/foro-bck.png";
-import POST from "./post"; 
 
-function ForoJoins({ info, data }) {
+function ForoJoins({ info }) {
   const rute = info.pathname;
+
+
+  const [categories, setCategories] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  let text_to_route = rute.replace("/", "/ ").toUpperCase();
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [loadingPosts, setLoadingPosts] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSelectCategory = (category) => {
+  const text_to_route = rute.replace("/", "/ ").toUpperCase();
+
+  // trae las categorias al cargar
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const res = await fetch("https://tu-api.com/categorias");
+        if (!res.ok) throw new Error("Error al obtener categorias");
+        const data = await res.json();
+        setCategories(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoadingCategories(false);
+      }
+    }
+    fetchCategories();
+  }, []);
+
+  // cuando seleccion una categ trae los post
+  const handleSelectCategory = async (category) => {
     setSelectedCategory(category);
-    setSelectedPost(null); 
+    setSelectedPost(null);
+    setLoadingPosts(true);
+    setError(null);
+
+    try {
+      const res = await fetch(`https://tu-api.com/categorias/${category.id}/posts`);
+      if (!res.ok) throw new Error("Error al obtener posts");
+      const data = await res.json();
+      setPosts(data);
+    } catch (err) {
+      setError(err.message);
+      setPosts([]);
+    } finally {
+      setLoadingPosts(false);
+    }
   };
 
+  // ver el post completo
   const handleSelectPost = (post) => {
     setSelectedPost(post);
   };
+
+  // tengo que mejorar esto, despues de que funque lo reviso
+  if (loadingCategories) return <p style={{ color: "white" }}>Cargando categorías...</p>;
+  if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
 
   return (
     <Box
@@ -50,9 +94,11 @@ function ForoJoins({ info, data }) {
             {selectedPost && ` / ${selectedPost.titulo}`}
           </h2>
         </Box>
+
         <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
+          {/* categorias*/}
           {!selectedCategory &&
-            data.map((cat) => (
+            categories.map((cat) => (
               <Joins
                 key={cat.id}
                 informacion={cat}
@@ -60,16 +106,23 @@ function ForoJoins({ info, data }) {
               />
             ))}
 
-          {selectedCategory &&
-            !selectedPost &&
-            POST.map((post) => (
-              <Joins
-                key={post.id}
-                informacion={post}
-                onSelect={handleSelectPost}
-              />
-            ))}
+          {/* post de la catg seleccionada*/}
+          {selectedCategory && !selectedPost && (
+            loadingPosts ? (
+              <p style={{ color: "white" }}>Cargando posts...</p>
+            ) : (
+              posts.map((post) => (
+                <Joins
+                  key={post.id}
+                  informacion={post}
+                  onSelect={handleSelectPost}
+                />
+              ))
+            )
+          )}
         </Box>
+
+        {/*view post*/}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
             <h3>{selectedPost.titulo}</h3>
