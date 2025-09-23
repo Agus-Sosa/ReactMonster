@@ -26,6 +26,11 @@ export const Monster = sequelize.define(config.modelData.monster, {
     },
     monster_image_url: {
         type: DataTypes.STRING,
+        allowNull:false,
+    },
+    monster_image_hero: {
+        type:DataTypes.STRING,
+        allowNull:false,
     }
 
 })

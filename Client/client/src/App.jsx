@@ -10,6 +10,7 @@ import Sands from './pages/Sands';
 import DetailPublish from './components/Forum/detailPublic/DetailPublish';
 import LayoutLanding from './components/Layout/LayoutLanding';
 import MonsterDetail from './components/MonstersSection/MonsterDetail';
+import NewDetails from './components/News/NewDetails';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           {/* Rutas que usan el LayoutLanding */}
           <Route element={<LayoutLanding />}>
             <Route path="/" element={<Home />} />
+            <Route path='/new/:id' element={<NewDetails/>}/>
             <Route path="/foro" element={<Foro />} />
             <Route path="/foro/:id" element={<DetailPublish />} />
             <Route path="/monsters" element={<Monsters />} />
