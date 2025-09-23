@@ -12,7 +12,7 @@ const [monster, setMonster]= useState({});
         .then(res=> res.json())
         .then((data)=> setMonster(data.monster))
         .catch(error => console.log(error))
-    },[])
+    },[id])
     return (
         <Box sx={{minHeight:"100vh"}}>
             <PageContainer>
@@ -30,6 +30,9 @@ const [monster, setMonster]= useState({});
                         <Box component="p" >
                             {monster.monster_description}
                         </Box>
+                    </Box>
+                    <Box component="img" src={monster.monster_image_url}>
+
                     </Box>
             </PageContainer>
         </Box>

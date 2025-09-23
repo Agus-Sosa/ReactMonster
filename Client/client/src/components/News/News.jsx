@@ -53,6 +53,7 @@ const News = () => {
         mb: 2,
         justifyContent: "space-between",
         alignItems: "center",
+        width:{xs:'auto', md: 'auto'}
       }}
     >
       <Box
@@ -88,13 +89,10 @@ const News = () => {
         >
           Ir a la pagina de noticias
         </Box>
-        <Icon>
-          <ArrowRightAltIcon style={{ color: "#380E00" }} />
-        </Icon>
+          {/* <ArrowRightAltIcon style={{ color: "#380E00" }} /> */}
       </Box>
     </Box>
 
-    {/* 👇 Aquí la condición */}
     {!mobile ? (
       <Box
         sx={{
@@ -106,7 +104,7 @@ const News = () => {
       >
         {notices.map((notice) => (
           <NewCard
-            id={notice.id}
+            id={notice.id_news}
             imageUrl={notice.imageUrl}
             resume={notice.resume}
             title={notice.title}

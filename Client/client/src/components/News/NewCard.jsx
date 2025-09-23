@@ -18,7 +18,7 @@ export default function NewCard({id,imageUrl, title, resume,date}) {
   const fechaFormateada = `${day}/${m}/${y}`
   return (
 
-    <Box component={Link} to={`/notice/${id}`} sx={{
+    <Box component={Link} to={`/new/${id}`} sx={{
     
     textDecoration:"none", 
     color:"#E3E0C3",
