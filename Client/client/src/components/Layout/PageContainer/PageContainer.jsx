@@ -3,14 +3,16 @@ import { Box } from "@mui/material";
 const PageContainer = ({ children }) => {
   return (
     <Box
-      sx={{
-        maxWidth: {xs:"1200px", md:"1500px"}, 
-        margin: "0 auto", 
-        padding: { xs: "0 16px", md: "0 14px" }, // Padding adaptable
-      }}
-    >
-      {children}
-    </Box>
+  sx={{
+    width: "100%", // 👈 que siempre ocupe todo el ancho
+    maxWidth: { md: "1500px" }, // 👈 solo limitar en pantallas grandes
+    margin: "0 auto",
+    padding: { xs: "0 5px", md: "0 14px" },
+  }}
+>
+  {children}
+</Box>
+
   );
 };
 

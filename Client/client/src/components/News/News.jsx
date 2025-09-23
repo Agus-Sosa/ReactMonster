@@ -2,13 +2,16 @@ import React from 'react'
 import Box from '@mui/material/Box';
 import './news.css'
 import NewCard from './NewCard'
-import { useMediaQuery } from '@mui/material';
+import { Icon, useMediaQuery } from '@mui/material';
 import NewCarouselMobile from './NewCarouselMobile';
 import { useState, useEffect } from 'react';
+import PageContainer from '../Layout/PageContainer/PageContainer';
+import { Link } from 'react-router-dom';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 const News = () => {
   const mobile = useMediaQuery('(max-width:1010px)')
-  const [noticias, setNoticias] = useState([]);
+  const [notices, setNotices] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +21,7 @@ const News = () => {
         return res.json();
       })
       .then(data => {
-        setNoticias(data);   
+        setNotices(data);   
         setLoading(false);
       })
       .catch(err => {
@@ -31,67 +34,93 @@ const News = () => {
     return <p style={{ color: 'white' }}>cargando noticias...</p>;
   }
 
-  return (
+  return (     
+  <Box
+  sx={{
+    background: "#E3E0C3",
+    color: "white",
+    minHeight: { md: "70vh" },
+    display: "flex",
+    alignItems: "center",
+    py:4
+  }}
+>
+  <PageContainer>
     <Box
+      component="header"
       sx={{
-        backgroundColor:'#380E00',
-        minHeight: '60vh',            
-        display: 'flex',
-        flexDirection: 'column',       
-        justifyContent: 'center',      
-        alignItems: 'center',          
-        gap: 5,                        
-        padding: 2                      
+        display: "flex",
+        mb: 2,
+        justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
-      
-       
-   <Box   
-        sx={{   
-          display: 'flex',   
-          flexWrap: 'wrap',            
-          justifyContent: 'center',   
-          gap: 4,   
-          width: '100%',                
-          maxWidth: 1200                
-        }}   
-      >   
-
-        <Box
+      <Box
+        component="h3"
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width:"100%",
-          color:"white"
-          
+          fontSize: { xs: "20px", md: "40px" },
+          fontWeight: "bold",
+          color: "black",
         }}
       >
-        <h1 className='ultimate-news'>Ultimas noticias</h1>
-        <button className='news-button'>Ver más noticias</button>
+        Ultimas noticias
       </Box>
-      {   
-        !mobile ? (   
+
+      <Box
+        component={Link}
+        sx={{
+          fontSize: { xs: "14px", md: "20px" },
+          textDecoration: "none",
+          color: "black",
+          display: "flex",
+          alignItems: "center",
+          gap: "0px",
+          transition: "all .5s ease",
           
-        noticias.slice(-3).map((inf) => (
-          <Box
-            key={inf.id_news}
-            sx={{
-              flex: '1 1 300px',     
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-          >
-            <NewCard inf={inf} />
-          </Box>
-        ))
+          ":hover": { gap: "8px" },
+        }}
+      >
+        <Box
+          sx={{
+            borderBottom: "solid 0.5px transparent",
+            ":hover": { borderColor: "black" },
+          }}
+        >
+          Ir a la pagina de noticias
+        </Box>
+        <Icon>
+          <ArrowRightAltIcon style={{ color: "#380E00" }} />
+        </Icon>
+      </Box>
+    </Box>
 
-      ) : (
-        <NewCarouselMobile inf={noticias}/>                       
-      ) }                       
-          </Box>
+    {/* 👇 Aquí la condición */}
+    {!mobile ? (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 4,
+          mt: 3,
+        }}
+      >
+        {notices.map((notice) => (
+          <NewCard
+            id={notice.id}
+            imageUrl={notice.imageUrl}
+            resume={notice.resume}
+            title={notice.title}
+            key={notice.id}
+            date={notice.date}
+          />
+        ))}
+      </Box>
+    ) : (
+      <NewCarouselMobile inf={notices} /> 
+    )}
+  </PageContainer>
+</Box>
 
-    </Box>                    
   )                       
 }                     
 export default News                       
