@@ -46,7 +46,7 @@ const styleButton = {
     <Box component='section' className='landing'>
     <img className="title-img" src={titulogame} alt="Nombre del juego"/>
 
-    <h2 id='eslogan'>Domina la guerra, controla la carne, gobierna el mundo.</h2>
+    <Box sx={{fontFamily: "Playfair Display"}} id='eslogan'>Domina la guerra, controla la carne, gobierna el mundo.</Box>
 
     <Button className='btn-play'
     sx={{
