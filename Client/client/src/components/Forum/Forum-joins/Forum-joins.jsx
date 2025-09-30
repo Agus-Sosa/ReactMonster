@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 import Joins from "./joins";
 import forumtexture from "../../../assets/img/foro-bck.png";
+import { CircularProgress } from '@mui/material';
+import Alert from '@mui/material/Alert';
 
 function ForoJoins({ info }) {
   const rute = info.pathname;
@@ -64,9 +66,89 @@ function ForoJoins({ info }) {
     setPathsPost(post.title)
   };
 
-  // tengo que mejorar esto, despues de que funque lo reviso
-  if (loadingCategories) return <p style={{ color: "white" }}>Cargando categorías...</p>;
-  if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
+  // checkea el estado (si esta cargando o hay error) y de retorna el de carga o error
+  if (loadingCategories){return (
+    <Box
+      sx={{
+        minHeight: "100vh",
+        backgroundImage: `url(${forumtexture})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "#1a1a1a",
+        backgroundBlendMode: "color-dodge",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "85vh",
+          width: "80%",
+          color: "white",
+        }}
+      >
+        <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
+          <h2>
+            Comunidad {text_to_route}
+            {selectedCategory && ` / ${paths}`}
+            {selectedPost && ` / ${paths_post}`}
+          </h2>
+        </Box>
+        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
+            <CircularProgress />
+        </Box>
+        
+      </Box>
+      
+    </Box>
+  )} 
+    
+    
+
+  if (error) {
+    return (
+      <Box
+      sx={{
+        minHeight: "100vh",
+        backgroundImage: `url(${forumtexture})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "#1a1a1a",
+        backgroundBlendMode: "color-dodge",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "85vh",
+          width: "80%",
+          color: "white",
+        }}
+      >
+        <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
+          <h2>
+            Comunidad {text_to_route}
+            {selectedCategory && ` / ${paths}`}
+            {selectedPost && ` / ${paths_post}`}
+          </h2>
+        </Box>
+        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
+          <Alert severity="error">Error al obtener la informacion.</Alert> 
+        </Box>
+        
+      </Box>
+      
+    </Box>
+
+    )
+  }
 
   return (
     <Box
@@ -113,7 +195,7 @@ function ForoJoins({ info }) {
           {/* post de la catg seleccionada*/}
           {selectedCategory && !selectedPost && (
             loadingPosts ? (
-              <p style={{ color: "white" }}>Cargando posts...</p>
+              <CircularProgress />
             ) : (
               posts.map((post) => (
                 <Joins
