@@ -49,7 +49,7 @@ export const Post = sequelize.define(config.modelData.post,{
     },
     imageUrl:{
         type:DataTypes.STRING,
-        defaultValue:"https://cdn-icons-png.flaticon.com/512/1037/1037908.png"
+        defaultValue:"https://png.pngtree.com/png-vector/20250327/ourmid/pngtree-a-rolled-up-parchment-scroll-with-wax-seal-png-image_15886793.png"
     }
     
 
