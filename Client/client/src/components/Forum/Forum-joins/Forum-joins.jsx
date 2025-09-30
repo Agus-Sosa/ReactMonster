@@ -4,6 +4,8 @@ import Joins from "./joins";
 import forumtexture from "../../../assets/img/foro-bck.png";
 import { CircularProgress } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import Loading from "../../LoadingComp/Loading";
+import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
 
 function ForoJoins({ info }) {
   const rute = info.pathname;
@@ -68,84 +70,14 @@ function ForoJoins({ info }) {
 
   // checkea el estado (si esta cargando o hay error) y de retorna el de carga o error
   if (loadingCategories){return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        backgroundImage: `url(${forumtexture})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundColor: "#1a1a1a",
-        backgroundBlendMode: "color-dodge",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "flex-start",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "85vh",
-          width: "80%",
-          color: "white",
-        }}
-      >
-        <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
-          <h2>
-            Comunidad {text_to_route}
-            {selectedCategory && ` / ${paths}`}
-            {selectedPost && ` / ${paths_post}`}
-          </h2>
-        </Box>
-        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
-            <CircularProgress />
-        </Box>
-        
-      </Box>
-      
-    </Box>
+    <Loading/>
   )} 
     
     
 
   if (error) {
     return (
-      <Box
-      sx={{
-        minHeight: "100vh",
-        backgroundImage: `url(${forumtexture})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundColor: "#1a1a1a",
-        backgroundBlendMode: "color-dodge",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "flex-start",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "85vh",
-          width: "80%",
-          color: "white",
-        }}
-      >
-        <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
-          <h2>
-            Comunidad {text_to_route}
-            {selectedCategory && ` / ${paths}`}
-            {selectedPost && ` / ${paths_post}`}
-          </h2>
-        </Box>
-        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
-          <Alert severity="error">Error al obtener la informacion.</Alert> 
-        </Box>
-        
-      </Box>
-      
-    </Box>
+      <ErrorComp/>
 
     )
   }
@@ -182,7 +114,7 @@ function ForoJoins({ info }) {
         </Box>
 
         <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
-          {/* categorias*/}
+          {/* categories*/}
           {!selectedCategory &&
             categories.map((cat) => (
               <Joins
