@@ -22,10 +22,10 @@ function ForoJoins({ info }) {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await fetch("https://tu-api.com/categorias");
+        const res = await fetch("http://localhost:8080/categories/");
         if (!res.ok) throw new Error("Error al obtener categorias");
         const data = await res.json();
-        setCategories(data);
+        setCategories(data.categorias);
       } catch (err) {
         setError(err.message);
       } finally {

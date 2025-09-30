@@ -33,14 +33,14 @@ function Joins({ informacion, onSelect }) {
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             <img
-              src={informacion.image}
+              src={informacion.imageUrl}
               className="forum-icons"
               alt="icono de tarjeta"
             />
-            {informacion.titulo}
+            {informacion.name_category}
           </Typography>
           <Typography variant="body2" sx={{ color: "white" }}>
-            {informacion.description}
+            {informacion.resume}
           </Typography>
         </CardContent>
       </CardActionArea>

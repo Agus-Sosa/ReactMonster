@@ -6,7 +6,7 @@ const router = Router();
 const categoriesController = new CategoryController();
 
 router.get("/", async (req, res, next) => {
-    return await categoriesController.getAllArenas(req, res, next);
+    return await categoriesController.getAllCategories(req, res, next);
 });
 
 router.get("/:id", validateIdCategory,  async (req, res, next) => {
