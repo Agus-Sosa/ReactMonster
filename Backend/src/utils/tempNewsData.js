@@ -14,7 +14,7 @@ export const tempNewsData = async () => {
           "En combate, Kael es veloz, con ataques que parecen surgir de la nada, como si las sombras mismas lucharan a su lado."
         ] 
       },
-      imageUrl: 'https://cdn.pixabay.com/photo/2023/01/30/20/13/devil-7756538_1280.jpg'
+      imageUrl: 'https://videos.openai.com/vg-assets/assets%2Ftask_01k5wa39s5fdsb84x1es7ksb7x%2F1758665638_img_0.webp?st=2025-09-29T23%3A48%3A19Z&se=2025-10-06T00%3A48%3A19Z&sks=b&skt=2025-09-29T23%3A48%3A19Z&ske=2025-10-06T00%3A48%3A19Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8ebb0df1-a278-4e2e-9c20-f2d373479b3a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=CKdWt%2F9hfVYzH9VuN3wssCUgsIrx5m4VIHXaagNvk2k%3D&az=oaivgprodscus'
     },
     {
       id_admin: 2,
@@ -28,7 +28,7 @@ export const tempNewsData = async () => {
           "Este evento busca incentivar el trabajo en equipo y la estrategia, recompensando tanto a jugadores veteranos como a novatos."
         ] 
       },
-      imageUrl: 'https://www.lagrietaonline.com/wp-content/uploads/2015/03/LaGrieta_Jorney_Videojuegos.jpg'
+      imageUrl: 'https://videos.openai.com/vg-assets/assets%2Ftask_01k5wa39s5fdsb84x1es7ksb7x%2F1758665638_img_0.webp?st=2025-09-29T23%3A48%3A19Z&se=2025-10-06T00%3A48%3A19Z&sks=b&skt=2025-09-29T23%3A48%3A19Z&ske=2025-10-06T00%3A48%3A19Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8ebb0df1-a278-4e2e-9c20-f2d373479b3a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=CKdWt%2F9hfVYzH9VuN3wssCUgsIrx5m4VIHXaagNvk2k%3D&az=oaivgprodscus'
     },
     {
       id_admin: 1,
@@ -42,7 +42,7 @@ export const tempNewsData = async () => {
           "Cada atardecer, el sol se oculta tras la arena, bañando de rojo las piedras y dando inicio al combate más feroz."
         ] 
       },
-      imageUrl: 'https://img.freepik.com/fotos-premium/ambiente-de-fundo-2d-de-arena-de-luta-para-um-jogo-movel-uma-paisagem-de-fundo-horizontal-de-alta-qualidade-localizacao-do-design-do-modelo-de-jogo-generativo_159242-19346.jpg',
+      imageUrl: 'https://videos.openai.com/vg-assets/assets%2Ftask_01k5wa39s5fdsb84x1es7ksb7x%2F1758665638_img_0.webp?st=2025-09-29T23%3A48%3A19Z&se=2025-10-06T00%3A48%3A19Z&sks=b&skt=2025-09-29T23%3A48%3A19Z&ske=2025-10-06T00%3A48%3A19Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8ebb0df1-a278-4e2e-9c20-f2d373479b3a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=CKdWt%2F9hfVYzH9VuN3wssCUgsIrx5m4VIHXaagNvk2k%3D&az=oaivgprodscus',
     }
   ]);
 }
