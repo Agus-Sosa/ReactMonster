@@ -5,7 +5,7 @@ export const tempCategories =async()=> {
         id_category: 1,
         title: 'Comunidad',
         resume:' Habla sobre temas relacionados a la comunidad.',
-        imageUrl:"https://png.pngtree.com/png-vector/20250226/ourmid/pngtree-mysterious-and-minimalistic-norse-mythology-art-in-black-white-png-image_15592012.png"
+        imageUrl:"https://png.pngtree.com/png-vector/20250327/ourmid/pngtree-a-rolled-up-parchment-scroll-with-wax-seal-png-image_15886793.png"
         
     },
     {

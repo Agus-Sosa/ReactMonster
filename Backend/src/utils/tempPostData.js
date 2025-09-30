@@ -49,6 +49,18 @@ La torre que custodia se derrumba, pero él sigue firme.
 Algunos viajeros dicen haberlo visto moverse en la penumbra.
 Nadie recuerda su nombre, pero todos conocen su presencia.`,
    
+  },
+  {
+    id_admin: 2,
+    title: "La Hechicera del Lago",
+    id_user: 2,
+    resume: "Una mujer atrapada entre la magia y la condena, cuyos cantos resuenan bajo la superficie del agua.",
+    id_category: 4,
+    content: `Quienes escuchan su voz sienten un extraño deseo de sumergirse.
+Habita en lo profundo, entre algas y corrientes heladas.
+Algunos dicen que busca redención, otros que busca compañía.
+Su reflejo nunca es igual: cambia con la fase de la luna.`,
+    
   }
    
   ]);
