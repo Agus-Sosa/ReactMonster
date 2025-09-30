@@ -43,7 +43,8 @@ function ForoJoins({ info }) {
     setError(null);
 
     try {
-      const res = await fetch(`http://localhost:8080/categories/categorias/:${category.id_category}}`);
+      console.log(category.id_category)
+      const res = await fetch(`http://localhost:8080/post/categorias/${category.id_category}}`);
       if (!res.ok) throw new Error("Error al obtener posts");
       const data = await res.json();
       setPosts(data);
@@ -100,7 +101,7 @@ function ForoJoins({ info }) {
           {!selectedCategory &&
             categories.map((cat) => (
               <Joins
-                key={cat.id}
+                key={cat.id_category}
                 informacion={cat}
                 onSelect={handleSelectCategory}
               />

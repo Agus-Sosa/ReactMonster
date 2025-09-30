@@ -25,8 +25,8 @@ class PostController{
 
     async getPostByCategory(req, res,next){
         try {
-            const post=await this.postService.getPostByCategory(id);
-            const id= req.params.id;
+            const id = req.params.id;  
+            const post = await this.postService.getPostByCategory(id);
             res.status(200).json(post);
         } catch (error) {
             res.status(500).json({status:"error",message:"error al obtener el posteo"});

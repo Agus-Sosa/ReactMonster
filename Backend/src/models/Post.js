@@ -19,7 +19,7 @@ export const Post = sequelize.define(config.modelData.post,{
         references: { model: 'User', key: 'id' }
     },
     id_category:{
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {model: 'Categories',key: 'id_category'}
     },
