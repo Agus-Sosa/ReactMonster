@@ -15,9 +15,10 @@ function ForoJoins({ info }) {
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [error, setError] = useState(null);
-
+  const [paths,setPaths] = useState(null)
+  const [paths_post,setPathsPost] = useState(null)
   const text_to_route = rute.replace("/", "/ ").toUpperCase();
-
+ 
   // trae las categorias al cargar
   useEffect(() => {
     async function fetchCategories() {
@@ -41,9 +42,10 @@ function ForoJoins({ info }) {
     setSelectedPost(null);
     setLoadingPosts(true);
     setError(null);
-
+    setPaths(category.title)
+    
+    
     try {
-      console.log(posts.idPost)
       const res = await fetch(`http://localhost:8080/post/categorias/${category.id_category}`);
       if (!res.ok) throw new Error("Error al obtener posts");
       const data = await res.json();
@@ -59,6 +61,7 @@ function ForoJoins({ info }) {
   // ver el post completo
   const handleSelectPost = (post) => {
     setSelectedPost(post);
+    setPathsPost(post.title)
   };
 
   // tengo que mejorar esto, despues de que funque lo reviso
@@ -91,8 +94,8 @@ function ForoJoins({ info }) {
         <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
           <h2>
             Comunidad {text_to_route}
-            {selectedCategory && ` / ${selectedCategory.titulo}`}
-            {selectedPost && ` / ${selectedPost.titulo}`}
+            {selectedCategory && ` / ${paths}`}
+            {selectedPost && ` / ${paths_post}`}
           </h2>
         </Box>
 
