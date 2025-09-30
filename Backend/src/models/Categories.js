@@ -9,7 +9,7 @@ export const Categories = sequelize.define(config.modelData.categories, {
         primaryKey:true,
         autoIncrement: true,
     },
-    name_category:{
+    title:{
         type:DataTypes.STRING,
         allowNull: false,
     },

@@ -12,7 +12,7 @@ export const tempPostData = async () => {
 Protege a quienes respetan el bosque, pero castiga a los intrusos.
 Las leyendas cuentan que nació del primer árbol caído por el rayo.
 A su paso, las hojas susurran historias olvidadas.`,
-    imageUrl: "https://cdn.pixabay.com/photo/2020/10/01/12/37/forest-5620529_1280.jpg"
+    
   },
   {
     id_admin: 2,
@@ -24,7 +24,7 @@ A su paso, las hojas susurran historias olvidadas.`,
 Habita en lo profundo, entre algas y corrientes heladas.
 Algunos dicen que busca redención, otros que busca compañía.
 Su reflejo nunca es igual: cambia con la fase de la luna.`,
-    imageUrl: "https://cdn.pixabay.com/photo/2016/11/18/16/19/woman-1834399_1280.jpg"
+    
   },
   {
     id_admin: 1,
@@ -36,7 +36,7 @@ Su reflejo nunca es igual: cambia con la fase de la luna.`,
 Afirma haber cruzado tierras donde el sol nunca se oculta.
 Su bastón guarda inscripciones de un lenguaje olvidado.
 Al caer la noche, las arenas parecen seguirlo como si lo obedecieran.`,
-    imageUrl: "https://cdn.pixabay.com/photo/2020/05/15/17/27/desert-5174479_1280.jpg"
+    
   },
   {
     id_admin: 3,
@@ -48,7 +48,7 @@ Al caer la noche, las arenas parecen seguirlo como si lo obedecieran.`,
 La torre que custodia se derrumba, pero él sigue firme.
 Algunos viajeros dicen haberlo visto moverse en la penumbra.
 Nadie recuerda su nombre, pero todos conocen su presencia.`,
-    imageUrl: "https://cdn.pixabay.com/photo/2017/08/01/08/29/ruins-2567576_1280.jpg"
+   
   }
    
   ]);
