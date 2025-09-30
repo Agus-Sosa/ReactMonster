@@ -1,5 +1,4 @@
 import { News } from "../models/News.js";
-
 export const tempNewsData = async () => {
   await News.bulkCreate([
     {

@@ -18,7 +18,11 @@ export const Post = sequelize.define(config.modelData.post,{
         allowNull: false,
         references: { model: 'User', key: 'id' }
     },
-    
+    id_category:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {model: 'Categories',key: 'id_category'}
+    },
     date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW

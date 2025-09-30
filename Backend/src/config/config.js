@@ -9,5 +9,6 @@ export const config = {
     like: 'Likes',
     monster: "Monsters",
     arena: "Arenas",
+    categories: 'Categories',
   }
 };

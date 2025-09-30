@@ -4,7 +4,7 @@ class ArenaController {
     constructor() {
         this.arenaService = new ArenaService();
     }
-
+/* Obtener todas las arenas */
     async getAllArenas(req, res, next) {
         try {
             const arenas = await this.arenaService.getAllArenas();
@@ -17,7 +17,7 @@ class ArenaController {
             next(error);
         }
     }
-
+/*Obtiene las arenas por id */
     async getArenaById(req, res, next) {
         try {
             const { id } = req.params;
@@ -31,7 +31,7 @@ class ArenaController {
             next(error);
         }
     }
-
+/*Obtiene las arenas por nombre */
     async getArenaByName(req, res, next) {
         try {
             const { arena_name } = req.body;
