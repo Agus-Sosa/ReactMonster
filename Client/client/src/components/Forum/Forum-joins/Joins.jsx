@@ -37,7 +37,7 @@ function Joins({ informacion, onSelect }) {
               className="forum-icons"
               alt="icono de tarjeta"
             />
-            {informacion.name_category}
+            {informacion.title}
           </Typography>
           <Typography variant="body2" sx={{ color: "white" }}>
             {informacion.resume}

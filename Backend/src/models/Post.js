@@ -13,10 +13,14 @@ export const Post = sequelize.define(config.modelData.post,{
         type:DataTypes.STRING,
         allowNull:false
     },
+    resume:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: 'User', key: 'id' }
+        references: { model: 'Users', key: 'id_user' }
     },
     id_category:{
         type: DataTypes.INTEGER,
@@ -41,7 +45,11 @@ export const Post = sequelize.define(config.modelData.post,{
     },
     admin_decide: {
         type: DataTypes.INTEGER,
-        references: { model: 'User', key: 'id' },
+        references: { model: 'Users', key: 'id_user' },
+    },
+    imageUrl:{
+        type:DataTypes.STRING,
+        defaultValue:"https://cdn-icons-png.flaticon.com/512/1037/1037908.png"
     }
     
 

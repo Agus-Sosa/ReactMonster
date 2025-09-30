@@ -43,8 +43,8 @@ function ForoJoins({ info }) {
     setError(null);
 
     try {
-      console.log(category.id_category)
-      const res = await fetch(`http://localhost:8080/post/categorias/${category.id_category}}`);
+      console.log(posts.idPost)
+      const res = await fetch(`http://localhost:8080/post/categorias/${category.id_category}`);
       if (!res.ok) throw new Error("Error al obtener posts");
       const data = await res.json();
       setPosts(data);
@@ -114,7 +114,7 @@ function ForoJoins({ info }) {
             ) : (
               posts.map((post) => (
                 <Joins
-                  key={post.id}
+                  key={post.idPost}
                   informacion={post}
                   onSelect={handleSelectPost}
                 />
