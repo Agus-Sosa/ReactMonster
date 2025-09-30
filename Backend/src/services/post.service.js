@@ -15,6 +15,14 @@ class PostService {
         return await this.modelPost.findByPk(id);
      }
 
+    async getPostByCategory (id) {
+        return await this.modelPost.findAll({
+            where:{
+                id_category: id
+            }
+        });
+     }
+
      async createNewPost (newPost) {
         return await this.modelPost.create(newPost)
      }

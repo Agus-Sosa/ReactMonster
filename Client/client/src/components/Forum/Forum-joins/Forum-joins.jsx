@@ -22,7 +22,7 @@ function ForoJoins({ info }) {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await fetch("http://localhost:8080/categories/");
+        const res = await fetch("http://localhost:8080/categories");
         if (!res.ok) throw new Error("Error al obtener categorias");
         const data = await res.json();
         setCategories(data.categorias);
@@ -43,7 +43,7 @@ function ForoJoins({ info }) {
     setError(null);
 
     try {
-      const res = await fetch(`https://tu-api.com/categorias/${category.id}/posts`);
+      const res = await fetch(`http://localhost:8080/categories/categorias/:${category.id_category}}`);
       if (!res.ok) throw new Error("Error al obtener posts");
       const data = await res.json();
       setPosts(data);
