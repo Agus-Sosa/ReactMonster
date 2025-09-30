@@ -39,9 +39,9 @@ return (
         <PageContainer>
     <Box sx={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:'center', color:"white", my:8}}>
 
-        <Box component="header" sx={{textAlign:'start', width:"50%"}}>
-            <Box sx={{color:"gray"}}>{fechaFormateada}</Box>
-            <Box sx={{fontSize:{xs:"70px"}, fontWeight:"bold"}}>{newDetail.title}</Box>
+        <Box component="header" sx={{textAlign:'start', width:{ xs:"100%", md:"50%"}}}>
+            <Box sx={{color:"gray", fontSize:{ xs:"10px", md:"14px"}}}>{fechaFormateada}</Box>
+            <Box sx={{fontSize:{xs:"24px", md:'40px'}, fontWeight:"bold"}}>{newDetail.title}</Box>
         </Box>
   {newDetail?.imageUrl && (
     <Box
@@ -49,14 +49,14 @@ return (
       src={newDetail.imageUrl}
       alt={newDetail.title || "imagen"}
       sx={{
-        width: { xs: "100%", md: "80%" }, // mejor que vh
+        width: { xs: "100%", md: "75%" }, // mejor que vh
         height: "auto", // mantiene proporción
-        borderRadius: 2,
+        borderRadius: {xs:0,md:2},
         objectFit: "cover" // para que no se deforme
       }}
     />
   )}
-        <Box component="div" sx={{width:'50%'}}>
+        <Box component="div" sx={{width:{ xs:"100%", md:'50%'}}}>
             <Box mt={5}>
                 {newDetail?.content?.paragraphs?.map((p, index) => (
                 <Box sx={{fontSize:{xs:'12px', md:"20px"}}} key={index} mb={1}>

@@ -5,7 +5,7 @@ import PageContainer from '../Layout/PageContainer/PageContainer';
 
 const MonsterDetail = () => {
     const {id} = useParams();
-const [monster, setMonster]= useState({});
+    const [monster, setMonster]= useState({});
 
     useEffect(()=> {
         fetch(`http://localhost:8080/monsters/${id}`)
