@@ -15,4 +15,4 @@ router.get("/:id", validateIdCategory,  async (req, res, next) => {
 
 
 
-export { router as ArenaRouter };
+export { router as categoriasRouter };
