@@ -2,7 +2,7 @@ import React from 'react'
 import Box from '@mui/material/Box';
 import './news.css'
 import NewCard from './NewCard'
-import { Icon, useMediaQuery } from '@mui/material';
+import { CircularProgress, Icon, useMediaQuery } from '@mui/material';
 import NewCarouselMobile from './NewCarouselMobile';
 import { useState, useEffect } from 'react';
 import PageContainer from '../Layout/PageContainer/PageContainer';
@@ -31,7 +31,84 @@ const News = () => {
   }, []);
   /* tengo que charlar de esto con agus lo vi en internet me parecio piola */
   if (loading) {
-    return <p style={{ color: 'white' }}>cargando noticias...</p>;
+    return (<Box
+  sx={{
+    background: "#E3E0C3",
+    color: "white",
+    minHeight: { md: "70vh" },
+    display: "flex",
+    alignItems: "center",
+    py:4
+  }}
+>
+  <PageContainer>
+    <Box
+      component="header"
+      sx={{
+        display: "flex",
+        mb: 2,
+        justifyContent: "space-between",
+        alignItems: "center",
+        width:{xs:'auto', md: 'auto'}
+      }}
+    >
+      <Box
+        component="h3"
+        sx={{
+          fontSize: { xs: "20px", md: "40px" },
+          fontWeight: "bold",
+          color: "black",
+        }}
+      >
+        Ultimas noticias
+      </Box>
+
+      <Box
+        component={Link}
+        sx={{
+          fontSize: { xs: "14px", md: "20px" },
+          textDecoration: "none",
+          color: "black",
+          display: "flex",
+          alignItems: "center",
+          gap: "0px",
+          transition: "all .5s ease",
+          
+          ":hover": { gap: "8px" },
+        }}
+      >
+        <Box
+          sx={{
+            borderBottom: "solid 0.5px transparent",
+            ":hover": { borderColor: "black" },
+          }}
+        >
+          Ir a la pagina de noticias
+        </Box>
+          {/* <ArrowRightAltIcon style={{ color: "#380E00" }} /> */}
+      </Box>
+    </Box>
+
+    {!mobile ? (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 4,
+          mt: 3,
+        }}
+      >
+        <CircularProgress />
+        <CircularProgress />
+        <CircularProgress />
+      </Box>
+    ) : (
+      <NewCarouselMobile inf={notices} /> 
+    )}
+  </PageContainer>
+</Box>
+
+    );
   }
 
   return (     
