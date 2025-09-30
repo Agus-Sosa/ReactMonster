@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 import Joins from "./joins";
 import forumtexture from "../../../assets/img/foro-bck.png";
+import { CircularProgress } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import Loading from "../../LoadingComp/Loading";
+import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
 
 function ForoJoins({ info }) {
   const rute = info.pathname;
@@ -64,9 +68,19 @@ function ForoJoins({ info }) {
     setPathsPost(post.title)
   };
 
-  // tengo que mejorar esto, despues de que funque lo reviso
-  if (loadingCategories) return <p style={{ color: "white" }}>Cargando categorías...</p>;
-  if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
+  // checkea el estado (si esta cargando o hay error) y de retorna el de carga o error
+  if (loadingCategories){return (
+    <Loading/>
+  )} 
+    
+    
+
+  if (error) {
+    return (
+      <ErrorComp/>
+
+    )
+  }
 
   return (
     <Box
@@ -100,7 +114,7 @@ function ForoJoins({ info }) {
         </Box>
 
         <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
-          {/* categorias*/}
+          {/* categories*/}
           {!selectedCategory &&
             categories.map((cat) => (
               <Joins
@@ -113,7 +127,7 @@ function ForoJoins({ info }) {
           {/* post de la catg seleccionada*/}
           {selectedCategory && !selectedPost && (
             loadingPosts ? (
-              <p style={{ color: "white" }}>Cargando posts...</p>
+              <CircularProgress />
             ) : (
               posts.map((post) => (
                 <Joins
