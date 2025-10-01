@@ -9,6 +9,7 @@ const users = [
       user_name: "juanp",
       user_email: "juanp@example.com",
       user_password: await bcrypt.hash("Password123", 10),
+      profile_picture: "https://avatars.githubusercontent.com/u/144922697?v=4",
       role: "user"
     },
     {

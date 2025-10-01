@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import { AuthenticationContext } from './AuthContext';
+import { AuthContext } from './AuthContext';
+import {jwtDecode} from 'jwt-decode';
+
 
 
 const valueToken = localStorage.getItem('react_monster_token');
@@ -9,25 +11,32 @@ const valueToken = localStorage.getItem('react_monster_token');
 
 export const AuthenticationContextProvider = ({children}) => {
   const [token, setToken] = useState(valueToken);
+  const [user, setUser] = useState({});
 
 
-  const handleUserLogin = (token)=> {
-    localStorage.setItem('react_monster_token', token);
-    setToken(token)
+  const handleUserLogin = (newToken)=> {
+    localStorage.setItem('react_monster_token', newToken);
+    setToken(newToken);
+    const tokenDecode = jwtDecode(newToken);
+    setUser(tokenDecode);
+
   };
 
 
   const handleUserLogout = ()=>{
     localStorage.removeItem('react_monster_token');
     setToken(null);
+    setUser(null)
   }
 
 
+
+
   return (
-    <AuthenticationContext value={{token, handleUserLogin, handleUserLogout}}>
+    <AuthContext.Provider value={{token, handleUserLogin, handleUserLogout, user}}>
       {children}
-    </AuthenticationContext>
+    </AuthContext.Provider>
   )
 }
 
-export default UserContext
+export default AuthenticationContextProvider;

@@ -7,8 +7,9 @@ import Button from "@mui/material/Button";
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from "react-router-dom";
 import ModalAuthPrev from "../Authentication/ModalAuthPrev";
+import { Avatar } from "@mui/material";
 
-const HeaderMobile = () => {
+const HeaderMobile = ({user, logoutButton}) => {
     const [openMenu, setOpenMenu]= useState(false);
     const [openModal, setOpenModal] = useState(false);
 
@@ -46,7 +47,27 @@ const HeaderMobile = () => {
                         <Box  key={item.name} style={{textDecoration:"none", color:"white", fontSize:"20px", padding:"10px", width:"100%", textAlign:"start"}} onClick={handleOpenMenu(false)}>{item.name}</Box>
                 ))}
 
-                <Button
+                {user ? (
+                  <>
+                  <Box component={Link} to={'/profile'} sx={{display:'flex', justifyContent:"space-between", alignItems:"center"}}>
+                    <Avatar  sx={{}} src={user.profile_picture}/>
+                    <Box>
+                      {user.user_name}
+                    </Box>
+                  </Box>
+                  <Button
+                  onClick={logoutButton}
+                    sx={{width:"100%",color:"white", mt:2, background:"#D84040", textAlign:"center", p:"10px", borderRadius:"2px", fontSize:"20px", cursor:"pointer", transition:"all .5s", "&:hover":{backgroundColor:"#8E1616"}}}
+                    
+                  >
+                    Cerrar Sesion
+                  </Button>
+                                    </>
+
+                ) :
+                
+                (
+            <Button
                 onClick={handleOpenModal}
 
                 sx={{width:"100%",color:"white", mt:2, background:"#D84040", textAlign:"center", p:"10px", borderRadius:"2px", fontSize:"20px", cursor:"pointer", transition:"all .5s", "&:hover":{backgroundColor:"#8E1616"}}}
@@ -55,6 +76,8 @@ const HeaderMobile = () => {
                     Jugar Ahora
 
                 </Button>
+                )}
+                
 
             </Box>
         </Box>
@@ -71,7 +94,7 @@ const HeaderMobile = () => {
     <Button  onClick={handleOpenMenu(true)}>
         <MenuRoundedIcon sx={{color:"white"}}/>
     </Button>
-    <Drawer PaperProps={{sx:{width:"100%"}}} open={openMenu} onClose={handleOpenMenu(false)} anchor="right">
+    <Drawer PaperProps={{sx:{width:"100%"}}} open={openMenu} onClose={handleOpenMenu(false)} anchor="left">
         {listMobileMenu}
     </Drawer>
         <ModalAuthPrev handleCloseModal={handleCloseModal} openModal={openModal}/>

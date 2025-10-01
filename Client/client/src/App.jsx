@@ -11,10 +11,15 @@ import DetailPublish from './components/Forum/detailPublic/DetailPublish';
 import LayoutLanding from './components/Layout/LayoutLanding';
 import MonsterDetail from './components/MonstersSection/MonsterDetail';
 import NewDetails from './components/News/NewDetails';
+import AuthenticationContextProvider from './context/AuthenticationContextProvider';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import ProfileUser from './components/Profile/ProfileUser';
 
 function App() {
   return (
     <>
+    <AuthenticationContextProvider>
+
       <Router>
         <Routes>
           {/* Rutas que usan el LayoutLanding */}
@@ -26,6 +31,10 @@ function App() {
             <Route path="/monsters" element={<Monsters />} />
             <Route path='/monsters/:id'element={<MonsterDetail/>}/>
             <Route path="/arenas" element={<Sands />} />
+
+            <Route path='/profile' element={<ProtectedRoute>
+              <ProfileUser/>
+            </ProtectedRoute>}/>
           </Route>
 
           {/* Rutas sin un layout */}
@@ -36,6 +45,8 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
+          </AuthenticationContextProvider>
+
     </>
   );
 }
