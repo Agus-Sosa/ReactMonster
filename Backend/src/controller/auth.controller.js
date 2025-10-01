@@ -1,5 +1,5 @@
 import AuthService from "../services/auth.service.js";
-
+import jwt from 'jsonwebtoken'
 class AuthController {
     constructor(){
         this.authService = new AuthService();
@@ -11,7 +11,17 @@ class AuthController {
         const {user_email, user_password} = req.body;
         const user = await this.authService.login(user_email, user_password);
         
-        res.status(200).json({status:"success", message: "se logueo con exito"});
+    
+
+            const token = jwt.sign(
+                {id:user.id, user_name: user.user_name, user_email: user.user_email , role:user.role, profile_picture: user.profile_picture },
+                "react_monsters", // Esto despues hay que cambiarlo y ponerlo en un .ENV 👟👟👟👟👟
+                {expiresIn:'1h'}
+            )
+
+
+
+        res.status(200).json({status:"success", message: "se logueo con exito", token:token});
         } catch (error) {
             next(error)
         }

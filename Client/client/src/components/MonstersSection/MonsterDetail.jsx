@@ -17,7 +17,7 @@ const MonsterDetail = () => {
         <Box sx={{minHeight:"100vh"}}>
             <PageContainer>
                     <Box sx={{
-                         display: "flex",
+            display: "flex",
             flexDirection: "column", 
             justifyContent: "center", 
             alignItems: "start", 
