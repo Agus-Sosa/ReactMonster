@@ -3,50 +3,48 @@ import { Box } from "@mui/system";
 import Joins from "./joins";
 import forumtexture from "../../../assets/img/foro-bck.png";
 import { CircularProgress } from '@mui/material';
-import Alert from '@mui/material/Alert';
 import Loading from "../../LoadingComp/Loading";
 import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
-
+/*lo di todo comentando en ingles. */
 function ForoJoins({ info }) {
   const rute = info.pathname;
 
-
+  /*---- MAIN STATES ---- */
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
-
+  /*---- CONTROL STATES ---- */
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [error, setError] = useState(null);
-  const [paths,setPaths] = useState(null)
-  const [paths_post,setPathsPost] = useState(null)
+  /*---- SHOW THE INITIAL ROUTE (MAYBE NOT SO NECESSARY) ----*/
   const text_to_route = rute.replace("/", "/ ").toUpperCase();
  
-  // trae las categorias al cargar
+  // USE EFFECT: LOAD CATEGORIES AT START
   useEffect(() => {
     async function fetchCategories() {
       try {
         const res = await fetch("http://localhost:8080/categories");
         if (!res.ok) throw new Error("Error al obtener categorias");
         const data = await res.json();
-        setCategories(data.categorias);
+        setCategories(data.categorias); // the API returns an object
       } catch (err) {
         setError(err.message);
       } finally {
-        setLoadingCategories(false);
+        setLoadingCategories(false); // stops showing loading
       }
     }
     fetchCategories();
   }, []);
 
-  // cuando seleccion una categ trae los post
+  // HANDLER: WHEN SELECTING A CATEGORY
   const handleSelectCategory = async (category) => {
-    setSelectedCategory(category);
-    setSelectedPost(null);
-    setLoadingPosts(true);
-    setError(null);
-    setPaths(category.title)
+    setSelectedCategory(category); //I save the chosen category
+    setSelectedPost(null); // clear the selected post
+    setLoadingPosts(true); //  show post spinner
+    setError(null); // clean previous errors
+    
     
     
     try {
@@ -62,13 +60,13 @@ function ForoJoins({ info }) {
     }
   };
 
-  // ver el post completo
+  // HANDLER: WHEN SELECTING A POST
   const handleSelectPost = (post) => {
-    setSelectedPost(post);
-    setPathsPost(post.title)
+    setSelectedPost(post); // show details of the post
+    
   };
 
-  // checkea el estado (si esta cargando o hay error) y de retorna el de carga o error
+  // CONDITIONAL RENDER: LOADING / ERROR
   if (loadingCategories){return (
     <Loading/>
   )} 
@@ -81,7 +79,7 @@ function ForoJoins({ info }) {
 
     )
   }
-
+// ---------- MAIN RENDER ----------
   return (
     <Box
       sx={{
@@ -105,16 +103,17 @@ function ForoJoins({ info }) {
           color: "white",
         }}
       >
+        {/* ---------- HEADER ---------- */}
         <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
           <h2>
             Comunidad {text_to_route}
-            {selectedCategory && ` / ${paths}`}
-            {selectedPost && ` / ${paths_post}`}
+            {selectedCategory && ` / ${selectedCategory.title}`}
+            {selectedPost && ` / ${selectedPost.title}`}
           </h2>
         </Box>
-
+        {/* ---------- LIST OF CATEGORIES OR POSTS ---------- */}
         <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
-          {/* categories*/}
+          {/* list of categories */}
           {!selectedCategory &&
             categories.map((cat) => (
               <Joins
@@ -124,7 +123,7 @@ function ForoJoins({ info }) {
               />
             ))}
 
-          {/* post de la catg seleccionada*/}
+          {/* list of posts within a category */}
           {selectedCategory && !selectedPost && (
             loadingPosts ? (
               <CircularProgress />
@@ -140,7 +139,7 @@ function ForoJoins({ info }) {
           )}
         </Box>
 
-        {/*view post*/}
+        {/* ---------- POST DETAILS ---------- */}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
             <h3>{selectedPost.titulo}</h3>
