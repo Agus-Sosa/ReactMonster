@@ -7,7 +7,7 @@ import { AuthContext } from '../../../context/AuthContext.jsx'
 export default function LikeButton({ postId }) {
   const { user } = useContext(AuthContext); 
 
-  if(!user) return null; // Si no hay usuario, no mostrar el botón
+  if(!user) return null; // If there is no user, do not show the button
   const userId = user.id;
   
  console.log(userId)
