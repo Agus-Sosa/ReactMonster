@@ -72,6 +72,7 @@ const News = () => {
 
       <Box
         component={Link}
+        to={"/allnews"}
         sx={{
           fontSize: { xs: "14px", md: "20px" },
           textDecoration: "none",
