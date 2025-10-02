@@ -14,6 +14,7 @@ import NewDetails from './components/News/NewDetails';
 import AuthenticationContextProvider from './context/AuthenticationContextProvider';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ProfileUser from './components/Profile/ProfileUser';
+import AllNews from './components/News/AllNews';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
             <Route path="/monsters" element={<Monsters />} />
             <Route path='/monsters/:id'element={<MonsterDetail/>}/>
             <Route path="/arenas" element={<Sands />} />
-
+            <Route path='/allnews' element={<AllNews/>}/>
             <Route path='/profile' element={<ProtectedRoute>
               <ProfileUser/>
             </ProtectedRoute>}/>

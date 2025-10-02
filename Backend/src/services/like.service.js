@@ -7,7 +7,7 @@ class LikeService {
 
   // Toggle like: si existe lo elimina, si no lo crea
   async toggleLike(id_user, id_post) {
-    const existing = await this.modelLike.findOne({ where: { id_user, id_post } });
+    const existing = await this.modelLike.findOne({ where: {id_user,id_post } });
 
     if (existing) {
       await existing.destroy();

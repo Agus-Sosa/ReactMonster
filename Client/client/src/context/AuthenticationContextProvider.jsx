@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { AuthContext } from './AuthContext';
 import {jwtDecode} from 'jwt-decode';
@@ -10,10 +10,19 @@ const valueToken = localStorage.getItem('react_monster_token');
 
 
 export const AuthenticationContextProvider = ({children}) => {
-  const [token, setToken] = useState(valueToken);
+  const [token, setToken] = useState((valueToken));
   const [user, setUser] = useState(null);
 
 
+  useEffect(()=> {
+    if(token){
+      const tokenDecode = jwtDecode(token);
+      setUser(tokenDecode);
+    } else {
+      setUser(null)
+    }
+  },[token])
+  
   const handleUserLogin = (newToken)=> {
     localStorage.setItem('react_monster_token', newToken);
     setToken(newToken);
