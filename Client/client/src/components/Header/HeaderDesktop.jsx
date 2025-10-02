@@ -28,7 +28,7 @@ const HeaderDesktop = ({user, logoutButton}) => {
   return (
     <>
     
-    <Box component="header" sx={{display:"flex", justifyContent:"space-between  ", alignItems:"center", backgroundColor:"#1e1e1e", color:"white", p:2}}>
+    <Box component="header" sx={{display:"flex",position:"sticky", top:0,zIndex:1100, justifyContent:"space-between  ", alignItems:"center", backgroundColor:"#1e1e1e", color:"white", p:2}}>
         
         <Link to='/'>
         <Box component="img" src={title_game} sx={{width:"100px"}}>

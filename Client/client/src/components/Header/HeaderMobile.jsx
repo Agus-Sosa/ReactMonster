@@ -32,7 +32,7 @@ const HeaderMobile = ({user, logoutButton}) => {
   ]
 
     const listMobileMenu = (
-        <Box component={"nav"} sx={{height:"100%", backgroundColor:"#1e1e1e", color:"white", display:"flex", flexDirection:"column", alignItems:"start",p:2, gap:2}}>
+        <Box component="header" sx={{height:"100%",position:"sticky", top:0,zIndex:1100,backgroundColor:"#1e1e1e", color:"white", display:"flex", flexDirection:"column", alignItems:"start",p:2, gap:2}}>
             <Box component="div" sx={{display: 'flex', justifyContent:"space-between", alignItems:"center", width:"100%"}}>
             <Link to='/'>
               <Box component="img" src={title_game} sx={{width:"100px"}}></Box>
