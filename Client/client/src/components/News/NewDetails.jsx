@@ -37,7 +37,7 @@ const styleImage = {
 return (
     <Box sx={{}}>
         <PageContainer>
-    <Box sx={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:'center', color:"white", my:8}}>
+    <Box sx={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:'center', color:"white", my:3}}>
 
         <Box component="header" sx={{textAlign:'start', width:{ xs:"100%", md:"50%"}}}>
             <Box sx={{color:"gray", fontSize:{ xs:"14px", md:"14px"}}}>{fechaFormateada}</Box>

@@ -111,7 +111,7 @@ const AuthForm = ({ isForLogin}) => {
         <Alert sx={{my:1}} severity="warning">{error.message}</Alert>
 
     }
-    <Box component={"form"} onSubmit={handleSubmit} sx={{display:"flex", flexDirection:"column", gap:3, width: mobile ? "-webkit-fill-available" : "100%" , margin: mobile ? "0 30px" : '' }}>
+    <Box component={"form"} onSubmit={handleSubmit} sx={{display:"flex", flexDirection:"column", gap:3  }}>
             {fieldTypes.map((field)=> (
                 <Input key={field.name} component="input" name={field.name} value={field.value} placeholder={field.placeholder} type={field.type} sx={style_input} onChange={handleChange}/>
             ))}
