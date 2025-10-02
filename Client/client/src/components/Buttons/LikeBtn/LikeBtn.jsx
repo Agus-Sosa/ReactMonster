@@ -32,29 +32,25 @@ export default function LikeButton({ postId }) {
 
   // toggle like
   const handleToggleLike = async () => {
-    if (!userId) {
-      console.error("No hay usuario logueado");
-      return;
-    }
+  if (!userId) return;
 
-    try {
-      const res = await fetch(`http://localhost:8080/likes/post/${postId}/user/${userId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  try {
+    const res = await fetch(`http://localhost:8080/likes/post/${postId}/user/${userId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
 
-      if (!res.ok) throw new Error(`Error ${res.status}`);
+    if (!res.ok) throw new Error(`Error ${res.status}`);
 
-      const data = await res.json(); 
-      setLiked(data.liked);
-      setLikesCount(data.count);
-    } catch (err) {
-      console.error("Error toggling like:", err);
-    }
-  };
+    const data = await res.json(); 
+    setLiked(data.liked);
 
+    //If the user liked it, add +1, if they liked it, subtract -1
+    setLikesCount((prev) => data.liked ? prev + 1 : prev - 1);
+  } catch (err) {
+    console.error("Error toggling like:", err);
+  }
+};
   return (
     <Box display="flex" alignItems="center" gap={1}>
       <IconButton
