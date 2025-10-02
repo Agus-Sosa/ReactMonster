@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActionArea from "@mui/material/CardActionArea";
@@ -6,15 +5,7 @@ import Typography from "@mui/material/Typography";
 import "./joins.css";
 
 function Joins({ informacion, onSelect }) {
-  const navigate = useNavigate();
 
-  const handleClick = () => {
-    if (onSelect) {
-      onSelect(informacion); 
-    } else {
-      navigate(`/foro/${informacion.id}`); 
-    }
-  };
 
   return (
     <Card
@@ -27,7 +18,8 @@ function Joins({ informacion, onSelect }) {
         border: "1px solid white",
         cursor: "pointer",
       }}
-      onClick={handleClick}
+      // The ?. prevents error if onSelect is not defined
+      onClick={() => onSelect?.(informacion)}
     >
       <CardActionArea>
         <CardContent>
@@ -35,10 +27,11 @@ function Joins({ informacion, onSelect }) {
             <img
               src={informacion.imageUrl}
               className="forum-icons"
-              alt="icono de tarjeta"
+              alt={`icono de ${informacion.title}`}
             />
             {informacion.title}
           </Typography>
+          {/* Summary / short description */}
           <Typography variant="body2" sx={{ color: "white" }}>
             {informacion.resume}
           </Typography>
