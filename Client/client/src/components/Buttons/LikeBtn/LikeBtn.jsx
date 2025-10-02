@@ -6,7 +6,10 @@ import { AuthContext } from '../../../context/AuthContext.jsx'
 
 export default function LikeButton({ postId }) {
   const { user } = useContext(AuthContext); 
-  const userId = user?.id ? Number(user.id) : null;
+
+  if(!user) return null; // Si no hay usuario, no mostrar el botón
+  const userId = user.id;
+  
  console.log(userId)
 
   const [liked, setLiked] = useState(false);
@@ -35,11 +38,10 @@ export default function LikeButton({ postId }) {
     }
 
     try {
-      const res = await fetch(`http://localhost:8080/likes/${postId}`, {
+      const res = await fetch(`http://localhost:8080/likes/post/${postId}/user/${userId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-user-id": userId,
         },
       });
 
