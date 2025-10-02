@@ -6,7 +6,7 @@ const router = express.Router();
 const likeController = new LikeController();
 
 // Toggle like (POST /like/:id_post)
-router.post('/:id_post', validateGetUserById, async (req, res, next) => {
+router.post('/post/:id_post/user/:id_user', async (req, res, next) => {
     return await likeController.toggleLike(req, res, next);
 });
 
