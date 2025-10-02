@@ -32,6 +32,7 @@ const DetailPublish = ({post}) => {
         </Box>
         <Box component="h5"><LikeButton postId={post.id_post}/></Box>
     </Box>
+    
 
 )
 }

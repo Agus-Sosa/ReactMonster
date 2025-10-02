@@ -6,6 +6,7 @@ import { CircularProgress } from '@mui/material';
 import Loading from "../../LoadingComp/Loading";
 import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
 import DetailPublish from "../detailPublic/DetailPublish.jsx";
+import CommentsSection from "../Forum-Comments/CommentsSection.jsx";
 /*lo di todo comentando en ingles. */
 function ForoJoins({ info }) {
   const rute = info.pathname;
@@ -143,7 +144,8 @@ function ForoJoins({ info }) {
         {/* ---------- POST DETAILS ---------- */}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
-            <DetailPublish post={selectedPost}/>            
+            <DetailPublish post={selectedPost}/>  
+            <CommentsSection/>          
           </Box>
         )}
       </Box>
