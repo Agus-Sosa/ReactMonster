@@ -1,6 +1,6 @@
 import { Categories } from "../models/Categories.js";
 
-
+//validates if the category id exists
 export const validateIdCategory= async(req, res, next)=> {
     const id= parseInt(req.params.id, 10); 
     const existingCategory =await Categories.findByPk(id);
