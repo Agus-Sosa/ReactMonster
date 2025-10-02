@@ -11,7 +11,7 @@ const valueToken = localStorage.getItem('react_monster_token');
 
 export const AuthenticationContextProvider = ({children}) => {
   const [token, setToken] = useState(valueToken);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
 
   const handleUserLogin = (newToken)=> {

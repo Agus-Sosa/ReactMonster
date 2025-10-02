@@ -15,8 +15,18 @@ class PostController{
 
     async getPostById(req, res,next){
         try {
-            const post=await this.postServiceostService.getAllPost(id);
+            const post=await this.postService.getAllPost(id);
             const id= req.params.id;
+            res.status(200).json(post);
+        } catch (error) {
+            res.status(500).json({status:"error",message:"error al obtener el posteo"});
+        }
+    }
+
+    async getPostByCategory(req, res,next){
+        try {
+            const id = req.params.id;  
+            const post = await this.postService.getPostByCategory(id);
             res.status(200).json(post);
         } catch (error) {
             res.status(500).json({status:"error",message:"error al obtener el posteo"});

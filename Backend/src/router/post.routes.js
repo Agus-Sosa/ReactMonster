@@ -16,6 +16,10 @@ router.post('/newPost', async(req,res,next)=>{
     await postController.createNewPost(req, res, next);
 })
 
+router.get('/categorias/:id', async(req,res,next)=>{
+    await postController.getPostByCategory(req, res, next);
+})
+
 router.delete('/:id', async(req,res,next)=>{
     await postController.deletePost(req,res,next);
 })

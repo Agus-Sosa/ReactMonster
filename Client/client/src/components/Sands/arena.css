@@ -10,4 +10,24 @@
     background-blend-mode: color;
     background-color: rgba(39, 39, 39, 0.699);
     text-align: center;
+    padding: 20px;
+}
+
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;       
+    justify-content: center;      
+    align-items: center;          
+    text-align: center;           
+    height: 80vh;                 
+    background-position: center;  
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 100vh; 
+    padding: 10px;
+  }
 }

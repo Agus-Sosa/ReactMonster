@@ -12,13 +12,14 @@ import { MonsterRouter } from './router/monster.routes.js';
 import { ArenaRouter } from './router/arena.routes.js';
 import { LikeRouter } from './router/like.routes.js';
 import { CommentRouter } from './router/comment.routes.js';
+import { categoriasRouter } from './router/category.routes.js';
 
 const app = express();
 const port = config.PORT
 
 app.use(cors());
 app.use(express.json());
-
+app.use('/categories', categoriasRouter);
 app.use('/users', UserRouter);
 app.use('/post', PostRouter );
 app.use('/auth', AuthRouter)

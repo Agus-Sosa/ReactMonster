@@ -3,11 +3,12 @@ export const config = {
   db_dialect: "sqlite",
   modelData: {
     user: 'Users',
-    post: 'Post',
+    post: 'Posts',
     news: 'News',
     comments: 'Comments',
     like: 'Likes',
     monster: "Monsters",
     arena: "Arenas",
+    categories: 'Categories',
   }
 };

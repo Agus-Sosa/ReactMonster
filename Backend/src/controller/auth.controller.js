@@ -12,9 +12,9 @@ class AuthController {
         const user = await this.authService.login(user_email, user_password);
         
     
-
             const token = jwt.sign(
-                {id:user.id, user_name: user.user_name, user_email: user.user_email , role:user.role, profile_picture: user.profile_picture },
+                
+                {id:user.id_user, user_name: user.user_name, user_email: user.user_email , role:user.role, profile_picture: user.profile_picture },
                 "react_monsters", // Esto despues hay que cambiarlo y ponerlo en un .ENV 👟👟👟👟👟
                 {expiresIn:'1h'}
             )
@@ -26,7 +26,7 @@ class AuthController {
             next(error)
         }
     }
-
+    /*Crea un nuevo usuario */
     async createNewUser (req, res, next) {
         try {
             const {user_name, user_email, user_password}= req.body;

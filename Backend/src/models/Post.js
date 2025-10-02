@@ -13,12 +13,20 @@ export const Post = sequelize.define(config.modelData.post,{
         type:DataTypes.STRING,
         allowNull:false
     },
+    resume:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: 'User', key: 'id' }
+        references: { model: 'Users', key: 'id_user' }
     },
-    
+    id_category:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {model: 'Categories',key: 'id_category'}
+    },
     date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
@@ -26,6 +34,10 @@ export const Post = sequelize.define(config.modelData.post,{
     content: {
         type:DataTypes.STRING,
         allowNull:false,
+    },
+    imgContent: {
+        type:DataTypes.STRING,
+        defaultValue:"https://i.pinimg.com/736x/d2/d5/f8/d2d5f8e7fa9a7fe44c1dee164e8de01e.jpg",
     },
     total_like: {
         type: DataTypes.INTEGER,
@@ -37,7 +49,11 @@ export const Post = sequelize.define(config.modelData.post,{
     },
     admin_decide: {
         type: DataTypes.INTEGER,
-        references: { model: 'User', key: 'id' },
+        references: { model: 'Users', key: 'id_user' },
+    },
+    imageUrl:{
+        type:DataTypes.STRING,
+        defaultValue:"https://png.pngtree.com/png-vector/20250327/ourmid/pngtree-a-rolled-up-parchment-scroll-with-wax-seal-png-image_15886793.png"
     }
     
 

@@ -29,7 +29,7 @@ export default function Card_Sand({arena}) {
   }
   return (
     <>
-    <Card sx={{ maxWidth: 345, border: '1px solid #E3E0C3',backgroundColor:'#212121', textAlign:'center'  }}
+    <Card sx={{ maxWidth: { xs: "100%", sm: 345 }, border: '1px solid #E3E0C3',backgroundColor:'#212121', textAlign:'center', m:1  }}
     onClick={handleOpen}>
       <CardActionArea>
         <CardMedia
@@ -58,11 +58,11 @@ export default function Card_Sand({arena}) {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 400,
+          width: { xs: '90%', sm: 400 },
           bgcolor: '#212121',
           border: '1px solid #E3E0C3',
           boxShadow: 24,
-          p: 4,
+          p: { xs: 2, sm: 4 },
           borderRadius: '10px'
         }}>
 
@@ -73,7 +73,7 @@ export default function Card_Sand({arena}) {
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily:"Anton",fontSize:'25px', textAlign:'center' }}>
+          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily:"Anton",fontSize:{ xs: '18px', sm: '25px' }, textAlign:'center' }}>
             {arena.nombre}
           </Typography>
           <Typography variant="body2" sx={{ color: "#E3E0C3", fontFamily:"Anton",fontSize:'17px' }}>

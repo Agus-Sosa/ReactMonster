@@ -2,12 +2,13 @@ import React from 'react'
 import Box from '@mui/material/Box';
 import './news.css'
 import NewCard from './NewCard'
-import { Icon, useMediaQuery } from '@mui/material';
+import { CircularProgress, Icon, useMediaQuery } from '@mui/material';
 import NewCarouselMobile from './NewCarouselMobile';
 import { useState, useEffect } from 'react';
 import PageContainer from '../Layout/PageContainer/PageContainer';
 import { Link } from 'react-router-dom';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import Loading from '../LoadingComp/Loading';
 
 const News = () => {
   const mobile = useMediaQuery('(max-width:1010px)')
@@ -31,7 +32,9 @@ const News = () => {
   }, []);
   /* tengo que charlar de esto con agus lo vi en internet me parecio piola */
   if (loading) {
-    return <p style={{ color: 'white' }}>cargando noticias...</p>;
+    return (
+      <Loading/>
+    );
   }
 
   return (     
