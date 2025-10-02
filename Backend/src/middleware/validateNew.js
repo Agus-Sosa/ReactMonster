@@ -1,6 +1,9 @@
 import { News } from "../models/News.js";
 import haveBadWord from "./badwords.js"
 
+// middleware to validate news data before creating or updating it
+// checks the title, summary, and content, and whether they contain prohibited words
+
 export const validateNew=(req, res, next)=> {
     const {title, resume, content} = req.body;
 
@@ -27,6 +30,7 @@ export const validateNew=(req, res, next)=> {
     next();
 
 }
+// middleware to validate that the news exists before GET/PUT/DELETE operations
 export const validateGetNewById= async(req, res, next)=> {
     const id= parseInt(req.params.id, 10); 
     const existingNew =await News.findByPk(id);
