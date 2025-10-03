@@ -31,7 +31,7 @@ const AuthButton = ({user,logoutButton,isOpenModalMobile }) => {
             <>
 
             <Box >
-                <Avatar component="button" onClick={handleClick} alt="Remy Sharp" src={user.profile_picture} />
+                <Avatar   onClick={handleClick} alt="Remy Sharp" sx={{cursor:"pointer"}} src={user.profile_picture} />
             </Box>
             <Menu
             id="basic-menu"
@@ -60,7 +60,7 @@ const AuthButton = ({user,logoutButton,isOpenModalMobile }) => {
             }}
         >
             <MenuItem  sx={{p:1, borderRadius: 2,":hover":{background:"#424242ff"}}} >
-            <Box component={Link}  sx={{textDecoration:"none" , color: 'white', width:"100%" }} to={'/profile'}>Ver perfil</Box>
+            <Box component={Link}  sx={{textDecoration:"none" , color: 'white', width:"100%" }} to={`/profile/${user.id}`}>Ver perfil</Box>
             </MenuItem>
             <MenuItem sx={{p:1, borderRadius:2, ":hover":{background:"#424242ff"}}} >
                 <Box component={Link} sx={{textDecoration:"none" , color: 'white', width:"100%"}} to={'/settings'}>Ajustes</Box>
@@ -94,7 +94,7 @@ const AuthButton = ({user,logoutButton,isOpenModalMobile }) => {
                 <>
                 {user ? (
                     <>
-                    <Box component={Link} onClick={isOpenModalMobile} to={'/profile'} sx={{display:'flex', justifyContent:"start", textDecoration:"none", color:"white",gap:2, alignItems:"center"}}>
+                    <Box component={Link} onClick={isOpenModalMobile} to={'/profile'} sx={{display:'flex', justifyContent:"start", width:"100%", textDecoration:"none", color:"white",gap:2, alignItems:"center"}}>
                         <Avatar  sx={{}} src={user.profile_picture}/>
                         <Box>
                         {user.user_name}
