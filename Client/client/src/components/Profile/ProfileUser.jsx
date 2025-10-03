@@ -3,6 +3,7 @@ import { AuthContext } from '../../context/AuthContext'
 import { Box } from '@mui/material';
 import PageContainer from '../Layout/PageContainer/PageContainer';
 import { Link, useParams } from 'react-router-dom';
+import EditProfileButton from './EditProfileButton';
 
 const ProfileUser = () => {
   const {user} = useContext(AuthContext);
@@ -19,11 +20,11 @@ const ProfileUser = () => {
   const userInfo = userData;
   // console.log(uer)
   return (
-    <Box sx={{minHeight:"80vh", py:7}}>
+    <Box sx={{minHeight:"80vh", py:0}}>
       <PageContainer>
-        <Box sx={{display:'flex',justifyContent:"space-between", alignItems:"start" ,p:5, background:"#1e1e1e"}}>
+        <Box sx={{display:'flex',justifyContent:"space-between", alignItems:"start" ,p:5, background:"#1e1e1e", border:"solid 0.5px gray", borderRadius:2}}>
 
-      <Box sx={{display:"flex", gap:5, alignItems:"center"}}>
+      <Box sx={{display:"flex", gap:5, alignItems:"center", justifyContent:"center",flexWrap:"wrap", textAlign:{xs:"center", md:"left"}}}>
 
 
         <Box sx={{width:"250px", height:"250px", borderRadius:"50%", overflow:"hidden"}}>
@@ -44,22 +45,20 @@ const ProfileUser = () => {
           </Box>
         </Box>
               </Box>
+        <Box sx={{display:{xs:"none",md:"block"}}}>
+        <EditProfileButton user={user} userInfo={userInfo}/>
 
-        {user && user?.id === userInfo.user?.id_user && (
-          <Box component={Link} sx={{backgroundColor:"#8E1616", p:1.4, borderRadius:1, color:"white", textDecoration:"none",transition:"0.5s all", ":hover":{backgroundColor:"#380E00"} }} to="/settings">
-              Editar perfil 
-          </Box>
-        )}
         </Box>
-            <Box sx={{ display: "flex", gap: 5, mt: 5, color: "white" }}>
-              <Box sx={{ flex: 1, backgroundColor: "#1e1e1e", p: 2 }}>
+        </Box>
+            <Box sx={{ display: "flex",flexDirection:{xs:"column",md:"row"}, gap: {xs:2,md:5}, mt: {xs:2,md:5}, color: "white", flexWrap: "wrap" }}>
+              <Box sx={{ flex: 1, backgroundColor: "#1e1e1e", p: 2 ,  border:"solid 0.5px gray", borderRadius:2}}>
                 <Box component="h2" sx={{ fontSize: "30px", my: 3 }}>Juego</Box>
                 <Box>
                   Rango {userInfo.user?.range}
                 </Box>
               </Box>
 
-                <Box sx={{ flex: 1, backgroundColor: "#1e1e1e", p: 2 }}>
+                <Box sx={{ flex: 1, backgroundColor: "#1e1e1e", p: 2,  border:"solid 0.5px gray" , borderRadius:2}}>
                   <Box component="h2" sx={{ fontSize: "30px", my: 3 }}>Foro</Box>
                   <Box>Publicaciones: {userData.user?.total_post}</Box>
                   <Box>Comentarios: {userData.user?.total_comments}</Box>
@@ -68,8 +67,11 @@ const ProfileUser = () => {
 
                 </Box>
       </Box>
+      <Box sx={{display:{xs:"block",md:"none"}, my:5}}>
+        <EditProfileButton user={user} userInfo={userInfo}/>
 
-
+        </Box>
+      
       </PageContainer>
        
     </Box>
