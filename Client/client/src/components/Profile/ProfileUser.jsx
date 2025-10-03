@@ -5,6 +5,11 @@ import PageContainer from '../Layout/PageContainer/PageContainer';
 
 const ProfileUser = () => {
     const {user} = useContext(AuthContext);
+    const fieldInputs= {
+      label: "Nombre de usuario", value: user.user_name,
+      label:"Email", value: user.email,
+      label:"Descripcion", value: user.description
+    }
   return (
     <Box sx={{minHeight:"80vh"}}>
       <PageContainer>

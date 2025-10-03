@@ -8,19 +8,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link } from "react-router-dom";
 import ModalAuthPrev from "../Authentication/ModalAuthPrev";
 import { Avatar } from "@mui/material";
+import AuthButton from "./AuthButton";
 
 const HeaderMobile = ({user, logoutButton}) => {
     const [openMenu, setOpenMenu]= useState(false);
     const [openModal, setOpenModal] = useState(false);
 
 
-  const handleOpenModal =()=> {
-    setOpenModal(true);
-    setOpenMenu(false)
-  }
-  const handleCloseModal = ()=> {
-    setOpenModal(false);
-  }
+ 
 
    const handleOpenMenu = (newOpen) => () => {
     setOpenMenu(newOpen);
@@ -37,47 +32,19 @@ const HeaderMobile = ({user, logoutButton}) => {
             <Link to='/'>
               <Box component="img" src={title_game} sx={{width:"100px"}}></Box>
             </Link>
+               {listLink.map((item)=>(
+                        <Box  key={item.name} style={{textDecoration:"none", color:"white", fontSize:"20px", padding:"10px", width:"100%", textAlign:"start"}} onClick={handleOpenMenu(false)}>{item.name}</Box>
+                ))}
             <Button onClick={handleOpenMenu(false)} sx={{color:"white", fontSize:"30px"}}>
                 <CloseIcon/>
             </Button>   
             </Box>
 
             <Box component="div" sx={{width: "100%"}}>
-                {listLink.map((item)=>(
-                        <Box  key={item.name} style={{textDecoration:"none", color:"white", fontSize:"20px", padding:"10px", width:"100%", textAlign:"start"}} onClick={handleOpenMenu(false)}>{item.name}</Box>
-                ))}
+             
 
-                {user ? (
-                  <>
-                  <Box component={Link} to={'/profile'} sx={{display:'flex', justifyContent:"space-between", alignItems:"center"}}>
-                    <Avatar  sx={{}} src={user.profile_picture}/>
-                    <Box>
-                      {user.user_name}
-                    </Box>
-                  </Box>
-                  <Button
-                  onClick={logoutButton}
-                    sx={{width:"100%",color:"white", mt:2, background:"#D84040", textAlign:"center", p:"10px", borderRadius:"2px", fontSize:"20px", cursor:"pointer", transition:"all .5s", "&:hover":{backgroundColor:"#8E1616"}}}
-                    
-                  >
-                    Cerrar Sesion
-                  </Button>
-                                    </>
-
-                ) :
                 
-                (
-            <Button
-                onClick={handleOpenModal}
-
-                sx={{width:"100%",color:"white", mt:2, background:"#D84040", textAlign:"center", p:"10px", borderRadius:"2px", fontSize:"20px", cursor:"pointer", transition:"all .5s", "&:hover":{backgroundColor:"#8E1616"}}}
-                
-                >
-                    Jugar Ahora
-
-                </Button>
-                )}
-                
+                  <AuthButton user={user} logoutButton={logoutButton} isOpenModalMobile={()=>setOpenMenu(false)}/>
 
             </Box>
         </Box>
@@ -97,8 +64,7 @@ const HeaderMobile = ({user, logoutButton}) => {
     <Drawer PaperProps={{sx:{width:"100%"}}} open={openMenu} onClose={handleOpenMenu(false)} anchor="left">
         {listMobileMenu}
     </Drawer>
-        <ModalAuthPrev handleCloseModal={handleCloseModal} openModal={openModal}/>
-
+    
   </Box>
   
 )
