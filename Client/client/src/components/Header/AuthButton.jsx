@@ -4,23 +4,23 @@ import { Avatar, Box, Button, Menu, MenuItem, useMediaQuery } from '@mui/materia
 import { Link } from 'react-router-dom';
 
 const AuthButton = ({user,logoutButton,isOpenModalMobile }) => {
-     const [anchorEl, setAnchorEl] = useState(null);
- const [openModal, setOpenModal] = useState(false);
-   const open = Boolean(anchorEl);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
+    const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-  const handleOpenModal =()=> {
-    setOpenModal(true);
-  }
-  const handleCloseModal = ()=> {
-    setOpenModal(false);
-  }
+    const handleOpenModal =()=> {
+        setOpenModal(true);
+    }
+    const handleCloseModal = ()=> {
+        setOpenModal(false);
+    }
     const mobile = useMediaQuery("(max-width:750px)")
 
 
@@ -38,21 +38,21 @@ const AuthButton = ({user,logoutButton,isOpenModalMobile }) => {
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
-              PaperProps={{
-    sx: {
-      backgroundColor: "#333333ff",
-      textDecoration:"none",
-      fontSize:"10px",
-      border:"0.5px solid gray",
-      color: "white",
-      borderRadius: 2,
-      minWidth: 200,
-      minHeight:100,
-      
-      p: 1,
-      boxShadow: "0px 4px 20px rgba(0,0,0,0.5)",
-    }
-  }}
+            PaperProps={{
+                sx: {
+                backgroundColor: "#333333ff",
+                textDecoration:"none",
+                fontSize:"10px",
+                border:"0.5px solid gray",
+                color: "white",
+                borderRadius: 2,
+                minWidth: 200,
+                minHeight:100,
+                
+                p: 1,
+                boxShadow: "0px 4px 20px rgba(0,0,0,0.5)",
+                }
+            }}
             slotProps={{
             list: {
                 'aria-labelledby': 'basic-button',
@@ -60,16 +60,15 @@ const AuthButton = ({user,logoutButton,isOpenModalMobile }) => {
             }}
         >
             <MenuItem  sx={{p:1, borderRadius: 2,":hover":{background:"#424242ff"}}} >
-            <Box  sx={{textDecoration:"none" , }} to={'/profile'}>Ver perfil</Box>
+            <Box component={Link}  sx={{textDecoration:"none" , color: 'white', width:"100%" }} to={'/profile'}>Ver perfil</Box>
             </MenuItem>
             <MenuItem sx={{p:1, borderRadius:2, ":hover":{background:"#424242ff"}}} >
-                <Box  sx={{textDecoration:"none" , }} to={'/settings'}>Ajustes</Box>
-
+                <Box component={Link} sx={{textDecoration:"none" , color: 'white', width:"100%"}} to={'/settings'}>Ajustes</Box>
             </MenuItem>
             <MenuItem sx={{p:1, borderRadius:2, ":hover":{background:"#424242ff"}}} onClick={logoutButton}>Cerrar Sesion</MenuItem>
         </Menu> 
         
-  
+
             </>
         
             
@@ -103,7 +102,7 @@ const AuthButton = ({user,logoutButton,isOpenModalMobile }) => {
                     </Box>
                     <Button
                     onClick={logoutButton}
-                        sx={{width:"100%",color:"white", mt:2, background:"#D84040", textAlign:"center", p:"10px", borderRadius:"2px", fontSize:"20px", cursor:"pointer", transition:"all .5s", "&:hover":{backgroundColor:"#8E1616"}}}
+                        sx={{width:"100%",color:"white", mt:2,textAlign:"start", p:0,justifyContent:"start", borderRadius:"2px", cursor:"pointer",fontSize:'16px', transition:"all .5s"}}
                         
                     >
                         Cerrar Sesion

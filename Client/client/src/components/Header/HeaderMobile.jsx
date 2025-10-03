@@ -6,13 +6,10 @@ import title_game from '../../assets/img/title_game.png'
 import Button from "@mui/material/Button";
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from "react-router-dom";
-import ModalAuthPrev from "../Authentication/ModalAuthPrev";
-import { Avatar } from "@mui/material";
 import AuthButton from "./AuthButton";
 
 const HeaderMobile = ({user, logoutButton}) => {
     const [openMenu, setOpenMenu]= useState(false);
-    const [openModal, setOpenModal] = useState(false);
 
 
  
@@ -22,9 +19,7 @@ const HeaderMobile = ({user, logoutButton}) => {
   };
 
 
-  const listLink =[
-    {name:"Foro", link:"#"},
-  ]
+
 
     const listMobileMenu = (
         <Box component="header" sx={{height:"100%",position:"sticky", top:0,zIndex:1100,backgroundColor:"#1e1e1e", color:"white", display:"flex", flexDirection:"column", alignItems:"start",p:2, gap:2}}>
@@ -32,19 +27,15 @@ const HeaderMobile = ({user, logoutButton}) => {
             <Link to='/'>
               <Box component="img" src={title_game} sx={{width:"100px"}}></Box>
             </Link>
-               {listLink.map((item)=>(
-                        <Box  key={item.name} style={{textDecoration:"none", color:"white", fontSize:"20px", padding:"10px", width:"100%", textAlign:"start"}} onClick={handleOpenMenu(false)}>{item.name}</Box>
-                ))}
             <Button onClick={handleOpenMenu(false)} sx={{color:"white", fontSize:"30px"}}>
                 <CloseIcon/>
             </Button>   
             </Box>
 
-            <Box component="div" sx={{width: "100%"}}>
-             
+            <Box component="div" sx={{width: "100%", display:"flex", flexDirection:"column", gap:2, alignItems:"start" }}>
+              <Box style={{textDecoration:"none", color:"white", fontSize:"20px", width:"100%", textAlign:"start"}} onClick={handleOpenMenu(false)}>Foro</Box>
 
-                
-                  <AuthButton user={user} logoutButton={logoutButton} isOpenModalMobile={()=>setOpenMenu(false)}/>
+                <AuthButton user={user} logoutButton={logoutButton} isOpenModalMobile={()=>setOpenMenu(false)}/>
 
             </Box>
         </Box>

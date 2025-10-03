@@ -1,11 +1,6 @@
 import Box from '@mui/material/Box'
-import React, { useContext, useState } from 'react'
 import title_game from '../../assets/img/title_game.png'
 import { Link } from 'react-router-dom';
-import ModalAuthPrev from '../Authentication/ModalAuthPrev';
-import { Avatar, Button } from '@mui/material';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import AuthButton from './AuthButton';
 const HeaderDesktop = ({user, logoutButton}) => {
  
