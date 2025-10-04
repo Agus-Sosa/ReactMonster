@@ -10,19 +10,20 @@ import {
 function Comments({comment}) {
   return (
     <>
-     {comment.map((comment) => (
-        <Card key={comment.id} sx={{ maxWidth: 500, mb: 2 }}>
+    {comment.map((comment) => (
+        <Card key={comment.id} sx={{Width: "100%", mb: 2 , backgroundColor:"transparent", color:"White"}}>
           <CardHeader
             avatar={
               <Avatar aria-label="usuario">
                 {comment.name ? comment.name[0].toUpperCase() : "?"}
               </Avatar>
             }
-            title={comment.name || "Anonimo"}
+            // falta agregar la opcion de traer la informacion de quien es el mensaje
+            title={comment.name || "anonimo"}
             subheader={comment.date || "Sin fecha"}
           />
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="White">
               {comment.comment || comment.body}
             </Typography>
           </CardContent>
