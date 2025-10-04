@@ -10,22 +10,26 @@ import {
 function Comments({comment}) {
   return (
     <>
-    <Card sx={{ maxWidth: 500 }}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="usuario">M</Avatar>
-        }
-        title="Extraño Atormentado"
-        subheader={comment.date}
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {comment.comment}
-        </Typography>
-      </CardContent>
-    </Card>
+     {comment.map((comment) => (
+        <Card key={comment.id} sx={{ maxWidth: 500, mb: 2 }}>
+          <CardHeader
+            avatar={
+              <Avatar aria-label="usuario">
+                {comment.name ? comment.name[0].toUpperCase() : "?"}
+              </Avatar>
+            }
+            title={comment.name || "Anonimo"}
+            subheader={comment.date || "Sin fecha"}
+          />
+          <CardContent>
+            <Typography variant="body2" color="text.secondary">
+              {comment.comment || comment.body}
+            </Typography>
+          </CardContent>
+        </Card>
+      ))}
     </>
-  )
+  );
 }
 
 export default Comments

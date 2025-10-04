@@ -145,7 +145,7 @@ function ForoJoins({ info }) {
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
             <DetailPublish post={selectedPost}/>  
-            <CommentsSection/>          
+            <CommentsSection postId={selectedPost}/>          
           </Box>
         )}
       </Box>
