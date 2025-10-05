@@ -9,13 +9,16 @@ import NewCard from './NewCard'
 import CreateNewPost from './CreateNewPost'
 const AllNews = () => {
     const [news, setNews]= useState([])
-    useEffect(()=> {
-        fetch("http://localhost:8080/news/")
-        .then(res=> res.json())
-        .then(data=> setNews(data))
-        .catch(err=> console.log(err))
+    const fetchNews = () => {
+  fetch("http://localhost:8080/news/")
+    .then(res => res.json())
+    .then(data => setNews(data))
+    .catch(err => console.log(err));
+};
 
-    }, [])
+useEffect(() => {
+  fetchNews();
+}, []);
 
   return (
     <Box>
@@ -28,7 +31,7 @@ const AllNews = () => {
     <Box sx={{backgroundColor:"#E3E0C3", minHeight:"100vh", width:"100%", paddingY:5}}>
 
         <PageContainer >
-          <CreateNewPost/>
+          <CreateNewPost refreshNews={fetchNews}/>
             <Box sx={{display:"flex", flexWrap:"wrap", gap:2, justifyContent:"center", my:7}}>
                 {
                 news.map((newItem)=> (

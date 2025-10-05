@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 import { Form } from 'react-router-dom';
 
-export const ModalFormNews = ({isOpen, closeModal, adminId}) => {
+export const ModalFormNews = ({isOpen, closeModal, adminId, refreshNews}) => {
      const [formData, setFormData]= useState({
         title: "",
         content: "",
@@ -38,13 +38,14 @@ export const ModalFormNews = ({isOpen, closeModal, adminId}) => {
 
             console.log("respues", res)
             if(!res.ok) {
-                console.log("Error al crear la noticia", res);
+
             }
             
             const data = await res.json();
             console.log(data)
+            refreshNews();
             closeModal();
-
+            
 
         } catch (error) {
             console.log(error)

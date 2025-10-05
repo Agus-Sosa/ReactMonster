@@ -4,7 +4,7 @@ import { Box, Button, Input, Modal } from '@mui/material';
 import { Form } from 'react-router-dom';
 import { ModalFormNews } from './ModalFormNews';
 
-const CreateNewPost = () => {
+const CreateNewPost = ({refreshNews}) => {
     const {user} = useContext(AuthContext);
     const [openModal, setOpenModal] = useState(false);
    
@@ -30,7 +30,7 @@ const CreateNewPost = () => {
             Crear publicacion 
         </Button>
 
-        <ModalFormNews closeModal={handleCloseModal} isOpen={openModal} adminId={user.id}/>
+        <ModalFormNews refreshNews={refreshNews} closeModal={handleCloseModal} isOpen={openModal} adminId={user.id}/>
     </>
     )
 }
