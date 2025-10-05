@@ -18,6 +18,7 @@ function Comments({comment}) {
                 {comment.name ? comment.name[0].toUpperCase() : "?"}
               </Avatar>
             }
+            sx={{ color:"White"}}
             // falta agregar la opcion de traer la informacion de quien es el mensaje
             title={comment.name || "anonimo"}
             subheader={comment.date || "Sin fecha"}
