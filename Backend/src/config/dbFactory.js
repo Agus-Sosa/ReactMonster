@@ -11,7 +11,7 @@ class DatabaseFactory {
             sequelize = new Sequelize({
                 dialect:"sqlite",
                 storage: "./react_monster.db",
-                logging: false,
+                logging: true,
             })
             break;
 

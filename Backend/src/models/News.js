@@ -23,7 +23,7 @@ export const News = sequelize.define(config.modelData.news, {
         allowNull: false,
     },
     content: {
-        type:DataTypes.JSON,
+        type:DataTypes.TEXT,
         allowNull: false,
     },
     date: {

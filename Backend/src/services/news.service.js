@@ -27,7 +27,8 @@ class NewService{
     }
     // I got tired, the name tells you what it does
     async createNew (newNew) {    
-        return await this.modelNew.create(newNew);
+      const news = await this.modelNew.create(newNew);
+        return news;
     }
 
     async updateNew (id,newUpdate) {
