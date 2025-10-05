@@ -10,7 +10,6 @@ const Register = () => {
 
     return (
         <>
-        <Box component={Link} sx={{position:"absolute", top:0, left:0, textDecoration:"none", color:"white" , padding:1, m:1, background:"#8E1616", borderRadius:"4px"}} to="/">Volver atras</Box>
         <Box sx={{backgroundColor:"#212121", color:"white", minHeight:"100vh", display:'flex', justifyContent:"center", alignItems:"center"}}>
         
         <Box sx={{textAlign:"center", width:`${mobile ? '100%' : "30%"}`}}>

@@ -1,24 +1,48 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { Box } from '@mui/material';
 import PageContainer from '../Layout/PageContainer/PageContainer';
-import { Link, useParams } from 'react-router-dom';
+import { useParams ,useNavigate,} from 'react-router-dom';
 import EditProfileButton from './EditProfileButton';
 
 const ProfileUser = () => {
   const {user} = useContext(AuthContext);
   const [userData, setUserData] = useState({});
   const {id_user} = useParams();
+  const [notUser, setNotUser]= useState(false);
+
+  const navigate = useNavigate();
+
     // const {user} = useContext(AuthContext);
   
   useEffect(()=> {
-    fetch(`http://localhost:8080/users/${id_user}`)
-    .then(res=> res.json())
-    .then(data=> setUserData(data))
+    const fetchGetUser = async()=> {
+      try {
+        const res = await fetch(`http://localhost:8080/users/${id_user}`);
+
+        if(!res.ok) {
+          setNotUser(true);
+          return;
+        }
+
+        const data = await res.json();
+        setNotUser(false);
+        setUserData(data);
+
+      } catch (error) {
+        console.log(error)
+        setNotUser(true);
+      }
+    }
+
+    fetchGetUser();
+
   },[id_user])
 
   const userInfo = userData;
-  // console.log(uer)
+
+  if(notUser) return navigate("/*")
+
   return (
     <Box sx={{minHeight:"80vh", py:0}}>
       <PageContainer>
