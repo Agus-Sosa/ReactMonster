@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 
 function Comments({comment}) {
+  console.log(comment[0])
   return (
     <>
     {comment.map((comment) => (
@@ -15,12 +16,12 @@ function Comments({comment}) {
           <CardHeader
             avatar={
               <Avatar aria-label="usuario">
-                {comment.name ? comment.name[0].toUpperCase() : "?"}
+                {comment.User.user_name ? comment.User.user_name[0].toUpperCase() : "?"}
               </Avatar>
             }
             sx={{ color:"White"}}
             // falta agregar la opcion de traer la informacion de quien es el mensaje
-            title={comment.name || "anonimo"}
+            title={comment.User.user_name || "anonimo"}
             subheader={comment.date || "Sin fecha"}
           />
           <CardContent>
