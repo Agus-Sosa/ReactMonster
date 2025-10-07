@@ -1,20 +1,39 @@
 import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import PageContainer from '../Layout/PageContainer/PageContainer';
 
 const NewDetails = () => {
     const [newDetail, setNewDetail] = useState({});
     const {id}  = useParams();
+    const [notNew, setNotNew] = useState(false);
+    const navigate =useNavigate();
 
 
 
 
+    
  useEffect(() => {
-  fetch(`http://localhost:8080/news/${id}`)
-    .then(res => res.json())
-    .then(data => setNewDetail(data.new))
+  const fetchGetNew = async ()=> {
+    try {
+    const res = await fetch(`http://localhost:8080/news/${id}`);
+
+    if(!res.ok) {
+      setNotNew(true);
+    } 
+    const data = await res.json();
+    setNewDetail(data.new);
+    } catch (error) {
+      console.log(error);
+      setNotNew(true);
+    }
+    
+  }
+  fetchGetNew();
 }, [id]) 
+
+
+if(notNew) navigate('*');
 
 const d = new Date(newDetail.date);
   const y = d.getFullYear();

@@ -2,13 +2,13 @@ export const config = {
   PORT: 8080,
   db_dialect: "sqlite",
   modelData: {
-    user: 'Users',
-    post: 'Posts',
-    news: 'News',
-    comments: 'Comments',
-    like: 'Likes',
-    monster: "Monsters",
-    arena: "Arenas",
-    categories: 'Categories',
+    user: 'User',
+    post: 'Post',
+    news: 'New',
+    comments: 'Comment',
+    like: 'Like',
+    monster: "Monster",
+    arena: "Arena",
+    categories: 'Categorie',
   }
 };

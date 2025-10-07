@@ -50,6 +50,7 @@ export const User = sequelize.define(config.modelData.user, {
     role:{
         type:DataTypes.STRING,
         defaultValue:'user',
+        enum: ["user", "admin", "superadmin"]
     },
     count_state: {
         type: DataTypes.BOOLEAN,

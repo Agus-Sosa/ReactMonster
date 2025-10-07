@@ -94,7 +94,7 @@ const AuthButton = ({user,logoutButton,isOpenModalMobile }) => {
                 <>
                 {user ? (
                     <>
-                    <Box component={Link} onClick={isOpenModalMobile} to={'/profile'} sx={{display:'flex', justifyContent:"start", width:"100%", textDecoration:"none", color:"white",gap:2, alignItems:"center"}}>
+                    <Box component={Link} onClick={isOpenModalMobile} to={`/profile/${user.id}`} sx={{display:'flex', justifyContent:"start", width:"100%", textDecoration:"none", color:"white",gap:2, alignItems:"center"}}>
                         <Avatar  sx={{}} src={user.profile_picture}/>
                         <Box>
                         {user.user_name}

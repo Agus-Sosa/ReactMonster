@@ -7,8 +7,8 @@ const MonstersCard = ({id, name, image}) => {
     
    <Box 
   sx={{
-    width: "350px", 
-    height: "600px", 
+    width: {xs:"200px" ,md:"350px"}, 
+    height: {xs:"300px" ,md:"600px"}, 
     overflow: "hidden", 
     position: "relative" 
   }} 
@@ -42,7 +42,7 @@ const MonstersCard = ({id, name, image}) => {
       fontWeight:'bold',
       color: "black",
       zIndex: 2,
-      fontSize:'20px',
+      fontSize:{xs:"14px", md:'20px'},
       
     }}
   >

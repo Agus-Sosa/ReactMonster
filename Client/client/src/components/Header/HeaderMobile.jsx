@@ -44,8 +44,9 @@ const HeaderMobile = ({user, logoutButton}) => {
 
   return (
   <Box component="header" sx={{display:"flex", justifyContent:"space-between  ", alignItems:"center", backgroundColor:"#1e1e1e", color:"white", p:2}} >
-    <Box component="img" src={title_game} sx={{width:"100px"}}>
-    </Box>
+    <Link to='/'>
+        <Box component="img" src={title_game} sx={{width:"100px"}}/>
+    </Link>
 
 
 
