@@ -11,12 +11,12 @@ export const Comments = sequelize.define(config.modelData.comments, {
   id_user: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {model: config.modelData.user, key:"id_user"}
+    references: { model: 'Users', key: 'id_user' }
   },
   id_post: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {model: config.modelData.post, key:"id_post"}
+    references: { model: 'Posts', key: 'id_post' }
 
   },
   comment: {
