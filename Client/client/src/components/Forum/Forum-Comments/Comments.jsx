@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   Card,
   CardHeader,
@@ -6,9 +6,13 @@ import {
   Avatar,
   Typography
 } from "@mui/material";
-
+import { AuthContext } from '../../../context/AuthContext.jsx'
 function Comments({comment}) {
-  console.log(comment[0])
+  
+  const { user } = useContext(AuthContext); 
+
+  
+  if(!user) return null; // If there is no user, do not show the button
   return (
     <>
     {comment.map((comment) => (
