@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import React from 'react'
 import LikeButton from '../../Buttons/LikeBtn/LikeBtn.jsx';
+import ReportButton from '../../Buttons/ReportBtn/ReportButton.jsx'
 
 
 const DetailPublish = ({post}) => {
@@ -30,7 +31,11 @@ const DetailPublish = ({post}) => {
         <Box component="div">
             {post.content}
         </Box>
-        <Box component="h5"><LikeButton postId={post.id_post}/></Box>
+        <Box component="h5">
+          <LikeButton postId={post.id_post}/>
+          <ReportButton/>
+          </Box>
+        
     </Box>
     
 

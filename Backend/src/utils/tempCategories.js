@@ -4,27 +4,27 @@ export const tempCategories =async()=> {
     {
         id_category: 1,
         title: 'Comunidad',
-        resume:' Habla sobre temas relacionados a la comunidad.',
-        imageUrl:"https://png.pngtree.com/png-vector/20250327/ourmid/pngtree-a-rolled-up-parchment-scroll-with-wax-seal-png-image_15886793.png"
+        resume:'Comparte ideas, haz amigos y habla sobre todo lo relacionado con la comunidad del juego.',
+        imageUrl:"https://cdn.pixabay.com/photo/2025/08/08/15/48/pixel-art-9762954_640.png"
         
     },
     {
         id_category: 2,
         title:'PVP',
-        resume:'Habla sobre el PVP del juego.',
-        imageUrl:"https://cdn-icons-png.flaticon.com/512/1037/1037908.png"
+        resume:'Comenta tus estrategias, comparte tus mejores combates y discute sobre el modo jugador contra jugador.',
+        imageUrl:"https://static.vecteezy.com/system/resources/thumbnails/027/226/437/small/an-8-bit-retro-styled-pixel-art-illustration-of-a-red-stone-sword-free-png.png"
     },
     {
         id_category:3,
         title:'Historia',
-        resume:'Habla sobre la historia del juego.',
-        imageUrl:"https://images.vexels.com/media/users/3/243343/isolated/preview/a782605a66328a14be33ef0be6d7eb37-medieval-realistcountourline-15.png"
+        resume:'Explora la narrativa del juego, teorías, personajes y eventos que dan vida al universo del juego.',
+        imageUrl:"https://cdn-icons-png.flaticon.com/512/3172/3172747.png"
     },
     {
         id_category:4,
         title:'Features',
-        resume:' Habla sobre futuros cambios en el juego o propon los tuyos!',
-        imageUrl:"https://cdn-icons-png.flaticon.com/512/839/839705.png"
+        resume:'Propón nuevas ideas, comenta futuros cambios o debate sobre las próximas actualizaciones del juego.',
+        imageUrl:"https://cdn-icons-png.flaticon.com/512/272/272892.png"
     }
   ]);
 }
