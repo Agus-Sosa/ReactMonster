@@ -1,40 +1,44 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer'
-import Card_Sand from '../components/Sands/Card_Sand'
+import CardUser from './CardUser'
 import Box from '@mui/material/Box';
 import iconoArena from '../assets/img/arenas/iconoArena.png'
 import tituloArena from '../assets/img/arenas/tituloArena.png'
 import "../components/Sands/arena.css"
-import Loading from "../components/LoadingComp/Loading"
+import Loading from '../components/LoadingComp/Loading';
+// import { data } from 'react-router-dom'
 
 
-const Sands = () => {
+
+
+const ViewUser = () => {
 
   const [arenas,setArenas]=useState([]);
-  const [loading,setLoading]=useState(true)
+  const [loading,setLoading]=useState(true);
 
-  useEffect(()=>{
+  useEffect( () => {
     fetch("http://localhost:8080/arenas")
-      .then(res=>{
-        if(!res.ok) throw new Error ("error al cargar arenas");
-          return res.json();
+      .then (res => {
+        if (!res.ok) throw new Error("error al cargar las arenas");
+        return res.json();
       })
-      .then(data=>{
+      .then (data=> {
         setArenas(data.arenas);
         setLoading(false);
       })
-      .catch(err=>{
+      .catch (err => {
         console.error(err);
         setLoading(false);
       })
-    },[]);
-    
-    if (loading){
+  }, [])
+
+  if (loading) {
       return (
-      <Loading/>
-      )
+        <Loading/>
+      );
     }
+
   
   return (
     <div style={{
@@ -81,7 +85,7 @@ const Sands = () => {
               gap: 2
             }}
             >
-          <Card_Sand arena={arena}/>
+          <CardUser arena={arena}/>
           </Box>
         ))}
         </Box>
@@ -89,4 +93,8 @@ const Sands = () => {
   )
 }
 
-export default Sands
+export default ViewUser
+
+
+
+
