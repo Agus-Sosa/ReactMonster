@@ -9,7 +9,6 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);  
-  console.log("post",id_post,"user",id_user)
   if(!user) return null;
 
   const handleSubmit = async (e) => {

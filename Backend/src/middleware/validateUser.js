@@ -69,6 +69,7 @@ export const validateGetUserById= async(req, res, next)=> {
     const id= parseInt(req.params.id, 10); 
     const existingUser =await User.findByPk(id);
     
+    
     if (!existingUser) {
         return res.status(404).json({status:"error", message:"El usuario no existe"});
     }
