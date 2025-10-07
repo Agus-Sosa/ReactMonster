@@ -9,7 +9,9 @@ function CommentsSection({postId}) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext); 
+    if(!user) return null;
   const userId = user.id;
+
   useEffect(() => {
     fetch(`http://localhost:8080/comments/${postId.id_post}`)
       .then((res) => res.json())
