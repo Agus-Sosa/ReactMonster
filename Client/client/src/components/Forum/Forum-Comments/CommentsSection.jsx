@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import { Typography, Box } from "@mui/material";
 import Comments from './Comments';
 import Loading from '../../LoadingComp/Loading';
+import CommentForm from './CreateComment.jsx';
+import { AuthContext } from '../../../context/AuthContext.jsx'
+import LoginRequired from '../../NeedLogin/NeedLogin.jsx';
+
 function CommentsSection({postId}) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
-    console.log(postId.id_post)
+  const { user } = useContext(AuthContext); 
+    if(!user) return <><LoginRequired/></>;
+  const userId = user.id;
+
   useEffect(() => {
     fetch(`http://localhost:8080/comments/${postId.id_post}`)
       .then((res) => res.json())
@@ -21,31 +28,26 @@ function CommentsSection({postId}) {
 
   return (
     <Box
-      component="section"
       sx={{
-        width: "100%",
-        border: "1px solid #ccc",  
+        p: 3,
         borderRadius: 2,
-        padding: 2,
-        backgroundColor: "transparent"
+        border: '1px dashed',
+        borderColor: 'divider',
+        textAlign: 'center',
+        bgcolor: (theme) => theme.palette.action.hover,
       }}
     >
-      <Typography 
-        variant="subtitle1" 
-        sx={{ fontWeight: "bold", mb: 1 }}
-      >
-        Comentarios
-      </Typography>
-
-      {loading ? (
-        <Loading/>
-      ) : (
-        
-          <Comments comment={comments} />
-        
-      )}
+      <Stack spacing={1.5} alignItems="center">
+        <LockOutlinedIcon color="action" />
+        <Typography variant="body1">
+          Debes estar logueado para ver este contenido.
+        </Typography>
+        <Button variant="contained" size="small" onClick={() => navigate('/login')}>
+          Iniciar sesión
+        </Button>
+      </Stack>
     </Box>
   );
-}
+};
 
 export default CommentsSection;
