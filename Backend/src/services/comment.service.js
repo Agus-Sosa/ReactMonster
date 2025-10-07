@@ -21,7 +21,7 @@ class CommentService {
       include: [
       {
         model: User,
-        attributes: ["user_name"],
+        attributes: ["user_name","range"],
     }]});
   }
 

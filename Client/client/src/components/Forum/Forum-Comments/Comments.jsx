@@ -14,15 +14,22 @@ function Comments({comment}) {
     {comment.map((comment) => (
         <Card key={comment.id} sx={{Width: "100%", mb: 2 , backgroundColor:"transparent", color:"White"}}>
           <CardHeader
+            //I put the first letter of profile
             avatar={
               <Avatar aria-label="usuario">
                 {comment.User.user_name ? comment.User.user_name[0].toUpperCase() : "?"}
               </Avatar>
             }
             sx={{ color:"White"}}
-            // falta agregar la opcion de traer la informacion de quien es el mensaje
-            title={comment.User.user_name || "anonimo"}
-            subheader={comment.date || "Sin fecha"}
+            title={
+                <Typography sx={{ color: "white", fontWeight: "bold",  fontSize:"1em"}}>
+                  {comment.User.user_name || "Anónimo Atormentado"}
+                </Typography>
+              }
+             subheader={
+            <Typography sx={{ color: "#9e9e9e" }}>
+              {comment.User.range || "Sin Rango"}
+            </Typography>}
           />
           <CardContent>
             <Typography variant="body2" color="White">
