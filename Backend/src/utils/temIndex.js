@@ -4,6 +4,7 @@ import { tempNewsData } from "./tempNewsData.js";
 import { tempUserData } from "./tempUserData.js"
 import { tempCategories } from "./tempCategories.js";
 import { tempPostData } from "./tempPostData.js";
+import { tempComments } from "./tempComments.js";
 
 export const tempDataIndex =async()=> {
     await tempUserData(); // aca se agregan las funciones que generan datos automaticamente
@@ -12,4 +13,5 @@ export const tempDataIndex =async()=> {
     await tempArenaData();
     await tempCategories();
     await tempPostData();
+    await tempComments();
 }

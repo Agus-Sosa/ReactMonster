@@ -1,20 +1,39 @@
 import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import PageContainer from '../Layout/PageContainer/PageContainer';
 
 const NewDetails = () => {
     const [newDetail, setNewDetail] = useState({});
     const {id}  = useParams();
+    const [notNew, setNotNew] = useState(false);
+    const navigate =useNavigate();
 
 
 
 
+    
  useEffect(() => {
-  fetch(`http://localhost:8080/news/${id}`)
-    .then(res => res.json())
-    .then(data => setNewDetail(data.new))
+  const fetchGetNew = async ()=> {
+    try {
+    const res = await fetch(`http://localhost:8080/news/${id}`);
+
+    if(!res.ok) {
+      setNotNew(true);
+    } 
+    const data = await res.json();
+    setNewDetail(data.new);
+    } catch (error) {
+      console.log(error);
+      setNotNew(true);
+    }
+    
+  }
+  fetchGetNew();
 }, [id]) 
+
+
+if(notNew) navigate('*');
 
 const d = new Date(newDetail.date);
   const y = d.getFullYear();
@@ -37,11 +56,10 @@ const styleImage = {
 return (
     <Box sx={{}}>
         <PageContainer>
-    <Box sx={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:'center', color:"white", my:8}}>
+    <Box sx={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:'center', color:"white", my:3}}>
 
         <Box component="header" sx={{textAlign:'start', width:{ xs:"100%", md:"50%"}}}>
-            <Box sx={{color:"gray", fontSize:{ xs:"10px", md:"14px"}}}>{fechaFormateada}</Box>
-            <Box sx={{fontSize:{xs:"24px", md:'40px'}, fontWeight:"bold"}}>{newDetail.title}</Box>
+            <Box sx={{color:"gray", fontSize:{ xs:"14px", md:"14px"}}}>{fechaFormateada}</Box>
         </Box>
   {newDetail?.imageUrl && (
     <Box
@@ -52,14 +70,17 @@ return (
         width: { xs: "100%", md: "75%" }, // mejor que vh
         height: "auto", // mantiene proporción
         borderRadius: {xs:0,md:2},
-        objectFit: "cover" // para que no se deforme
+        objectFit: "cover" 
       }}
     />
   )}
         <Box component="div" sx={{width:{ xs:"100%", md:'50%'}}}>
+          <Box component="h1" sx={{fontSize:{xs:'25px', md:"40px"}, fontWeight:"bold", my:3}}>
+              {newDetail.title}
+          </Box>
             <Box mt={5}>
                 {newDetail?.content?.paragraphs?.map((p, index) => (
-                <Box sx={{fontSize:{xs:'12px', md:"20px"}}} key={index} mb={1}>
+                <Box sx={{fontSize:{xs:'16px', md:"20px"}}} key={index} mb={1}>
                     {p}
                 </Box>
                 ))}

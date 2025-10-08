@@ -12,8 +12,16 @@ class UserService {
 
 
     async getUserById (id) {
-        return await this.modelUser.findByPk(id);
-    }
+        const user = await this.modelUser.findByPk(id);
+    
+            if(!user) {
+                const error = new Error("Usuario no encontrado");
+                error.status = 404;
+                throw error;
+            }
+
+        return user;
+    }   
 
 
 
@@ -31,6 +39,13 @@ class UserService {
 
     async desactivateUserById(id) {
         const user = await this.modelUser.findByPk(id);
+
+        if(!user) {
+            const error = new Error("Usuario no encontrado");
+            error.status = 404;
+            throw error;
+        }
+
         return await user.update({count_state: false})
     }
 

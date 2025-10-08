@@ -13,7 +13,7 @@ function MonstersLanding() {
     >
     <Box  sx={{width:"100%", display:"flex", alignItems:"center" ,height:{xs:"40vh", md:"40vh", background: `url(${hero_monster})`, backgroundSize:"cover",}}}>
       <PageContainer>
-      <Box component='img' src={title_hero} sx={{width:{ xs: "300px", md:"800px"}}} ></Box>
+      <Box component='img' src={title_hero} sx={{width:{ xs: "300px", md:"500px"}}} ></Box>
 
       </PageContainer>
     </Box> 

@@ -14,6 +14,8 @@ import NewDetails from './components/News/NewDetails';
 import AuthenticationContextProvider from './context/AuthenticationContextProvider';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ProfileUser from './components/Profile/ProfileUser';
+import AllNews from './components/News/AllNews';
+import SettingsProfile from './components/Profile/SettingsProfile';
 
 function App() {
   return (
@@ -31,10 +33,16 @@ function App() {
             <Route path="/monsters" element={<Monsters />} />
             <Route path='/monsters/:id'element={<MonsterDetail/>}/>
             <Route path="/arenas" element={<Sands />} />
-
-            <Route path='/profile' element={<ProtectedRoute>
+            <Route path='/allnews' element={<AllNews/>}/>
+            <Route path='/profile/:id_user' element={
               <ProfileUser/>
-            </ProtectedRoute>}/>
+      }/>
+      <Route path='/settings' element={
+        <ProtectedRoute>
+          <SettingsProfile/>
+        </ProtectedRoute>
+      }/>
+
           </Route>
 
           {/* Rutas sin un layout */}

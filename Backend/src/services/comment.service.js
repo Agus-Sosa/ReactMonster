@@ -1,4 +1,4 @@
-import { Comments } from "../models/Comments.js";
+import { User, Comments } from "../models/index.js";
 
 class CommentService {
   constructor() {
@@ -17,8 +17,12 @@ class CommentService {
   async getCommentsByPost(id_post) {
     return await this.modelComment.findAll({
       where: { id_post, comment_state: true },
-      order: [["date", "ASC"]]
-    });
+      order: [["date", "ASC"]],
+      include: [
+      {
+        model: User,
+        attributes: ["user_name","range"],
+    }]});
   }
 
   async deleteComment(id_comment, requesterId, requesterRole) {

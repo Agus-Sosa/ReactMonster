@@ -1,10 +1,10 @@
-import { Box, Button, Modal } from '@mui/material'
+import { Box, Button, Modal, useMediaQuery } from '@mui/material'
 import React from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 
 const ModalAuthPrev = ({openModal, handleCloseModal}) => {
-
+  const mobile = useMediaQuery("(max-width:700px)")
   const style = {
   position: 'absolute',
   top: '50%',
@@ -42,7 +42,7 @@ const styleButton = {
           <Box component="h2" sx={{textAlign:'center',mb:"50px"}}>
               Preparate para Jugar
           </Box>
-          <Box component="div" sx={{display:"flex", gap:"10px", justifyContent:'center'}}>
+          <Box component="div" sx={{display:"flex", flexDirection:mobile ? "column" : "row", gap:"10px", justifyContent:'center'}}>
               <Button   variant='contained'  sx={{...styleButton, backgroundColor:"#8E1616", color:"white"}}  component={Link} to="/login" >
                   Iniciar Sesion
               </Button>

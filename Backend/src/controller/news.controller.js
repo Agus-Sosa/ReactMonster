@@ -51,6 +51,7 @@ class NewController {
                 content
                 
             };
+            console.log(newNew, "new controller")
             const notice =await this.newService.createNew(newNew);
             res.status(200).json({status:"success", newNew:notice});
 

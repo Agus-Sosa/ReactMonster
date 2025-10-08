@@ -35,6 +35,10 @@ export const Post = sequelize.define(config.modelData.post,{
         type:DataTypes.STRING,
         allowNull:false,
     },
+    imgContent: {
+        type:DataTypes.STRING,
+        defaultValue:"https://i.pinimg.com/736x/d2/d5/f8/d2d5f8e7fa9a7fe44c1dee164e8de01e.jpg",
+    },
     total_like: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
