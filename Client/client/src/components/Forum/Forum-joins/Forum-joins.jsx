@@ -114,7 +114,7 @@ function ForoJoins({ info }) {
           </h2>
         </Box>
         {/* ---------- LIST OF CATEGORIES OR POSTS ---------- */}
-        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
+        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" ,wordBreak: "break-word"   }}>
           {/* list of categories */}
           {!selectedCategory &&
             categories.map((cat) => (

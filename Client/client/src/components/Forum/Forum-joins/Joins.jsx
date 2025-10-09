@@ -17,13 +17,14 @@ function Joins({ informacion, onSelect }) {
         color: "white",
         border: "1px solid white",
         cursor: "pointer",
+        wordBreak: "break-word"
       }}
       // The ?. prevents error if onSelect is not defined
       onClick={() => onSelect?.(informacion)}
     >
       <CardActionArea>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+        <CardContent sx={{wordBreak: "break-word"}}>
+          <Typography gutterBottom variant="h5" component="div" >
             <img
               src={informacion.imageUrl}
               className="forum-icons"
@@ -32,7 +33,7 @@ function Joins({ informacion, onSelect }) {
             {informacion.title}
           </Typography>
           {/* Summary / short description */}
-          <Typography variant="body2" sx={{ color: "white" }}>
+          <Typography variant="body2" sx={{ color: "white",wordBreak: "break-word" }}>
             {informacion.resume}
           </Typography>
         </CardContent>
