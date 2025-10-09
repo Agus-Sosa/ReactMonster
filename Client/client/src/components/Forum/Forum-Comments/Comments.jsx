@@ -16,7 +16,7 @@ function Comments({comment}) {
   return (
     <>
     {comment.map((comment) => (
-        <Card key={comment.id} sx={{Width: "100%", mb: 2 , backgroundColor:"transparent", color:"White"}}>
+        <Card key={comment.id_comment} sx={{Width: "100%", mb: 2 , backgroundColor:"transparent", color:"White"}}>
           <CardHeader
             //I put the first letter of profile
             avatar={

@@ -49,7 +49,7 @@ function CommentsSection({postId}) {
         <Loading/>
       ) : (
         <>
-          <Comments comment={comments} />
+          <Comments comment={comments}/>
           <CommentForm
             id_post={postId.id_post}
             id_user={userId}
