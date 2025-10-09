@@ -8,13 +8,14 @@ class CommentController {
   // Crear un comentario
   async createComment(req, res, next) {
     try {
-      const { id_user } = req.user;
+
+      const { id_user } = req.body;
       const { id_post } = req.params;
       const { comment } = req.body;
 
       const newComment = await this.commentService.createComment(
         id_user,
-        Number(id_post),
+        id_post,
         comment
       );
 
@@ -27,6 +28,7 @@ class CommentController {
   // Obtener comentarios de un post
   async getCommentsByPost(req, res, next) {
     try {
+     
       const { id_post } = req.params;
       const comments = await this.commentService.getCommentsByPost(Number(id_post));
       res.json(comments);
@@ -39,7 +41,7 @@ class CommentController {
   async deleteComment(req, res, next) {
     try {
       const { id_comment } = req.params;
-      const { id_user, role } = req.user;
+      const { id_user } = req.body;
 
       const deleted = await this.commentService.deleteComment(
         Number(id_comment),

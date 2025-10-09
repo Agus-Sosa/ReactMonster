@@ -27,13 +27,17 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
   try {
     setLoading(true);
     setError("");
-
+    console.log(user.id)
     const response = await fetch(`http://localhost:8080/comments/${id_post}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ comment: comment.trim() }),
+      body: JSON.stringify({
+    comment: comment.trim(),
+    id_user: user.id,
+    
+  }),
     });
 
     if (!response.ok) {
