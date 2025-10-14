@@ -1,38 +1,27 @@
 import CategoryService from "../services/category.service.js";
 
 class CategoryController {
-    constructor() {
-        this.categoryService = new CategoryService();
+  // Get all categories
+  async getAll(req, res) {
+    try {
+      const categorias = await CategoryService.getAll();
+      res.status(200).json({ categorias });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
-/* obtener todas las categorias */
-    async getAllCategories(req, res, next) {
-        try {
-            const categorias = await this.categoryService.getAllCategories();
-            res.status(200).json({
-                status: "success",
-                message: "Se obtuvieron las categorias con exito",
-                categorias: categorias
-            });
-        } catch (error) {
-            next(error);
-        }
-    }
-/*obtiene las categorias por id */
-    async getCategoryById(req, res, next) {
-        try {
-            const { id } = req.params;
-            const categorias = await this.categoryService.getCategoryById(id);
-            res.status(200).json({
-                status: "success",
-                message: "Se obtuvo las categorias con exito",
-                categorias: categorias
-            });
-        } catch (error) {
-            next(error);
-        }
-    }
+  }
 
-    
+  // Get one category by ID
+  async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const category = await CategoryService.getById(id);
+      if (!category) return res.status(404).json({ error: "Category not found" });
+      res.status(200).json(category);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
-export default CategoryController;
+export default new CategoryController();

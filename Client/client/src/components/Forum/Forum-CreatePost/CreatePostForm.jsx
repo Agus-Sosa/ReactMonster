@@ -1,86 +1,65 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
 
-const CreatePostForm = ({ categoryId, userId, onPostCreated }) => {
+function CreatePostForm({ idCategory, onPostCreated }) {
   const [title, setTitle] = useState("");
-  const [resume, setResume] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!categoryId || !userId) {
-      return alert("Falta categoría o usuario para crear la publicación.");
-    }
-
     setLoading(true);
-
     try {
-      const res = await fetch("/posts", {
+      const res = await fetch("http://localhost:8080/post/newPost", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title,
-          resume,
-          content,
-          id_user: userId,
-          id_category: categoryId,
-        }),
+        body: JSON.stringify({ title, content, id_category: idCategory }),
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        console.error("Error en backend al crear post:", data);
-        throw new Error(data.error || "Error desconocido al crear publicación");
-      }
-
-      onPostCreated(data);
+      if (!res.ok) throw new Error("Error creating post");
+      const newPost = await res.json();
+      onPostCreated?.(newPost);
       setTitle("");
-      setResume("");
       setContent("");
     } catch (err) {
-      console.error("Error al crear publicación:", err);
-      alert(err.message);
+      console.error("Error creating post:", err);
+      alert("There was an error creating the post.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mb: 4 }}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "80%",
+        marginBottom: 3,
+      }}
+    >
       <TextField
-        fullWidth
-        label="Título"
+        label="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        sx={{ marginBottom: 2 }}
         required
-        sx={{ mb: 2 }}
       />
       <TextField
-        fullWidth
-        label="Resumen"
-        value={resume}
-        onChange={(e) => setResume(e.target.value)}
-        required
-        sx={{ mb: 2 }}
-      />
-      <TextField
-        fullWidth
-        label="Contenido"
-        multiline
-        rows={4}
+        label="Content"
         value={content}
         onChange={(e) => setContent(e.target.value)}
+        multiline
+        rows={4}
+        sx={{ marginBottom: 2 }}
         required
-        sx={{ mb: 2 }}
       />
-      <Button variant="contained" type="submit" disabled={loading}>
-        {loading ? "Publicando..." : "Publicar"}
+      <Button type="submit" variant="contained" disabled={loading}>
+        {loading ? "Publishing..." : "Publish"}
       </Button>
     </Box>
   );
-};
+}
 
 export default CreatePostForm;

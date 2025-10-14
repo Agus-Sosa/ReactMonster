@@ -1,64 +1,63 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState, useContext } from "react";
 import { Typography, Box } from "@mui/material";
-import Comments from './Comments';
-import Loading from '../../LoadingComp/Loading';
-import CommentForm from './CreateComment.jsx';
-import { AuthContext } from '../../../context/AuthContext.jsx'
-import LoginRequired from '../../NeedLogin/NeedLogin.jsx';
+import Comments from "./Comments";
+import Loading from "../../LoadingComp/Loading";
+import CommentForm from "./CreateComment.jsx";
+import { AuthContext } from "../../../context/AuthContext.jsx";
+import LoginRequired from "../../NeedLogin/NeedLogin.jsx";
 
-
-function CommentsSection({postId}) {
+function CommentsSection({ postId }) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useContext(AuthContext); 
-    if(!user) return <><LoginRequired/></>;
-  const userId = user.id;
+  const { user } = useContext(AuthContext);
+
+  if (!user) return <LoginRequired />;
+
+  const userId = user.id_user; 
 
   useEffect(() => {
-    fetch(`http://localhost:8080/comments/${postId.id_post}`)
+    if (!postId) return; 
+    fetch(`http://localhost:8080/comments/${postId}`)
       .then((res) => res.json())
       .then((data) => {
-        setComments(data);
+        const arr = Array.isArray(data) ? data : []; 
+        setComments(arr);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching comments:", error);
         setLoading(false);
       });
-  }, []);
+  }, [postId]);
 
   return (
     <Box
       component="section"
       sx={{
         width: "100%",
-        border: "1px solid #ccc",  
+        border: "1px solid #ccc",
         borderRadius: 2,
         padding: 2,
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
       }}
     >
-      <Typography 
-        variant="subtitle1" 
-        sx={{ fontWeight: "bold", mb: 1 }}
-      >
+      <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>
         Comentarios
       </Typography>
 
       {loading ? (
-        <Loading/>
+        <Loading />
       ) : (
         <>
-          <Comments comment={comments} />
+          <Comments comment={comments} /> {}
           <CommentForm
-            id_post={postId.id_post}
+            id_post={postId}   
             id_user={userId}
             onCommentCreated={(newComment) =>
               setComments((prev) => [...prev, newComment])
             }
           />
         </>
-        
       )}
     </Box>
   );
