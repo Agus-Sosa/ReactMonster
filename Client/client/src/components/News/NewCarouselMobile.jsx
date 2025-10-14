@@ -22,8 +22,8 @@ const NewCarouselMobile = ({ inf }) => {
     >
       {inf.map((notice) => (
         <NewCard
-          key={notice.id}
-          id={notice.id}
+          key={notice.id_news}
+          id={notice.id_news}
           imageUrl={notice.imageUrl}
           resume={notice.resume}
           title={notice.title}

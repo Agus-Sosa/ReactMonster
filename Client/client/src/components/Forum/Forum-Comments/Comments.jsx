@@ -38,7 +38,7 @@ function Comments({comment}) {
           />
           <CardContent sx={{ wordBreak: "break-word"}}>
             <Typography variant="body2" color="White" sx={{wordBreak: "break-word", whiteSpace: "pre-wrap"}}>
-              {commentary.comment || commentary.body}
+              {commentary.comment || "Comentario Mistico"}
             </Typography>
           </CardContent>
         </Card>
