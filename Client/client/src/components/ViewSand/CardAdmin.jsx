@@ -28,6 +28,25 @@ export default function CardAdmin({ arena }) {
   const [nombre, setNombre] = React.useState(arena.arena_name);
   const [descripcion, setDescripcion] = React.useState(arena.arena_description);
 
+
+  const handleEliminar = async (e) => {
+    e.preventDefault();
+    try {
+      const responsee = await fetch(`http://localhost:8080/arenas/${arena.id}`, {
+        method: "delete"
+      })
+      if (responsee.ok) {
+        alert("la arena se elimino con exito");
+      }
+      handleCloseConf();
+      window.location.reload();
+
+    } catch (error) {
+      console.error("error:", error)
+    }
+  }
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -49,10 +68,10 @@ export default function CardAdmin({ arena }) {
 
       const data = await response.json();
       console.log("Arena actualizada:", data);
-
-      handleCloseForm(); // cerrar modal
-      // opcional: refrescar datos en el front
-      window.location.reload(); 
+      // cerrar modal
+      handleCloseForm();
+      //refrescar datos en el front
+      window.location.reload();
     } catch (err) {
       console.error("Error:", err);
     }
@@ -178,7 +197,7 @@ export default function CardAdmin({ arena }) {
           <Button onClick={handleCloseConf} color="primary">
             Cancelar
           </Button>
-          <Button color="error" autoFocus>
+          <Button color="error" autoFocus onClick={handleEliminar}>
             Eliminar
           </Button>
         </DialogActions>

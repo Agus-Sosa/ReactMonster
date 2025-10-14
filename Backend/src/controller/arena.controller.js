@@ -52,7 +52,15 @@ class ArenaController {
     }
 
 
-
+    async delete(req, res, next) {
+        const { id } = req.params;
+        try {
+            await this.arenaService.deleteArena(id);
+            res.status(200).json({ message: "arena eliminada" });
+        } catch (error) {
+            res.status(404).json({ message: "error al eliminar arena" });
+        }
+    }
         
         
 

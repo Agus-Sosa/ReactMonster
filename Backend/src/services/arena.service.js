@@ -34,10 +34,9 @@ class ArenaService {
     }
 
     async deleteArena(id) {
-        const deleted = await this.modelArena.destroy({
-            where: { id }
-        });
-        return deleted;
+        const arena = await this.modelArena.findByPk(id);
+        arena.destroy();
+        return {message : "arena eliminada correctamente"};
     }
 }
 
