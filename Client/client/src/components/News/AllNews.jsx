@@ -35,7 +35,8 @@ useEffect(() => {
             <Box sx={{display:"flex", flexWrap:"wrap", gap:2, justifyContent:"center", my:7}}>
                 {
                 news.map((newItem)=> (
-                    <NewCard date={newItem.date} id={newItem.id_news} imageUrl={newItem.imageUrl} resume={newItem.resume} title={newItem.title} key={newItem.id_news} />
+                  <NewCard  key={newItem.id_news} date={newItem.date} id={newItem.id_news} imageUrl={newItem.imageUrl} resume={newItem.resume} title={newItem.title} />
+                  
                 ))
                 
             }
