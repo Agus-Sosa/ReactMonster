@@ -1,31 +1,10 @@
 import { Router } from "express";
-import PostController from "../controller/post.controller.js";
+import postController from "../controller/post.controller.js";
 
-const router = Router();
-const postController=new PostController()
+const PostRouter = Router();
 
-router.get('/', async(req, res, next)=>{
-    await postController.getAllPost(req,res, next)
-})
+PostRouter.get("/allposts", (req, res) => postController.getAll(req, res));
+PostRouter.post("/newPost", (req, res) => postController.create(req, res));
+PostRouter.get("/categories/:id", (req, res) => postController.getByCategory(req, res));
 
-router.get('/:id', async(req,res, next)=>{
-    await postController.getPostById(req,res,next);
-})
-
-router.post('/newPost', async(req,res,next)=>{
-    await postController.createNewPost(req, res, next);
-})
-
-router.get('/categorias/:id', async(req,res,next)=>{
-    await postController.getPostByCategory(req, res, next);
-})
-
-router.delete('/:id', async(req,res,next)=>{
-    await postController.deletePost(req,res,next);
-})
-
-router.put('/:id', async(req,res,next)=>{
-    await postController.updatePost(req,res,next);
-})
-
-export {router as PostRouter};
+export { PostRouter };

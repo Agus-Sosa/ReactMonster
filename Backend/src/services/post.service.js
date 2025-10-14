@@ -1,47 +1,19 @@
-import { Post } from "../models/Post.js";
+import Post from "../models/Post.js";
+import Categories from "../models/Categories.js";
 
 class PostService {
-    constructor(){
-        this.modelPost=Post
-    }
-
-    //mostrar todos los post
-    //si laburo con async si o si utilizo await devuelva una respuesta
-    async getAllPost (){
-        return await this.modelPost.findAll();
-    }
-
-     async getPostById (id) {
-        return await this.modelPost.findByPk(id);
-     }
-
-    async getPostByCategory (id) {
-        return await this.modelPost.findAll({
-            where:{
-                id_category: id
-            }
-        });
-     }
-
-     async createNewPost (newPost) {
-        return await this.modelPost.create(newPost)
-     }
-
-     async deletePost (idPost){
-        return await this.modelPost.destroy(idPost)
-     }
-
-     async updatePost (idPost, newPost){ 
-        const [updateData]= await this.modelPost.update(newPost, {where:{idPost}});
-    
-    
-        if(updateData ===0) {
-            throw new Error("No hay cambios");
-        }
-
-        return await this.modelPost.findByPk(idPost);
-    }
-
-     
+  async getAll() {
+    return await Post.findAll({ include: Categories });
+  }
+  async create(newPost) {
+    return await Post.create(newPost);
+  }
+  async getByCategory(idCategory) {
+    return await Post.findAll({
+      where: { id_category: idCategory },
+      include: Categories,
+    });
+  }
 }
-export default PostService;
+
+export default new PostService();

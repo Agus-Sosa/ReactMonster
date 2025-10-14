@@ -6,7 +6,7 @@ import { validateComment } from '../middleware/validateComment.js';
 const router = express.Router();
 const commentController = new CommentController();
 
-router.post('/:id_post', validateComment, async (req, res, next) => {
+router.post('/:id_post', validateGetUserById, validateComment, async (req, res, next) => {
   try {
     await commentController.createComment(req, res, next);
   } catch (err) {

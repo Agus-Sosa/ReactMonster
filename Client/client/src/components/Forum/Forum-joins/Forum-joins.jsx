@@ -1,57 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/system";
-import Joins from "./joins";
+import { Box, Button, CircularProgress } from "@mui/material";
+
+import Joins from "./Joins";
 import forumtexture from "../../../assets/img/foro-bck.png";
-import { CircularProgress } from '@mui/material';
 import Loading from "../../LoadingComp/Loading";
 import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
 import DetailPublish from "../detailPublic/DetailPublish.jsx";
 import CommentsSection from "../Forum-Comments/CommentsSection.jsx";
-/*lo di todo comentando en ingles. */
-function ForoJoins({ info }) {
+import CreatePostForm from "../Forum-CreatePost/CreatePostForm.jsx";
+
+function ForoJoins({ info, externalPosts = [] }) {
   const rute = info.pathname;
 
-  /*---- MAIN STATES ---- */
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
-  /*---- CONTROL STATES ---- */
+  const [showForm, setShowForm] = useState(false);
+
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [error, setError] = useState(null);
-  /*---- SHOW THE INITIAL ROUTE (MAYBE NOT SO NECESSARY) ----*/
+
   const text_to_route = rute.replace("/", "/ ").toUpperCase();
- 
-  // USE EFFECT: LOAD CATEGORIES AT START
+
   useEffect(() => {
     async function fetchCategories() {
       try {
         const res = await fetch("http://localhost:8080/categories");
-        if (!res.ok) throw new Error("Error al obtener categorias");
+        if (!res.ok) throw new Error("Error fetching categories");
         const data = await res.json();
-        setCategories(data.categorias); // the API returns an object
+        setCategories(data.categorias);
       } catch (err) {
         setError(err.message);
       } finally {
-        setLoadingCategories(false); // stops showing loading
+        setLoadingCategories(false);
       }
     }
     fetchCategories();
   }, []);
 
-  // HANDLER: WHEN SELECTING A CATEGORY
   const handleSelectCategory = async (category) => {
-    setSelectedCategory(category); //I save the chosen category
-    setSelectedPost(null); // clear the selected post
-    setLoadingPosts(true); //  show post spinner
-    setError(null); // clean previous errors
-    
-    
-    
+    setSelectedCategory(category);
+    setSelectedPost(null);
+    setLoadingPosts(true);
+    setError(null);
+
     try {
-      const res = await fetch(`http://localhost:8080/post/categorias/${category.id_category}`);
-      if (!res.ok) throw new Error("Error al obtener posts");
+      const res = await fetch(`http://localhost:8080/post/categories/${category.id_category}`);
+      if (!res.ok) throw new Error("Error fetching posts");
       const data = await res.json();
       setPosts(data);
     } catch (err) {
@@ -62,26 +59,13 @@ function ForoJoins({ info }) {
     }
   };
 
-  // HANDLER: WHEN SELECTING A POST
   const handleSelectPost = (post) => {
-    setSelectedPost(post); // show details of the post
-    
+    setSelectedPost(post);
   };
 
-  // CONDITIONAL RENDER: LOADING / ERROR
-  if (loadingCategories){return (
-    <Loading/>
-  )} 
-    
-    
+  if (loadingCategories) return <Loading />;
+  if (error) return <ErrorComp />;
 
-  if (error) {
-    return (
-      <ErrorComp/>
-
-    )
-  }
-// ---------- MAIN RENDER ----------
   return (
     <Box
       sx={{
@@ -105,7 +89,6 @@ function ForoJoins({ info }) {
           color: "white",
         }}
       >
-        {/* ---------- HEADER ---------- */}
         <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
           <h2>
             Comunidad {text_to_route}
@@ -113,9 +96,8 @@ function ForoJoins({ info }) {
             {selectedPost && ` / ${selectedPost.title}`}
           </h2>
         </Box>
-        {/* ---------- LIST OF CATEGORIES OR POSTS ---------- */}
-        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" ,wordBreak: "break-word"   }}>
-          {/* list of categories */}
+
+        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" }}>
           {!selectedCategory &&
             categories.map((cat) => (
               <Joins
@@ -125,27 +107,43 @@ function ForoJoins({ info }) {
               />
             ))}
 
-          {/* list of posts within a category */}
           {selectedCategory && !selectedPost && (
-            loadingPosts ? (
-              <CircularProgress />
-            ) : (
-              posts.map((post) => (
-                <Joins
-                  key={post.id_post}
-                  informacion={post}
-                  onSelect={handleSelectPost}
+            <>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => setShowForm((prev) => !prev)}
+                sx={{ marginY: 2 }}
+              >
+                {showForm ? "Close form" : "Create new post"}
+              </Button>
+
+              {showForm && (
+                <CreatePostForm
+                  idCategory={selectedCategory.id_category}
+                  onPostCreated={(newPost) => setPosts((prev) => [newPost, ...prev])}
                 />
-              ))
-            )
+              )}
+
+              {loadingPosts ? (
+                <CircularProgress />
+              ) : (
+                posts.map((post) => (
+                  <Joins
+                    key={post.id_post}
+                    informacion={post}
+                    onSelect={handleSelectPost}
+                  />
+                ))
+              )}
+            </>
           )}
         </Box>
 
-        {/* ---------- POST DETAILS ---------- */}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
-            <DetailPublish post={selectedPost}/>  
-            <CommentsSection postId={selectedPost}/>          
+            <DetailPublish post={selectedPost} />
+            <CommentsSection postId={selectedPost.id_post} />
           </Box>
         )}
       </Box>
