@@ -34,7 +34,6 @@ const AuthForm = ({ isForLogin}) => {
 
     const style_input = {
         p:2,
-        border:"none",
         outline: "none",
         backgroundColor:"#2b2b2bff",
         color:"white",

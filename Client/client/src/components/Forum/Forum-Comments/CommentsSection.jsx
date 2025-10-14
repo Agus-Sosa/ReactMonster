@@ -25,7 +25,7 @@ function CommentsSection({postId}) {
         console.error("Error fetching comments:", error);
         setLoading(false);
       });
-  }, []);
+  }, [comments]);
 
   return (
     <Box
