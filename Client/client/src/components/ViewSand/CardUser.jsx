@@ -7,8 +7,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import { Modal } from '@mui/material';
 import Box from '@mui/material/Box';
 
-
-export default function Card_Sand({arena}) {
+export default function CardUser({arena}) {
   const style = {
   position: 'absolute',
   top: '50%',

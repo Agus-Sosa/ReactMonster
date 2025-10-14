@@ -6,7 +6,7 @@ export const tempArenaData = async () => {
       arena_name: "Volcano Crater",
       arena_description: "A fiery battlefield surrounded by rivers of lava.",
       arena_location: "Firelands",
-      arena_image_url: "https://placehold.co/200x200?text=Volcano+Arena"
+      arena_image_url: "https://placehold.co/200x200?text=Arena"
     },
     {
       arena_name: "Frozen Wasteland",

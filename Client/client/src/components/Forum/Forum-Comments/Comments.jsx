@@ -13,15 +13,16 @@ function Comments({comment}) {
 
   
   if(!user) return null; // If there is no user, do not show the button
+  
   return (
     <>
-    {comment.map((comment) => (
-        <Card key={comment.id} sx={{Width: "100%", mb: 2 , backgroundColor:"transparent", color:"White"}}>
+    {comment.map((commentary) => (
+        <Card key={commentary.id_comment} sx={{Width: "100%", mb: 2 , backgroundColor:"transparent", color:"White"}}>
           <CardHeader
             //I put the first letter of profile
             avatar={
               <Avatar aria-label="usuario">
-                {comment.User.user_name ? comment.User.user_name[0].toUpperCase() : "?"}
+                {commentary.User.user_name ? commentary.User.user_name[0].toUpperCase() : "?"}
               </Avatar>
             }
             sx={{ color:"White"}}

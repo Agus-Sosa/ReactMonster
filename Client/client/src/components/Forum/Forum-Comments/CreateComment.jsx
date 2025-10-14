@@ -42,7 +42,7 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
 
     const newComment = await response.json();
 
-    if (onCommentCreated) onCommentCreated(newComment);
+    if (onCommentCreated) await onCommentCreated();;
 
     setComment("");
   } catch (err) {

@@ -12,7 +12,6 @@ export const Arena = sequelize.define(config.modelData.arena, {
   arena_name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
   },
   arena_description: {
     type: DataTypes.STRING,
