@@ -1,44 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../components/Header/Header'
-import Footer from '../components/Footer'
-import CardUser from './CardUser'
+import { useState, useEffect, useContext } from 'react';
+import Header from '../Header/Header'
+import Footer from '../Footer'
+import Card_Sand from '../Sands/Card_Sand'
 import Box from '@mui/material/Box';
-import iconoArena from '../assets/img/arenas/iconoArena.png'
-import tituloArena from '../assets/img/arenas/tituloArena.png'
-import "../components/Sands/arena.css"
-import Loading from '../components/LoadingComp/Loading';
-// import { data } from 'react-router-dom'
-
-
+import iconoArena from '../../assets/img/arenas/iconoArena.png'
+import tituloArena from '../../assets/img/arenas/tituloArena.png'
+import "../Sands/arena.css"
+import Loading from "../LoadingComp/Loading"
+// import CardAdmin from "../components/ViewSand/CardAdmin"
 
 
 const ViewUser = () => {
-
   const [arenas,setArenas]=useState([]);
-  const [loading,setLoading]=useState(true);
+  const [loading,setLoading]=useState(true)
 
-  useEffect( () => {
+  useEffect(()=>{
     fetch("http://localhost:8080/arenas")
-      .then (res => {
-        if (!res.ok) throw new Error("error al cargar las arenas");
-        return res.json();
+      .then(res=>{
+        if(!res.ok) throw new Error ("error al cargar arenas");
+          return res.json();
       })
-      .then (data=> {
+      .then(data=>{
         setArenas(data.arenas);
         setLoading(false);
       })
-      .catch (err => {
+      .catch(err=>{
         console.error(err);
         setLoading(false);
       })
-  }, [])
+    },[]);
 
-  if (loading) {
+    
+    if (loading){
       return (
-        <Loading/>
-      );
+      <Loading/>
+      )
     }
-
   
   return (
     <div style={{
@@ -47,10 +44,10 @@ const ViewUser = () => {
         <Box sx={{
           color: "#E3E0C3",
           fontFamily:"Anton",
-          fontSize:{ xs: "20px", sm: "30px", md: "40px" }, // tipografía que escala
+          fontSize:{ xs: "20px", sm: "30px", md: "40px" }, 
           flexBasis: '100%',
-          textAlign:{ xs: "center", md: "left" }, // en cel centrado, en desktop a la izq
-          ml: { xs: 0, md: 14 }, // margen izq solo en desktop
+          textAlign:{ xs: "center", md: "left" }, 
+          ml: { xs: 0, md: 14 }, 
           display:'flex',
           justifyContent: { xs: "center", md: "flex-start" },
           alignItems: 'center',}}>
@@ -58,11 +55,10 @@ const ViewUser = () => {
         src={tituloArena}
          alt="titulo"
           style={{
-            maxWidth: "100%",  // se adapta al ancho del contenedor
-            height: "auto",    // mantiene proporción
-            maxHeight: "350px" // opcional: límite máximo
+            maxWidth: "100%",  
+            height: "auto",    
+            maxHeight: "350px" 
           }}/>
-        {/* <img src={iconoArena} alt="espadas" height={'350px'} width={'500px'}  style={{ backgroundColor: 'transparent' }}/> */}
          </Box>
          </section>
          <Box
@@ -75,9 +71,8 @@ const ViewUser = () => {
         marginBottom:'40px',
       }}
     >
-        {arenas.map((arena)=>(
+        
           <Box
-            key={arena.id}
             sx={{ 
               display: 'flex',
               justifyContent: 'center',
@@ -85,16 +80,15 @@ const ViewUser = () => {
               gap: 2
             }}
             >
-          <CardUser arena={arena}/>
+          {arenas.map((arena)=>(
+            <Card_Sand key={arena.id} arena={arena}/>
+          ))}
           </Box>
-        ))}
+        
         </Box>
+        {/* <CardAdmin/> */}
     </div>
   )
 }
 
 export default ViewUser
-
-
-
-

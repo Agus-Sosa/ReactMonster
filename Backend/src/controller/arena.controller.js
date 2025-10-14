@@ -1,3 +1,4 @@
+import { response } from "express";
 import ArenaService from "../services/arena.service.js";
 
 class ArenaController {
@@ -31,6 +32,31 @@ class ArenaController {
             next(error);
         }
     }
+
+    // actualizar arenas
+
+    async update(req, res, next) {
+        const { id } = req.params;
+        const { arena_name, arena_description, arena_image_url } = req.body;
+        const data = {
+            arena_name,
+            arena_description,
+            arena_image_url
+        };
+        try {
+            await this.arenaService.updateArena(id, data);
+            res.status(200).json({status: "success", data: data});
+        } catch (error) {
+            res.status(404).json({message : "no se pudo actualizar"});
+        }
+    }
+
+
+
+        
+        
+
+
 /*Obtiene las arenas por nombre */
     async getArenaByName(req, res, next) {
         try {

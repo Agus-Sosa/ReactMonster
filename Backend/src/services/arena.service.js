@@ -27,6 +27,12 @@ class ArenaService {
         return arena;
     }
 
+    async updateArena(id, data ) {
+        const entity = await this.modelArena.findByPk(id)
+        await entity.update(data)
+        return entity;
+    }
+
     async deleteArena(id) {
         const deleted = await this.modelArena.destroy({
             where: { id }
