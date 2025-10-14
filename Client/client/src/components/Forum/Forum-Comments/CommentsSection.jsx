@@ -14,18 +14,30 @@ function CommentsSection({postId}) {
     if(!user) return <><LoginRequired/></>;
   const userId = user.id;
 
+  const fetchComments = async () => {
+  try {
+    const res = await fetch(`http://localhost:8080/comments/${postId.id_post}`);
+    if (!res.ok) throw new Error("Error al cargar comentarios");
+    const data = await res.json();
+    setComments(data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
   useEffect(() => {
     fetch(`http://localhost:8080/comments/${postId.id_post}`)
       .then((res) => res.json())
       .then((data) => {
         setComments(data);
         setLoading(false);
+        fetchComments();
       })
       .catch((error) => {
         console.error("Error fetching comments:", error);
         setLoading(false);
       });
-  }, [comments]);
+  }, [postId.id_post]);
 
   return (
     <Box
@@ -53,9 +65,7 @@ function CommentsSection({postId}) {
           <CommentForm
             id_post={postId.id_post}
             id_user={userId}
-            onCommentCreated={(newComment) =>
-              setComments((prev) => [...prev, newComment])
-            }
+            onCommentCreated={fetchComments}
           />
         </>
         

@@ -13,6 +13,7 @@ function Comments({comment}) {
 
   
   if(!user) return null; // If there is no user, do not show the button
+  
   return (
     <>
     {comment.map((commentary) => (
