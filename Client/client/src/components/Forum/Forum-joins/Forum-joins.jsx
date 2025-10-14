@@ -132,7 +132,7 @@ function ForoJoins({ info }) {
             ) : (
               posts.map((post) => (
                 <Joins
-                  key={post.idPost}
+                  key={post.id_post}
                   informacion={post}
                   onSelect={handleSelectPost}
                 />
