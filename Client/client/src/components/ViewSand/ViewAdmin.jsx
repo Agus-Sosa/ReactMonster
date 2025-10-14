@@ -7,6 +7,7 @@ import iconoArena from '../../assets/img/arenas/iconoArena.png'
 import tituloArena from '../../assets/img/arenas/tituloArena.png'
 import "../Sands/arena.css"
 import Loading from "../LoadingComp/Loading"
+import CardAgg from './CardAgg';
 
 
 const ViewAdmin = () => {
@@ -86,6 +87,7 @@ const ViewAdmin = () => {
               <CardAdmin arena={arena} />
             </div>
           ))}
+          <CardAgg/>
 
        </Box>
         

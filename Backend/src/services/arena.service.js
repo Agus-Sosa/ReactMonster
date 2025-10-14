@@ -38,6 +38,11 @@ class ArenaService {
         arena.destroy();
         return {message : "arena eliminada correctamente"};
     }
+
+    async createArena(data) {
+        const newArena = await Arena.create(data);
+        return newArena
+    }
 }
 
 export default ArenaService;
