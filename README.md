@@ -6,8 +6,8 @@
 
 ## 👥 Autores
 
-- 👩‍💻 - Barthelemy Tomás.
 - 👩‍💻 - Sosa Agustin.
+- 👩‍💻 - Barthelemy Tomás.
 - 👩‍💻 - Bertoni Ivo.
 - 👩‍💻 - Volpe Andres.
 
