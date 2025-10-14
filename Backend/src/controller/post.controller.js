@@ -1,74 +1,32 @@
 import PostService from "../services/post.service.js";
-class PostController{
-    constructor(){
-        this.postService= new PostService(); 
+
+class PostController {
+  async getAll(req, res) {
+    try {
+      const posts = await PostService.getAll();
+      res.status(200).json(posts);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
-
-    async getAllPost(req, res, next){
-        try {
-            const post=await this.postService.getAllPost();
-            res.status(200).json(post);
-        } catch (error) {
-            res.status(500).json({status:"error",message:"error al obtener todos los posteos"});
-        }
+  }
+  async create(req, res) {
+    try {
+      const { title, content, id_category } = req.body;
+      const post = await PostService.create({ title, content, id_category });
+      res.status(200).json(post);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
-
-    async getPostById(req, res,next){
-        try {
-            const post=await this.postService.getAllPost(id);
-            const id= req.params.id;
-            res.status(200).json(post);
-        } catch (error) {
-            res.status(500).json({status:"error",message:"error al obtener el posteo"});
-        }
+  }
+  async getByCategory(req, res) {
+    try {
+      const { id } = req.params;
+      const posts = await PostService.getByCategory(id);
+      res.status(200).json(posts);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
-
-    async getPostByCategory(req, res,next){
-        try {
-            const id = req.params.id;  
-            const post = await this.postService.getPostByCategory(id);
-            res.status(200).json(post);
-        } catch (error) {
-            res.status(500).json({status:"error",message:"error al obtener el posteo"});
-        }
-    }
-
-    async createNewPost(req, res, next){
-        try{
-            const {title, date, content}= req.body;
-            const newPost = {
-                title,
-                date,
-                content,
-            };
-            const post=await this.postService.createNewPost(newPost);
-            res.status(200).json({status:"success", newPost:post});
-        } catch(error){
-            next(error)
-        }
-    }
-
-    async deletePost(req,res,next){
-        try {
-            const {id}=req.params;
-            await this.postService.deletePost(id);
-            await res.status(200).json({status:"success", message:"posteo eliminado con exito" });
-        } catch (error) {
-            next(error);
-        }
-    }
-
-    async updatePost(req,res,next){
-        try {
-            const {id} = req.params;
-            const newPost=req.body;
-            const updatePost = await this.postService.updatePost(id,newPost);
-            res.status(200).json({status:"success", post:updatePost});
-        } catch (error) {
-            next(error);
-        }
-    }
-
-
+  }
 }
-export default PostController;
+
+export default new PostController();

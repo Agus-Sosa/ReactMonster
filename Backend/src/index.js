@@ -34,7 +34,10 @@ app.use(errorHandler);
 
 const startServer = async () => {
   try {
-    await sequelize.sync({force:true});
+    await sequelize.query("PRAGMA foreign_keys = OFF"); // ojo con mi falopa que funciona pero despues queda fixear el orden de ejecucion 
+    await sequelize.sync({ force: true });
+    await sequelize.query("PRAGMA foreign_keys = ON");
+
     console.log("Base de datos sincronizada");
 
     await tempDataIndex(); // Funcion para crear usuarios automaticamente para no tener que crear a cada rato (ATTE: lo teni 👟)

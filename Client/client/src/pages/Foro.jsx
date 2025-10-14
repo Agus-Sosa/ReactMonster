@@ -1,22 +1,25 @@
-import React,{ useState } from 'react'
-import LandingForo  from '../components/Forum/Forum-landing/Forum-landing'
-import ForoJoins from '../components/Forum/Forum-joins/Forum-joins'
-import { useLocation } from 'react-router-dom';
-import infor  from '../components/Forum/Forum-joins/info.js'
-import publi  from '../components/Forum/Forum-joins/post.js'
+import React, { useState, useEffect } from "react";
+import { Box } from "@mui/material";
+import { useLocation } from "react-router-dom";
+
+import ForoJoins from "../components/Forum/Forum-joins/Forum-joins";
 
 const Foro = () => {
-    const location = useLocation()
-    const [informacion, setInformacion] = useState(infor)
-    const [publicaciones, setPublicaciones] = useState(publi)
+  const location = useLocation();
+  const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
+    fetch("http://localhost:8080/post/allposts")
+      .then((res) => res.json())
+      .then((data) => setPosts(data))
+      .catch((err) => console.error("Error fetching posts:", err));
+  }, []);
 
-    return (
-        <>
-        <LandingForo/>
-        <ForoJoins info={location} data={informacion}/>
-        </>
-)
-}
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <ForoJoins info={location} externalPosts={posts} />
+    </Box>
+  );
+};
 
-export default Foro
+export default Foro;

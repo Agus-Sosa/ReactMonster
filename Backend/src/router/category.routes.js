@@ -1,18 +1,9 @@
 import { Router } from "express";
-import CategoryController from "../controller/category.controller.js";
-import { validateIdCategory} from "../middleware/validate.category.js";
+import categoryController from "../controller/category.controller.js";
 
-const router = Router();
-const categoriesController = new CategoryController();
+const categoriasRouter = Router();
 
-router.get("/", async (req, res, next) => {
-    return await categoriesController.getAllCategories(req, res, next);
-});
+categoriasRouter.get("/", (req, res) => categoryController.getAll(req, res));
+categoriasRouter.get("/:id", (req, res) => categoryController.getById(req, res));
 
-router.get("/:id", validateIdCategory,  async (req, res, next) => {
-    return await categoriesController.getArenaById(req, res, next);
-});
-
-
-
-export { router as categoriasRouter };
+export { categoriasRouter };

@@ -1,32 +1,15 @@
-import { Categories } from "../models/Categories.js";
+import Categories from "../models/Categories.js";
 
 class CategoryService {
-    constructor() {
-        this.modelCategory = Categories;
-    }
+  // Get all categories
+  async getAll() {
+    return await Categories.findAll();
+  }
 
-    async getAllCategories() {
-        const categorias = await this.modelCategory.findAll();
-        return categorias;
-    }
-
-    async getCategoryById(id) {
-        const categorias = await this.modelCategory.findByPk(id);
-        return categorias;
-    }
-
-
-    async createCtegory(data) {
-        const categorias = await this.modelCategory.create(data);
-        return categorias;
-    }
-
-    async deleteArena(id) {
-        const deleted = await this.modelCategory.destroy({
-            where: { id }
-        });
-        return deleted;
-    }
+  // Get one category by ID
+  async getById(id) {
+    return await Categories.findByPk(id);
+  }
 }
 
-export default CategoryService;
+export default new CategoryService();

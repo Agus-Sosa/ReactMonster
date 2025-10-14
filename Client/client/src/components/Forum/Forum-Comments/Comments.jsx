@@ -27,13 +27,13 @@ function Comments({comment}) {
             }
             sx={{ color:"White"}}
             title={
-                <Typography sx={{ color: "white", fontWeight: "bold",  fontSize:"1em", wordBreak: "break-word", }}>
-                  {commentary.User.user_name || "Anónimo Atormentado"}
+                <Typography sx={{ color: "white", fontWeight: "bold",  fontSize:"1em"}}>
+                  {comment.User.user_name || "Anónimo Atormentado"}
                 </Typography>
               }
              subheader={
-            <Typography sx={{ color: "#9e9e9e",wordBreak: "break-word"  }}>
-              {commentary.User.range || "Sin Rango"}
+            <Typography sx={{ color: "#9e9e9e" }}>
+              {comment.User.range || "Sin Rango"}
             </Typography>}
           />
           <CardContent sx={{ wordBreak: "break-word"}}>
