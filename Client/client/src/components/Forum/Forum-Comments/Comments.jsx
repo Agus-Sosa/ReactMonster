@@ -8,15 +8,11 @@ import {
 } from "@mui/material";
 import { AuthContext } from '../../../context/AuthContext.jsx'
 import DeleteCommentButton from '../../Buttons/BtnDelete/DeleteBtn.jsx';
-function Comments({comment,post_id}) {
+function Comments({comment,post_id, onCommentDeleted}) {
   
   const { user } = useContext(AuthContext); 
-  const handleDeleted = (data) => {
-    console.log('Comentario eliminado:', data);
-    
-  };
 
-  
+
   if(!user) return null; // If there is no user, do not show the button
   
   return (
@@ -48,7 +44,7 @@ function Comments({comment,post_id}) {
         postId={post_id}
         commentId={commentary.id_comment}
         userId={commentary.id_user}
-        onDeleted={handleDeleted}
+        onDeleted={ onCommentDeleted}
       />
 
           <CardContent sx={{ wordBreak: "break-word"}}>

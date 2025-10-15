@@ -1,17 +1,16 @@
-import React, { useState ,useContext} from 'react';
-import PropTypes from 'prop-types';
-import { IconButton, Tooltip, CircularProgress } from '@mui/material';
+import React, { useState, useContext } from 'react';
+import { IconButton, Tooltip, CircularProgress, Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { AuthContext } from '../../../context/AuthContext.jsx'
+import { AuthContext } from '../../../context/AuthContext.jsx';
+import { toast } from 'react-toastify';
 
 const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
-    const { user } = useContext(AuthContext); 
-    const [loading, setLoading] = useState(false);
+  const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
-    if (user.id != userId) return null;
+  if (!user || user.id !== userId) return null;
 
-    const handleDelete = async () => {
-      
+  const handleDelete = async () => {
     const confirmDelete = window.confirm('¿Seguro que querés eliminar este comentario?');
     if (!confirmDelete) return;
 
@@ -20,45 +19,40 @@ const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
     try {
       const res = await fetch(`http://localhost:8080/comments/${commentId}`, {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id_user: userId }),
-    });
+      });
 
-    if (!res.ok) {
-        throw new Error('Error al eliminar el comentario');
-    }
+      if (!res.ok) throw new Error('Error al eliminar el comentario');
 
-    const data = await res.json();
+      const data = await res.json();
+      onDeleted?.(data);
 
-    if (onDeleted) {
-        onDeleted(data);
-    }
-
-    alert('Comentario eliminado correctamente');
+      toast.success('Comentario eliminado correctamente.');
     } catch (error) {
-        console.error(error);
-        alert('No se pudo eliminar el comentario');
+      console.error(error);
+      toast.error('No se pudo eliminar el comentario.');
     } finally {
-    setLoading(false);
+      setLoading(false);
     }
   };
 
-return (
-    <Tooltip title="Eliminar comentario">
-    <span>
-        <IconButton
+  return (
+    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Tooltip title="Eliminar comentario">
+        <span>
+          <IconButton
             color="error"
             onClick={handleDelete}
             aria-label="eliminar comentario"
             size="small"
             disabled={loading}
-        >
-        {loading ? <CircularProgress size={20} /> : <DeleteIcon />}
-        </IconButton>
-    </span>
-    </Tooltip>
+          >
+            {loading ? <CircularProgress size={20} /> : <DeleteIcon />}
+          </IconButton>
+        </span>
+      </Tooltip>
+    </Box>
   );
 };
 

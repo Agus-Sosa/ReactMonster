@@ -16,12 +16,22 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ProfileUser from './components/Profile/ProfileUser';
 import AllNews from './components/News/AllNews';
 import SettingsProfile from './components/Profile/SettingsProfile';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <>
     <AuthenticationContextProvider>
-
+      <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+          theme="colored"
+        />
       <Router>
         <Routes>
           {/* Rutas que usan el LayoutLanding */}
