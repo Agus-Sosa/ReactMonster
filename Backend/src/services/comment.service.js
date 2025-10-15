@@ -25,15 +25,15 @@ class CommentService {
     }]});
   }
 
-  async deleteComment(id_comment, requesterId, requesterRole) {
+  async deleteComment(id_comment, requesterId) {
     const comment = await this.modelComment.findByPk(id_comment);
     if (!comment) throw new Error("Comentario no encontrado");
 
-    if (comment.id_user !== requesterId && requesterRole !== "admin") {
-      const err = new Error("No autorizado");
-      err.status = 403;
-      throw err;
-    }
+    if (comment.id_user !== requesterId) {
+    const err = new Error("No autorizado");
+    err.status = 403;
+    throw err;
+  }
 
     comment.comment_state = false;
     await comment.save();

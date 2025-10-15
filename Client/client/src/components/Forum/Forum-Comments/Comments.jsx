@@ -7,14 +7,20 @@ import {
   Typography
 } from "@mui/material";
 import { AuthContext } from '../../../context/AuthContext.jsx'
-function Comments({comment}) {
+import DeleteCommentButton from '../../Buttons/BtnDelete/DeleteBtn.jsx';
+function Comments({comment,post_id}) {
   
   const { user } = useContext(AuthContext); 
+  const handleDeleted = (data) => {
+    console.log('Comentario eliminado:', data);
+    
+  };
 
   
   if(!user) return null; // If there is no user, do not show the button
   
   return (
+    
     <>
     {comment.map((commentary) => (
         <Card key={commentary.id_comment} sx={{Width: "100%", mb: 2 , backgroundColor:"transparent", color:"White"}}>
@@ -35,7 +41,16 @@ function Comments({comment}) {
             <Typography sx={{ color: "#9e9e9e",wordBreak: "break-word"  }}>
               {commentary.User.range || "Sin Rango"}
             </Typography>}
-          />
+          
+          
+        />
+        <DeleteCommentButton
+        postId={post_id}
+        commentId={commentary.id_comment}
+        userId={commentary.id_user}
+        onDeleted={handleDeleted}
+      />
+
           <CardContent sx={{ wordBreak: "break-word"}}>
             <Typography variant="body2" color="White" sx={{wordBreak: "break-word", whiteSpace: "pre-wrap"}}>
               {commentary.comment || commentary.body}
