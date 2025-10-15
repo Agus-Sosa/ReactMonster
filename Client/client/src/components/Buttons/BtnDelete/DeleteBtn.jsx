@@ -11,7 +11,7 @@ const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
   if (!user || user.id !== userId) return null;
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm('¿Seguro que querés eliminar este comentario?');
+    const confirmDelete = window.confirm('¿Seguro que queres eliminar este comentario?');
     if (!confirmDelete) return;
 
     setLoading(true);
@@ -23,7 +23,7 @@ const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
         body: JSON.stringify({ id_user: userId }),
       });
 
-      if (!res.ok) throw new Error('Error al eliminar el comentario');
+      if (!res.ok) throw new Error('Error al eliminar el comentario.');
 
       const data = await res.json();
       onDeleted?.(data);

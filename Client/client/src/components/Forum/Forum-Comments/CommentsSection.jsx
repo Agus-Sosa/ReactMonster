@@ -61,8 +61,10 @@ function CommentsSection({postId}) {
         <Loading/>
       ) : (
         <>
-            <Comments comment={comments} post_id={postId.id_post}
-            onCommentDeleted={fetchComments}
+            <Comments
+              comment={comments}
+              post_id={postId.id_post}
+              onCommentDeleted={fetchComments}
             />
           <CommentForm
             id_post={postId.id_post}
