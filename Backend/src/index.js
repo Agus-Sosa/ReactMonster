@@ -1,4 +1,4 @@
-import express from 'express'
+import express from 'express';
 import { config } from './config/config.js';
 import { sequelize } from './config/db.js';
 import cors from 'cors' 

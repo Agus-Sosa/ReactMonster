@@ -46,7 +46,6 @@ class CommentController {
       const deleted = await this.commentService.deleteComment(
         Number(id_comment),
         id_user,
-        role
       );
 
       res.json(deleted);
