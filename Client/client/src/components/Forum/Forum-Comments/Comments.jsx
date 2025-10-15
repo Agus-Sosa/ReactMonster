@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import {
   Card,
   CardHeader,
@@ -6,45 +6,63 @@ import {
   Avatar,
   Typography
 } from "@mui/material";
-import { AuthContext } from '../../../context/AuthContext.jsx'
-function Comments({comment}) {
-  
-  const { user } = useContext(AuthContext); 
+import { AuthContext } from '../../../context/AuthContext.jsx';
 
-  
-  if(!user) return null; // If there is no user, do not show the button
-  
+function Comments({ comment = [] }) {
+  const { user } = useContext(AuthContext);
+
+  // If there is no logged-in user, do not render comments
+  if (!user) return null;
+
+  // Ensure we always work with an array
+  if (!Array.isArray(comment)) return null;
+
   return (
     <>
-    {comment.map((commentary) => (
-        <Card key={commentary.id_comment} sx={{Width: "100%", mb: 2 , backgroundColor:"transparent", color:"White"}}>
-          <CardHeader
-            //I put the first letter of profile
-            avatar={
-              <Avatar aria-label="usuario">
-                {commentary.User.user_name ? commentary.User.user_name[0].toUpperCase() : "?"}
-              </Avatar>
-            }
-            sx={{ color:"White"}}
-            title={
-                <Typography sx={{ color: "white", fontWeight: "bold",  fontSize:"1em"}}>
-                  {comment.User.user_name || "Anónimo Atormentado"}
+      {comment.map((commentary) => {
+        const userName = commentary?.User?.user_name || "Unknown User";
+        const userRange = commentary?.User?.range || "No Rank";
+        const content = commentary?.content || commentary?.comment || commentary?.body || "";
+
+        return (
+          <Card
+            key={commentary.id_comment || Math.random()}
+            sx={{
+              width: "100%",
+              mb: 2,
+              backgroundColor: "transparent",
+              color: "white"
+            }}
+          >
+            <CardHeader
+              // Avatar shows the first letter of the username
+              avatar={
+                <Avatar aria-label="user">
+                  {userName[0]?.toUpperCase() || "?"}
+                </Avatar>
+              }
+              sx={{ color: "white" }}
+              title={
+                <Typography sx={{ color: "white", fontWeight: "bold", fontSize: "1em" }}>
+                  {userName}
                 </Typography>
               }
-             subheader={
-            <Typography sx={{ color: "#9e9e9e" }}>
-              {comment.User.range || "Sin Rango"}
-            </Typography>}
-          />
-          <CardContent>
-            <Typography variant="body2" color="White">
-              {comment.comment || comment.body}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
+              subheader={
+                <Typography sx={{ color: "#9e9e9e" }}>
+                  {userRange}
+                </Typography>
+              }
+            />
+            <CardContent>
+              <Typography variant="body2" color="white">
+                {content}
+              </Typography>
+            </CardContent>
+          </Card>
+        );
+      })}
     </>
   );
 }
 
-export default Comments
+export default Comments;
