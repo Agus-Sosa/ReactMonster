@@ -8,7 +8,7 @@ import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export default function NewCard({id,imageUrl, title, resume,date}) {
-
+  console.log("title:" ,title, "resume:", resume)
   /*Formateo la fecha que trae el sv */
   const d = new Date(date);
   const y = d.getFullYear();
@@ -21,7 +21,7 @@ export default function NewCard({id,imageUrl, title, resume,date}) {
     <Box component={Link} to={`/new/${id}`} sx={{
     
     textDecoration:"none", 
-    color:"#E3E0C3",
+    color:"black",
     height: { xs: 'auto',md:'450px'},
    
     display: "block", 

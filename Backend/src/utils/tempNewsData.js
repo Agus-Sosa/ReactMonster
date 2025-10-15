@@ -11,7 +11,7 @@ await News.bulkCreate([
       Su poder crece en las noches sin luna, donde la maldición se hace más fuerte y su aura intimida a los más valientes.
       En combate, Kael es veloz, con ataques que parecen surgir de la nada, como si las sombras mismas lucharan a su lado.
     `,
-    imageUrl: "https://videos.openai.com/vg-assets/assets%2Ftask_01k6r65njaebmr76dmrtxp2wxw%2F1759601007_img_0.webp?st=2025-10-05T18%3A36%3A02Z&se=2025-10-11T19%3A36%3A02Z&sks=b&skt=2025-10-05T18%3A36%3A02Z&ske=2025-10-11T19%3A36%3A02Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=3d249c53-07fa-4ba4-9b65-0bf8eb4ea46a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=qAiyCx58UlSEkBkglGZqAcgc1JdDEYAd1IUH0SWBXHE%3D&az=oaivgprodscus"
+    imageUrl: "https://videos.openai.com/vg-assets/assets%2Ftask_01k5wa39s5fdsb84x1es7ksb7x%2F1758665638_img_0.webp?se=2025-10-21T20%3A54%3A33Z&sp=r&sv=2024-08-04&sr=b&skoid=1af02b11-169c-463d-b441-d2ccfc9f02c8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-15T20%3A13%3A04Z&ske=2025-10-22T20%3A18%3A04Z&sks=b&skv=2024-08-04&sig=sHGEiyAtelobhxk2hva%2BDMy8H914IniWVoTlKy0MpLo%3D&az=oaivgprodscus"
   },
   {
     id_admin: 2,
@@ -23,7 +23,7 @@ await News.bulkCreate([
       Los jugadores que participen en más de 10 combates recibirán un ítem exclusivo conmemorativo.
       Este evento busca incentivar el trabajo en equipo y la estrategia.
     `,
-    imageUrl: "https://videos.openai.com/vg-assets/assets%2Ftask_01k6r65njaebmr76dmrtxp2wxw%2F1759601007_img_0.webp?st=2025-10-05T18%3A36%3A02Z&se=2025-10-11T19%3A36%3A02Z&sks=b&skt=2025-10-05T18%3A36%3A02Z&ske=2025-10-11T19%3A36%3A02Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=3d249c53-07fa-4ba4-9b65-0bf8eb4ea46a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=qAiyCx58UlSEkBkglGZqAcgc1JdDEYAd1IUH0SWBXHE%3D&az=oaivgprodscus"
+    imageUrl: "https://videos.openai.com/vg-assets/assets%2Ftask_01k5wa39s5fdsb84x1es7ksb7x%2F1758665638_img_0.webp?se=2025-10-21T20%3A54%3A33Z&sp=r&sv=2024-08-04&sr=b&skoid=1af02b11-169c-463d-b441-d2ccfc9f02c8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-15T20%3A13%3A04Z&ske=2025-10-22T20%3A18%3A04Z&sks=b&skv=2024-08-04&sig=sHGEiyAtelobhxk2hva%2BDMy8H914IniWVoTlKy0MpLo%3D&az=oaivgprodscus"
   },
   {
     id_admin: 1,
@@ -35,7 +35,7 @@ await News.bulkCreate([
       Las estatuas que rodean la arena representan a guerreros olvidados.
       Cada atardecer, el sol se oculta tras la arena, bañando de rojo las piedras y dando inicio al combate más feroz.
     `,
-    imageUrl: "https://videos.openai.com/vg-assets/assets%2Ftask_01k6r65njaebmr76dmrtxp2wxw%2F1759601007_img_0.webp?st=2025-10-05T18%3A36%3A02Z&se=2025-10-11T19%3A36%3A02Z&sks=b&skt=2025-10-05T18%3A36%3A02Z&ske=2025-10-11T19%3A36%3A02Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=3d249c53-07fa-4ba4-9b65-0bf8eb4ea46a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=qAiyCx58UlSEkBkglGZqAcgc1JdDEYAd1IUH0SWBXHE%3D&az=oaivgprodscus"
+    imageUrl: "https://videos.openai.com/vg-assets/assets%2Ftask_01k5wa39s5fdsb84x1es7ksb7x%2F1758665638_img_0.webp?se=2025-10-21T20%3A54%3A33Z&sp=r&sv=2024-08-04&sr=b&skoid=1af02b11-169c-463d-b441-d2ccfc9f02c8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-15T20%3A13%3A04Z&ske=2025-10-22T20%3A18%3A04Z&sks=b&skv=2024-08-04&sig=sHGEiyAtelobhxk2hva%2BDMy8H914IniWVoTlKy0MpLo%3D&az=oaivgprodscus"
   }
 ]);
 
