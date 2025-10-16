@@ -1,8 +1,10 @@
 import { News } from "../models/News.js";
+import { User } from "../models/User.js";
 
 class NewService{
     constructor(){
         this.modelNew = News
+        this.modelUser = User
     }
     // returns an array with all the records
     async getAllNews () {
@@ -17,7 +19,17 @@ class NewService{
     }
     // get a news item by your ID
     async getNewById (id) {
-        return await this.modelNew.findByPk(id);
+        return await this.modelNew.findByPk(
+            id,
+            {
+            include: {
+                    model: this.modelUser,
+                attributes:["id_user", "user_name", "profile_picture"]
+                
+                }
+            }
+        );
+
     }
     // delete a news item by its ID
     async deleteNewById(id) {

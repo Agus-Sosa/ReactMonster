@@ -16,6 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ProfileUser from './components/Profile/ProfileUser';
 import AllNews from './components/News/AllNews';
 import SettingsProfile from './components/Profile/SettingsProfile';
+import PublicRoute from './components/ProtectedRoute/PublicRoute';
 
 function App() {
   return (
@@ -46,8 +47,18 @@ function App() {
           </Route>
 
           {/* Rutas sin un layout */}
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+            <Route path="/register" element={
+              <PublicRoute>
+                  <Register />
+              </PublicRoute>
+             } />
+            <Route path="/login" element={
+              <PublicRoute>
+
+                <Login />
+            </PublicRoute>
+
+              } />
 
           {/* Ruta para manejar errores */}
           <Route path="*" element={<ErrorPage />} />
