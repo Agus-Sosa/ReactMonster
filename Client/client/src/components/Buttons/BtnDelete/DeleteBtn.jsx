@@ -8,7 +8,7 @@ const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
-  if (!user || user.id !== userId) return null;
+  if (!user || user.id !== userId && user.role != 'admin') return null;
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm('¿Seguro que queres eliminar este comentario?');

@@ -23,7 +23,9 @@ function Comments({comment,post_id, onCommentDeleted}) {
           <CardHeader
             //I put the first letter of profile
             avatar={
-              <Avatar aria-label="usuario">
+            <Avatar aria-label="usuario"
+              src={commentary.User.profile_picture}
+            >
                 {commentary.User.user_name ? commentary.User.user_name[0].toUpperCase() : "?"}
               </Avatar>
             }
