@@ -11,7 +11,7 @@ function Joins({ informacion, onSelect }) {
     <Card
       sx={{
         width: "100%",
-        height: "95px",
+        height: "auto",
         margin: "20px",
         backgroundColor: "transparent",
         color: "white",
