@@ -34,7 +34,7 @@ class PostController{
     }
 
     async createNewPost(req, res, next){
-        try{
+/*         try{
             const {title, date, content}= req.body;
             const newPost = {
                 title,
@@ -46,7 +46,28 @@ class PostController{
         } catch(error){
             next(error)
         }
+    } */
+
+        try { //code ivo
+        const { title, resume, content, id_category, id_user } = req.body;
+        const newPostData = {
+        title,
+        resume,
+        content,
+        id_category,
+        id_user
+        };
+        console.log("createNewPost", newPostData);
+
+        const post = await this.postService.createNewPost(newPostData);
+        return res.status(201).json({ status: "success", newPost: post });
+    } catch (error) {
+        console.error("/post/newPost error:", error.name, error.message, error.errors);
+        next(error);
     }
+    }
+
+
 
     async deletePost(req,res,next){
         try {

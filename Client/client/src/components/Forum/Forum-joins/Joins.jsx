@@ -6,7 +6,6 @@ import "./joins.css";
 
 function Joins({ informacion, onSelect }) {
 
-
   return (
     <Card
       sx={{

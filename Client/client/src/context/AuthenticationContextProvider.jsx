@@ -14,14 +14,15 @@ export const AuthenticationContextProvider = ({children}) => {
   const [user, setUser] = useState(null);
 
 
-  useEffect(()=> {
-    if(token){
-      const tokenDecode = jwtDecode(token);
-      setUser(tokenDecode);
-    } else {
-      setUser(null)
-    }
-  },[token])
+useEffect(() => {
+  if (token) {
+    const tokenDecode = jwtDecode(token)
+    console.log("tokenDecode →", tokenDecode) //look this sheet 
+    setUser(tokenDecode)
+  } else {
+    setUser(null)
+  }
+}, [token])
   
   const handleUserLogin = (newToken)=> {
     localStorage.setItem('react_monster_token', newToken);
