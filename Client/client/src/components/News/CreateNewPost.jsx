@@ -10,7 +10,6 @@ const CreateNewPost = ({refreshNews}) => {
    
 
     const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
-    console.log(isAdmin,'is admin')
 
     if(!isAdmin) {
         return null;

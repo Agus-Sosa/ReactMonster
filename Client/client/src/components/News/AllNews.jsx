@@ -22,7 +22,7 @@ const AllNews = () => {
 
 useEffect(() => {
   fetchNews();
-}, []);
+}, [news]);
   
     const handleSearch =(newSearchValue)=> {
     setSearchValue(newSearchValue);

@@ -10,7 +10,7 @@ class AuthController {
         try {
         const {user_email, user_password} = req.body;
         const user = await this.authService.login(user_email, user_password);
-        
+        console.log("user auth:", user.role)
     
             const token = jwt.sign(
                 

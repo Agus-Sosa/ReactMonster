@@ -32,6 +32,6 @@ export const News = sequelize.define(config.modelData.news, {
     },
     imageUrl:{
         type: DataTypes.STRING,
-        defaultValue:'https://img.freepik.com/foto-gratis/rodaje-fantastic-alien_23-2151648335.jpg?semt=ais_incoming&w=740&q=80'
+        defaultValue:'https://i.ibb.co/Myq6R75d/Imagen-de-Whats-App-2025-09-30-a-las-22-48-00-d3bb7321.jpg'
     }
 })

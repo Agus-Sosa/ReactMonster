@@ -44,8 +44,8 @@ class NewController {
     async createNew (req, res, next) {
         try {
             const { title, resume, content } = req.body; // data sent by the client
-            
-            const id_admin = req.user.role;
+            console.log("user_role",req.user);
+            const id_admin = req.user.id;
             const newNew = {
                 id_admin,
                 title,
