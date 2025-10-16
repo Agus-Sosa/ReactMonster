@@ -5,20 +5,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Modal, Button } from '@mui/material';
 import Box from '@mui/material/Box';
+import { AuthContext } from '../../context/AuthContext';
+import ButtonAdmin from './ButtonAdmin';
 
 export default function CardUser({arena}) {
-  const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-  borderRadius: '10px'
-};
+
+  const { user } = React.useContext(AuthContext)
+
+
   const [carta,setcarta] = React.useState(false);
   const handleOpen=()=>{
     setcarta(true);
@@ -46,7 +40,9 @@ export default function CardUser({arena}) {
               sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3", fontFamily: "Anton" }}
             >
               Ver más
-            </Button>
+          </Button>
+          {user && <ButtonAdmin arena={arena}/>}
+          
         </CardContent>
       
     </Card>
