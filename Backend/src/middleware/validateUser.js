@@ -1,5 +1,5 @@
 import { User } from "../models/User.js";
-
+import jwt from 'jsonwebtoken'
 
 //El middleware es un filtro que revisa los datos antes de que el controller haga algo.
 // Si algo está mal, lo bloquea; si todo está bien, deja que siga.
@@ -35,6 +35,7 @@ export const validateNewUser=(req, res, next)=> {
 
 export const verifyToken =(req, res , next)=> {
   const tokenHeader = req.headers.authorization;
+  console.log("token:", tokenHeader);
   if(!tokenHeader) {
     const error = new Error("El token no fue enviado");
     error.status = 400;
@@ -45,8 +46,9 @@ export const verifyToken =(req, res , next)=> {
 
   try {
     const decodedToken = jwt.verify(token, "react_monsters");
-
-    req.user= decodedToken;
+    console.log("decoded:", decodedToken)
+    req.user = decodedToken;
+    console.log("req_usera:",req.user)
 
   next()
 
@@ -58,16 +60,6 @@ export const verifyToken =(req, res , next)=> {
 
 }
 
-
-export const verifyRole=(role)=> {
-    return (req,res, next)=> {
-        const userRole = req.user.role;
-        if (userRole !== role) {
-            return res.status(404).json({status:"error", message:`Acceso denegado`})
-        }
-        next();
-    }
-}
 
 
 export const verifyLogin=(req,res, next)=> {
@@ -108,6 +100,14 @@ export const validateGetUserById= async(req, res, next)=> {
 }
 
 
-export const validateUpdateUser = async(req, res, next) => {
 
+export const isAdmin=(req, res, next)=> {
+  if (!req.user.role ||(req.user.role !== 'admin' && req.user.role !== 'superadmin')) {
+    const error = new Error("No cuenta con los permisos necesarios");
+    error.status = 404;
+    throw error;
+
+  }
+  next();
 }
+

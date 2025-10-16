@@ -13,7 +13,6 @@ export const ModalFormNews = ({isOpen, closeModal, refreshNews}) => {
     })
     const [error, setError]= useState({});
 
-  console.log("formadata:", formData);
   
     const {token} = useContext(AuthContext)
     
@@ -30,7 +29,7 @@ export const ModalFormNews = ({isOpen, closeModal, refreshNews}) => {
     const hanldeOnSubmit = async(e)=> {
         try {
             e.preventDefault()
-            const res = await fetch("http://localhost:8080/news/createNew", {
+            const res = await fetch("http://localhost:8080/news/", {
               headers: {
                 "Content-Type": "application/json" ,
                 "Authorization": `Bearer ${token}`
@@ -40,7 +39,6 @@ export const ModalFormNews = ({isOpen, closeModal, refreshNews}) => {
                 body: JSON.stringify(formData)
             })
 
-            console.log("respues", res)
             if(!res.ok) {
 
             }
