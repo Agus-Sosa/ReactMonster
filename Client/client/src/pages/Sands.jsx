@@ -9,8 +9,8 @@ const Sands = () => {
   
   return (
   <div>
-    {/* <ViewUser/> */}
-    <ViewAdmin/>
+    <ViewUser/>
+    {/* <ViewAdmin/> */}
   </div>
   )
 }
