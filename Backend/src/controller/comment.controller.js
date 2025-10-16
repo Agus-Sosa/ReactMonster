@@ -9,7 +9,7 @@ class CommentController {
   async createComment(req, res, next) {
     try {
 
-      const { id_user } = req.body;
+      const id_user = req.user.id;
       const { id_post } = req.params;
       const { comment } = req.body;
 
@@ -41,7 +41,8 @@ class CommentController {
   async deleteComment(req, res, next) {
     try {
       const { id_comment } = req.params;
-      const { id_user } = req.body;
+      const id_user = req.user.id;
+      
 
       const deleted = await this.commentService.deleteComment(
         Number(id_comment),

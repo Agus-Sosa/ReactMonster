@@ -23,7 +23,7 @@ const users = [
       user_email: "admin@example.com",
       user_password: await bcrypt.hash("Admin789", 10),
       role: "superadmin",
-      profile_picture: "https://www.creativefabrica.com/wp-content/uploads/2022/10/25/Support-Admin-icon-Graphics-43209390-1.jpg"
+      profile_picture: "https://static.vecteezy.com/system/resources/previews/014/528/287/non_2x/it-administrator-icon-simple-style-vector.jpg"
     },
 
     {
