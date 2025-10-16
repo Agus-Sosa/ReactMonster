@@ -31,6 +31,34 @@ export const validateNewUser=(req, res, next)=> {
 }
 
 
+
+
+export const verifyToken =(req, res , next)=> {
+  const tokenHeader = req.headers.authorization;
+  if(!tokenHeader) {
+    const error = new Error("El token no fue enviado");
+    error.status = 400;
+    throw error;
+  }
+
+  const token = tokenHeader.split(" ")[1];
+
+  try {
+    const decodedToken = jwt.verify(token, "react_monsters");
+
+    req.user= decodedToken;
+
+  next()
+
+  } catch (error) {
+    throw error;
+  }
+
+
+
+}
+
+
 export const verifyRole=(role)=> {
     return (req,res, next)=> {
         const userRole = req.user.role;
