@@ -82,7 +82,7 @@ return (
     />
   )}
         <Box component="div" sx={{width:{ xs:"100%", md:'50%'}}}>
-          <Box component="h1" sx={{fontSize:{xs:'25px', md:"40px"}, fontWeight:"bold", my:3}}>
+          <Box component="h1" sx={{fontSize:{xs:'25px', md:"40px"}, fontWeight:"bold", my:3, whiteSpace: 'pre-line', lineHeight: 1.6, }}>
               {newDetail.title}
           </Box>
             <Box mt={3} sx={{fontSize: '20px'}}>

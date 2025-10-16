@@ -47,8 +47,24 @@ const users = [
       profile_picture: "https://media.licdn.com/dms/image/v2/D4D03AQFkQm6HOLi25w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1703160501749?e=2147483647&v=beta&t=sg-KAMyfku6jprmvgb6gsyqs2SDnds1OFPoYO02JlaY",
       role: "user",
       range:"Diamond"
-    }
-      
+  },
+  
+    {
+      user_name: "AlessandroG",
+      user_email: "Ale@example.com",
+      user_password: await bcrypt.hash("Password123", 10),
+      profile_picture: "https://media.licdn.com/dms/image/v2/D4E03AQE3i32z5-5XtQ/profile-displayphoto-shrink_800_800/B4EZdZ0Tc7HgAc-/0/1749558573451?e=1763596800&v=beta&t=ljcEjlVF2l6EQEckCv9XknCH-5E5i1YeM029OWiPs1k",
+      role: "user",
+      range:"Gold"
+  } ,
+  {
+      user_name: "MiguelVictorio",
+      user_email: "miguel@example.com",
+      user_password: await bcrypt.hash("Password123", 10),
+      profile_picture: "https://media.licdn.com/dms/image/v2/C4E03AQFTlSlKulQ5GQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1649853440429?e=1763596800&v=beta&t=NcoM-msvs2272kfHhVkgDWkCaHNPPNLsCm1qa4tGHVY",
+      role: "user",
+      range:"Challenger"
+  }   
       
       
   ];

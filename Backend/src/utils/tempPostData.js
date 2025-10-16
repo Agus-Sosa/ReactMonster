@@ -28,15 +28,12 @@ Su reflejo nunca es igual: cambia con la fase de la luna.`,
   },
   {
     id_admin: 1,
-    title: "Monstruos a Medida: Porque el Horror También Merece Estilo",
+    title: "¡Desatamos a las bestias del código!",
     id_user: 3,
-    resume: "Monstruos únicos, diseñados con humor, locura y un toque de elegancia.",
+    resume: "El proyecto “ReactMonster” combina creatividad y React para dar vida a monstruos digitales tan impredecibles como divertidos.",
     id_category: 1,
-    content: `¿Cansado de los mismos orcos genéricos y demonios reciclados? En nuestro taller de diseño monstruoso, convertimos tus pesadillas (y tus ideas más absurdas) en criaturas únicas, con personalidad, actitud y un sentido del humor tan retorcido como el nuestro.
-
-Cada monstruo es diseñado a mano —con amor, detalle y una saludable dosis de locura— para que destaque en tu mundo, historia o juego. Ya sea un dragón con problemas de autoestima, una gárgola fashionista o un zombie que solo quiere un aumento de sueldo, le damos vida a lo imposible con un toque profesional y un guiño cómplice.
-
-Porque sí, lo admitimos: nos tomamos muy en serio el arte de hacer cosas aterradoras... pero con estilo.`,
+    content: `Después de incontables líneas de código, errores dignos de una película de terror y algún que otro susto en consola, el trabajo práctico “ReactMonster” finalmente cobró vida. Este proyecto no fue solo un ejercicio técnico, sino una experiencia creativa donde mezclamos lógica, diseño y un poco de locura para construir criaturas digitales únicas.
+Cada monstruo tiene su propia personalidad, poderes y estilo visual, fruto de la imaginación (y la paciencia) del equipo. “ReactMonster” nos enseñó que programar no siempre es domar el caos, sino aprender a convivir con él… especialmente cuando el caos tiene garras, dientes y un useEffect que se ejecuta más veces de las que debería.`,
     
   },
   {

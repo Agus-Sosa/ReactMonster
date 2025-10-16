@@ -144,7 +144,8 @@ function ForoJoins({ info }) {
         {/* ---------- POST DETAILS ---------- */}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
-            <DetailPublish post={selectedPost}/>  
+        
+            <DetailPublish post={selectedPost} creator={selectedPost.User}/>  
             <CommentsSection postId={selectedPost}/>          
           </Box>
         )}
