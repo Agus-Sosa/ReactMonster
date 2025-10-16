@@ -19,10 +19,11 @@ const users = [
       role: "user"
     },
     {
-      user_name: "admin",
+      user_name: "ReactMonster",
       user_email: "admin@example.com",
       user_password: await bcrypt.hash("Admin789", 10),
-      role: "admin"
+      role: "superadmin",
+      profile_picture: "https://www.creativefabrica.com/wp-content/uploads/2022/10/25/Support-Admin-icon-Graphics-43209390-1.jpg"
     },
 
     {
