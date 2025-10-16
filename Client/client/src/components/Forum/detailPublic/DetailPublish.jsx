@@ -39,7 +39,7 @@ const DetailPublish = ({post, creator}) => {
         <CardHeader
         avatar={
           <Avatar aria-label="usuario"
-              
+              src={creator.profile_picture}
             >
             </Avatar>
             }sx={{ color:"White"}}
