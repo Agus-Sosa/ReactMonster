@@ -22,7 +22,15 @@ function App() {
   return (
     <>
     <AuthenticationContextProvider>
-
+      <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+          theme="colored"
+        />
       <Router>
         <Routes>
           {/* Rutas que usan el LayoutLanding */}

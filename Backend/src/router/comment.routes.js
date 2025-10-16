@@ -22,7 +22,7 @@ router.get('/:id_post', async (req, res, next) => {
   }
 });
 
-router.delete('/:id_comment', validateGetUserById, async (req, res, next) => {
+router.delete('/:id_comment', async (req, res, next) => {
   try {
     await commentController.deleteComment(req, res, next);
   } catch (err) {
