@@ -28,14 +28,15 @@ Su reflejo nunca es igual: cambia con la fase de la luna.`,
   },
   {
     id_admin: 1,
-    title: "El Errante de las Arenas",
+    title: "Monstruos a Medida: Porque el Horror También Merece Estilo",
     id_user: 3,
-    resume: "Un viajero cubierto de polvo y fuego que nunca detiene su marcha en el desierto.",
+    resume: "Monstruos únicos, diseñados con humor, locura y un toque de elegancia.",
     id_category: 1,
-    content: `Su silueta se ve en el horizonte, incluso bajo tormentas de arena.
-Afirma haber cruzado tierras donde el sol nunca se oculta.
-Su bastón guarda inscripciones de un lenguaje olvidado.
-Al caer la noche, las arenas parecen seguirlo como si lo obedecieran.`,
+    content: `¿Cansado de los mismos orcos genéricos y demonios reciclados? En nuestro taller de diseño monstruoso, convertimos tus pesadillas (y tus ideas más absurdas) en criaturas únicas, con personalidad, actitud y un sentido del humor tan retorcido como el nuestro.
+
+Cada monstruo es diseñado a mano —con amor, detalle y una saludable dosis de locura— para que destaque en tu mundo, historia o juego. Ya sea un dragón con problemas de autoestima, una gárgola fashionista o un zombie que solo quiere un aumento de sueldo, le damos vida a lo imposible con un toque profesional y un guiño cómplice.
+
+Porque sí, lo admitimos: nos tomamos muy en serio el arte de hacer cosas aterradoras... pero con estilo.`,
     
   },
   {

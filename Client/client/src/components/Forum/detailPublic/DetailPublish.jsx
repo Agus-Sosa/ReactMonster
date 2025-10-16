@@ -27,7 +27,7 @@ const DetailPublish = ({post}) => {
             <Box component="h4">{formattedDate}</Box>
 
         </Box>
-        <Box component="div">
+        <Box component="div" sx={{ whiteSpace: 'pre-line', lineHeight: 1.6, fontSize: '1.1rem' }}>
             {post.content}
         </Box>
         <Box component="h5">
