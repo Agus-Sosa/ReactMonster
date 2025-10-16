@@ -17,6 +17,7 @@ import ProfileUser from './components/Profile/ProfileUser';
 import AllNews from './components/News/AllNews';
 import SettingsProfile from './components/Profile/SettingsProfile';
 import PublicRoute from './components/ProtectedRoute/PublicRoute';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
