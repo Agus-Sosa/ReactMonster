@@ -16,7 +16,7 @@ const MonsterDetail = () => {
     return (
         <Box sx={{ maxHeight: "100vh", minHeight:"80vh",background: `url(${hero_detail_monster})`, backgroundPosition:"center", backgroundSize:"cover", overflowY:"hidden"}}>
             <PageContainer>
-                <Box sx={{display:'flex', alignItems:'center'}}>
+                <Box sx={{display:'flex', alignItems:'start'}}>
                     
                     <Box sx={{
             display: "flex",
@@ -33,8 +33,9 @@ const MonsterDetail = () => {
                         <Box component="p" >
                             {monster.monster_description}
                         </Box>
-                        <Box>
-                            Rol {monster.monster_role}
+                        <Box sx={{my:5, p:4 ,textAlign:'center', display:"flex", flexDirection:"column", border:"1px solid #8E1616", backgroundColor:"#1E1E1E"}}>
+                            
+                             {monster.monster_role}
                         </Box>
                     </Box>
 
