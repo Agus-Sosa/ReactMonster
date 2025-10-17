@@ -17,7 +17,15 @@ export const AuthenticationContextProvider = ({children}) => {
   useEffect(()=> {
     if(token){
       const tokenDecode = jwtDecode(token);
-      setUser(tokenDecode);
+      const nowDate = Date.now() / 1000;
+      
+      if (tokenDecode.exp < nowDate) // con esto verifica si el token expiro y si es asi cierra sesion automaticamente 
+        handleUserLogout();
+      else { 
+          setUser(tokenDecode);
+
+      }
+
     } else {
       setUser(null)
     }
