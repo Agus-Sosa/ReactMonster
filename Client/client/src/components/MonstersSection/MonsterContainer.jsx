@@ -11,12 +11,15 @@ const [monster, setMonster]= useState([]);
         .then(res=> res.json())
         .then((data)=> setMonster(data.monsters))
         .catch(error => console.log(error))
-    },[])
+    }, [])
+    
 
   return (
     <Box sx={{display:"flex", flexWrap:"wrap", gap:2, justifyContent:"center", my:7}}>
         {monster.map((monster)=> (
-            <MonstersCard id={monster.monster_id}  description={monster.monster_description} image={monster.monster_image_url} name={monster.monster_name} role={monster.monster_role} key={monster.monster_id}/>
+            <MonstersCard id={monster.monster_id} description={monster.monster_description}
+                image={`http://localhost:8080${monster.monster_image_url}`}
+                name={monster.monster_name} role={monster.monster_role} key={monster.monster_id} />
         ))}
     </Box>
 )

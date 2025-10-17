@@ -25,7 +25,7 @@ const CreateNewPost = ({refreshNews}) => {
 
   return (
     <>
-        <Button onClick={handleOpenModal} variant='contained' sx={{background:"#8E1616", color:"white"}}>
+        <Button onClick={handleOpenModal} variant='contained' sx={{background:"#8E1616", color:"white", width:"auto"}}>
             Crear publicacion 
         </Button>
 
