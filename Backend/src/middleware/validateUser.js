@@ -53,7 +53,9 @@ export const verifyToken =(req, res , next)=> {
   next()
 
   } catch (error) {
-    throw error;
+    const err = new Error("La sesion expiro o no es valida")
+    err.status = 401;
+    throw err
   }
 
 

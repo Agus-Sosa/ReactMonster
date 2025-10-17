@@ -50,7 +50,22 @@ useEffect(() => {
   </Box>
 
   <PageContainer>
-    <NewCardContainer news={filteredNews}/>
+        <NewCardContainer news={filteredNews} />
+        
+        {
+          filteredNews.length === 0 && (
+            <Box sx={{fontSize:"22px"}}>
+              No existe la noticia con la terminacion:
+              <Box sx={{fontWeight:"bold"}}>
+              {searchValue}
+
+              </Box>
+            </Box>
+          )
+        }
+        <Box>
+          
+        </Box>
   </PageContainer>
 </Box>
 
