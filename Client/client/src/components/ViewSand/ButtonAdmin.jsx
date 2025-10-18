@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Modal, Button, Dialog, TextField, DialogActions, DialogTitle } from '@mui/material';
 import Box from '@mui/material/Box';
+import { AuthContext } from '../../context/AuthContext';
 
 
-export default function ButtonAdmin({ arena }) {
+export default function ButtonAdmin({ arena, fetchArenas }) {
 
     
   const [confirmacion, setConfirmacion] = React.useState(false);
@@ -12,7 +13,11 @@ export default function ButtonAdmin({ arena }) {
   const [nombre, setNombre] = React.useState(arena.arena_name);
   const [descripcion, setDescripcion] = React.useState(arena.arena_description);
 
-
+  const { user } = React.useContext(AuthContext)
+  const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
+  if (!isAdmin) {
+    return null;
+  }
   const handleEliminar = async (e) => {
     e.preventDefault();
     try {
@@ -23,7 +28,8 @@ export default function ButtonAdmin({ arena }) {
         alert("la arena se elimino con exito");
       }
       handleCloseConf();
-      window.location.reload();
+      fetchArenas();
+      // window.location.reload();
 
     } catch (error) {
       console.error("error:", error)
@@ -54,8 +60,9 @@ export default function ButtonAdmin({ arena }) {
       console.log("Arena actualizada:", data);
       // cerrar modal
       handleCloseForm();
+      fetchArenas();
       //refrescar datos en el front
-      window.location.reload();
+      // window.location.reload();
     } catch (err) {
       console.error("Error:", err);
     }
@@ -176,15 +183,3 @@ export default function ButtonAdmin({ arena }) {
 }
 
 
-//   const style = {
-//     position: 'absolute',
-//     top: '50%',
-//     left: '50%',
-//     transform: 'translate(-50%, -50%)',
-//     width: 400,
-//     bgcolor: 'background.paper',
-//     border: '2px solid #000',
-//     boxShadow: 24,
-//     p: 4,
-//     borderRadius: '10px'
-//     };

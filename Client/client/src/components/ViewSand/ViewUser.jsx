@@ -8,14 +8,14 @@ import tituloArena from '../../assets/img/arenas/tituloArena.png'
 import "../Sands/arena.css"
 import Loading from "../LoadingComp/Loading"
 import CardUser from './CardUser';
-// import CardAdmin from "../components/ViewSand/CardAdmin"
+import AddArena from './AddArena';
 
 
 const ViewUser = () => {
   const [arenas,setArenas]=useState([]);
-  const [loading,setLoading]=useState(true)
-
-  useEffect(()=>{
+  const [loading, setLoading] = useState(true)
+  
+  const fetchArenas = () => {
     fetch("http://localhost:8080/arenas")
       .then(res=>{
         if(!res.ok) throw new Error ("error al cargar arenas");
@@ -29,7 +29,11 @@ const ViewUser = () => {
         console.error(err);
         setLoading(false);
       })
-    },[]);
+  }
+
+  useEffect(()=>{
+    fetchArenas()
+    },[arenas]);
 
     
     if (loading){
@@ -80,16 +84,16 @@ const ViewUser = () => {
               flexWrap: 'wrap',
               gap: 2
             }}
-            >
+        >
+          <AddArena fetchArenas={ fetchArenas }/>
           {arenas.map((arena) => (
             <div key={arena.id}>
-              <CardUser arena={arena} />
+              <CardUser arena={arena} fetchArenas={fetchArenas} />
             </div>
           ))}
           </Box>
         
         </Box>
-        {/* <CardAdmin/> */}
     </div>
   )
 }

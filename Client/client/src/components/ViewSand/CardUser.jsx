@@ -5,12 +5,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Modal, Button } from '@mui/material';
 import Box from '@mui/material/Box';
-import { AuthContext } from '../../context/AuthContext';
 import ButtonAdmin from './ButtonAdmin';
 
-export default function CardUser({arena}) {
-
-  const { user } = React.useContext(AuthContext)
+export default function CardUser({arena, fetchArenas}) {
 
 
   const [carta,setcarta] = React.useState(false);
@@ -41,8 +38,7 @@ export default function CardUser({arena}) {
             >
               Ver más
           </Button>
-          {user && <ButtonAdmin arena={arena}/>}
-          
+          <ButtonAdmin arena={arena} fetchArenas={ fetchArenas } />
         </CardContent>
       
     </Card>
