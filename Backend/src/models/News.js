@@ -26,6 +26,10 @@ export const News = sequelize.define(config.modelData.news, {
         type:DataTypes.TEXT,
         allowNull: false,
     },
+    state: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    },
     date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW

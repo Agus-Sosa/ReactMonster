@@ -33,9 +33,7 @@ class NewService{
     }
     // delete a news item by its ID
     async deleteNewById(id) {
-        return await this.modelNew.destroy({
-            where: {id} 
-        });
+        return await this.modelNew.update({ state: false }, {where:{id}});
     }
     // I got tired, the name tells you what it does
     async createNew (newNew) {    

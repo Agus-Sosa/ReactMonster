@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react'
+import React, { useState,useRef, useContext } from 'react'
 import "./Landing.css";
 import btnbg from '../../assets/img/test.png';
 import titulogame from "../../assets/img/title_game.png";
@@ -9,9 +9,11 @@ import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import ModalAuthPrev from '../Authentication/ModalAuthPrev';
 import sound from './background_01.mp3'
+import { AuthContext } from '../../context/AuthContext';
 
 function Landing() {
   const [openModal, setOpenModal] = useState(false);
+  const {user} = useContext(AuthContext);
   const audioRef = useRef(null);
 
   const handleOpenModal =()=> {
@@ -55,49 +57,95 @@ const styleButton = {
   p:2
 }
 
+return (
+  <>
+    <Box component="section" className="landing">
+      <img className="title-img" src={titulogame} alt="Nombre del juego" />
 
+      <Box sx={{ fontFamily: "Playfair Display" }} id="eslogan">
+        Domina la guerra, controla la carne, gobierna el mundo.
+      </Box>
 
-  return (
-    <>
-    <Box component='section' className='landing'>
-    <img className="title-img" src={titulogame} alt="Nombre del juego"/>
+      {user ? (
+        <Box
+          component={Link}
+          to={"/menuGame"}
+          className="btn-play"
+          sx={{
+            backgroundImage: `url(${btnbg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            color: "#ffea00",
+            border: "2px solid #ff0000",
+            borderRadius: "8px",
+            padding: "20px 60px",
+            fontWeight: "bold",
+            fontFamily: "'Creepster', cursive",
+            textTransform: "uppercase",
+            position: "relative",
+            overflow: "hidden",
+            boxShadow: "0 0 15px #ff4500, inset 0 0 20px #ff0000",
+            textShadow:
+              "0 0 5px #ff0000, 0 0 10px #ff4500, 2px 2px 2px black",
+            transition: "all 0.3s ease-in-out",
+            "&:hover": {
+              animation: "fire-shake 10s",
+              textShadow:
+                "0 0 15px #ffea00, 0 0 25px #ff4500, 2px 2px 2px black",
+              transform: "scale(1.08)",
+            },
+          }}
+        >
+          JUGAR AHORA
+        </Box>
+      ) : (
+        <>
+          <Button
+            className="btn-play"
+            sx={{
+              backgroundImage: `url(${btnbg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              color: "#ffea00",
+              border: "2px solid #ff0000",
+              borderRadius: "8px",
+              padding: "20px 60px",
+              fontWeight: "bold",
+              fontFamily: "'Creepster', cursive",
+              textTransform: "uppercase",
+              position: "relative",
+              overflow: "hidden",
+              boxShadow: "0 0 15px #ff4500, inset 0 0 20px #ff0000",
+              textShadow:
+                "0 0 5px #ff0000, 0 0 10px #ff4500, 2px 2px 2px black",
+              transition: "all 0.3s ease-in-out",
+              "&:hover": {
+                animation: "fire-shake 10s",
+                textShadow:
+                  "0 0 15px #ffea00, 0 0 25px #ff4500, 2px 2px 2px black",
+                transform: "scale(1.08)",
+              },
+            }}
+            onClick={handleOpenModal}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            JUGAR AHORA
+          </Button>
 
-    <Box sx={{fontFamily: "Playfair Display"}} id='eslogan'>Domina la guerra, controla la carne, gobierna el mundo.</Box>
-
-    <Button className='btn-play'
-    sx={{
-        backgroundImage: `url(${btnbg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        color: "#ffea00",
-        border: "2px solid #ff0000",
-        borderRadius: "8px",
-        padding: "20px 60px",
-        fontWeight: "bold",
-        fontFamily: "'Creepster', cursive",
-        textTransform: "uppercase",
-        position: "relative",
-        overflow: "hidden",
-        boxShadow: "0 0 15px #ff4500, inset 0 0 20px #ff0000",
-        textShadow: "0 0 5px #ff0000, 0 0 10px #ff4500, 2px 2px 2px black",
-        transition: "all 0.3s ease-in-out",
-        "&:hover": {
-          animation: "fire-shake 10s",
-          textShadow: "0 0 15px #ffea00, 0 0 25px #ff4500, 2px 2px 2px black",
-          transform: "scale(1.08)",
-        },
-  }}
-  onClick={handleOpenModal}
-  onMouseEnter={handleMouseEnter}
-  onMouseLeave={handleMouseLeave}
-    > JUGAR AHORA</Button>
-    <ModalAuthPrev openModal={openModal} handleCloseModal={handleCloseModal}/>
-
- 
+          <ModalAuthPrev
+            openModal={openModal}
+            handleCloseModal={handleCloseModal}
+          />
+        </>
+      )}
     </Box>
+
     <audio ref={audioRef} src={sound} loop />
-    </>
-  )
+  </>
+);
+
 }
 export default Landing

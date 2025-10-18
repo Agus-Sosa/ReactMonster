@@ -18,6 +18,7 @@ import AllNews from './components/News/AllNews';
 import SettingsProfile from './components/Profile/SettingsProfile';
 import PublicRoute from './components/ProtectedRoute/PublicRoute';
 import { ToastContainer } from 'react-toastify';
+import GameMenu from './pages/GameMenu';
 
 function App() {
   return (
@@ -68,6 +69,11 @@ function App() {
             </PublicRoute>
 
               } />
+            <Route path='/menuGame' element={ 
+              <ProtectedRoute>
+                <GameMenu/>
+              </ProtectedRoute>
+            } />
 
           {/* Ruta para manejar errores */}
           <Route path="*" element={<ErrorPage />} />
