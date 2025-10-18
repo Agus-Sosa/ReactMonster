@@ -8,7 +8,7 @@ import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
 import DetailPublish from "../detailPublic/DetailPublish.jsx";
 import CommentsSection from "../Forum-Comments/CommentsSection.jsx";
 import CreatePost from "../../Forum/Forum-Posts/CreatePost.jsx";
-import { AuthContext } from "../../../context/AuthContext"; // ← necesario para acceder al rol
+import { AuthContext } from "../../../context/AuthContext"; 
 import LoginRequired from '../../NeedLogin/NeedLogin.jsx';
 
 function ForoJoins({ info }) {
@@ -66,7 +66,7 @@ function ForoJoins({ info }) {
       setSelectedPost(post);
     };
 
-    //  filtrar los posts eliminados solo para usuarios comunes
+    //  filter deleted posts only for regular users
     const visiblePosts = posts.filter(post => {
       if (!user) return post.deleted === false;
       if (user.role === "admin" || user.role === "superadmin") return true;
@@ -174,7 +174,7 @@ function ForoJoins({ info }) {
           </Box>
         )}
 
-        {/* ---------- DETALLE + COMENTARIOS ---------- */}
+        {/* ---------- DETAILS + COMMENTS ---------- */}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
             <DetailPublish post={selectedPost} creator={selectedPost.User}/>

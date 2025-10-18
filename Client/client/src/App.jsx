@@ -18,7 +18,7 @@ import AllNews from './components/News/AllNews';
 import SettingsProfile from './components/Profile/SettingsProfile';
 import PublicRoute from './components/ProtectedRoute/PublicRoute';
 import { ToastContainer } from 'react-toastify';
-
+import Admin from './pages/Admin';
 function App() {
   return (
     <>
@@ -44,9 +44,8 @@ function App() {
             <Route path='/monsters/:id'element={<MonsterDetail/>}/>
             <Route path="/arenas" element={<Sands />} />
             <Route path='/allnews' element={<AllNews/>}/>
-            <Route path='/profile/:id_user' element={
-              <ProfileUser/>
-      }/>
+            <Route path='/profile/:id_user' element={<ProfileUser/>} />
+            <Route path='/admin' element={<ProtectedRoute requiredRole={"superadmin"}><Admin /></ProtectedRoute>} />
       <Route path='/settings' element={
         <ProtectedRoute>
           <SettingsProfile/>
