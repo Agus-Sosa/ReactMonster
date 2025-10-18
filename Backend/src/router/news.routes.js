@@ -1,6 +1,7 @@
 import { Router } from "express";
 import NewService from "../controller/news.controller.js";
 import { validateNew, validateGetNewById } from "../middleware/validateNew.js";
+import { isAdmin, verifyToken } from "../middleware/validateUser.js";
 
 // NEWS ROUTES
 const router = Router();
@@ -17,7 +18,7 @@ router.get('/someNews',async(req,res,next)=>{
 
 // create a new news item
 // middleware `validateNew` validates that the data is correct before creating
-router.post('/createNew',validateNew, async(req, res, next)=>{ 
+router.post('/',verifyToken, isAdmin,validateNew, async(req, res, next)=>{ 
     await newController.createNew(req, res, next)
 })
 // get a specific news item by ID

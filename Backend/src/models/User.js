@@ -47,11 +47,10 @@ export const User = sequelize.define(config.modelData.user, {
         type:DataTypes.INTEGER,
         defaultValue: 0,
     },
-    role:{
-        type:DataTypes.STRING,
-        defaultValue:'user',
-        enum: ["user", "admin", "superadmin"]
-    },
+   role: {
+    type: DataTypes.ENUM("user", "admin", "superadmin"), 
+    defaultValue: 'user',
+},
     count_state: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,

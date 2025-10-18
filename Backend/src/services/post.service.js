@@ -1,4 +1,4 @@
-import { Post } from "../models/Post.js";
+import { User, Post } from "../models/index.js";
 
 class PostService {
   constructor() {

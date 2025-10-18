@@ -10,7 +10,6 @@ const CreateNewPost = ({refreshNews}) => {
    
 
     const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
-    console.log(isAdmin,'is admin')
 
     if(!isAdmin) {
         return null;
@@ -26,7 +25,7 @@ const CreateNewPost = ({refreshNews}) => {
 
   return (
     <>
-        <Button onClick={handleOpenModal} variant='contained' sx={{background:"#8E1616", color:"white"}}>
+        <Button onClick={handleOpenModal} variant='contained' sx={{background:"#8E1616", color:"white", width:"auto"}}>
             Crear publicacion 
         </Button>
 
