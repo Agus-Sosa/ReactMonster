@@ -14,15 +14,22 @@ export const AuthenticationContextProvider = ({children}) => {
   const [user, setUser] = useState(null);
 
 
-useEffect(() => {
-  if (token) {
-    const tokenDecode = jwtDecode(token)
-    console.log("tokenDecode →", tokenDecode) //look this sheet 
-    setUser(tokenDecode)
-  } else {
-    setUser(null)
-  }
-}, [token])
+  useEffect(()=> {
+    if(token){
+      const tokenDecode = jwtDecode(token);
+      const nowDate = Date.now() / 1000;
+      
+      if (tokenDecode.exp < nowDate) // con esto verifica si el token expiro y si es asi cierra sesion automaticamente 
+        handleUserLogout();
+      else { 
+          setUser(tokenDecode);
+
+      }
+
+    } else {
+      setUser(null)
+    }
+  },[token])
   
   const handleUserLogin = (newToken)=> {
     localStorage.setItem('react_monster_token', newToken);

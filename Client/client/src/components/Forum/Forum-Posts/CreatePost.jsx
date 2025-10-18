@@ -1,4 +1,3 @@
-// src/components/Forum-Posts/CreatePost.jsx
 import React, { useState, useEffect, useContext } from "react";
 import {
   Box,
@@ -13,11 +12,8 @@ import {
 import { AuthContext } from "../../../context/AuthContext";
 
 const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
-  // Get the user from context (comes from jwtDecode)
-  const { user } = useContext(AuthContext);
-  const userId = user?.id;  
+  const { token, user } = useContext(AuthContext);
 
-  // States for fields
   const [title, setTitle] = useState("");
   const [resume, setResume] = useState("");
   const [content, setContent] = useState("");
@@ -26,7 +22,6 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Load categories for the Select
   useEffect(() => {
     fetch("http://localhost:8080/categories")
       .then((res) => {
@@ -37,12 +32,10 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
       .catch((err) => setError(err.message));
   }, []);
 
-  // Submit function
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Frontend validations
-    if (!userId) {
+    if (!token || !user?.id) {
       setError("Debes iniciar sesión para crear un post");
       return;
     }
@@ -58,23 +51,25 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
     setLoading(true);
     setError("");
 
-    // Build the payload with the 5 required keys
     const payload = {
-      title:    title.trim(),
-      resume:   resume.trim(),
-      content:  content.trim(),
-      id_category: categoryId,
-      id_user:  userId,
+      title: title.trim(),
+      resume: resume.trim(),
+      content: content.trim(),
+      id_category: categoryId
     };
 
-    console.log("CreatePost → enviando payload:", payload);
+    console.log("CreatePost → payload con JWT:", payload);
 
     try {
       const res = await fetch("http://localhost:8080/post/newPost", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(payload),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(payload),
       });
+
       if (!res.ok) throw new Error("Error creando el post");
       await res.json();
       onCreated();
@@ -85,7 +80,6 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
     }
   };
 
-  // Find the title of the default category
   const selectedCat = categories.find((c) => c.id_category === defaultCategory);
 
   return (
@@ -93,54 +87,25 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
       component="form"
       onSubmit={handleSubmit}
       sx={{
-        display:       "flex",
+        display: "flex",
         flexDirection: "column",
-        gap:           2,
-        p:             2,
-        bgcolor:       "#2a2a2a",
-        borderRadius:  2,
+        gap: 2,
+        p: 2,
+        bgcolor: "#2a2a2a",
+        borderRadius: 2,
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6">Nuevo Post</Typography>
-        <Button size="small" onClick={onCancel}>
-          X
-        </Button>
+        <Button size="small" onClick={onCancel}>X</Button>
       </Box>
 
-      <TextField
-        label="Título"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-        fullWidth
-      />
-
-      <TextField
-        label="Resumen"
-        value={resume}
-        onChange={(e) => setResume(e.target.value)}
-        required
-        fullWidth
-      />
-
-      <TextField
-        label="Contenido"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        required
-        multiline
-        rows={4}
-        fullWidth
-      />
+      <TextField label="Título" value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
+      <TextField label="Resumen" value={resume} onChange={(e) => setResume(e.target.value)} required fullWidth />
+      <TextField label="Contenido" value={content} onChange={(e) => setContent(e.target.value)} required multiline rows={4} fullWidth />
 
       {defaultCategory ? (
-        <TextField
-          label="Categoría"
-          value={selectedCat?.title || ""}
-          disabled
-          fullWidth
-        />
+        <TextField label="Categoría" value={selectedCat?.title || ""} disabled fullWidth />
       ) : (
         <FormControl fullWidth required>
           <InputLabel id="label-categoria">Categoría</InputLabel>
@@ -160,15 +125,11 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
       )}
 
       {error && (
-        <Typography color="error" variant="body2">
-          {error}
-        </Typography>
+        <Typography color="error" variant="body2">{error}</Typography>
       )}
 
       <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
-        <Button variant="outlined" onClick={onCancel}>
-          Cancelar
-        </Button>
+        <Button variant="outlined" onClick={onCancel}>Cancelar</Button>
         <Button type="submit" variant="contained" disabled={loading}>
           {loading ? "Creando…" : "Crear Post"}
         </Button>
