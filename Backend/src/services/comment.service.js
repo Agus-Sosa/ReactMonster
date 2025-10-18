@@ -14,16 +14,28 @@ class CommentService {
       comment_state: true
     });
   }
-  async getCommentsByPost(id_post) {
-    return await this.modelComment.findAll({
-      where: { id_post, comment_state: true },
-      order: [["date", "ASC"]],
-      include: [
+ async getCommentsByPost(id_post, page = 1, limit = 5) {
+  const offset = (page - 1) * limit;
+
+  const { count, rows } = await this.modelComment.findAndCountAll({
+    where: { id_post, comment_state: true },
+    order: [["date", "DESC"]],
+    include: [
       {
         model: User,
-        attributes: ["user_name","range","profile_picture"],
-    }]});
-  }
+        attributes: ["user_name", "range", "profile_picture"],
+      },
+    ],
+    limit,
+    offset,
+  });
+
+  return {
+    comments: rows,
+    totalPages: Math.ceil(count / limit),
+    totalComments: count,
+  };
+}
 
   async deleteComment(id_comment, requesterId) {
     const comment = await this.modelComment.findByPk(id_comment);
