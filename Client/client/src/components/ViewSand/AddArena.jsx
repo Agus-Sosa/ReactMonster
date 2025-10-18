@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Modal, Button, TextField } from '@mui/material';
+import { AuthContext } from '../../context/AuthContext';
 
-const AddArena = () => {
+const AddArena = ({ fetchArenas }) => {
+
+    const {user} = useContext(AuthContext);
+
+    const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
+    if (!isAdmin) {
+        return null;
+    }
+    
+
     const [modal, setModal] = useState(false);
     const [newName, setNewName] = useState("");
     const [newDescription, setNewDescription] = useState("");
@@ -29,7 +39,7 @@ const AddArena = () => {
     }
 
     const handleNewArena = async (e) => {
-        e.preventDefault
+        e.preventDefault()
         const newArena = {
             arena_name: newName,
             arena_description: newDescription,
@@ -51,7 +61,7 @@ const AddArena = () => {
             setNewDescription("");
             setNewName("");
             setNewImg("");
-            
+            fetchArenas();
         } catch (error) {
             console.error("Error:", error);
             alert("error");
@@ -69,12 +79,12 @@ const AddArena = () => {
                     <CardMedia
                         component="img"
                         height="250"
-                        image="https://placehold.co/200x200?text=Nueva Arena"
-                        alt="green iguana"
+                        image="https://placehold.co/200x200?text= Create Arena"
+                        alt="Create ARENA"
                     />
                     <CardContent sx={{ height: 128 }}>
                         <Typography gutterBottom variant="h5" component="div" sx={{ color: "#E3E0C3", fontFamily: "Anton" }}>
-                            name
+                            Name Arena
                         </Typography>
 
                         <Button

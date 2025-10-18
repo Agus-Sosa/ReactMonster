@@ -51,6 +51,39 @@ class ArenaController {
         }
     }
 
+    // eliminar Arenas
+
+     async delete(req, res, next) {
+        const { id } = req.params;
+        try {
+            await this.arenaService.deleteArena(id);
+            res.status(200).json({ message: "arena eliminada" });
+        } catch (error) {
+            res.status(404).json({ message: "error al eliminar arena" });
+        }
+    }
+    
+    //crear arenas
+
+    async create(req, res, next) {
+        const { arena_name, arena_description, arena_image_url } = req.body;
+        const data = {
+            arena_name,
+            arena_description,
+            arena_image_url
+        }
+        try {
+            await this.arenaService.createArena(data)
+            res.status(200).json({status: "success", message:"arena creada", data: data})
+        } catch (error) {
+            console.error("Error al crear la arena:", error);
+            res.status(500).json({
+                status: "error",
+                message: "No se pudo crear la arena"
+            });
+        }
+    }
+
 
 
         
