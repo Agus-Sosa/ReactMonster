@@ -64,7 +64,7 @@ class NewController {
     }
     // delete a news item by its ID
     // DELETE /news/:id
-        async deleteNewById (req, res) {
+        async deleteNewById (req, res, next) {
         try {
         
             const {id}= req.params;
