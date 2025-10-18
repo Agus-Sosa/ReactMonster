@@ -66,7 +66,7 @@ function ForoJoins({ info }) {
 
   // ← filtrar los posts eliminados solo para usuarios comunes
   const visiblePosts = posts.filter(post => {
-    if (!user) return false;
+    if (!user) return post.deleted === false;
     if (user.role === "admin" || user.role === "superadmin") return true;
     return post.deleted === false;
   });
