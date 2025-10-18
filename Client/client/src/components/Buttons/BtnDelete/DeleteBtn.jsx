@@ -5,9 +5,8 @@ import { AuthContext } from '../../../context/AuthContext.jsx';
 import { toast } from 'react-toastify';
 
 const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
-  const { user } = useContext(AuthContext);
+  const { user,token } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-
   if (!user || user.id !== userId && user.role != 'admin') return null;
 
   const handleDelete = async () => {
@@ -19,8 +18,10 @@ const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
     try {
       const res = await fetch(`http://localhost:8080/comments/${commentId}`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_user: userId }),
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`
+        }
       });
 
       if (!res.ok) throw new Error('Error al eliminar el comentario.');
