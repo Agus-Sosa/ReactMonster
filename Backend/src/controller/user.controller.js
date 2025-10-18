@@ -14,6 +14,17 @@ class UserController {
         }
     }
 
+        async getUserByMail(req, res, next){
+        try {
+            const user_email= req.params.user_email;
+            const user = await this.userService.getUserByMail(user_email);
+            res.status(200).json({status: "success", user:user});
+        } catch (error) {
+            next(error)
+
+        }
+    }
+
     async getUserById(req, res, next){
         try {
             const id= req.params.id;
