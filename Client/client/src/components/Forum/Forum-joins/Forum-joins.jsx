@@ -1,56 +1,54 @@
-import React, { useState, useEffect } from "react";
-import { Box } from "@mui/system";
+// src/components/Forum/Forum-joins/Forum-joins.jsx
+import React, { useState, useEffect, useContext } from "react";
+import { Box, Button, CircularProgress } from "@mui/material";
 import Joins from "./joins";
 import forumtexture from "../../../assets/img/foro-bck.png";
-import { CircularProgress } from '@mui/material';
 import Loading from "../../LoadingComp/Loading";
 import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
 import DetailPublish from "../detailPublic/DetailPublish.jsx";
 import CommentsSection from "../Forum-Comments/CommentsSection.jsx";
-/*lo di todo comentando en ingles. */
-function ForoJoins({ info }) {
-  const rute = info.pathname;
+import CreatePost from "../../Forum/Forum-Posts/CreatePost.jsx";
+import { AuthContext } from "../../../context/AuthContext"; // ← necesario para acceder al rol
 
-  /*---- MAIN STATES ---- */
+function ForoJoins({ info }) {
+  const ruta = info.pathname;
+  const { user } = useContext(AuthContext); 
+
+  /*---- MAIN STATES ----*/
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
-  /*---- CONTROL STATES ---- */
+
+  /*---- CONTROL STATES ----*/
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [error, setError] = useState(null);
-  /*---- SHOW THE INITIAL ROUTE (MAYBE NOT SO NECESSARY) ----*/
-  const text_to_route = rute.replace("/", "/ ").toUpperCase();
- 
-  // USE EFFECT: LOAD CATEGORIES AT START
+  const [showCreateForm, setShowCreateForm] = useState(false);
+
+  const text_to_route = ruta.replace("/", "/ ").toUpperCase();
+
   useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const res = await fetch("http://localhost:8080/categories");
+    fetch("http://localhost:8080/categories")
+      .then(res => {
         if (!res.ok) throw new Error("Error al obtener categorias");
-        const data = await res.json();
-        setCategories(data.categorias); // the API returns an object
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoadingCategories(false); // stops showing loading
-      }
-    }
-    fetchCategories();
+        return res.json();
+      })
+      .then(data => setCategories(data.categorias))
+      .catch(err => setError(err.message))
+      .finally(() => setLoadingCategories(false));
   }, []);
 
-  // HANDLER: WHEN SELECTING A CATEGORY
-  const handleSelectCategory = async (category) => {
-    setSelectedCategory(category); //I save the chosen category
-    setSelectedPost(null); // clear the selected post
-    setLoadingPosts(true); //  show post spinner
-    setError(null); // clean previous errors
-    
-    
-    
+  const handleSelectCategory = async cat => {
+    setSelectedCategory(cat);
+    setSelectedPost(null);
+    setLoadingPosts(true);
+    setError(null);
+
     try {
-      const res = await fetch(`http://localhost:8080/post/categorias/${category.id_category}`);
+      const res = await fetch(
+        `http://localhost:8080/post/categorias/${cat.id_category}`
+      );
       if (!res.ok) throw new Error("Error al obtener posts");
       const data = await res.json();
       setPosts(data);
@@ -62,26 +60,20 @@ function ForoJoins({ info }) {
     }
   };
 
-  // HANDLER: WHEN SELECTING A POST
-  const handleSelectPost = (post) => {
-    setSelectedPost(post); // show details of the post
-    
+  const handleSelectPost = post => {
+    setSelectedPost(post);
   };
 
-  // CONDITIONAL RENDER: LOADING / ERROR
-  if (loadingCategories){return (
-    <Loading/>
-  )} 
-    
-    
+  //  filtrar los posts eliminados solo para usuarios comunes
+  const visiblePosts = posts.filter(post => {
+    if (!user) return post.deleted === false;
+    if (user.role === "admin" || user.role === "superadmin") return true;
+    return post.deleted === false;
+  });
 
-  if (error) {
-    return (
-      <ErrorComp/>
+  if (loadingCategories) return <Loading />;
+  if (error) return <ErrorComp />;
 
-    )
-  }
-// ---------- MAIN RENDER ----------
   return (
     <Box
       sx={{
@@ -106,47 +98,85 @@ function ForoJoins({ info }) {
         }}
       >
         {/* ---------- HEADER ---------- */}
-        <Box sx={{ fontSize: "1.2em", width: "100%", marginLeft: "6%" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            fontSize: "1.2em",
+            width: "100%",
+            marginLeft: "6%",
+          }}
+        >
           <h2>
             Comunidad {text_to_route}
             {selectedCategory && ` / ${selectedCategory.title}`}
             {selectedPost && ` / ${selectedPost.title}`}
           </h2>
-        </Box>
-        {/* ---------- LIST OF CATEGORIES OR POSTS ---------- */}
-        <Box sx={{ flexDirection: "column", display: "flex", margin: "5%" ,wordBreak: "break-word"   }}>
-          {/* list of categories */}
-          {!selectedCategory &&
-            categories.map((cat) => (
-              <Joins
-                key={cat.id_category}
-                informacion={cat}
-                onSelect={handleSelectCategory}
-              />
-            ))}
 
-          {/* list of posts within a category */}
-          {selectedCategory && !selectedPost && (
-            loadingPosts ? (
-              <CircularProgress />
-            ) : (
-              posts.map((post) => (
-                <Joins
-                  key={post.id_post}
-                  informacion={post}
-                  onSelect={handleSelectPost}
-                />
-              ))
-            )
+          {selectedCategory && !selectedPost && !showCreateForm && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setShowCreateForm(true)}
+            >
+              Crear Post
+            </Button>
           )}
         </Box>
 
-        {/* ---------- POST DETAILS ---------- */}
+        {/* ---------- INLINE FORM o LISTADO ---------- */}
+        {showCreateForm ? (
+          <Box sx={{ margin: "20px 6%", width: "88%" }}>
+            <CreatePost
+              defaultCategory={selectedCategory.id_category}
+              onCancel={() => setShowCreateForm(false)}
+              onCreated={() => {
+                setShowCreateForm(false);
+                handleSelectCategory(selectedCategory);
+              }}
+            />
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              margin: "5%",
+              wordBreak: "break-word",
+            }}
+          >
+            {!selectedCategory &&
+              categories.map(cat => (
+                <Joins
+                  key={cat.id_category}
+                  informacion={cat}
+                  onSelect={handleSelectCategory}
+                />
+              ))}
+
+            {selectedCategory && !selectedPost && (
+              loadingPosts ? (
+                <CircularProgress />
+              ) : (
+                visiblePosts.map(post => (
+                  <Joins
+                    key={post.id_post}
+                    informacion={post}
+                    onSelect={handleSelectPost}
+                    onRefresh={() => handleSelectCategory(selectedCategory)} // new
+                  />
+                ))
+              )
+            )}
+          </Box>
+        )}
+
+        {/* ---------- DETALLE + COMENTARIOS ---------- */}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
-        
-            <DetailPublish post={selectedPost} creator={selectedPost.User}/>  
-            <CommentsSection postId={selectedPost}/>          
+            <DetailPublish post={selectedPost} />
+            <CommentsSection postId={selectedPost} />
           </Box>
         )}
       </Box>
