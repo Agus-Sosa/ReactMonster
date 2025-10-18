@@ -155,6 +155,7 @@ function ForoJoins({ info }) {
                     key={post.id_post}
                     informacion={post}
                     onSelect={handleSelectPost}
+                    onRefresh={() => handleSelectCategory(selectedCategory)} // new
                   />
                 ))
               )

@@ -1,10 +1,26 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardActionArea from "@mui/material/CardActionArea";
-import Typography from "@mui/material/Typography";
+import React, { useContext } from "react";
+import { Card, CardContent, CardActionArea, Typography, Button, Box } from "@mui/material";
+import { AuthContext } from "../../../context/AuthContext";
 import "./joins.css";
 
-function Joins({ informacion, onSelect }) {
+function Joins({ informacion, onSelect, onRefresh }) {
+  const { user, token } = useContext(AuthContext);
+
+  const handleDelete = async () => {
+    const res = await fetch(`http://localhost:8080/post/${informacion.id_post}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (res.ok) onRefresh?.();
+  };
+
+  const handleRevert = async () => {
+    const res = await fetch(`http://localhost:8080/post/revert/${informacion.id_post}`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (res.ok) onRefresh?.();
+  };
 
   return (
     <Card
@@ -16,14 +32,14 @@ function Joins({ informacion, onSelect }) {
         color: "white",
         border: "1px solid white",
         cursor: "pointer",
-        wordBreak: "break-word"
+        wordBreak: "break-word",
+        position: "relative"
       }}
-      // The ?. prevents error if onSelect is not defined
       onClick={() => onSelect?.(informacion)}
     >
       <CardActionArea>
-        <CardContent sx={{wordBreak: "break-word"}}>
-          <Typography gutterBottom variant="h5" component="div" >
+        <CardContent sx={{ wordBreak: "break-word" }}>
+          <Typography gutterBottom variant="h5" component="div">
             <img
               src={informacion.imageUrl}
               className="forum-icons"
@@ -31,12 +47,41 @@ function Joins({ informacion, onSelect }) {
             />
             {informacion.title}
           </Typography>
-          {/* Summary / short description */}
-          <Typography variant="body2" sx={{ color: "white",wordBreak: "break-word" }}>
+          <Typography variant="body2" sx={{ color: "white", wordBreak: "break-word" }}>
             {informacion.resume}
           </Typography>
         </CardContent>
       </CardActionArea>
+
+      {user?.isAdmin && (
+        <Box sx={{ position: "absolute", top: 8, right: 8 }}>
+          {informacion.deleted ? (
+            <Button
+              variant="outlined"
+              color="warning"
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRevert();
+              }}
+            >
+              Revertir
+            </Button>
+          ) : (
+            <Button
+              variant="outlined"
+              color="error"
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete();
+              }}
+            >
+              Eliminar
+            </Button>
+          )}
+        </Box>
+      )}
     </Card>
   );
 }

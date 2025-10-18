@@ -10,7 +10,7 @@ class PostController {
       const post = await this.postService.getAllPost();
       res.status(200).json(post);
     } catch (error) {
-      res.status(500).json({ status: "error", message: "Error al obtener todos los posteos" });
+      res.status(500).json({ status: "error", message: "Error al obtener todas las publicaciones" });
     }
   }
 
@@ -20,7 +20,7 @@ class PostController {
       const post = await this.postService.getPostById(id);
       res.status(200).json(post);
     } catch (error) {
-      res.status(500).json({ status: "error", message: "Error al obtener el posteo" });
+      res.status(500).json({ status: "error", message: "Error al obtener la publicacion por ID" });
     }
   }
 
@@ -30,14 +30,14 @@ class PostController {
       const post = await this.postService.getPostByCategory(id);
       res.status(200).json(post);
     } catch (error) {
-      res.status(500).json({ status: "error", message: "Error al obtener el posteo por categoría" });
+      res.status(500).json({ status: "error", message: "Error al obtener las publicaciones por categoria" });
     }
   }
 
   async createNewPost(req, res, next) {
     try {
       const { title, resume, content, id_category } = req.body;
-      const id_user = req.user.id; // jwt
+      const id_user = req.user.id;
 
       const newPostData = { title, resume, content, id_category, id_user };
       console.log("createNewPost →", newPostData);
@@ -53,8 +53,18 @@ class PostController {
   async deletePost(req, res, next) {
     try {
       const { id } = req.params;
-      await this.postService.deletePost(id);
-      res.status(200).json({ status: "success", message: "Posteo eliminado con éxito" });
+      await this.postService.softDeletePost(id); // ← soft delete
+      res.status(200).json({ status: "success", message: "Post Bloqueado" });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async revertPost(req, res, next) {
+    try {
+      const { id } = req.params;
+      await this.postService.revertPost(id); // ← restore post
+      res.status(200).json({ status: "success", message: "Post Restablecido" });
     } catch (error) {
       next(error);
     }
