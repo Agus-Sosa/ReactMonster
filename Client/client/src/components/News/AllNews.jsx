@@ -52,6 +52,7 @@ useEffect(() => {
   <PageContainer>
         <NewCardContainer news={filteredNews} />
         
+        
         {
           filteredNews.length === 0 && (
             <Box sx={{fontSize:"22px"}}>
