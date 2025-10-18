@@ -2,8 +2,8 @@ import { Avatar, Box, Button } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import PageContainer from '../Layout/PageContainer/PageContainer';
-import DeleteBtnNews from '../Buttons/BtnDelete/DeleteBtnNews';
 import { AuthContext } from '../../context/AuthContext';
+import DeleteBtnModal from '../Buttons/BtnDelete/DeleteBtnModal';
 
 const NewDetails = () => {
   const { user, token } = useContext(AuthContext);
@@ -119,7 +119,7 @@ return (
             Eliminar
           </Button>
            }
-          <DeleteBtnNews onDelete={handleDelete} userRole={user?.role} onClose={handleClose} open={openModal} />
+          <DeleteBtnModal onDelete={handleDelete} userRole={user?.role} onClose={handleClose} open={openModal} />
           <Box component="h1" sx={{ fontSize: { xs: '25px', md: "40px" }, fontWeight: "bold", my: 3, whiteSpace: 'pre-line', lineHeight: 1.6, }}>
               {newDetail.title}
           </Box>
