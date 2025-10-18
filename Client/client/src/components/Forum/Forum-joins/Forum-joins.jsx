@@ -9,6 +9,7 @@ import DetailPublish from "../detailPublic/DetailPublish.jsx";
 import CommentsSection from "../Forum-Comments/CommentsSection.jsx";
 import CreatePost from "../../Forum/Forum-Posts/CreatePost.jsx";
 import { AuthContext } from "../../../context/AuthContext"; // ← necesario para acceder al rol
+import LoginRequired from '../../NeedLogin/NeedLogin.jsx';
 
 function ForoJoins({ info }) {
   const ruta = info.pathname;
@@ -27,53 +28,54 @@ function ForoJoins({ info }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
 
   const text_to_route = ruta.replace("/", "/ ").toUpperCase();
+  
+  if (!user) { return <LoginRequired/>}
+    useEffect(() => {
+      fetch("http://localhost:8080/categories")
+        .then(res => {
+          if (!res.ok) throw new Error("Error al obtener categorias");
+          return res.json();
+        })
+        .then(data => setCategories(data.categorias))
+        .catch(err => setError(err.message))
+        .finally(() => setLoadingCategories(false));
+    }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:8080/categories")
-      .then(res => {
-        if (!res.ok) throw new Error("Error al obtener categorias");
-        return res.json();
-      })
-      .then(data => setCategories(data.categorias))
-      .catch(err => setError(err.message))
-      .finally(() => setLoadingCategories(false));
-  }, []);
+    const handleSelectCategory = async cat => {
+      setSelectedCategory(cat);
+      setSelectedPost(null);
+      setLoadingPosts(true);
+      setError(null);
 
-  const handleSelectCategory = async cat => {
-    setSelectedCategory(cat);
-    setSelectedPost(null);
-    setLoadingPosts(true);
-    setError(null);
+      try {
+        const res = await fetch(
+          `http://localhost:8080/post/categorias/${cat.id_category}`
+        );
+        if (!res.ok) throw new Error("Error al obtener posts");
+        const data = await res.json();
+        setPosts(data);
+      } catch (err) {
+        setError(err.message);
+        setPosts([]);
+      } finally {
+        setLoadingPosts(false);
+      }
+    };
 
-    try {
-      const res = await fetch(
-        `http://localhost:8080/post/categorias/${cat.id_category}`
-      );
-      if (!res.ok) throw new Error("Error al obtener posts");
-      const data = await res.json();
-      setPosts(data);
-    } catch (err) {
-      setError(err.message);
-      setPosts([]);
-    } finally {
-      setLoadingPosts(false);
-    }
-  };
+    const handleSelectPost = post => {
+      setSelectedPost(post);
+    };
 
-  const handleSelectPost = post => {
-    setSelectedPost(post);
-  };
+    //  filtrar los posts eliminados solo para usuarios comunes
+    const visiblePosts = posts.filter(post => {
+      if (!user) return post.deleted === false;
+      if (user.role === "admin" || user.role === "superadmin") return true;
+      return post.deleted === false;
+    });
 
-  //  filtrar los posts eliminados solo para usuarios comunes
-  const visiblePosts = posts.filter(post => {
-    if (!user) return post.deleted === false;
-    if (user.role === "admin" || user.role === "superadmin") return true;
-    return post.deleted === false;
-  });
-
-  if (loadingCategories) return <Loading />;
-  if (error) return <ErrorComp />;
-
+    if (loadingCategories) return <Loading />;
+    if (error) return <ErrorComp />;
+  
   return (
     <Box
       sx={{
@@ -175,7 +177,7 @@ function ForoJoins({ info }) {
         {/* ---------- DETALLE + COMENTARIOS ---------- */}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
-            <DetailPublish post={selectedPost} />
+            <DetailPublish post={selectedPost} creator={selectedPost.User}/>
             <CommentsSection postId={selectedPost} />
           </Box>
         )}
