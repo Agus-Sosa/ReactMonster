@@ -27,15 +27,21 @@ class CommentController {
 
   // Obtener comentarios de un post
   async getCommentsByPost(req, res, next) {
-    try {
-     
-      const { id_post } = req.params;
-      const comments = await this.commentService.getCommentsByPost(Number(id_post));
-      res.json(comments);
-    } catch (err) {
-      next(err);
-    }
+  try {
+    const { id_post } = req.params;
+    const { page = 1, limit = 5 } = req.query;
+
+    const comments = await this.commentService.getCommentsByPost(
+      Number(id_post),
+      Number(page),
+      Number(limit)
+    );
+
+    res.json(comments);
+  } catch (err) {
+    next(err);
   }
+}
 
   // Eliminar comentario
   async deleteComment(req, res, next) {
