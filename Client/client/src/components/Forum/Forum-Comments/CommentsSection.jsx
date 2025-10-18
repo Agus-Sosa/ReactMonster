@@ -73,7 +73,7 @@ function CommentsSection({ postId }) {
                 count={totalPages}
                 page={page}
                 onChange={handlePageChange}
-                color="primary"
+                color="error"
               />
             </Box>
           )}
