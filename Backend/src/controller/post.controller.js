@@ -14,15 +14,20 @@ class PostController {
     }
   }
 
-  async getPostById(req, res, next) {
+  async getPostByCategory(req, res, next) {
     try {
       const id = req.params.id;
-      const post = await this.postService.getPostById(id);
+      const role = req.user?.role || null; 
+      const post = await this.postService.getPostByCategory(id, role);
       res.status(200).json(post);
     } catch (error) {
-      res.status(500).json({ status: "error", message: "Error al obtener la publicacion por ID" });
+      res.status(500).json({
+        status: "error",
+        message: "Error al obtener las publicaciones por categoria"
+      });
     }
   }
+
 
   async getPostByCategory(req, res, next) {
     try {

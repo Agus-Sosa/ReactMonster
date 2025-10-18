@@ -12,7 +12,7 @@ import { AuthContext } from "../../../context/AuthContext"; // ← necesario par
 
 function ForoJoins({ info }) {
   const ruta = info.pathname;
-  const { user } = useContext(AuthContext); // ← acceso al usuario
+  const { user } = useContext(AuthContext); 
 
   /*---- MAIN STATES ----*/
   const [categories, setCategories] = useState([]);
@@ -64,7 +64,7 @@ function ForoJoins({ info }) {
     setSelectedPost(post);
   };
 
-  // ← filtrar los posts eliminados solo para usuarios comunes
+  //  filtrar los posts eliminados solo para usuarios comunes
   const visiblePosts = posts.filter(post => {
     if (!user) return post.deleted === false;
     if (user.role === "admin" || user.role === "superadmin") return true;

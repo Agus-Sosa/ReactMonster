@@ -17,7 +17,7 @@ class PostService {
     return await this.modelPost.findAll({
       where: {
         id_category: id,
-        // deleted: false // ← exclude soft-deleted posts
+        // deleted: false //  exclude soft-deleted esto es una giga miarda 
       }
     });
   }
