@@ -1,7 +1,9 @@
 import { Box, Button, Modal, Typography } from '@mui/material';
 import React from 'react';
 
-const DeleteBtnNews = ({ onDelete, userRole, open, onClose }) => {
+
+// Este componente puede ser reutilizable en cualquier lugar donde se necesite un modal de confirmación de eliminación
+const DeleteBtnModal = ({ onDelete, userRole, open, onClose }) => {
   if (userRole !== 'admin' && userRole !== 'superadmin') return null;
 
   const handleDelete = () => {
@@ -33,7 +35,7 @@ const DeleteBtnNews = ({ onDelete, userRole, open, onClose }) => {
         </Typography>
 
         <Typography sx={{ mb: 3 }}>
-          ¿Estás seguro de que deseas eliminar esta noticia? Esta acción no se puede deshacer.
+          ¿Estás seguro de que deseas eliminar esto? Esta acción no se puede deshacer.
         </Typography>
 
         <Box sx={{ display: 'flex', gap: 1 }}>
@@ -49,4 +51,4 @@ const DeleteBtnNews = ({ onDelete, userRole, open, onClose }) => {
   );
 };
 
-export default DeleteBtnNews;
+export default DeleteBtnModal;
