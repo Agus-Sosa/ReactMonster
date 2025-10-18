@@ -117,7 +117,7 @@ export const ModalFormNews = ({isOpen, closeModal, refreshNews}) => {
                                         
 
                 ))}
-                <Box component="div" sx={{display:"flex", justifyContent:"space-between", mt:3}}>
+                <Box component="div" sx={{display:"flex", justifyContent:"space-between", mt:3, gap:2}}>
                     <Button type='submit' sx={{backgroundColor:"#8E1616"}} variant="contained">Crear noticia</Button>
                     <Button sx={{backgroundColor:"#E3E0C3", color:"black"}} onClick={handleCancel} variant='contained'>Cancelar</Button>
                 </Box>
