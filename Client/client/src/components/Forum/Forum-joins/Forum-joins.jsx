@@ -1,5 +1,5 @@
 // src/components/Forum/Forum-joins/Forum-joins.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box, Button, CircularProgress } from "@mui/material";
 import Joins from "./joins";
 import forumtexture from "../../../assets/img/foro-bck.png";
@@ -8,9 +8,11 @@ import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
 import DetailPublish from "../detailPublic/DetailPublish.jsx";
 import CommentsSection from "../Forum-Comments/CommentsSection.jsx";
 import CreatePost from "../../Forum/Forum-Posts/CreatePost.jsx";
+import { AuthContext } from "../../../context/AuthContext"; // ← necesario para acceder al rol
 
 function ForoJoins({ info }) {
   const ruta = info.pathname;
+  const { user } = useContext(AuthContext); // ← acceso al usuario
 
   /*---- MAIN STATES ----*/
   const [categories, setCategories] = useState([]);
@@ -61,6 +63,13 @@ function ForoJoins({ info }) {
   const handleSelectPost = post => {
     setSelectedPost(post);
   };
+
+  // ← filtrar los posts eliminados solo para usuarios comunes
+  const visiblePosts = posts.filter(post => {
+    if (!user) return false;
+    if (user.role === "admin" || user.role === "superadmin") return true;
+    return post.deleted === false;
+  });
 
   if (loadingCategories) return <Loading />;
   if (error) return <ErrorComp />;
@@ -150,7 +159,7 @@ function ForoJoins({ info }) {
               loadingPosts ? (
                 <CircularProgress />
               ) : (
-                posts.map(post => (
+                visiblePosts.map(post => (
                   <Joins
                     key={post.id_post}
                     informacion={post}

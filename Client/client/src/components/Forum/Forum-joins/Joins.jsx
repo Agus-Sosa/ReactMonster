@@ -53,35 +53,36 @@ function Joins({ informacion, onSelect, onRefresh }) {
         </CardContent>
       </CardActionArea>
 
-      {user?.isAdmin && (
-        <Box sx={{ position: "absolute", top: 8, right: 8 }}>
-          {informacion.deleted ? (
-            <Button
-              variant="outlined"
-              color="warning"
-              size="small"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleRevert();
-              }}
-            >
-              Revertir
-            </Button>
-          ) : (
-            <Button
-              variant="outlined"
-              color="error"
-              size="small"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleDelete();
-              }}
-            >
-              Eliminar
-            </Button>
-          )}
-        </Box>
-      )}
+    {(user?.role === "admin" || user?.role === "superadmin") && (
+      <Box sx={{ position: "absolute", top: 8, right: 8 }}>
+        {informacion.deleted ? (
+          <Button
+            variant="outlined"
+            color="warning"
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleRevert();
+            }}
+          >
+            Revertir
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            color="error"
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete();
+            }}
+          >
+            Eliminar
+          </Button>
+        )}
+      </Box>
+    )}
+
     </Card>
   );
 }
