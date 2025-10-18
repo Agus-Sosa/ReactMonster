@@ -21,9 +21,6 @@ class PostService {
       }
     });
   }
-
-
-    
     
   async createNewPost(newPost) {
     return await this.modelPost.create(newPost);
