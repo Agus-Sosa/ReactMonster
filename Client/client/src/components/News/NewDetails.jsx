@@ -1,15 +1,24 @@
-import { Avatar, Box } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import { Avatar, Box, Button } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import PageContainer from '../Layout/PageContainer/PageContainer';
+import DeleteBtnNews from '../Buttons/BtnDelete/DeleteBtnNews';
+import { AuthContext } from '../../context/AuthContext';
 
 const NewDetails = () => {
+  const { user, token } = useContext(AuthContext);
+  console.log("user en NewDetails:", user);
     const [newDetail, setNewDetail] = useState({});
     const {id}  = useParams();
     const [notNew, setNotNew] = useState(false);
     const navigate =useNavigate();
-
-  
+  const [openModal, setOpenModal] = useState(false);
+  const handleClose = () => { 
+    setOpenModal(false);
+  }
+  const handleOpenModal = () => { 
+    setOpenModal(true);
+  }
 
 
 
@@ -21,6 +30,7 @@ const NewDetails = () => {
 
     if(!res.ok) {
       setNotNew(true);
+      return;
     } 
     const data = await res.json();
     setNewDetail(data.new);
@@ -31,10 +41,32 @@ const NewDetails = () => {
     
   }
   fetchGetNew();
-}, [id]) 
+
+ }
+   , [id]) 
+  const handleDelete =async () => { 
+      try {
+        const res = await fetch(`http://localhost:8080/news/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          method: "DELETE",
+        })
+
+        if (!res.ok) {
+          console.log("Error al eliminar la noticia");
+          return;
+        }
+        navigate('/allnews');
+
+
+      } catch (error) {
+        console.log(error)
+      }
+  }
 
 console.log("newDetail:", newDetail)
-if(notNew) navigate('*');
 
 const d = new Date(newDetail.date);
   const y = d.getFullYear();
@@ -81,8 +113,14 @@ return (
       }}
     />
   )}
-        <Box component="div" sx={{width:{ xs:"100%", md:'50%'}}}>
-          <Box component="h1" sx={{fontSize:{xs:'25px', md:"40px"}, fontWeight:"bold", my:3, whiteSpace: 'pre-line', lineHeight: 1.6, }}>
+        <Box component="div" sx={{ width: { xs: "100%", md: '50%' } }}>
+          { user && (user.role === 'admin' || user.role === 'superadmin') &&
+          <Button variant="contained" color="error" sx={{mt:3, mb:1}} onClick={handleOpenModal}>
+            Eliminar
+          </Button>
+           }
+          <DeleteBtnNews onDelete={handleDelete} userRole={user?.role} onClose={handleClose} open={openModal} />
+          <Box component="h1" sx={{ fontSize: { xs: '25px', md: "40px" }, fontWeight: "bold", my: 3, whiteSpace: 'pre-line', lineHeight: 1.6, }}>
               {newDetail.title}
           </Box>
             <Box mt={3} sx={{fontSize: '20px', whiteSpace: 'pre-line', lineHeight: 1.6,}}>

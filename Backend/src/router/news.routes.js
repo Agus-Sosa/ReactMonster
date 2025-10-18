@@ -28,7 +28,7 @@ router.get("/:id", validateGetNewById,async(req, res, next)=> {
 })  
 // delete a news item by ID
 // middleware `validateGetNewById` ensures that the news item exists before deleting
-router.delete("/:id",validateGetNewById, async(req,res, next)=> {
+router.delete("/:id",verifyToken, isAdmin, async(req,res, next)=> {
     await newController.deleteNewById(req,res, next)
 })
 // update a news item by ID
