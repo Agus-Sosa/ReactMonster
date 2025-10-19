@@ -26,6 +26,11 @@ class MonsterService {
     }
 
 
+    async deleteMonsterById(id) { 
+        return await this.modelMonster.destroy({where:{monster_id:id}});
+    }
+
+
 
 
 

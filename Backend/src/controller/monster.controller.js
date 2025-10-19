@@ -38,6 +38,16 @@ class MonsterController {
         }
     }
 
+
+    async deleteMonsterById(req, res, next) {
+        try {
+            const { id } = req.params;
+            await this.monsterService.deleteMonsterById(id);
+            res.status(200).json({status: "success", message: "Monstruo eliminado con exito"});
+        } catch (error) {
+            next(error)
+        }
+    }
  
 }
 

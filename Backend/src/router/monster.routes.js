@@ -19,4 +19,8 @@ router.post('/name', async(req, res, next)=> {
     return await monsterController.getMonsterByName(req, res ,next);
 })
 
+
+router.delete('/:id', async (req, res, next) => { 
+    return await monsterController.deleteMonsterById(req, res, next);
+});
 export {router as MonsterRouter};

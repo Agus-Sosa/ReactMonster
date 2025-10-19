@@ -2,7 +2,7 @@ import { Box, Button, Modal, Typography } from '@mui/material';
 import React from 'react';
 
 
-// Este componente puede ser reutilizable en cualquier lugar donde se necesite un modal de confirmación de eliminación
+// Este componente puede ser reutilizable en cualquier lugar donde se necesite un modal de confirmación de eliminación 👟
 const DeleteBtnModal = ({ onDelete, userRole, open, onClose }) => {
   if (userRole !== 'admin' && userRole !== 'superadmin') return null;
 
@@ -31,7 +31,7 @@ const DeleteBtnModal = ({ onDelete, userRole, open, onClose }) => {
         }}
       >
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Borrar noticia
+          Borrar elemento
         </Typography>
 
         <Typography sx={{ mb: 3 }}>
