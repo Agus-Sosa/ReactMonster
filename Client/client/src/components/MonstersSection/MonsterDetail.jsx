@@ -41,7 +41,8 @@ const handleDelete =async () => {
       } catch (error) {
         console.log(error)
       }
-  }
+    }
+    
 
     
     

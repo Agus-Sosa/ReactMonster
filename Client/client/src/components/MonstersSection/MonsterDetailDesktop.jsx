@@ -42,7 +42,7 @@ const MonsterDetailDesktop = ({ monster, onDelete,userRole }) => {
                         <Box component="p" >
                             {monster.monster_description}
                         </Box>
-                        <Box sx={{my:5, p:4 ,textAlign:'center', display:"flex", flexDirection:"column", border:"1px solid #8E1616", backgroundColor:"#1E1E1E"}}>
+                        <Box sx={{my:5, p:1 ,textAlign:'center', display:"flex", flexDirection:"column", border:"1px solid #8E1616", backgroundColor:"#1E1E1E"}}>
                             
                              {monster.monster_role}
                         </Box>

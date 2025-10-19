@@ -12,6 +12,11 @@ class MonsterService {
     }
 
 
+    async createNewMonster(newMonster) {
+        const monster = await this.modelMonster.create(newMonster);
+        return monster;
+    }
+
     async getMonsterById(id) {
         const monster = await this.modelMonster.findByPk(id);
         return monster
