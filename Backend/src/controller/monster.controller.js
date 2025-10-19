@@ -27,6 +27,16 @@ class MonsterController {
         }
     }
 
+    async createNewMonster(req, res, next) { 
+        try {
+            const monsterData = req.body;
+            const newMonster = await this.monsterService.createNewMonster(monsterData);
+            res.status(200).json({ status: "success", message: "Monstruo creado con exito", monster: newMonster });
+            
+        } catch (error) {
+            next(error)
+        }
+    }
 
     async getMonsterByName(req, res, next) {
         try {
