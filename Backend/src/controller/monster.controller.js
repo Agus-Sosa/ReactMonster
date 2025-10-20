@@ -48,6 +48,17 @@ class MonsterController {
         }
     }
 
+    async updateMonster(req, res, next) { 
+        try {
+            const {id} = req.params;
+            const monsterUpdate = req.body;
+            await this.monsterService.updateMonster(id, monsterUpdate);
+            res.status(200).json({status: "success", message: "Monstruo actualizado con exito"});
+        } catch (error) {
+            next(error)
+        }
+    }
+
 
     async deleteMonsterById(req, res, next) {
         try {

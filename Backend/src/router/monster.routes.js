@@ -19,6 +19,9 @@ router.get('/:id', async(req, res, next)=> {
     return await monsterController.getMonsterById(req, res ,next);
 })
 
+router.put('/:id', verifyToken, isAdmin, async (req, res, next) => { 
+    return await monsterController.updateMonster(req, res, next);
+})
 
 router.post('/name', async(req, res, next)=> {
     return await monsterController.getMonsterByName(req, res ,next);

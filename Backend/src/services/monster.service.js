@@ -30,6 +30,9 @@ class MonsterService {
     
     }
 
+    async updateMonster(id, monsterUpdate) { 
+        return await this.modelMonster.update(monsterUpdate, {where:{monster_id:id}});
+    }
 
     async deleteMonsterById(id) { 
         return await this.modelMonster.destroy({where:{monster_id:id}});

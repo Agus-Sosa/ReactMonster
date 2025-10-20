@@ -45,7 +45,7 @@ class NewService{
 
     async updateNew (id,newUpdate) {
         
-        const [updateData]= await this.modelNew.update(newUpdate, {where:{id}});
+        const [updateData]= await this.modelNew.update(newUpdate, {where:{id_news:id}});
     
     
         if(updateData ===0) {
