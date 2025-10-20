@@ -1,4 +1,3 @@
-// src/components/Forum/Forum-joins/Forum-joins.jsx
 import React, { useState, useEffect, useContext } from "react";
 import { Box, Button, CircularProgress } from "@mui/material";
 import Joins from "./joins";
@@ -8,23 +7,23 @@ import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
 import DetailPublish from "../detailPublic/DetailPublish.jsx";
 import CommentsSection from "../Forum-Comments/CommentsSection.jsx";
 import CreatePost from "../../Forum/Forum-Posts/CreatePost.jsx";
-import { AuthContext } from "../../../context/AuthContext"; // ← necesario para acceder al rol
+import ModalAuthPrev from "../../Authentication/ModalAuthPrev";
+import { AuthContext } from "../../../context/AuthContext";
 
 function ForoJoins({ info }) {
   const ruta = info.pathname;
-  const { user } = useContext(AuthContext); 
+  const { user } = useContext(AuthContext);
 
-  /*---- MAIN STATES ----*/
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  /*---- CONTROL STATES ----*/
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [error, setError] = useState(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const text_to_route = ruta.replace("/", "/ ").toUpperCase();
 
@@ -46,9 +45,7 @@ function ForoJoins({ info }) {
     setError(null);
 
     try {
-      const res = await fetch(
-        `http://localhost:8080/post/categorias/${cat.id_category}`
-      );
+      const res = await fetch(`http://localhost:8080/post/categorias/${cat.id_category}`);
       if (!res.ok) throw new Error("Error al obtener posts");
       const data = await res.json();
       setPosts(data);
@@ -64,7 +61,6 @@ function ForoJoins({ info }) {
     setSelectedPost(post);
   };
 
-  //  filtrar los posts eliminados solo para usuarios comunes
   const visiblePosts = posts.filter(post => {
     if (!user) return post.deleted === false;
     if (user.role === "admin" || user.role === "superadmin") return true;
@@ -118,7 +114,13 @@ function ForoJoins({ info }) {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => setShowCreateForm(true)}
+              onClick={() => {
+                if (!user) {
+                  setShowAuthModal(true);
+                } else {
+                  setShowCreateForm(true);
+                }
+              }}
             >
               Crear Post
             </Button>
@@ -164,7 +166,7 @@ function ForoJoins({ info }) {
                     key={post.id_post}
                     informacion={post}
                     onSelect={handleSelectPost}
-                    onRefresh={() => handleSelectCategory(selectedCategory)} // new
+                    onRefresh={() => handleSelectCategory(selectedCategory)}
                   />
                 ))
               )
@@ -179,6 +181,12 @@ function ForoJoins({ info }) {
             <CommentsSection postId={selectedPost} />
           </Box>
         )}
+
+        {/* ---------- MODAL AUTH ---------- */}
+        <ModalAuthPrev
+          openModal={showAuthModal}
+          handleCloseModal={() => setShowAuthModal(false)}
+        />
       </Box>
     </Box>
   );
