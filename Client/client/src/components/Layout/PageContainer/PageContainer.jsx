@@ -6,7 +6,7 @@ const PageContainer = ({ children }) => {
   sx={{
     width: "100%", // 👈 que siempre ocupe todo el ancho
     maxWidth: { md: "1500px" }, // 👈 solo limitar en pantallas grandes
-    margin: "0 auto",
+    margin: {xs:"0 10px", md:"0 auto"},
   }}
 >
   {children}

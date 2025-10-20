@@ -1,4 +1,4 @@
-import express from 'express'
+import express from 'express';
 import { config } from './config/config.js';
 import { sequelize } from './config/db.js';
 import cors from 'cors' 
@@ -13,12 +13,13 @@ import { ArenaRouter } from './router/arena.routes.js';
 import { LikeRouter } from './router/like.routes.js';
 import { CommentRouter } from './router/comment.routes.js';
 import { categoriasRouter } from './router/category.routes.js';
-
+import path from 'path'
 const app = express();
 const port = config.PORT
 
 app.use(cors());
 app.use(express.json());
+app.use('/public', express.static(path.join(process.cwd(), 'public')));
 app.use('/categories', categoriasRouter);
 app.use('/users', UserRouter);
 app.use('/post', PostRouter );

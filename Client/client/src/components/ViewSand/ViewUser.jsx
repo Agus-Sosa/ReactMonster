@@ -7,6 +7,7 @@ import iconoArena from '../../assets/img/arenas/iconoArena.png'
 import tituloArena from '../../assets/img/arenas/tituloArena.png'
 import "../Sands/arena.css"
 import Loading from "../LoadingComp/Loading"
+import CardUser from './CardUser';
 // import CardAdmin from "../components/ViewSand/CardAdmin"
 
 
@@ -80,8 +81,10 @@ const ViewUser = () => {
               gap: 2
             }}
             >
-          {arenas.map((arena)=>(
-            <Card_Sand key={arena.id} arena={arena}/>
+          {arenas.map((arena) => (
+            <div key={arena.id}>
+              <CardUser arena={arena} />
+            </div>
           ))}
           </Box>
         

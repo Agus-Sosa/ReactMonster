@@ -1,21 +1,21 @@
 import { Box, Button, Input, Modal } from '@mui/material';
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
 import { Form } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
-export const ModalFormNews = ({isOpen, closeModal, adminId, refreshNews}) => {
+export const ModalFormNews = ({isOpen, closeModal, refreshNews}) => {
      const [formData, setFormData]= useState({
         title: "",
         content: "",
         imageUrl: "",
-        id_admin: adminId,
         resume: "",        
     })
     const [error, setError]= useState({});
 
-    console.log("formadata:",formData);
-
-
+  
+    const {token} = useContext(AuthContext)
+    
 
     const inputFields = [
     { label: "Título", name: "title", type: "text", required: true },
@@ -29,14 +29,16 @@ export const ModalFormNews = ({isOpen, closeModal, adminId, refreshNews}) => {
     const hanldeOnSubmit = async(e)=> {
         try {
             e.preventDefault()
-            const res = await fetch("http://localhost:8080/news/createNew", {
-                  headers: { "Content-Type": "application/json" },
+            const res = await fetch("http://localhost:8080/news/", {
+              headers: {
+                "Content-Type": "application/json" ,
+                "Authorization": `Bearer ${token}`
+                  },
 
                 method:"POST",
                 body: JSON.stringify(formData)
             })
 
-            console.log("respues", res)
             if(!res.ok) {
 
             }

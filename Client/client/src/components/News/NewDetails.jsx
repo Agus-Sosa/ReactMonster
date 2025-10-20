@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Avatar, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import PageContainer from '../Layout/PageContainer/PageContainer';
@@ -9,6 +9,7 @@ const NewDetails = () => {
     const [notNew, setNotNew] = useState(false);
     const navigate =useNavigate();
 
+  
 
 
 
@@ -32,7 +33,7 @@ const NewDetails = () => {
   fetchGetNew();
 }, [id]) 
 
-
+console.log("newDetail:", newDetail)
 if(notNew) navigate('*');
 
 const d = new Date(newDetail.date);
@@ -58,7 +59,13 @@ return (
         <PageContainer>
     <Box sx={{display:"flex", justifyContent:"center",flexDirection:"column", alignItems:'center', color:"white", my:3}}>
 
-        <Box component="header" sx={{textAlign:'start', width:{ xs:"100%", md:"50%"}}}>
+        <Box component="header" sx={{ textAlign: 'start', width: { xs: "100%", md: "50%" } }}>
+          <Box sx={{display:"flex", gap:2, alignItems:"center", marginBottom:2}}>
+            <Avatar alt="Remy Sharp" sx={{ width: { md: 60 }, height: { md:60} }} src={newDetail?.User?.profile_picture} />
+            <Box>
+              { newDetail?.User?.user_name}
+            </Box>
+            </Box>
             <Box sx={{color:"gray", fontSize:{ xs:"14px", md:"14px"}}}>{fechaFormateada}</Box>
         </Box>
   {newDetail?.imageUrl && (
@@ -75,15 +82,11 @@ return (
     />
   )}
         <Box component="div" sx={{width:{ xs:"100%", md:'50%'}}}>
-          <Box component="h1" sx={{fontSize:{xs:'25px', md:"40px"}, fontWeight:"bold", my:3}}>
+          <Box component="h1" sx={{fontSize:{xs:'25px', md:"40px"}, fontWeight:"bold", my:3, whiteSpace: 'pre-line', lineHeight: 1.6, }}>
               {newDetail.title}
           </Box>
-            <Box mt={5}>
-                {newDetail?.content?.paragraphs?.map((p, index) => (
-                <Box sx={{fontSize:{xs:'16px', md:"20px"}}} key={index} mb={1}>
-                    {p}
-                </Box>
-                ))}
+            <Box mt={3} sx={{fontSize: '20px', whiteSpace: 'pre-line', lineHeight: 1.6,}}>
+                {newDetail?.content}
             </Box>        
   
   </Box>
