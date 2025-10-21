@@ -20,6 +20,7 @@ import PublicRoute from './components/ProtectedRoute/PublicRoute';
 import { ToastContainer } from 'react-toastify';
 import Admin from './pages/Admin';
 import GameMenu from './pages/GameMenu';
+import Game from'./pages/Game'
 
 function App() {
   return (
@@ -47,7 +48,8 @@ function App() {
             <Route path="/arenas" element={<Sands />} />
             <Route path='/allnews' element={<AllNews/>}/>
             <Route path='/profile/:id_user' element={<ProfileUser/>} />
-            <Route path='/admin' element={<ProtectedRoute requiredRole={"superadmin"}><Admin /></ProtectedRoute>} />
+              <Route path='/admin' element={<ProtectedRoute requiredRole={"superadmin"}><Admin /></ProtectedRoute>} />
+              <Route path="/game" element={<Game />} />
       <Route path='/settings' element={
         <ProtectedRoute>
           <SettingsProfile/>

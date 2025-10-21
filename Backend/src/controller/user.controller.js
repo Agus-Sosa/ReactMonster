@@ -25,6 +25,16 @@ class UserController {
         }
     }
 
+    async getAdmins(req, res) {
+        try {
+            const admins = await this.userService.getAdmins();
+            res.status(200).json(admins)
+        } catch (error) {
+            res.status(500).json({status: "error", message:"Error al obtener todos los usuarios"})
+        }
+    }
+    
+
     async getUserById(req, res, next){
         try {
             const id= req.params.id;

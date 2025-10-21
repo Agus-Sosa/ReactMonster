@@ -16,6 +16,12 @@ class UserService {
         });
     }
 
+    async getAdmins () {
+        return await this.modelUser.findAll({
+            where: { role : "admin" },
+        });
+    }
+
     async getUserById (id) {
         const user = await this.modelUser.findByPk(id);
     
