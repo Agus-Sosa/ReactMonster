@@ -18,6 +18,9 @@ import AllNews from './components/News/AllNews';
 import SettingsProfile from './components/Profile/SettingsProfile';
 import PublicRoute from './components/ProtectedRoute/PublicRoute';
 import { ToastContainer } from 'react-toastify';
+import Admin from './pages/Admin';
+import GameMenu from './pages/GameMenu';
+import Game from'./pages/Game'
 
 function App() {
   return (
@@ -44,9 +47,9 @@ function App() {
             <Route path='/monsters/:id'element={<MonsterDetail/>}/>
             <Route path="/arenas" element={<Sands />} />
             <Route path='/allnews' element={<AllNews/>}/>
-            <Route path='/profile/:id_user' element={
-              <ProfileUser/>
-      }/>
+            <Route path='/profile/:id_user' element={<ProfileUser/>} />
+              <Route path='/admin' element={<ProtectedRoute requiredRole={"superadmin"}><Admin /></ProtectedRoute>} />
+              <Route path="/game" element={<Game />} />
       <Route path='/settings' element={
         <ProtectedRoute>
           <SettingsProfile/>
@@ -68,6 +71,11 @@ function App() {
             </PublicRoute>
 
               } />
+            <Route path='/menuGame' element={ 
+              <ProtectedRoute>
+                <GameMenu/>
+              </ProtectedRoute>
+            } />
 
           {/* Ruta para manejar errores */}
           <Route path="*" element={<ErrorPage />} />

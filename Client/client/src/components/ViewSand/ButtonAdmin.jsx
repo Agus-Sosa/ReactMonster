@@ -69,6 +69,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
       
       // cerrar modal
       handleCloseForm();
+      fetchArenas();
       //refrescar datos en el front
       fetchArenas();
       

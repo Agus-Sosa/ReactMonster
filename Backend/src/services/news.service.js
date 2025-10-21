@@ -8,12 +8,13 @@ class NewService{
     }
     // returns an array with all the records
     async getAllNews () {
-        return await this.modelNew.findAll();
+        return await this.modelNew.findAll({where:{state:true} });
     }
     //get a limited number of news items, sorted by creation date descending
     async getSomeNews(limit){
         return await this.modelNew.findAll({
-            limit:limit,
+            limit: limit,
+            where:{state:true},
             order: [['createdAt', 'DESC']]
         })
     }
@@ -33,9 +34,8 @@ class NewService{
     }
     // delete a news item by its ID
     async deleteNewById(id) {
-        return await this.modelNew.destroy({
-            where: {id} 
-        });
+        console.log("Deleting news item with ID:", id);
+        return await this.modelNew.update({ state: false }, {where:{id_news:id}});
     }
     // I got tired, the name tells you what it does
     async createNew (newNew) {    
@@ -45,7 +45,7 @@ class NewService{
 
     async updateNew (id,newUpdate) {
         
-        const [updateData]= await this.modelNew.update(newUpdate, {where:{id}});
+        const [updateData]= await this.modelNew.update(newUpdate, {where:{id_news:id}});
     
     
         if(updateData ===0) {

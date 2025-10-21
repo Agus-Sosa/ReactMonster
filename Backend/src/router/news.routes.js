@@ -21,6 +21,11 @@ router.get('/someNews',async(req,res,next)=>{
 router.post('/',verifyToken, isAdmin,validateNew, async(req, res, next)=>{ 
     await newController.createNew(req, res, next)
 })
+
+router.put('/:id', verifyToken, isAdmin, validateNew, async (req, res, next) => { 
+    await newController.updateNew(req, res, next)
+})
+
 // get a specific news item by ID
 // middleware `validateGetNewById` verifies that the news item exists
 router.get("/:id", validateGetNewById,async(req, res, next)=> {
@@ -28,7 +33,7 @@ router.get("/:id", validateGetNewById,async(req, res, next)=> {
 })  
 // delete a news item by ID
 // middleware `validateGetNewById` ensures that the news item exists before deleting
-router.delete("/:id",validateGetNewById, async(req,res, next)=> {
+router.delete("/:id",verifyToken, isAdmin, async(req,res, next)=> {
     await newController.deleteNewById(req,res, next)
 })
 // update a news item by ID

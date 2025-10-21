@@ -8,7 +8,7 @@ export const validateNewPost=(req,res,next)=>{
         res.status(404).json({status:"error", message:"el titulo debe contener mas de 3 caracteres y menos de 30."})
     }
     if (!content || content.length<3 || content.length>200){
-        res.status(404).jsno({status:"error", message:"el contenido de el post debe tener mas de 3 caracteres y menos de 200."})
+        res.status(404).json({status:"error", message:"el contenido de el post debe tener mas de 3 caracteres y menos de 200."})
     }
     if (haveBadWord(title)){
         res.status(404).json({status:"error", message:"El titulo contiene palabras no permitidas."})

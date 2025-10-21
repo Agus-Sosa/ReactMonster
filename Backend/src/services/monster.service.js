@@ -12,6 +12,11 @@ class MonsterService {
     }
 
 
+    async createNewMonster(newMonster) {
+        const monster = await this.modelMonster.create(newMonster);
+        return monster;
+    }
+
     async getMonsterById(id) {
         const monster = await this.modelMonster.findByPk(id);
         return monster
@@ -23,6 +28,20 @@ class MonsterService {
                 return monster;
         
     
+    }
+
+    async updateMonster(id, monsterUpdate) { 
+        const [updateData] =  this.modelMonster.update(monsterUpdate, {where:{monster_id:id}});
+         if(updateData ===0) {
+            throw new Error("No hay cambios");
+        }
+
+        const updatedMonster = await this.modelMonster.findByPk(id);
+        return updatedMonster;
+    }
+
+    async deleteMonsterById(id) { 
+        return await this.modelMonster.destroy({where:{monster_id:id}});
     }
 
 
