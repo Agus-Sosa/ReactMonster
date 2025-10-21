@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import NewCard from './NewCard';
 
 const NewCarouselMobile = ({ inf }) => {
-  console.log("inf en NewCarouselMobile:", inf);
   return (
     <Box
       sx={{
@@ -23,8 +22,8 @@ const NewCarouselMobile = ({ inf }) => {
     >
       {inf.map((notice) => (
         <NewCard
-          key={notice.id_news}
-          id={notice.id_news}
+          key={notice.id}
+          id={notice.id}
           imageUrl={notice.imageUrl}
           resume={notice.resume}
           title={notice.title}

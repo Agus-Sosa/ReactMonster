@@ -4,123 +4,67 @@ import { useNavigate, useParams } from 'react-router-dom'
 import PageContainer from '../Layout/PageContainer/PageContainer';
 import { AuthContext } from '../../context/AuthContext';
 import DeleteBtnModal from '../Buttons/BtnDelete/DeleteBtnModal';
-import UpdateBtn from '../Buttons/BtnUpdate/UpdateBtn';
-import UpdateBtnModal from '../Buttons/BtnUpdate/UpdateBtnModal';
 
 const NewDetails = () => {
   const { user, token } = useContext(AuthContext);
-  const [newDetail, setNewDetail] = useState({});
-  const { id } = useParams();
-  const [notNew, setNotNew] = useState(false);
-  const navigate = useNavigate();
+  console.log("user en NewDetails:", user);
+    const [newDetail, setNewDetail] = useState({});
+    const {id}  = useParams();
+    const [notNew, setNotNew] = useState(false);
+    const navigate =useNavigate();
   const [openModal, setOpenModal] = useState(false);
-  const [openModalUpdate, setOpenModalUpdate] = useState(false);
-  const handleClose = () => {
+  const handleClose = () => { 
     setOpenModal(false);
   }
-  const handleOpenModal = () => {
+  const handleOpenModal = () => { 
     setOpenModal(true);
   }
 
-  const handleOpenUpdateModal = () => {
-    setOpenModalUpdate(true);
-  }
-
-  const handleCloseUpdateModal = () => {
-    setOpenModalUpdate(false);
-  }
 
 
     
-  useEffect(() => {
-    const fetchGetNew = async () => {
+ useEffect(() => {
+  const fetchGetNew = async ()=> {
+    try {
+    const res = await fetch(`http://localhost:8080/news/${id}`);
+
+    if(!res.ok) {
+      setNotNew(true);
+      return;
+    } 
+    const data = await res.json();
+    setNewDetail(data.new);
+    } catch (error) {
+      console.log(error);
+      setNotNew(true);
+    }
+    
+  }
+  fetchGetNew();
+
+ }
+   , [id]) 
+  const handleDelete =async () => { 
       try {
-        const res = await fetch(`http://localhost:8080/news/${id}`);
+        const res = await fetch(`http://localhost:8080/news/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          method: "DELETE",
+        })
 
         if (!res.ok) {
-          setNotNew(true);
+          console.log("Error al eliminar la noticia");
           return;
         }
-        const data = await res.json();
-        setNewDetail(data.new);
-      
+        navigate('/allnews');
+
+
       } catch (error) {
-        console.log(error);
-        setNotNew(true);
+        console.log(error)
       }
-    
-    }
-    fetchGetNew();
-
   }
-    , [id])
-  
-  const handleDelete = async () => {
-    try {
-      const res = await fetch(`http://localhost:8080/news/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        method: "DELETE",
-      })
-
-      if (!res.ok) {
-        console.log("Error al eliminar la noticia");
-        return;
-      }
-      navigate('/allnews');
-
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const initialFieldInputs = {
-    title: newDetail.title || '',
-    imageUrl: newDetail.imageUrl || '',
-    resume: newDetail.resume || '',
-    content: newDetail.content || '',
-  }
-  
-  const inputsFields = [
-    { label: "Título", name: "title", type: "text", required: true },
-    { label: "Imagen (URL)", name: "imageUrl", type: "url", required: false },
-    { label: "Resumen", name: "resume", type: "text", required: true },
-    { label: "Contenido", name: "content", type: "text", required: true },
-    
-  ]
-
-  const handleUpdate = async(updatedNew) => { 
-    try { 
-
-      const res = await fetch(`http://localhost:8080/news/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        }
-        ,
-        method: "PUT",
-        body: JSON.stringify(updatedNew)
-      })
-      
-
-
-      if (!res.ok) { 
-        console.log("Error al actualizar la noticia");
-        return;
-      }
-
-      const data = await res.json();
-      setNewDetail(data.updatedNew);
-
-    }
-    catch (error) { }
-  }
-
-
-
 
 console.log("newDetail:", newDetail)
 
@@ -170,17 +114,12 @@ return (
     />
   )}
         <Box component="div" sx={{ width: { xs: "100%", md: '50%' } }}>
-          <Box sx={{display:'flex', alignItems:'center', gap:1, mt:3, mb:1}}>
-
           { user && (user.role === 'admin' || user.role === 'superadmin') &&
-          <Button variant="contained" color="error"  onClick={handleOpenModal}>
+          <Button variant="contained" color="error" sx={{mt:3, mb:1}} onClick={handleOpenModal}>
             Eliminar
           </Button>
            }
-            <UpdateBtn onClick={handleOpenUpdateModal} userRole={user?.role} />
-            </Box>
           <DeleteBtnModal onDelete={handleDelete} userRole={user?.role} onClose={handleClose} open={openModal} />
-          <UpdateBtnModal onClose={handleCloseUpdateModal} open={openModalUpdate } onUpdate={handleUpdate} initFieldsData={initialFieldInputs} userRole={user?.role} inputFields={inputsFields}/>
           <Box component="h1" sx={{ fontSize: { xs: '25px', md: "40px" }, fontWeight: "bold", my: 3, whiteSpace: 'pre-line', lineHeight: 1.6, }}>
               {newDetail.title}
           </Box>

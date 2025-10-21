@@ -41,8 +41,7 @@ const News = () => {
   <Box
   sx={{
     background: "#E3E0C3",
-        color: "white",
-    
+    color: "white",
     minHeight: { md: "70vh" },
     display: "flex",
     alignItems: "center",
@@ -97,13 +96,7 @@ const News = () => {
           {/* <ArrowRightAltIcon style={{ color: "#380E00" }} /> */}
       </Box>
     </Box>
-        {
-          notices.length === 0 && (
-            <Box sx={{fontSize:{xs: "15px",md:"22px"}, color:"black"}}>
-              No hay noticias disponibles en este momento.
-              </Box>
-          )
-        }
+
     {!mobile ? (
       <Box
         sx={{
