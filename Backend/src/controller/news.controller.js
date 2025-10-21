@@ -83,7 +83,7 @@ class NewController {
 
             const updateNew = await this.newService.updateNew(id, newData);
 
-            res.status(200).json({status: "success", data:updateNew})
+            res.status(200).json({status: "success", updatedNew:updateNew})
 
         } catch (error) {
             next(error);

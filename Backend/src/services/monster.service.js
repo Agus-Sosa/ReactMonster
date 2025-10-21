@@ -31,7 +31,13 @@ class MonsterService {
     }
 
     async updateMonster(id, monsterUpdate) { 
-        return await this.modelMonster.update(monsterUpdate, {where:{monster_id:id}});
+        const [updateData] =  this.modelMonster.update(monsterUpdate, {where:{monster_id:id}});
+         if(updateData ===0) {
+            throw new Error("No hay cambios");
+        }
+
+        const updatedMonster = await this.modelMonster.findByPk(id);
+        return updatedMonster;
     }
 
     async deleteMonsterById(id) { 
