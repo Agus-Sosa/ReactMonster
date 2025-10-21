@@ -11,6 +11,7 @@ import {
   Stack,
 } from "@mui/material";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import AdminUsersTable from "./WhoIsAdmin.jsx";
 // ODIO EL FRONT CON TODA MI ALMA
 const roles = [
   { value: "user", label: "Usuario" },
@@ -27,6 +28,7 @@ const UserRoleManager = () => {
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const { token } = useContext(AuthContext);
+  const [refreshAdmins, setRefreshAdmins] = useState(false); // para refrescar la lista de mui
 
   const handleSearch = async () => {
     setLoading(true);
@@ -91,6 +93,7 @@ const UserRoleManager = () => {
       const data = await response.json();
       setSuccessMsg(`Rol actualizado correctamente a "${role}"`);
       setUserFound(data.data);
+      setRefreshAdmins((prev) => !prev); //aviso a la tabla
     } catch (err) {
       setError(err.message);
     } finally {
@@ -99,6 +102,7 @@ const UserRoleManager = () => {
   };
 
   return (
+    <>
     <Paper
       elevation={4}
       sx={{
@@ -207,7 +211,9 @@ const UserRoleManager = () => {
           </Stack>
         )}
       </Stack>
-    </Paper>
+      </Paper>
+      <AdminUsersTable refresh={refreshAdmins}/>
+      </>
   );
 };
 
