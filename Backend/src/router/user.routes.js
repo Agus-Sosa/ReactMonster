@@ -16,6 +16,10 @@ router.get('/', async(req, res)=> {
 router.get('/email/:user_email',verifyToken,isAdmin, async(req, res)=> {
     await userController.getUserByMail(req, res);
 })
+// para obtener los admins
+router.get('/admins',verifyToken,isAdmin, async(req, res)=> {
+    await userController.getAdmins(req, res);
+})
 router.get("/:id", validateGetUserById,async(req, res, next)=> {
     await userController.getUserById(req,res, next);
 })  
