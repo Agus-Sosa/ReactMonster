@@ -8,6 +8,7 @@ import DetailPublish from "../detailPublic/DetailPublish.jsx";
 import CommentsSection from "../Forum-Comments/CommentsSection.jsx";
 import CreatePost from "../../Forum/Forum-Posts/CreatePost.jsx";
 import ModalAuthPrev from "../../Authentication/ModalAuthPrev";
+import LoginRequired from "../../NeedLogin/NeedLogin.jsx";
 import { AuthContext } from "../../../context/AuthContext";
 
 function ForoJoins({ info }) {
@@ -67,6 +68,7 @@ function ForoJoins({ info }) {
     return post.deleted === false;
   });
 
+  if (!user) return <LoginRequired />;
   if (loadingCategories) return <Loading />;
   if (error) return <ErrorComp />;
 
@@ -114,13 +116,7 @@ function ForoJoins({ info }) {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => {
-                if (!user) {
-                  setShowAuthModal(true);
-                } else {
-                  setShowCreateForm(true);
-                }
-              }}
+              onClick={() => setShowCreateForm(true)}
             >
               Crear Post
             </Button>
@@ -177,7 +173,7 @@ function ForoJoins({ info }) {
         {/* ---------- DETALLE + COMENTARIOS ---------- */}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
-            <DetailPublish post={selectedPost} />
+            <DetailPublish post={selectedPost} creator={selectedPost.User} />
             <CommentsSection postId={selectedPost} />
           </Box>
         )}

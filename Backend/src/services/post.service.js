@@ -1,4 +1,4 @@
-import { Post } from "../models/Post.js";
+import { User, Post } from "../models/index.js";
 
 class PostService {
   constructor() {
@@ -6,11 +6,29 @@ class PostService {
   }
 
   async getAllPost() {
-    return await this.modelPost.findAll();
+    return await this.modelPost.findAll(
+
+      {
+              include: [
+                   {
+                     model: User,
+                     attributes: ["user_name","range","profile_picture"],
+                 }]  
+            }
+    );
   }
 
   async getPostById(id) {
-    return await this.modelPost.findByPk(id);
+    return await this.modelPost.findByPk({
+      id,
+      include: [
+        {
+          model: User,
+          attributes: ["user_name", "range", "profile_picture"],
+        }]
+    }
+    );
+  
   }
 
   async getPostByCategory(id) {
@@ -18,8 +36,14 @@ class PostService {
       where: {
         id_category: id,
         // deleted: false //  exclude soft-deleted esto es una giga miarda 
-      }
+      },
+      include: [
+      {
+        model: User,
+        attributes: ["user_name","range","profile_picture"],
+         }]
     });
+    
   }
     
   async createNewPost(newPost) {

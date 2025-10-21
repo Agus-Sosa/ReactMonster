@@ -43,7 +43,9 @@ class NewController {
     // POST /news
     async createNew (req, res, next) {
         try {
-            const {id_admin,title,resume, content}= req.body; // data sent by the client
+            const { title, resume, content } = req.body; // data sent by the client
+            console.log("user_role",req.user);
+            const id_admin = req.user.id;
             const newNew = {
                 id_admin,
                 title,
@@ -62,7 +64,7 @@ class NewController {
     }
     // delete a news item by its ID
     // DELETE /news/:id
-        async deleteNewById (req, res) {
+        async deleteNewById (req, res, next) {
         try {
         
             const {id}= req.params;
@@ -81,7 +83,7 @@ class NewController {
 
             const updateNew = await this.newService.updateNew(id, newData);
 
-            res.status(200).json({status: "success", data:updateNew})
+            res.status(200).json({status: "success", updatedNew:updateNew})
 
         } catch (error) {
             next(error);

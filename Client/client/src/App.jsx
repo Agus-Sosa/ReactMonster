@@ -16,12 +16,24 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ProfileUser from './components/Profile/ProfileUser';
 import AllNews from './components/News/AllNews';
 import SettingsProfile from './components/Profile/SettingsProfile';
+import PublicRoute from './components/ProtectedRoute/PublicRoute';
+import { ToastContainer } from 'react-toastify';
+import Admin from './pages/Admin';
+import GameMenu from './pages/GameMenu';
 
 function App() {
   return (
     <>
     <AuthenticationContextProvider>
-
+      <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+          theme="colored"
+        />
       <Router>
         <Routes>
           {/* Rutas que usan el LayoutLanding */}
@@ -34,9 +46,8 @@ function App() {
             <Route path='/monsters/:id'element={<MonsterDetail/>}/>
             <Route path="/arenas" element={<Sands />} />
             <Route path='/allnews' element={<AllNews/>}/>
-            <Route path='/profile/:id_user' element={
-              <ProfileUser/>
-      }/>
+            <Route path='/profile/:id_user' element={<ProfileUser/>} />
+            <Route path='/admin' element={<ProtectedRoute requiredRole={"superadmin"}><Admin /></ProtectedRoute>} />
       <Route path='/settings' element={
         <ProtectedRoute>
           <SettingsProfile/>
@@ -46,8 +57,23 @@ function App() {
           </Route>
 
           {/* Rutas sin un layout */}
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+            <Route path="/register" element={
+              <PublicRoute>
+                  <Register />
+              </PublicRoute>
+             } />
+            <Route path="/login" element={
+              <PublicRoute>
+
+                <Login />
+            </PublicRoute>
+
+              } />
+            <Route path='/menuGame' element={ 
+              <ProtectedRoute>
+                <GameMenu/>
+              </ProtectedRoute>
+            } />
 
           {/* Ruta para manejar errores */}
           <Route path="*" element={<ErrorPage />} />

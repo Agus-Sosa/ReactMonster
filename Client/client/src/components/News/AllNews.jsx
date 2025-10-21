@@ -1,50 +1,119 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import PageContainer from '../Layout/PageContainer/PageContainer'
-import news_title from '../../assets/img/news_title.png'
-import hero_bg_home from '../../assets/img/hero_bg_home.png'
-import NewCard from './NewCard'
-import CreateNewPost from './CreateNewPost'
+
+import NewCardContainer from './NewCardContainer'
+import SearchInput from '../SearchInput/SearchInput'
+import BtnFloatingCreate from '../Buttons/BtnCreate/BtnFloatingCreate'
+import { AuthContext } from '../../context/AuthContext'
+import CreateBtnModal from '../Buttons/BtnCreate/CreateBtnModal'
 const AllNews = () => {
-    const [news, setNews]= useState([])
+  const [openModal, setOpenModal] = useState(false);
+  const {user, token} = useContext(AuthContext);
+  const [news, setNews] = useState([])
+    const [searchValue, setSearchValue] = useState("");
+
+  const handleClose = () => { 
+    setOpenModal(false);
+  }
+  const handleOpen = () => {
+    setOpenModal(true);
+  }
+  
+  
     const fetchNews = () => {
   fetch("http://localhost:8080/news/")
     .then(res => res.json())
     .then(data => setNews(data))
     .catch(err => console.log(err));
-};
+  };
+  
+  
+  
+const handleCreate =async (newNew) => { 
+      try {
+        const res = await fetch(`http://localhost:8080/news/`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          method: "POST",
+          body: JSON.stringify(newNew)
+        })
+
+        if (!res.ok) {
+          console.log("Error al eliminar la noticia");
+          return;
+        }
+
+
+      } catch (error) {
+        console.log(error)
+      }
+  }
+
+      const inputFields = [
+    { label: "Título", name: "title", type: "text", required: true },
+    { label: "Imagen (URL)", name: "imageUrl", type: "url", required: false },
+    { label: "Resumen", name: "resume", type: "text", required: true },
+    { label: "Contenido", name: "content", type: "text", required: true },
+
+    ];
+
 
 useEffect(() => {
   fetchNews();
-}, []);
+}, [news]);
+  
+    const handleSearch =(newSearchValue)=> {
+    setSearchValue(newSearchValue);
+  }
+
+  const filteredNews = news.filter((n)=> {
+    if(!searchValue) return news
+    const lowerCaseSearch = searchValue.toLowerCase();
+
+    return (
+      n.title.toLowerCase().includes(lowerCaseSearch) ||
+      n.resume.toLowerCase().includes(lowerCaseSearch)
+    )
+  })
 
   return (
-    <Box>
-        <Box  sx={{width:"100%", display:"flex", alignItems:"center" ,height:{xs:"40vh", md:"60vh", background: `url(${hero_bg_home})`, backgroundSize:"cover",}}}>
-      <PageContainer>
-      <Box component='img' src={news_title} sx={{width:{ xs: "300px", md:"500px"}}} ></Box>
+    <Box sx={{backgroundColor:"#E3E0C3", minHeight:"100vh", width:"100%", py:5}}>
+  <Box sx={{position:"sticky", top:0, zIndex:10, backgroundColor:"#E3E0C3"}}>
+    <PageContainer>
+      <Box sx={{display:'flex', flexDirection:{xs:"column",md:"row"}, justifyContent:{xs:"start ",md:"space-between"}}}>
+            <BtnFloatingCreate onClick={handleOpen} user={user} />
+            <CreateBtnModal onClose={handleClose} onCreate={handleCreate} open={openModal} userRole={user?.role} inputFields={inputFields}/>
+            <SearchInput nameInput={"news"} placeholder={"Buscar noticia..."} onSearch={handleSearch} search={searchValue} />
+      </Box>
+    </PageContainer>
+  </Box>
 
-      </PageContainer >
-    </Box > 
-    <Box sx={{backgroundColor:"#E3E0C3", minHeight:"100vh", width:"100%", paddingY:5}}>
+  <PageContainer>
+        <NewCardContainer news={filteredNews} />
+        
+        
+        {
+          filteredNews.length === 0 && (
+            <Box sx={{fontSize:"22px"}}>
+              No existe la noticia con la terminacion:
+              <Box sx={{fontWeight:"bold"}}>
+              {searchValue}
 
-        <PageContainer >
-          <CreateNewPost refreshNews={fetchNews}/>
-            <Box sx={{display:"flex", flexWrap:"wrap", gap:2, justifyContent:"center", my:7}}>
-                {
-                news.map((newItem)=> (
-                    <NewCard date={newItem.date} id={newItem.id_news} imageUrl={newItem.imageUrl} resume={newItem.resume} title={newItem.title} key={newItem.id_news} />
-                ))
-                
-            }
+              </Box>
             </Box>
-           
-        </PageContainer>
-            </Box>
+          )
+        }
+        <Box>
+          
+        </Box>
+  </PageContainer>
+</Box>
 
-    </Box>
   )
 }
 

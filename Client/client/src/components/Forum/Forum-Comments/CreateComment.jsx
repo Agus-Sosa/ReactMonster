@@ -8,7 +8,7 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
   const [comment, setComment] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(AuthContext);  
+  const { user, token } = useContext(AuthContext);  
   if(!user) return null;
 
   const handleSubmit = async (e) => {
@@ -32,10 +32,10 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
     comment: comment.trim(),
-    id_user: user.id,
     
   }),
     });

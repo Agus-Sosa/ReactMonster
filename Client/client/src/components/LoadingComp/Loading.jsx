@@ -15,7 +15,7 @@ export default function Loading() {
         backgroundBlendMode: "color-dodge",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center", // centramos vertical y horizontal
+        alignItems: "center", 
       }}
     >
       <Box

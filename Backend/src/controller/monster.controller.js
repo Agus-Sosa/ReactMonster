@@ -27,6 +27,16 @@ class MonsterController {
         }
     }
 
+    async createNewMonster(req, res, next) { 
+        try {
+            const monsterData = req.body;
+            const newMonster = await this.monsterService.createNewMonster(monsterData);
+            res.status(200).json({ status: "success", message: "Monstruo creado con exito", monster: newMonster });
+            
+        } catch (error) {
+            next(error)
+        }
+    }
 
     async getMonsterByName(req, res, next) {
         try {
@@ -38,6 +48,27 @@ class MonsterController {
         }
     }
 
+    async updateMonster(req, res, next) { 
+        try {
+            const {id} = req.params;
+            const monsterUpdate = req.body;
+            await this.monsterService.updateMonster(id, monsterUpdate);
+            res.status(200).json({status: "success", message: "Monstruo actualizado con exito", updatedMonster: monsterUpdate});
+        } catch (error) {
+            next(error)
+        }
+    }
+
+
+    async deleteMonsterById(req, res, next) {
+        try {
+            const { id } = req.params;
+            await this.monsterService.deleteMonsterById(id);
+            res.status(200).json({status: "success", message: "Monstruo eliminado con exito"});
+        } catch (error) {
+            next(error)
+        }
+    }
  
 }
 
