@@ -25,7 +25,7 @@ export default function CardUser({arena, fetchArenas}) {
           component="img"
           height="250"
           image={arena.arena_image_url}
-          alt="green iguana"
+          alt={`Imagen ${arena.arena_name}`}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily:"Anton"}}>
@@ -59,13 +59,19 @@ export default function CardUser({arena, fetchArenas}) {
           p: { xs: 2, sm: 4 },
           borderRadius: '10px'
         }}>
+          <Box>
+            <Button onClick={handleClose} variant="contained" color="error" sx={{ marginLeft: 'auto', display: 'block'}} >
+            X
+            </Button>
+          </Box>
 
-        <CardMedia
+          <CardMedia
           component="img"
           height="325"
           image={arena.arena_image_url}
-          alt="green iguana"
-        />
+          alt={`Imagen ${arena.arena_name}`}
+          />
+  
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily:"Anton",fontSize:{ xs: '18px', sm: '25px' }, textAlign:'center' }}>
             {arena.arena_name}

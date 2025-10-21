@@ -6,10 +6,13 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Modal, Button, TextField } from '@mui/material';
 import { AuthContext } from '../../context/AuthContext';
+import { toast } from 'react-toastify';
+
 
 const AddArena = ({ fetchArenas }) => {
 
-    const {user} = useContext(AuthContext);
+    const { user, token } = useContext(AuthContext);
+    
 
     const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
     if (!isAdmin) {
@@ -27,6 +30,9 @@ const AddArena = ({ fetchArenas }) => {
     }
     const handleCloseMod = () => {
         setModal(false);
+        setNewDescription("");
+        setNewName("");
+        setNewImg("");
     }
     const handleNewImg = (e) => {
         setNewImg(e.target.value);
@@ -41,29 +47,35 @@ const AddArena = ({ fetchArenas }) => {
     const handleNewArena = async (e) => {
         e.preventDefault()
         const newArena = {
-            arena_name: newName,
-            arena_description: newDescription,
-            arena_image_url: newImg,
+            arena_name: newName.trim(),
+            arena_description: newDescription.trim(),
+            arena_image_url: newImg.trim(),
         };
+        if (!newArena.arena_name || !newArena.arena_description || !newArena.arena_image_url) {
+            toast.error("Se debe completar todos los campos antes de subir la arena.");
+        return;
+        }
         try {
             const responeee = await fetch(`http://localhost:8080/arenas`, {
                 method: "post",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "authorization":`bearer ${token}`
                 },
                 body: JSON.stringify(newArena)
             });
             
 
             if (responeee.ok) {
-                alert("se creo con exito");
-            }
-            setNewDescription("");
-            setNewName("");
-            setNewImg("");
-            fetchArenas();
+                toast.success('Arena creada correctamente.');
+                }
+                setNewDescription("");
+                setNewName("");
+                setNewImg("");
+                handleCloseMod();
+                fetchArenas();
         } catch (error) {
-            console.error("Error:", error);
+            toast.error('error al crear la Arena.');
             alert("error");
         }
          
@@ -101,6 +113,7 @@ const AddArena = ({ fetchArenas }) => {
             </div>
     
             <Modal open={modal} onClose={handleCloseMod}>
+               
                 <Box
                     sx={{
                         position: "absolute",
@@ -142,6 +155,9 @@ const AddArena = ({ fetchArenas }) => {
 
                     <Button variant="contained" onClick={handleNewArena}  >
                         Guardar
+                    </Button>
+                    <Button variant="contained" color="error" onClick={handleCloseMod}  >
+                        Cancelar
                     </Button>
                 </Box>
             </Modal>

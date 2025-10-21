@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Modal, Button, Dialog, TextField, DialogActions, DialogTitle } from '@mui/material';
 import Box from '@mui/material/Box';
 import { AuthContext } from '../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 
 export default function ButtonAdmin({ arena, fetchArenas }) {
-
     
   const [confirmacion, setConfirmacion] = React.useState(false);
   const [formulario, setFormulario] = React.useState(false);
@@ -13,7 +13,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
   const [nombre, setNombre] = React.useState(arena.arena_name);
   const [descripcion, setDescripcion] = React.useState(arena.arena_description);
 
-  const { user } = React.useContext(AuthContext)
+  const { user, token } = React.useContext(AuthContext)
   const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
   if (!isAdmin) {
     return null;
@@ -22,28 +22,36 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
     e.preventDefault();
     try {
       const responsee = await fetch(`http://localhost:8080/arenas/${arena.id}`, {
+        headers: {
+          "Content-type":"application/json",
+          "authorization":`bearer ${token}`
+        },
         method: "delete"
       })
       if (responsee.ok) {
-        alert("la arena se elimino con exito");
+        toast.success('Arena eliminada correctamente.');
       }
       handleCloseConf();
       fetchArenas();
-      // window.location.reload();
 
     } catch (error) {
-      console.error("error:", error)
+      toast.error('Error al eliminar Arena.');
     }
   }
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!nombre || !descripcion || !imagen || !nombre.trim() || !descripcion.trim() || !imagen.trim()) {
+          toast.error("Se debe completar todos los campos antes de subir la arena.");
+          return;
+        }
     try {
       const response = await fetch(`http://localhost:8080/arenas/${arena.id}`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "authorization":`bearer ${token}`
         },
         body: JSON.stringify({
           arena_image_url: imagen,
@@ -57,14 +65,16 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
       }
 
       const data = await response.json();
-      console.log("Arena actualizada:", data);
+      toast.success('Arena editada correctamente.');
+      
       // cerrar modal
       handleCloseForm();
-      fetchArenas();
       //refrescar datos en el front
-      // window.location.reload();
+      fetchArenas();
+      
     } catch (err) {
-      console.error("Error:", err);
+      toast.error('Error al editar Arena');
+      
     }
   };
 
@@ -93,6 +103,9 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
   }
   const handleCloseForm = () => {
     setFormulario(false);
+    setNombre(arena.arena_name)
+    setDescripcion(arena.arena_description)
+    setImagen(arena.arena_image_url)
   }
 
 
@@ -122,10 +135,10 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
       <Dialog open={confirmacion} onClose={handleCloseConf}>
         <DialogTitle>{"¿Estás seguro de que querés eliminar esta arena?"}</DialogTitle>
         <DialogActions>
-          <Button onClick={handleCloseConf} color="primary">
+          <Button variant="contained" color="primary" onClick={handleCloseConf} >
             Cancelar
           </Button>
-          <Button color="error" autoFocus onClick={handleEliminar}>
+          <Button variant="contained" color="error" autoFocus onClick={handleEliminar}>
             Eliminar
           </Button>
         </DialogActions>
@@ -173,6 +186,9 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
 
           <Button variant="contained" onClick={handleSubmit} >
             Guardar
+          </Button>
+          <Button variant="contained" color="error" onClick={handleCloseForm}  >
+            Cancelar
           </Button>
         </Box>
       </Modal>
