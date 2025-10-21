@@ -11,6 +11,8 @@ import ModalAuthPrev from "../../Authentication/ModalAuthPrev";
 import LoginRequired from "../../NeedLogin/NeedLogin.jsx";
 import { AuthContext } from "../../../context/AuthContext";
 
+// Borrar este comentario
+
 function ForoJoins({ info }) {
   const ruta = info.pathname;
   const { user } = useContext(AuthContext);
