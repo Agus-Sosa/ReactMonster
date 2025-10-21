@@ -21,6 +21,11 @@ router.get('/someNews',async(req,res,next)=>{
 router.post('/',verifyToken, isAdmin,validateNew, async(req, res, next)=>{ 
     await newController.createNew(req, res, next)
 })
+
+router.put('/:id', verifyToken, isAdmin, validateNew, async (req, res, next) => { 
+    await newController.updateNew(req, res, next)
+})
+
 // get a specific news item by ID
 // middleware `validateGetNewById` verifies that the news item exists
 router.get("/:id", validateGetNewById,async(req, res, next)=> {
