@@ -11,7 +11,7 @@ import ModalAuthPrev from "../../Authentication/ModalAuthPrev";
 import LoginRequired from "../../NeedLogin/NeedLogin.jsx";
 import { AuthContext } from "../../../context/AuthContext";
 
-// Borrar este comentario
+// Borrar este comentario fnsdfhsjdfius
 
 function ForoJoins({ info }) {
   const ruta = info.pathname;
