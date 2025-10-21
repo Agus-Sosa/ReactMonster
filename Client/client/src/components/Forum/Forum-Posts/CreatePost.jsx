@@ -58,8 +58,6 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
       id_category: categoryId
     };
 
-    console.log("CreatePost → payload con JWT:", payload);
-
     try {
       const res = await fetch("http://localhost:8080/post/newPost", {
         method: "POST",
@@ -89,31 +87,81 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: 2,
-        p: 2,
-        bgcolor: "#2a2a2a",
-        borderRadius: 2,
+        gap: 3,
+        p: 4,
+        bgcolor: "#1e1e1e",
+        borderRadius: 3,
+        boxShadow: 3,
+        maxWidth: "700px",
+        margin: "0 auto",
+        color: "white",
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h6">Nuevo Post</Typography>
-        <Button size="small" onClick={onCancel}>X</Button>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Typography variant="h5" fontWeight={600}>
+          Nuevo Post
+        </Typography>
+        <Button size="small" onClick={onCancel} sx={{ color: "#ff0000ff" }}>
+          x
+        </Button>
       </Box>
 
-      <TextField label="Título" value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
-      <TextField label="Resumen" value={resume} onChange={(e) => setResume(e.target.value)} required fullWidth />
-      <TextField label="Contenido" value={content} onChange={(e) => setContent(e.target.value)} required multiline rows={4} fullWidth />
+      <TextField
+        label="Título*"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+        fullWidth
+        variant="outlined"
+        InputLabelProps={{ style: { color: "#aaa" } }}
+        InputProps={{ style: { color: "white" } }}
+      />
+
+      <TextField
+        label="Resumen*"
+        value={resume}
+        onChange={(e) => setResume(e.target.value)}
+        required
+        fullWidth
+        variant="outlined"
+        InputLabelProps={{ style: { color: "#aaa" } }}
+        InputProps={{ style: { color: "white" } }}
+      />
+
+      <TextField
+        label="Contenido*"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        required
+        multiline
+        rows={6}
+        fullWidth
+        variant="outlined"
+        InputLabelProps={{ style: { color: "#aaa" } }}
+        InputProps={{ style: { color: "white" } }}
+      />
 
       {defaultCategory ? (
-        <TextField label="Categoría" value={selectedCat?.title || ""} disabled fullWidth />
+        <TextField
+          label="Categoría"
+          value={selectedCat?.title || ""}
+          fullWidth
+          variant="outlined"
+          InputLabelProps={{ style: { color: "#aaa" } }}
+          InputProps={{
+            readOnly: true,
+            style: { color: "white" }
+          }}
+        />
       ) : (
         <FormControl fullWidth required>
-          <InputLabel id="label-categoria">Categoría</InputLabel>
+          <InputLabel id="label-categoria" sx={{ color: "#aaa" }}>Categoría</InputLabel>
           <Select
             labelId="label-categoria"
             value={categoryId}
             label="Categoría"
             onChange={(e) => setCategoryId(e.target.value)}
+            sx={{ color: "white" }}
           >
             {categories.map((cat) => (
               <MenuItem key={cat.id_category} value={cat.id_category}>
@@ -124,12 +172,17 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
         </FormControl>
       )}
 
+
       {error && (
-        <Typography color="error" variant="body2">{error}</Typography>
+        <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+          {error}
+        </Typography>
       )}
 
-      <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
-        <Button variant="outlined" onClick={onCancel}>Cancelar</Button>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+        <Button variant="outlined" onClick={onCancel} sx={{ color: "#ccc", borderColor: "#555" }}>
+          Cancelar
+        </Button>
         <Button type="submit" variant="contained" disabled={loading}>
           {loading ? "Creando…" : "Crear Post"}
         </Button>
