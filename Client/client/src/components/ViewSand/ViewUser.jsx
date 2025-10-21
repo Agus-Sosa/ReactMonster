@@ -1,9 +1,5 @@
-import { useState, useEffect, useContext } from 'react';
-import Header from '../Header/Header'
-import Footer from '../Footer'
-import Card_Sand from '../Sands/Card_Sand'
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import iconoArena from '../../assets/img/arenas/iconoArena.png'
 import tituloArena from '../../assets/img/arenas/tituloArena.png'
 import "../Sands/arena.css"
 import Loading from "../LoadingComp/Loading"
