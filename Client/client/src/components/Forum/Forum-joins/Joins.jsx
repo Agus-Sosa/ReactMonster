@@ -6,6 +6,8 @@ import "./joins.css";
 function Joins({ informacion, onSelect, onRefresh }) {
   const { user, token } = useContext(AuthContext);
 
+  const isPost = !!informacion.id_post;
+
   const handleDelete = async () => {
     const res = await fetch(`http://localhost:8080/post/${informacion.id_post}`, {
       method: "DELETE",
@@ -53,36 +55,35 @@ function Joins({ informacion, onSelect, onRefresh }) {
         </CardContent>
       </CardActionArea>
 
-    {(user?.role === "admin" || user?.role === "superadmin") && (
-      <Box sx={{ position: "absolute", top: 8, right: 8 }}>
-        {informacion.deleted ? (
-          <Button
-            variant="outlined"
-            color="warning"
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleRevert();
-            }}
-          >
-            Revertir
-          </Button>
-        ) : (
-          <Button
-            variant="outlined"
-            color="error"
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleDelete();
-            }}
-          >
-            Eliminar
-          </Button>
-        )}
-      </Box>
-    )}
-
+      {isPost && (user?.role === "admin" || user?.role === "superadmin") && (
+        <Box sx={{ position: "absolute", top: 8, right: 8 }}>
+          {informacion.deleted ? (
+            <Button
+              variant="outlined"
+              color="warning"
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRevert();
+              }}
+            >
+              Revertir
+            </Button>
+          ) : (
+            <Button
+              variant="outlined"
+              color="error"
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete();
+              }}
+            >
+              Eliminar
+            </Button>
+          )}
+        </Box>
+      )}
     </Card>
   );
 }

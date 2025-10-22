@@ -1,4 +1,3 @@
-// src/components/Forum/Forum-joins/Forum-joins.jsx
 import React, { useState, useEffect, useContext } from "react";
 import { Box, Button, CircularProgress } from "@mui/material";
 import Joins from "./joins";
@@ -8,12 +7,13 @@ import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
 import DetailPublish from "../detailPublic/DetailPublish.jsx";
 import CommentsSection from "../Forum-Comments/CommentsSection.jsx";
 import CreatePost from "../../Forum/Forum-Posts/CreatePost.jsx";
-import { AuthContext } from "../../../context/AuthContext"; 
-import LoginRequired from '../../NeedLogin/NeedLogin.jsx';
+import ModalAuthPrev from "../../Authentication/ModalAuthPrev";
+import LoginRequired from "../../NeedLogin/NeedLogin.jsx";
+import { AuthContext } from "../../../context/AuthContext";
 
 function ForoJoins({ info }) {
   const ruta = info.pathname;
-  const { user } = useContext(AuthContext); 
+  const { user } = useContext(AuthContext);
 
   /*---- MAIN STATES ----*/
   const [categories, setCategories] = useState([]);
@@ -26,56 +26,58 @@ function ForoJoins({ info }) {
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [error, setError] = useState(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
-
+  const [showAuthModal, setShowAuthModal] = useState(false); 
   const text_to_route = ruta.replace("/", "/ ").toUpperCase();
-  
-  if (!user) { return <LoginRequired/>}
-    useEffect(() => {
-      fetch("http://localhost:8080/categories")
-        .then(res => {
-          if (!res.ok) throw new Error("Error al obtener categorias");
-          return res.json();
-        })
-        .then(data => setCategories(data.categorias))
-        .catch(err => setError(err.message))
-        .finally(() => setLoadingCategories(false));
-    }, []);
 
-    const handleSelectCategory = async cat => {
-      setSelectedCategory(cat);
-      setSelectedPost(null);
-      setLoadingPosts(true);
-      setError(null);
+  /*---- FETCH CATEGORIES ----*/
+  useEffect(() => {
+    fetch("http://localhost:8080/categories")
+      .then(res => {
+        if (!res.ok) throw new Error("Error al obtener categorias");
+        return res.json();
+      })
+      .then(data => setCategories(data.categorias))
+      .catch(err => setError(err.message))
+      .finally(() => setLoadingCategories(false));
+  }, []);
 
-      try {
-        const res = await fetch(
-          `http://localhost:8080/post/categorias/${cat.id_category}`
-        );
-        if (!res.ok) throw new Error("Error al obtener posts");
-        const data = await res.json();
-        setPosts(data);
-      } catch (err) {
-        setError(err.message);
-        setPosts([]);
-      } finally {
-        setLoadingPosts(false);
-      }
-    };
+  /*---- FETCH POSTS BY CATEGORY ----*/
+  const handleSelectCategory = async cat => {
+    setSelectedCategory(cat);
+    setSelectedPost(null);
+    setLoadingPosts(true);
+    setError(null);
 
-    const handleSelectPost = post => {
-      setSelectedPost(post);
-    };
+    try {
+      const res = await fetch(`http://localhost:8080/post/categorias/${cat.id_category}`);
+      if (!res.ok) throw new Error("Error al obtener posts");
+      const data = await res.json();
+      setPosts(data);
+    } catch (err) {
+      setError(err.message);
+      setPosts([]);
+    } finally {
+      setLoadingPosts(false);
+    }
+  };
 
-    //  filter deleted posts only for regular users
-    const visiblePosts = posts.filter(post => {
-      if (!user) return post.deleted === false;
-      if (user.role === "admin" || user.role === "superadmin") return true;
-      return post.deleted === false;
-    });
+  /*---- SELECT POST ----*/
+  const handleSelectPost = post => {
+    setSelectedPost(post);
+  };
 
-    if (loadingCategories) return <Loading />;
-    if (error) return <ErrorComp />;
-  
+  //  filter deleted posts only for regular users
+  const visiblePosts = posts.filter(post => {
+    if (!user) return post.deleted === false;
+    if (user.role === "admin" || user.role === "superadmin") return true;
+    return post.deleted === false;
+  });
+
+  /*---- CONDITIONAL RENDERING ----*/
+  if (!user) return <LoginRequired />;
+  if (loadingCategories) return <Loading />;
+  if (error) return <ErrorComp />;
+
   return (
     <Box
       sx={{
@@ -166,7 +168,7 @@ function ForoJoins({ info }) {
                     key={post.id_post}
                     informacion={post}
                     onSelect={handleSelectPost}
-                    onRefresh={() => handleSelectCategory(selectedCategory)} // new
+                    onRefresh={() => handleSelectCategory(selectedCategory)}
                   />
                 ))
               )
@@ -177,10 +179,16 @@ function ForoJoins({ info }) {
         {/* ---------- DETAILS + COMMENTS ---------- */}
         {selectedPost && (
           <Box sx={{ marginTop: "20px" }}>
-            <DetailPublish post={selectedPost} creator={selectedPost.User}/>
+            <DetailPublish post={selectedPost} creator={selectedPost.User} />
             <CommentsSection postId={selectedPost} />
           </Box>
         )}
+
+        {/* ---------- MODAL AUTH ---------- */}
+        <ModalAuthPrev
+          openModal={showAuthModal}
+          handleCloseModal={() => setShowAuthModal(false)}
+        />
       </Box>
     </Box>
   );
