@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from "react";
 import { Typography, Box, Pagination } from "@mui/material";
-import Comments from './Comments';
-import Loading from '../../LoadingComp/Loading';
-import CommentForm from './CreateComment.jsx';
-import { AuthContext } from '../../../context/AuthContext.jsx';
-import LoginRequired from '../../NeedLogin/NeedLogin.jsx';
+import Comments from "./Comments";
+import Loading from "../../LoadingComp/Loading";
+import CommentForm from "./CreateComment.jsx";
+import { AuthContext } from "../../../context/AuthContext.jsx";
+import LoginRequired from "../../NeedLogin/NeedLogin.jsx";
 
 function CommentsSection({ postId }) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);  
-  const [totalPages, setTotalPages] = useState(1); 
-  const { user } = useContext(AuthContext); 
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const { user } = useContext(AuthContext);
 
   if (!user) return <LoginRequired />;
 
@@ -20,7 +20,9 @@ function CommentsSection({ postId }) {
   const fetchComments = async (page = 1, limit = 5) => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8080/comments/${postId.id_post}?page=${page}&limit=${limit}`);
+      const res = await fetch(
+        `http://localhost:8080/comments/${postId.id_post}?page=${page}&limit=${limit}`,
+      );
       if (!res.ok) throw new Error("Error al cargar comentarios");
       const data = await res.json();
       setComments(data.comments);
@@ -48,13 +50,10 @@ function CommentsSection({ postId }) {
         border: "1px solid #ccc",
         borderRadius: 2,
         padding: 2,
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
       }}
     >
-      <Typography 
-        variant="subtitle1" 
-        sx={{ fontWeight: "bold", mb: 1 }}
-      >
+      <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>
         Comentarios
       </Typography>
 
@@ -82,8 +81,6 @@ function CommentsSection({ postId }) {
             id_user={userId}
             onCommentCreated={() => fetchComments(page)}
           />
-
-          
         </>
       )}
     </Box>

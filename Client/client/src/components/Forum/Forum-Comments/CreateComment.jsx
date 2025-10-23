@@ -1,61 +1,70 @@
-import React, { useState,  useContext } from "react";
-import { TextField, Button, Box, Typography, CircularProgress } from "@mui/material";
-import  haveBadWord  from "../../../../../../Backend/src/middleware/badwords.js"; 
-import { AuthContext } from '../../../context/AuthContext.jsx'
-import Loading from '../../LoadingComp/Loading';
+import React, { useState, useContext } from "react";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
+import haveBadWord from "../../../../../../Backend/src/middleware/badwords.js";
+import { AuthContext } from "../../../context/AuthContext.jsx";
+
 
 const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
   const [comment, setComment] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { user, token } = useContext(AuthContext);  
-  if(!user) return null;
+  const { user, token } = useContext(AuthContext);
+  if (!user) return null;
+  const maxLength = 500;
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (comment.trim().length < 3) {
-    setError("El comentario debe tener al menos 3 caracteres.");
-    return;
-  }
-
-  if (haveBadWord(comment)) {
-    setError("Tu comentario contiene palabras no permitidas.");
-    return;
-  }
-
-  try {
-    setLoading(true);
-    setError("");
-    console.log(user.id)
-    const response = await fetch(`http://localhost:8080/comments/${id_post}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify({
-    comment: comment.trim(),
-    
-  }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error del servidor: ${response.status}`);
+    if (comment.trim().length < 3) {
+      setError("El comentario debe tener al menos 3 caracteres.");
+      return;
     }
 
-    const newComment = await response.json();
+    if (haveBadWord(comment)) {
+      setError("Tu comentario contiene palabras no permitidas.");
+      return;
+    }
 
-    if (onCommentCreated) await onCommentCreated();;
+    try {
+      setLoading(true);
+      setError("");
+      console.log(user.id);
+      const response = await fetch(
+        `http://localhost:8080/comments/${id_post}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            comment: comment.trim(),
+          }),
+        },
+      );
 
-    setComment("");
-  } catch (err) {
-    console.error(err);
-    setError("Error al enviar el comentario. Intenta nuevamente.");
-  } finally {
-    setLoading(false);
-  }
-};
+      if (!response.ok) {
+        throw new Error(`Error del servidor: ${response.status}`);
+      }
+
+      const newComment = await response.json();
+
+      if (onCommentCreated) await onCommentCreated();
+
+      setComment("");
+    } catch (err) {
+      console.error(err);
+      setError("Error al enviar el comentario. Intenta nuevamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Box
@@ -83,6 +92,7 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
         fullWidth
         error={!!error}
         helperText={error}
+        slotProps={{ htmlInput: { maxLength } }}
         sx={{
           "& .MuiInputBase-root": {
             backgroundColor: "rgba(255, 255, 255, 0.1)",

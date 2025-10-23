@@ -1,23 +1,46 @@
 import * as React from 'react';
-import { Modal, Button, Dialog, TextField, DialogActions, DialogTitle } from '@mui/material';
+import { Modal, Button, Dialog, TextField,Typography, DialogActions, DialogTitle } from '@mui/material';
 import Box from '@mui/material/Box';
 import { AuthContext } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 
 
 export default function ButtonAdmin({ arena, fetchArenas }) {
-    
+  
+  const whiteTextField = {
+  input: { color: 'white' },
+  label: { color: 'white' },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': { borderColor: 'white' },
+    '&:hover fieldset': { borderColor: '#E3E0C3' },
+    '&.Mui-focused fieldset': { borderColor: '#E3E0C3' },
+  },
+};
+
+  
+  // create the states and initialize them
+  // creo los estados y los inicializo
+  
   const [confirmacion, setConfirmacion] = React.useState(false);
   const [formulario, setFormulario] = React.useState(false);
   const [imagen, setImagen] = React.useState(arena.arena_image_url);
   const [nombre, setNombre] = React.useState(arena.arena_name);
   const [descripcion, setDescripcion] = React.useState(arena.arena_description);
-
+  
+  // constant that is assigned the user's role and depending on his or her role, the component is rendered or not
+  // constante que se le asigna el rol de el usuario y dependiendo su rol renderiza o no el componente
+  
+  //use the useContext to bring the token and the user data
+  //utiliza el useContext para traer el token y los datos de el usuario
   const { user, token } = React.useContext(AuthContext)
   const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
   if (!isAdmin) {
     return null;
   }
+
+  //function to remove a sand
+  //funcion para eliminar una arena
+
   const handleEliminar = async (e) => {
     e.preventDefault();
     try {
@@ -38,7 +61,8 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
       toast.error('Error al eliminar Arena.');
     }
   }
-
+  //function to edit an arena, what it does inside it is a validation and sends it to the back
+  //funcion para editar una arena, lo que hace dentro de ella es una validacion y lo envia al back
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,9 +91,11 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
       const data = await response.json();
       toast.success('Arena editada correctamente.');
       
+      // close modal
       // cerrar modal
       handleCloseForm();
       fetchArenas();
+      //refresh data in the front
       //refrescar datos en el front
       fetchArenas();
       
@@ -78,7 +104,8 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
       
     }
   };
-
+  // functions to handle states, dialog and modal
+  // funciones para manejar estados, dialgo y modal
   const handleImagen = (e) => {
     setImagen(e.target.value)
   }
@@ -113,6 +140,8 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
   return (
     <>
       
+          {/* buttons that are rendered if the user is admin or superadmin */}
+          {/* botones que se renderizan si el usuario es admin o superadmin */}
           <Box>
             <Button
               variant="outlined"
@@ -131,21 +160,57 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
             </Button>
           </Box>
         
+      {/* confirmation dialog that will appear when you want to delete an arena */}
+      {/* dialog de confirmacion que se habre al querer eliminar una arena */}
 
 
-      <Dialog open={confirmacion} onClose={handleCloseConf}>
-        <DialogTitle>{"¿Estás seguro de que querés eliminar esta arena?"}</DialogTitle>
-        <DialogActions>
-          <Button variant="contained" color="primary" onClick={handleCloseConf} >
-            Cancelar
-          </Button>
-          <Button variant="contained" color="error" autoFocus onClick={handleEliminar}>
+      
+
+      <Modal open={confirmacion} onClose={handleCloseConf}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 400,
+          bgcolor: "#212121",
+          borderRadius: 2,
+          boxShadow: 24,
+          color: "white",
+          p: 4,
+        }}
+      >
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          Borrar elemento
+        </Typography>
+
+        <Typography sx={{ mb: 3 }}>
+          ¿Estás seguro de que deseas eliminar esto? Esta acción no se puede deshacer.
+        </Typography>
+
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <Button variant="contained" color="error" onClick={handleEliminar }>
             Eliminar
           </Button>
-        </DialogActions>
-      </Dialog>
+          <Button variant="contained" sx={{backgroundColor:"#E3E0C3", color:"black"}} onClick={handleCloseConf}>
+            Cancelar
+          </Button>
+        </Box>
+      </Box>
+    </Modal>  
 
+
+
+
+       {/* modal that is rendered when you want to edit an arena 
+       modal que se renderiza al querer editar una arena  */}
+
+      
+
+      
       <Modal open={formulario} onClose={handleCloseForm}>
+        
         <Box
           sx={{
             position: "absolute",
@@ -153,21 +218,27 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
             left: "50%",
             transform: "translate(-50%, -50%)",
             width: 400,
-            bgcolor: "background.paper",
+            bgcolor: "#212121",
             boxShadow: 24,
             p: 4,
             borderRadius: 2,
             display: "flex",
             flexDirection: "column",
-            gap: 2
+            gap: 2,
+            color: '#E3E0C3'
+        
           }}
         >
+          <h2 >Editar Arena</h2>
           <TextField
             label="Imagen"
             name="image_url"
             value={imagen}
             onChange={handleImagen}
             fullWidth
+            variant="outlined"
+            sx={whiteTextField}
+            
           />
           <TextField
             label="Nombre"
@@ -175,6 +246,8 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
             value={nombre}
             onChange={handleNombre}
             fullWidth
+            variant="outlined"
+            sx={whiteTextField}
           />
           <TextField
             label="Descripción"
@@ -182,17 +255,20 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
             value={descripcion}
             onChange={handleDescripcion}
             fullWidth
-            multiline
+            variant="outlined"
+            sx={whiteTextField}
           />
 
-          <Button variant="contained" onClick={handleSubmit} >
+          <Button variant="contained" sx={{backgroundColor:"#8E1616"}} onClick={handleSubmit} >
             Guardar
           </Button>
-          <Button variant="contained" color="error" onClick={handleCloseForm}  >
+          <Button variant="contained" sx={{backgroundColor:"#E3E0C3", color:"black"}}   onClick={handleCloseForm}  >
             Cancelar
           </Button>
         </Box>
       </Modal>
+
+      
 
 
     </>
