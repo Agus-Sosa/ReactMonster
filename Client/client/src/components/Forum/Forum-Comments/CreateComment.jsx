@@ -9,7 +9,8 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { user, token } = useContext(AuthContext);  
-  if(!user) return null;
+  if (!user) return null;
+  const maxLength = 500;
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -83,6 +84,7 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
         fullWidth
         error={!!error}
         helperText={error}
+        slotProps={{ htmlInput: {maxLength} }}
         sx={{
           "& .MuiInputBase-root": {
             backgroundColor: "rgba(255, 255, 255, 0.1)",
