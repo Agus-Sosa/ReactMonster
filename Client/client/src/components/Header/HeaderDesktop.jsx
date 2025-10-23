@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import title_game from '../../assets/img/title_game.png'
 import { Link } from 'react-router-dom';
 import AuthButton from './AuthButton';
+import AdminBtn from './AdminBtn';
 const HeaderDesktop = ({user, logoutButton}) => {
  
 
@@ -17,7 +18,8 @@ const HeaderDesktop = ({user, logoutButton}) => {
         </Link>
            <Box component={Link} to="/foro"   sx={{ p:"10px" , border:"none", color:"white", cursor:"pointer", fontSize:"18px", borderRadius:"3px", textDecoration:"none",transition:"all .5s", "&:hover":{color:"#8E1616"}}}>
             Comunidad
-        </Box>
+          </Box>
+          <AdminBtn/>
                 </Box>
 
         <Box component="nav" sx={{display:"flex", gap:2, alignItems:"center"}}>

@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from "react-router-dom";
 import AuthButton from "./AuthButton";
-
+import AdminBtn from './AdminBtn';
 const HeaderMobile = ({user, logoutButton}) => {
     const [openMenu, setOpenMenu]= useState(false);
 
@@ -32,11 +32,12 @@ const HeaderMobile = ({user, logoutButton}) => {
             </Button>   
             </Box>
 
-            <Box component="div" sx={{width: "100%", display:"flex", flexDirection:"column", gap:2, alignItems:"start" }}>
+        <Box component="div" sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 2, alignItems: "start" }}>
+          <AdminBtn/> 
               <Box style={{textDecoration:"none", color:"white", fontSize:"20px", width:"100%", textAlign:"start"}} onClick={handleOpenMenu(false)}>Foro</Box>
 
                 <AuthButton user={user} logoutButton={logoutButton} isOpenModalMobile={()=>setOpenMenu(false)}/>
-
+                
             </Box>
         </Box>
     )
