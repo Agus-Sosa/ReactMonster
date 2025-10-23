@@ -58,12 +58,11 @@ const NewDetails = () => {
 
   }
     , [id])
-  console.log("news en NewDetails:", newDetail);
   
-const imageSrc = newDetail.imageUrl?.startsWith('http')
-  ? newDetail.imageUrl
-  : `http://localhost:8080/public/news/default_img.png`;
-
+  const imageSrc = newDetail?.imageUrl?.startsWith('http')
+    ? newDetail.imageUrl
+    : `http://localhost:8080${newDetail.imageUrl}`;
+  
   const handleDelete = async () => {
     try {
       const res = await fetch(`http://localhost:8080/news/${id}`, {

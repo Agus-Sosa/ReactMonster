@@ -36,7 +36,7 @@ const AllNews = () => {
   };
   
   fetchNews();
-}, [news]);
+}, []);
   
   
 const handleCreate =async (newNew) => { 
@@ -54,6 +54,10 @@ const handleCreate =async (newNew) => {
           console.log("Error al eliminar la noticia");
           return;
         }
+        const data = await res.json();
+        const created = data.newNew;
+        setNews(prev => [created, ...prev]); 
+
 
 
       } catch (error) {
@@ -72,8 +76,9 @@ const handleCreate =async (newNew) => {
 
     const handleSearch =(newSearchValue)=> {
     setSearchValue(newSearchValue);
-  }
+  } 
 
+  
   const filteredNews = news.filter((n)=> {
     if(!searchValue) return news
     const lowerCaseSearch = searchValue.toLowerCase();

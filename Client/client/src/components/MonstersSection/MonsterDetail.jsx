@@ -64,10 +64,13 @@ const handleDelete =async () => {
       }
 
       const data = await res.json();
-      setNewDetail(data.updatedMonster);
+      setMonster(data.updatedMonster);
 
     }
-    catch (error) { }
+    catch (error) { 
+      console.log(error)
+
+    }
   }
       const inputFields = [
   { name: "monster_role", label: "Rol del monstruo", type: "text" },
@@ -86,7 +89,7 @@ const handleDelete =async () => {
   }
 
     
-    return mobile ?  <MonsterDetailMobile monster={monster}  initialFieldInputs={initialFieldInputs} inputFields={inputFields} userRole={user?.role} onDelete={handleDelete} /> : <MonsterDetailDesktop monster={monster} initialFieldInputs={initialFieldInputs} inputFields={inputFields} userRole={user?.role} onDelete={handleDelete} />
+    return mobile ?  <MonsterDetailMobile monster={monster}  initialFieldInputs={initialFieldInputs} onUpdate={handleUpdate} inputFields={inputFields} userRole={user?.role} onDelete={handleDelete} /> : <MonsterDetailDesktop monster={monster} initialFieldInputs={initialFieldInputs} inputFields={inputFields} userRole={user?.role} onDelete={handleDelete} onUpdate={handleUpdate} />
    
 }
 

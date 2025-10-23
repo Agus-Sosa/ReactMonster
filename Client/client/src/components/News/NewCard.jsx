@@ -22,7 +22,7 @@ export default function NewCard({id,imageUrl, title, resume,date}) {
     textDecoration:"none", 
     color:"black",
     height: { xs: 'auto',md:'450px'},
-   
+    
       display: "block", 
     minWidth:"400px",
     maxWidth: { xs: '90vw', md: '400px' },

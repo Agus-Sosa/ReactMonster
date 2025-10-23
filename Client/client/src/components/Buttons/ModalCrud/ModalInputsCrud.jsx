@@ -1,7 +1,7 @@
 import { Box, Button, Modal } from '@mui/material'
 import React from 'react'
 
-const ModalInputsCrud = ({ open, titleMessage= "Relizar accion",onClose, onConfirm, userRole, inputFields = [], formData, setFormData }) => {
+const ModalInputsCrud = ({ open, resetData = false,titleMessage= "Relizar accion",onClose, onConfirm, userRole, inputFields = [], formData, setFormData }) => {
     
 
     
@@ -31,7 +31,7 @@ const handleSubmit = (e) => {
 };
 
 const handleCancel = () => {
-  setFormData({}); 
+  if (resetData) {setFormData({});} 
   onClose();
   };
   
