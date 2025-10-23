@@ -23,13 +23,20 @@ const AllNews = () => {
   }
   
   
-    const fetchNews = () => {
-  fetch("http://localhost:8080/news/")
-    .then(res => res.json())
-    .then(data => setNews(data))
+
+  
+  useEffect(() => {
+      const fetchNews = () => {
+        fetch("http://localhost:8080/news/")
+            .then(res => res.json())
+    .then(data => {
+      setNews(data);
+    })
     .catch(err => console.log(err));
   };
   
+  fetchNews();
+}, [news]);
   
   
 const handleCreate =async (newNew) => { 
@@ -63,10 +70,6 @@ const handleCreate =async (newNew) => {
     ];
 
 
-useEffect(() => {
-  fetchNews();
-}, [news]);
-  
     const handleSearch =(newSearchValue)=> {
     setSearchValue(newSearchValue);
   }
@@ -74,7 +77,7 @@ useEffect(() => {
   const filteredNews = news.filter((n)=> {
     if(!searchValue) return news
     const lowerCaseSearch = searchValue.toLowerCase();
-
+      
     return (
       n.title.toLowerCase().includes(lowerCaseSearch) ||
       n.resume.toLowerCase().includes(lowerCaseSearch)

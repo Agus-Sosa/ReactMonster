@@ -15,6 +15,10 @@ const NewDetails = () => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
+
+
+ 
+
   const handleClose = () => {
     setOpenModal(false);
   }
@@ -54,7 +58,12 @@ const NewDetails = () => {
 
   }
     , [id])
+  console.log("news en NewDetails:", newDetail);
   
+const imageSrc = newDetail.imageUrl?.startsWith('http')
+  ? newDetail.imageUrl
+  : `http://localhost:8080/public/news/default_img.png`;
+
   const handleDelete = async () => {
     try {
       const res = await fetch(`http://localhost:8080/news/${id}`, {
@@ -159,7 +168,7 @@ return (
   {newDetail?.imageUrl && (
     <Box
       component="img"
-      src={newDetail.imageUrl}
+      src={imageSrc}
       alt={newDetail.title || "imagen"}
       sx={{
         width: { xs: "100%", md: "75%" }, // mejor que vh
