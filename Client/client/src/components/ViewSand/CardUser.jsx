@@ -21,7 +21,6 @@ export default function CardUser({arena, fetchArenas}) {
   return (
     <>
       {/* the letter loaded with the information brought from the viewUser */}
-      {/* la carta cargada con la informacion traida de la viewUser */}
       <Card sx={{
         width: { xs: "100%", sm: 300, md: 345 },
         height: { xs: 400, sm: 450 },
@@ -54,7 +53,6 @@ export default function CardUser({arena, fetchArenas}) {
     </Card>
     
     {/* the modal that appears (letter) when you click on see more and gives more information about the arena */}
-    {/* el modal que se habre(carta) al hacer click en ver mas y da mas informacion sbre la arena */}
     <Modal
       open={carta}
       onClose={handleClose}

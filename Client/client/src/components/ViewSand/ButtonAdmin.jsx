@@ -19,7 +19,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
 
   
   // create the states and initialize them
-  // creo los estados y los inicializo
+
   
   const [confirmacion, setConfirmacion] = React.useState(false);
   const [formulario, setFormulario] = React.useState(false);
@@ -28,10 +28,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
   const [descripcion, setDescripcion] = React.useState(arena.arena_description);
   
   // constant that is assigned the user's role and depending on his or her role, the component is rendered or not
-  // constante que se le asigna el rol de el usuario y dependiendo su rol renderiza o no el componente
-  
   //use the useContext to bring the token and the user data
-  //utiliza el useContext para traer el token y los datos de el usuario
   const { user, token } = React.useContext(AuthContext)
   const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
   if (!isAdmin) {
@@ -62,7 +59,6 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
     }
   }
   //function to edit an arena, what it does inside it is a validation and sends it to the back
-  //funcion para editar una arena, lo que hace dentro de ella es una validacion y lo envia al back
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,11 +88,9 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
       toast.success('Arena editada correctamente.');
       
       // close modal
-      // cerrar modal
       handleCloseForm();
       fetchArenas();
       //refresh data in the front
-      //refrescar datos en el front
       fetchArenas();
       
     } catch (err) {
@@ -105,7 +99,6 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
     }
   };
   // functions to handle states, dialog and modal
-  // funciones para manejar estados, dialgo y modal
   const handleImagen = (e) => {
     setImagen(e.target.value)
   }
@@ -141,7 +134,6 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
     <>
       
           {/* buttons that are rendered if the user is admin or superadmin */}
-          {/* botones que se renderizan si el usuario es admin o superadmin */}
           <Box>
             <Button
               variant="outlined"
@@ -161,7 +153,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
           </Box>
         
       {/* confirmation dialog that will appear when you want to delete an arena */}
-      {/* dialog de confirmacion que se habre al querer eliminar una arena */}
+
 
 
       
@@ -203,8 +195,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
 
 
 
-       {/* modal that is rendered when you want to edit an arena 
-       modal que se renderiza al querer editar una arena  */}
+       {/* modal that is rendered when you want to edit an arena */}
 
       
 
