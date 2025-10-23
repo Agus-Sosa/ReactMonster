@@ -86,7 +86,7 @@ const handleDelete =async () => {
   }
 
     
-    return mobile ?  <MonsterDetailMobile monster={monster} initialFieldInputs={initialFieldInputs} inputFields={inputFields} userRole={user.role} onDelete={handleDelete} /> : <MonsterDetailDesktop monster={monster} initialFieldInputs={initialFieldInputs} inputFields={inputFields} userRole={user.role} onDelete={handleDelete} />
+    return mobile ?  <MonsterDetailMobile monster={monster}  initialFieldInputs={initialFieldInputs} inputFields={inputFields} userRole={user?.role} onDelete={handleDelete} /> : <MonsterDetailDesktop monster={monster} initialFieldInputs={initialFieldInputs} inputFields={inputFields} userRole={user?.role} onDelete={handleDelete} />
    
 }
 

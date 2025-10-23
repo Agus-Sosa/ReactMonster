@@ -14,7 +14,6 @@ Su verdadera fuerza se manifiesta durante las noches sin luna, el cenit de su po
 
 En la batalla, Kael es una sombra en movimiento: su velocidad fantasmal le permite ejecutar ataques que parecen materializarse desde la nada, como si las tinieblas mismas hubieran tomado forma para luchar a su lado.
     `,
-    imageUrl: "https://videos.openai.com/vg-assets/assets%2Ftask_01k5wa39s5fdsb84x1es7ksb7x%2F1758665638_img_0.webp?se=2025-10-21T20%3A54%3A33Z&sp=r&sv=2024-08-04&sr=b&skoid=1af02b11-169c-463d-b441-d2ccfc9f02c8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-15T20%3A13%3A04Z&ske=2025-10-22T20%3A18%3A04Z&sks=b&skv=2024-08-04&sig=sHGEiyAtelobhxk2hva%2BDMy8H914IniWVoTlKy0MpLo%3D&az=oaivgprodscus"
   },
   {
     id_admin: 2,
@@ -31,7 +30,6 @@ Recompensa Exclusiva: Participa en 10 o más combates y recibe un ítem conmemor
 
 Objetivo: Queremos incentivar el trabajo en equipo y el uso de estrategias audaces. ¡Demuestra tu valía!
     `,
-    imageUrl: "https://videos.openai.com/vg-assets/assets%2Ftask_01k5wa39s5fdsb84x1es7ksb7x%2F1758665638_img_0.webp?se=2025-10-21T20%3A54%3A33Z&sp=r&sv=2024-08-04&sr=b&skoid=1af02b11-169c-463d-b441-d2ccfc9f02c8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-15T20%3A13%3A04Z&ske=2025-10-22T20%3A18%3A04Z&sks=b&skv=2024-08-04&sig=sHGEiyAtelobhxk2hva%2BDMy8H914IniWVoTlKy0MpLo%3D&az=oaivgprodscus"
   },
   {
     id_admin: 1,
@@ -44,7 +42,6 @@ Alrededor, imponentes estatuas de piedra inmortalizan a los guerreros más feroc
 
 Es al caer la tarde cuando la magia culmina: el sol se precipita tras el horizonte de la arena, tiñendo las antiguas piedras de un rojo sangriento que marca el preludio del combate más brutal y desesperado.
     `,
-    imageUrl: "https://videos.openai.com/vg-assets/assets%2Ftask_01k5wa39s5fdsb84x1es7ksb7x%2F1758665638_img_0.webp?se=2025-10-21T20%3A54%3A33Z&sp=r&sv=2024-08-04&sr=b&skoid=1af02b11-169c-463d-b441-d2ccfc9f02c8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-15T20%3A13%3A04Z&ske=2025-10-22T20%3A18%3A04Z&sks=b&skv=2024-08-04&sig=sHGEiyAtelobhxk2hva%2BDMy8H914IniWVoTlKy0MpLo%3D&az=oaivgprodscus"
   }
 ]);
 

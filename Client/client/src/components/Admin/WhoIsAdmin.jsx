@@ -92,9 +92,9 @@ export default function AdminUsersTable({ refresh }) {
             border: "none",
             bgcolor: "#1e1e1e", 
           },
-          "& .MuiDataGrid-cell": {
-            color: "#fdfafaff",
-          },
+          // "& .MuiDataGrid-cell": {
+          //   // color: "#fdfafaff",
+          // },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "#2c2c2c",
             color: "#b0b0b0", 
