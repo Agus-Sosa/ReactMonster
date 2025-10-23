@@ -1,0 +1,50 @@
+.div-backgound{
+    background-color: rgb(56, 14, 0);
+    height: 100vh;
+    align-Items: center
+
+}
+
+
+
+.news-button{
+    background: none;  
+  border: none;        
+  color: rgb(238, 238, 238);               
+  font: inherit;       
+  cursor: pointer;     
+}
+
+@media (max-width: 768px) {
+    .div-backgound {
+        padding: 1rem;       
+    }
+
+    .ultimate-news {
+        font-size: 1.5rem;   
+        text-align: center;  
+    }
+
+    .news-button {
+        font-size: 1rem;     
+        padding: 0.3rem 0.6rem;
+    }
+  
+}
+
+@media (max-width: 480px) {
+    .div-backgound {
+        padding: 0.5rem;
+    }
+
+    .ultimate-news {
+        font-size: 1.2rem;
+    }
+
+    .news-button {
+        font-size: 0.9rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+
+}

@@ -1,0 +1,24 @@
+.landing-foro{
+    background-image: url('../../../assets/img/hero_bg_foro.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60vh;
+    display: flex;          
+    flex-direction: row;   
+    justify-content: flex-start;    
+    align-items: center;  
+    background-blend-mode: color;
+    background-color: rgba(39, 39, 39, 0.699);
+    text-align: center;
+}
+.foro-img{
+    height: 30vh;
+    margin-left: 5%;
+}
+
+@media (max-width: 767px) {
+    .foro-img{
+    height: 30vh;
+    margin-left: 0;
+}
+}
