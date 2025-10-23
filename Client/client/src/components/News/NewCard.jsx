@@ -1,9 +1,4 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import CardActionArea from '@mui/material/CardActionArea';
+
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +10,11 @@ export default function NewCard({id,imageUrl, title, resume,date}) {
   const day = String(d.getDate()).padStart(2, '0');
 
   const fechaFormateada = `${day}/${m}/${y}`
+
+  const imageSrc = imageUrl.startsWith("http")
+  ? imageUrl
+  : `http://localhost:8080${imageUrl}`;
+
   return (
 
     <Box component={Link} to={`/new/${id}`} sx={{
@@ -33,7 +33,7 @@ export default function NewCard({id,imageUrl, title, resume,date}) {
     p: 1,
     }}>
       <Box sx={{width:"auto", height:{xs:"300px", md:"250px"}, mb:1}}>
-        <Box component='img' src={imageUrl} sx={{ display: imageUrl? "block" : "none", width:"100%", height:"100%",objectFit:"cover"}}/>
+        <Box component='img' src={imageSrc} sx={{ display: imageUrl? "block" : "none", width:"100%", height:"100%",objectFit:"cover"}}/>
 
       </Box>
       <Box component="div" sx={{width:"auto"}}>

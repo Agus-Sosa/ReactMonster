@@ -113,16 +113,22 @@ const News = () => {
           mt: 3,
         }}
       >
-        {notices.map((notice) => (
-          <NewCard
-            id={notice.id_news}
-            imageUrl={notice.imageUrl}
-            resume={notice.resume}
-            title={notice.title}
-            key={notice.id}
-            date={notice.date}
-          />
-        ))}
+               {notices.map((notice) => {
+               const imageSrc = notice.imageUrl.startsWith('http')
+    ? notice.imageUrl
+    : `http://localhost:8080${notice.imageUrl}`; // para imágenes locales
+
+              return (
+                <NewCard
+                  id={notice.id_news}
+                  imageUrl={imageSrc}
+                  resume={notice.resume}
+                  title={notice.title}
+                  key={notice.id_news}
+                  date={notice.date}
+                />
+              );
+            })}
       </Box>
     ) : (
       <NewCarouselMobile inf={notices} /> 

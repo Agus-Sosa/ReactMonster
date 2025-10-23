@@ -41,10 +41,11 @@ class PostController {
 
   async createNewPost(req, res, next) {
     try {
-      const { title, resume, content, id_category } = req.body;
-      const id_user = req.user.id;
+    const { title, resume, content, id_category, imgContent } = req.body;
+    const id_user = req.user.id;
 
-      const newPostData = { title, resume, content, id_category, id_user };
+    const newPostData = { title, resume, content, id_category, id_user, imgContent }; 
+ 
       console.log("createNewPost →", newPostData);
 
       const post = await this.postService.createNewPost(newPostData);
