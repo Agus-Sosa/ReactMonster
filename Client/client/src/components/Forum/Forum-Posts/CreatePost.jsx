@@ -21,6 +21,8 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
   const [categoryId, setCategoryId] = useState(defaultCategory || "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [imageUrl, setImageUrl] = useState(""); 
+  const isValidImageUrl = /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i.test(imageUrl.trim()); 
 
   useEffect(() => {
     fetch("http://localhost:8080/categories")
@@ -55,8 +57,11 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
       title: title.trim(),
       resume: resume.trim(),
       content: content.trim(),
-      id_category: categoryId
+      id_category: categoryId,
+      id_user: user.id,
+      ...(isValidImageUrl && { imgContent: imageUrl.trim() }) 
     };
+
 
     try {
       const res = await fetch("http://localhost:8080/post/newPost", {
@@ -141,6 +146,28 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
         InputProps={{ style: { color: "white" } }}
       />
 
+      <TextField 
+        label="URL de imagen (opcional)" 
+        value={imageUrl} 
+        onChange={(e) => setImageUrl(e.target.value)} 
+        fullWidth 
+        variant="outlined" 
+        InputLabelProps={{ style: { color: "#aaa" } }} 
+        InputProps={{ style: { color: "white" } }} 
+      />
+
+      {isValidImageUrl && ( 
+        <Box sx={{ mt: 2, textAlign: "center" }}> 
+          <Typography variant="body2" sx={{ mb: 1 }}>Vista Previa:</Typography> 
+          <Box 
+            component="img" 
+            src={imageUrl.trim()} 
+            alt="Preview" 
+            sx={{ maxWidth: "100%", maxHeight: 300, borderRadius: 2 }} 
+          /> 
+        </Box>
+      )} 
+
       {defaultCategory ? (
         <TextField
           label="Categoría"
@@ -171,7 +198,6 @@ const CreatePost = ({ defaultCategory, onCancel, onCreated }) => {
           </Select>
         </FormControl>
       )}
-
 
       {error && (
         <Typography color="error" variant="body2" sx={{ mt: 1 }}>
