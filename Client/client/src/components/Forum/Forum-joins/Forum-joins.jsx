@@ -8,7 +8,7 @@ import {
   Divider,
   Fade,
 } from "@mui/material";
-import Joins from "./joins";
+import Joins from "./Joins.jsx";
 import forumtexture from "../../../assets/img/foro-bck.png";
 import Loading from "../../LoadingComp/Loading";
 import ErrorComp from "../../ErrorComp/ErrorComp.jsx";
