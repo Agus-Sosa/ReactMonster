@@ -52,8 +52,8 @@ class MonsterController {
         try {
             const {id} = req.params;
             const monsterUpdate = req.body;
-            await this.monsterService.updateMonster(id, monsterUpdate);
-            res.status(200).json({status: "success", message: "Monstruo actualizado con exito", updatedMonster: monsterUpdate});
+            const updatedMonster =await this.monsterService.updateMonster(id, monsterUpdate);
+            res.status(200).json({status: "success", message: "Monstruo actualizado con exito", updatedMonster: updatedMonster});
         } catch (error) {
             next(error)
         }

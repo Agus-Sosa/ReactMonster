@@ -19,6 +19,11 @@ class MonsterService {
 
     async getMonsterById(id) {
         const monster = await this.modelMonster.findByPk(id);
+        if (!monster) {
+            const error = new Error("monstruo no encontrado");
+            error.status = 404;
+            throw error;
+        };
         return monster
     }
 
@@ -31,18 +36,25 @@ class MonsterService {
     }
 
     async updateMonster(id, monsterUpdate) { 
-        const [updateData] =  this.modelMonster.update(monsterUpdate, {where:{monster_id:id}});
-         if(updateData ===0) {
-            throw new Error("No hay cambios");
+        const [updateData] =await this.modelMonster.update(monsterUpdate, {where:{monster_id:id}});
+         if(updateData ===0 || !updateData) {
+            throw new Error("No hay cambios en el monstruo");
         }
 
-        const updatedMonster = await this.modelMonster.findByPk(id);
-        return updatedMonster;
+        return  await this.modelMonster.findByPk(id);
+        
     }
 
     async deleteMonsterById(id) { 
-        return await this.modelMonster.destroy({where:{monster_id:id}});
-    }
+        const monster = await this.modelMonster.findByPk(id);
+
+        if (!monster) { 
+            const error = new Error("Monstruo no encontrado");
+            error.status = 404;
+            throw error;
+        }
+        return await monster.destroy();
+    }   
 
 
 

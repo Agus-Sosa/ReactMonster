@@ -2,7 +2,6 @@ import { Box, Button, Modal, Typography } from '@mui/material'
 import React from 'react'
 
 const ModalConfirm = ({ open, onConfirm , onClose }) => {
-  console.log("ModalConfirm render");
 
   
 

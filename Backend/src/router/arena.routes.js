@@ -19,13 +19,13 @@ router.get("/name", validateNameArena, async (req, res, next) => {
     return await arenaController.create(req, res, next);
 });
 
-router.put("/:id",  validateIdArena, async (req, res, next) => {
+router.put("/:id",   validateIdArena, async (req, res, next) => {
     return await arenaController.update(req, res, next);
 })
-router.delete("/:id", validateIdArena, async (req, res, next) => {
+router.delete("/:id",  validateIdArena, async (req, res, next) => {
     return await arenaController.delete(req, res, next);
 })
-router.post("/", async (req, res, next) => {
+router.post("/",  async (req, res, next) => {
     return await arenaController.create(req, res, next);
 })
 

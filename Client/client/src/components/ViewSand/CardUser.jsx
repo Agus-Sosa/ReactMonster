@@ -9,7 +9,8 @@ import ButtonAdmin from './ButtonAdmin';
 
 export default function CardUser({arena, fetchArenas}) {
 
-
+// letter management
+// manejo de la carta
   const [carta,setcarta] = React.useState(false);
   const handleOpen=()=>{
     setcarta(true);
@@ -19,7 +20,16 @@ export default function CardUser({arena, fetchArenas}) {
   }
   return (
     <>
-    <Card sx={{ maxWidth: { xs: "100%", sm: 345 }, border: '1px solid #E3E0C3',backgroundColor:'#212121', textAlign:'center', m:1  }}>
+      {/* the letter loaded with the information brought from the viewUser */}
+      {/* la carta cargada con la informacion traida de la viewUser */}
+      <Card sx={{
+        width: { xs: "100%", sm: 300, md: 345 },
+        height: { xs: 400, sm: 450 },
+        maxWidth: { xs: "100%", sm: 345 },
+        border: '1px solid #E3E0C3',
+        backgroundColor: '#212121',
+        textAlign: 'center', m: 1
+      }}>
      
         <CardMedia
           component="img"
@@ -43,10 +53,12 @@ export default function CardUser({arena, fetchArenas}) {
       
     </Card>
     
-    
+    {/* the modal that appears (letter) when you click on see more and gives more information about the arena */}
+    {/* el modal que se habre(carta) al hacer click en ver mas y da mas informacion sbre la arena */}
     <Modal
-    open={carta}
-    onClose={handleClose}>
+      open={carta}
+      onClose={handleClose}
+      >
       <Box sx={{
           position: 'absolute',
           top: '50%',
@@ -57,10 +69,25 @@ export default function CardUser({arena, fetchArenas}) {
           border: '1px solid #E3E0C3',
           boxShadow: 24,
           p: { xs: 2, sm: 4 },
-          borderRadius: '10px'
+          borderRadius: '10px',
+          outline: 'none',
+          maxHeight: '85vh',
+          overflowY: 'auto',
         }}>
-          <Box>
-            <Button onClick={handleClose} variant="contained" color="error" sx={{ marginLeft: 'auto', display: 'block'}} >
+          <Box sx={{
+            position: 'absolute',
+            top: 8,
+            right: 8,
+          }}>
+            <Button onClick={handleClose} variant="contained" color="error"
+               sx={{
+                  minWidth: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  fontWeight: 'bold',
+                  lineHeight: 1,
+                  padding: 0,
+                }} >
             X
             </Button>
           </Box>

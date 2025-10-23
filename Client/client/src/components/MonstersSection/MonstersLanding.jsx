@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import MonsterContainer from './MonsterContainer';
 import PageContainer from '../Layout/PageContainer/PageContainer';
 import hero_monster from '../../assets/img/hero_bg_monsters.png'
@@ -7,7 +6,6 @@ import title_hero from '../../assets/img/Monsters-title.png'
 import CreateBtnModal from '../Buttons/BtnCreate/CreateBtnModal';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { Button } from '@mui/material';
 import BtnFloatingCreate from '../Buttons/BtnCreate/BtnFloatingCreate';
 function MonstersLanding() {
   const {token , user} = useContext(AuthContext);
