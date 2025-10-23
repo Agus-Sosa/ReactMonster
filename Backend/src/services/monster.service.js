@@ -19,6 +19,11 @@ class MonsterService {
 
     async getMonsterById(id) {
         const monster = await this.modelMonster.findByPk(id);
+        if (!monster) {
+            const error = new Error("monstruo no encontrado");
+            error.status = 404;
+            throw error;
+        };
         return monster
     }
 
@@ -48,10 +53,7 @@ class MonsterService {
             error.status = 404;
             throw error;
         }
-
         return await monster.destroy();
-        
-        
     }   
 
 

@@ -1,7 +1,6 @@
-import { Box, useMediaQuery } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react'
+import {  useMediaQuery } from '@mui/material';
+import  { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import PageContainer from '../Layout/PageContainer/PageContainer';
 import MonsterDetailMobile from './MonsterDetailMobile';
 import MonsterDetailDesktop from './MonsterDetailDesktop';
 import { AuthContext } from '../../context/AuthContext';

@@ -46,9 +46,7 @@ export const verifyToken =(req, res , next)=> {
 
   try {
     const decodedToken = jwt.verify(token, "react_monsters");
-    console.log("decoded:", decodedToken)
     req.user = decodedToken;
-    console.log("req_usera:",req.user)
 
   next()
 
