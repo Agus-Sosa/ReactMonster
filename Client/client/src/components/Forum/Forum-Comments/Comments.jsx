@@ -12,7 +12,6 @@ function Comments({comment,post_id, onCommentDeleted}) {
   
   const { user } = useContext(AuthContext); 
 
-
   if(!user) return null; // If there is no user, do not show the button
   
   return (
