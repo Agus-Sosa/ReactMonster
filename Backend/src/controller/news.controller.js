@@ -43,19 +43,19 @@ class NewController {
     // POST /news
     async createNew (req, res, next) {
         try {
-            const { title, resume, content } = req.body; // data sent by the client
+            const { title, resume, content, imageUrl } = req.body; // data sent by the client
             console.log("user_role",req.user);
             const id_admin = req.user.id;
             const newNew = {
                 id_admin,
                 title,
                 resume,
-                content
+                content,
+                imageUrl
                 
             };
-            console.log(newNew, "new controller")
-            const notice =await this.newService.createNew(newNew);
-            res.status(200).json({status:"success", newNew:notice});
+            const data =await this.newService.createNew(newNew);
+            res.status(200).json({status:"success", newNew:data});
 
         } catch (error) {
             next(error)
