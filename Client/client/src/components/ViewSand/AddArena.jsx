@@ -23,7 +23,6 @@ const AddArena = ({ fetchArenas }) => {
     const { user, token } = useContext(AuthContext);
     
     // constant that is assigned the user's role and depending on his or her role, the component is rendered or not
-    // constante que se le asigna el rol de el usuario y dependiendo su rol renderiza o no el componente
     const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
     if (!isAdmin) {
         return null;
@@ -36,7 +35,6 @@ const AddArena = ({ fetchArenas }) => {
     const [newImg, setNewImg] = useState("");
 
     //functions to handle the modal
-    //funciones para manejar el modal 
     const handleOpenMod = () => {
         setModal(true);
     }
@@ -47,7 +45,6 @@ const AddArena = ({ fetchArenas }) => {
         setNewImg("");
     }
     //functions to handle state
-    //funciones para manejar los estados
     const handleNewImg = (e) => {
         setNewImg(e.target.value);
     }
@@ -58,7 +55,6 @@ const AddArena = ({ fetchArenas }) => {
         setNewName(e.target.value);
     }
     //management of the new sand that was loaded, validating the data and sending it to the back
-    //manejo de la nueva arena que fue cargada,validando los datos y enviandolos al back
     const handleNewArena = async (e) => {
         e.preventDefault()
         const newArena = {
@@ -100,7 +96,6 @@ const AddArena = ({ fetchArenas }) => {
     return (
         <>
             {/* exclusive card to create sand */}
-            {/* carta exlusiva para crear arena */}
             <div>
                 <Card sx={{
                     width: { xs: "100%", sm: 300, md: 345 },
@@ -136,7 +131,6 @@ const AddArena = ({ fetchArenas }) => {
                 </Card>
             </div>
             {/* The modal that appears when you click on add sand is a form that must be filled out with the information about the new sand. */}
-            {/* modal que se habre al dar click en agregar arena, es un formulario que se debe rellenar con la informacion de la nueva arena */}
             <Modal open={modal} onClose={handleCloseMod}>
                
                 <Box
