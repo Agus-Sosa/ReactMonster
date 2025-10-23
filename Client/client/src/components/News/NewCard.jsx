@@ -33,7 +33,7 @@ export default function NewCard({id,imageUrl, title, resume,date}) {
     p: 1,
     }}>
       <Box sx={{width:"auto", height:{xs:"300px", md:"250px"}, mb:1}}>
-        <Box component='img' src={imageUrl} sx={{ width:"100%", height:"100%",objectFit:"cover"}}/>
+        <Box component='img' src={imageUrl} sx={{ display: imageUrl? "block" : "none", width:"100%", height:"100%",objectFit:"cover"}}/>
 
       </Box>
       <Box component="div" sx={{width:"auto"}}>

@@ -15,7 +15,7 @@ const UpdateBtnModal = ({open,onUpdate, onClose, userRole, inputFields=[], initF
 
 
   const handleCancel = () => { 
-    setFormData({});
+    // setFormData({});
     onClose();
   }
 
@@ -23,7 +23,7 @@ const UpdateBtnModal = ({open,onUpdate, onClose, userRole, inputFields=[], initF
 
   
   return (
-    <ModalInputsCrud onClose={handleCancel} formData={formData} setFormData={setFormData} open={open} onConfirm={onUpdate} userRole={userRole}  inputFields={inputFields} />
+    <ModalInputsCrud titleMessage='Actualizar elemento' onClose={handleCancel} formData={formData} setFormData={setFormData} open={open} onConfirm={onUpdate} userRole={userRole}  inputFields={inputFields} />
   )
 }
 

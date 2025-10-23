@@ -36,6 +36,7 @@ export const News = sequelize.define(config.modelData.news, {
     },
     imageUrl:{
         type: DataTypes.STRING,
-        defaultValue:'https://i.ibb.co/Ps7jRTwS/Imagen-de-Whats-App-2025-10-16-a-las-14-44-07-8e69d046.jpg'
+  defaultValue: '/public/news/default_img.png',
+        allowNull: true,
     }
 })

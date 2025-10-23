@@ -1,7 +1,7 @@
 import { Box, Button, Modal } from '@mui/material'
 import React from 'react'
 
-const ModalInputsCrud = ({ open, onClose, onConfirm, userRole, inputFields = [], formData, setFormData }) => {
+const ModalInputsCrud = ({ open, titleMessage= "Relizar accion",onClose, onConfirm, userRole, inputFields = [], formData, setFormData }) => {
     
 
     
@@ -33,9 +33,8 @@ const handleSubmit = (e) => {
 const handleCancel = () => {
   setFormData({}); 
   onClose();
-};
-
-
+  };
+  
 
   return (
  <Modal open={open} onClose={onClose} >
@@ -55,7 +54,7 @@ const handleCancel = () => {
         }}
  
     >
-            <Box component="h1" sx={{mb:3}}>Crear nueva noticia</Box>
+        <Box component="h1" sx={{ mb: 3 }}>{ titleMessage}</Box>
             <form  onSubmit={handleSubmit} method='POST' style={styleForm} >
                 {inputFields.map((field) => (
                     <Box key={field.name} sx={{display:"flex", flexDirection:"column", width:"100%", mb:2, gap:1}}>

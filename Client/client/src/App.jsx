@@ -49,7 +49,11 @@ function App() {
             <Route path='/allnews' element={<AllNews/>}/>
             <Route path='/profile/:id_user' element={<ProfileUser/>} />
               <Route path='/admin' element={<ProtectedRoute requiredRole={"superadmin"}><Admin /></ProtectedRoute>} />
-              <Route path="/game" element={<Game />} />
+              <Route path="/game" element={
+              <ProtectedRoute>
+                   <Game />
+              </ProtectedRoute>
+               } />
       <Route path='/settings' element={
         <ProtectedRoute>
           <SettingsProfile/>
