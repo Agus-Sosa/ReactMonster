@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import hero_detail_monster from '../../assets/img/monsters/hero_detail_monster.png'
 import DeleteBtnModal from '../Buttons/BtnDelete/DeleteBtnModal';
 

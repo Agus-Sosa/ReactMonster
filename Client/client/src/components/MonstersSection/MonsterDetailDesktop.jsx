@@ -1,11 +1,9 @@
 import { Box, Button } from '@mui/material'
-import React, { useContext } from 'react'
 import PageContainer from '../Layout/PageContainer/PageContainer'
 import hero_detail_monster from '../../assets/img/monsters/hero_detail_monster.png'
 import { useState } from 'react'
 import DeleteBtnModal from '../Buttons/BtnDelete/DeleteBtnModal'
 import UpdateBtn from '../Buttons/BtnUpdate/UpdateBtn'
-import { AuthContext } from '../../context/AuthContext'
 import UpdateBtnModal from '../Buttons/BtnUpdate/UpdateBtnModal'
 
 const MonsterDetailDesktop = ({ monster, onDelete,onUpdate,userRole , initialFieldInputs, inputFields }) => {
