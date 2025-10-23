@@ -10,10 +10,20 @@ import { toast } from 'react-toastify';
 
 
 const AddArena = ({ fetchArenas }) => {
+    const whiteTextField = {
+  input: { color: 'white' },
+  label: { color: 'white' },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': { borderColor: 'white' },
+    '&:hover fieldset': { borderColor: '#E3E0C3' },
+    '&.Mui-focused fieldset': { borderColor: '#E3E0C3' },
+  },
+};
 
     const { user, token } = useContext(AuthContext);
     
-
+    // constant that is assigned the user's role and depending on his or her role, the component is rendered or not
+    // constante que se le asigna el rol de el usuario y dependiendo su rol renderiza o no el componente
     const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
     if (!isAdmin) {
         return null;
@@ -25,6 +35,8 @@ const AddArena = ({ fetchArenas }) => {
     const [newDescription, setNewDescription] = useState("");
     const [newImg, setNewImg] = useState("");
 
+    //functions to handle the modal
+    //funciones para manejar el modal 
     const handleOpenMod = () => {
         setModal(true);
     }
@@ -34,6 +46,8 @@ const AddArena = ({ fetchArenas }) => {
         setNewName("");
         setNewImg("");
     }
+    //functions to handle state
+    //funciones para manejar los estados
     const handleNewImg = (e) => {
         setNewImg(e.target.value);
     }
@@ -43,7 +57,8 @@ const AddArena = ({ fetchArenas }) => {
     const handleNewName = (e) => {
         setNewName(e.target.value);
     }
-
+    //management of the new sand that was loaded, validating the data and sending it to the back
+    //manejo de la nueva arena que fue cargada,validando los datos y enviandolos al back
     const handleNewArena = async (e) => {
         e.preventDefault()
         const newArena = {
@@ -76,7 +91,6 @@ const AddArena = ({ fetchArenas }) => {
                 fetchArenas();
         } catch (error) {
             toast.error('error al crear la Arena.');
-            alert("error");
         }
          
     }
@@ -85,8 +99,18 @@ const AddArena = ({ fetchArenas }) => {
 
     return (
         <>
+            {/* exclusive card to create sand */}
+            {/* carta exlusiva para crear arena */}
             <div>
-                <Card sx={{ maxWidth: { xs: "100%", sm: 345 }, border: '1px solid #E3E0C3', backgroundColor: '#212121', textAlign: 'center', m: 1 }}>
+                <Card sx={{
+                    width: { xs: "100%", sm: 300, md: 345 },
+                    height: { xs: 400, sm: 450 },
+                    maxWidth: { xs: "100%", sm: 345 },
+                    border: '1px solid #E3E0C3',
+                    backgroundColor: '#212121',
+                    textAlign: 'center',
+                    m: 1
+                }}>
                     {/* <CardActionArea> */}
                     <CardMedia
                         component="img"
@@ -96,7 +120,7 @@ const AddArena = ({ fetchArenas }) => {
                     />
                     <CardContent sx={{ height: 128 }}>
                         <Typography gutterBottom variant="h5" component="div" sx={{ color: "#E3E0C3", fontFamily: "Anton" }}>
-                            Name Arena
+                            Nombre Arena
                         </Typography>
 
                         <Button
@@ -111,7 +135,8 @@ const AddArena = ({ fetchArenas }) => {
 
                 </Card>
             </div>
-    
+            {/* The modal that appears when you click on add sand is a form that must be filled out with the information about the new sand. */}
+            {/* modal que se habre al dar click en agregar arena, es un formulario que se debe rellenar con la informacion de la nueva arena */}
             <Modal open={modal} onClose={handleCloseMod}>
                
                 <Box
@@ -121,21 +146,26 @@ const AddArena = ({ fetchArenas }) => {
                         left: "50%",
                         transform: "translate(-50%, -50%)",
                         width: 400,
-                        bgcolor: "background.paper",
+                        bgcolor: "#212121",
                         boxShadow: 24,
                         p: 4,
                         borderRadius: 2,
                         display: "flex",
                         flexDirection: "column",
-                        gap: 2
+                        gap: 2,
+                        color: '#E3E0C3'
+        
                     }}
                 >
+                    <h2>Crear Arena</h2>
                     <TextField
                         label="Imagen"
                         name="image_url"
                         value={newImg}
                         onChange={handleNewImg}
                         fullWidth
+                        variant="outlined"
+                        sx={whiteTextField}
                     />
                     <TextField
                         label="Nombre"
@@ -143,6 +173,8 @@ const AddArena = ({ fetchArenas }) => {
                         value={newName}
                         onChange={handleNewName}
                         fullWidth
+                        variant="outlined"
+                        sx={whiteTextField}
                     />
                     <TextField
                         label="Descripción"
@@ -150,13 +182,14 @@ const AddArena = ({ fetchArenas }) => {
                         value={newDescription}
                         onChange={handleNewDescription}
                         fullWidth
-                        multiline
+                        variant="outlined"
+                        sx={whiteTextField}
                     />
 
-                    <Button variant="contained" onClick={handleNewArena}  >
+                    <Button variant="contained" sx={{backgroundColor:"#8E1616"}} onClick={handleNewArena}  >
                         Guardar
                     </Button>
-                    <Button variant="contained" color="error" onClick={handleCloseMod}  >
+                    <Button variant="contained" sx={{backgroundColor:"#E3E0C3", color:"black"}} onClick={handleCloseMod}  >
                         Cancelar
                     </Button>
                 </Box>
