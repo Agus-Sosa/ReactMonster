@@ -8,8 +8,14 @@ import AddArena from './AddArena';
 
 
 const ViewUser = () => {
+  // create the states and initialize them
+  // creo los estados y los inicializo
+
   const [arenas,setArenas]=useState([]);
   const [loading, setLoading] = useState(true)
+
+  //function that is used to render the sands brought from the back
+  //funcion que sirve para renderizar las arenas traidas del back
   
   const fetchArenas = () => {
     fetch("http://localhost:8080/arenas")
@@ -26,7 +32,8 @@ const ViewUser = () => {
         setLoading(false);
       })
   }
-
+  //every time sand is modified the component is rendered
+  //cada vez que se modique arenas se renderiza el componente
   useEffect(()=>{
     fetchArenas()
     },[arenas]);
@@ -81,7 +88,11 @@ const ViewUser = () => {
               gap: 2
             }}
         >
-          <AddArena fetchArenas={ fetchArenas }/>
+          
+          {/* I map the arenas and depending on the user's role I show the AddArena component */}
+          {/* mapeo las arenas y dependiendo el rol del usuario muestro el componente AddArena */}
+          
+          <AddArena fetchArenas={fetchArenas} />
           {arenas.map((arena) => (
             <div key={arena.id}>
               <CardUser arena={arena} fetchArenas={fetchArenas} />
