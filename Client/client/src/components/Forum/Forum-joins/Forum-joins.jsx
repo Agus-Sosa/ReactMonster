@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Box, Button, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Typography,
+  Paper,
+  Divider,
+  Fade,
+} from "@mui/material";
 import Joins from "./joins";
 import forumtexture from "../../../assets/img/foro-bck.png";
 import Loading from "../../LoadingComp/Loading";
@@ -79,26 +87,27 @@ function ForoJoins({ info }) {
   if (error) return <ErrorComp />;
 
   return (
-    <Box
+     <Box
       sx={{
         minHeight: "100vh",
-        backgroundImage: `url(${forumtexture})`,
+        backgroundImage: `linear-gradient(rgba(10,10,10,0.85), rgba(10,10,10,0.85)), url(${forumtexture})`,
         backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundColor: "#1a1a1a",
-        backgroundBlendMode: "color-dodge",
+        backgroundPosition: "center",
         display: "flex",
         justifyContent: "center",
-        alignItems: "flex-start",
+        paddingY: 6,
       }}
     >
-      <Box
+      <Paper
+        elevation={6}
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "85vh",
-          width: "80%",
+          width: { xs: "95%", md: "80%" },
+          minHeight: "80vh",
+          backgroundColor: "rgba(30,30,30,0.9)",
+          backdropFilter: "blur(8px)",
+          borderRadius: 3,
           color: "white",
+          padding: { xs: 3, md: 5 },
         }}
       >
         {/* ---------- HEADER ---------- */}
@@ -107,51 +116,52 @@ function ForoJoins({ info }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            fontSize: "1.2em",
-            width: "100%",
-            marginLeft: "6%",
+            flexWrap: "wrap",
+            mb: 3,
           }}
         >
-          <h2>
+          <Typography variant="h5" sx={{ fontWeight: "bold" }}>
             Comunidad {text_to_route}
             {selectedCategory && ` / ${selectedCategory.title}`}
             {selectedPost && ` / ${selectedPost.title}`}
-          </h2>
+          </Typography>
 
           {selectedCategory && !selectedPost && !showCreateForm && (
             <Button
               variant="contained"
               color="primary"
               onClick={() => setShowCreateForm(true)}
+              sx={{
+                fontWeight: "bold",
+                borderRadius: "10px",
+                boxShadow: "0px 2px 8px rgba(0,0,0,0.3)",
+              }}
             >
-              Crear Post
+              Crear nuevo post
             </Button>
           )}
         </Box>
 
-        {/* ---------- INLINE FORM o LISTADO ---------- */}
+        <Divider sx={{ mb: 4, borderColor: "rgba(255,255,255,0.2)" }} />
+
+        {/* ---------- main content ---------- */}
         {showCreateForm ? (
-          <Box sx={{ margin: "20px 6%", width: "88%" }}>
-            <CreatePost
-              defaultCategory={selectedCategory.id_category}
-              onCancel={() => setShowCreateForm(false)}
-              onCreated={() => {
-                setShowCreateForm(false);
-                handleSelectCategory(selectedCategory);
-              }}
-            />
-          </Box>
+          <Fade in={showCreateForm}>
+            <Box>
+              <CreatePost
+                defaultCategory={selectedCategory.id_category}
+                onCancel={() => setShowCreateForm(false)}
+                onCreated={() => {
+                  setShowCreateForm(false);
+                  handleSelectCategory(selectedCategory);
+                }}
+              />
+            </Box>
+          </Fade>
         ) : (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              margin: "5%",
-              wordBreak: "break-word",
-            }}
-          >
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             {!selectedCategory &&
-              categories.map(cat => (
+              categories.map((cat) => (
                 <Joins
                   key={cat.id_category}
                   informacion={cat}
@@ -161,9 +171,9 @@ function ForoJoins({ info }) {
 
             {selectedCategory && !selectedPost && (
               loadingPosts ? (
-                <CircularProgress />
-              ) : (
-                visiblePosts.map(post => (
+                <CircularProgress sx={{ alignSelf: "center", mt: 4 }} />
+              ) : visiblePosts.length ? (
+                visiblePosts.map((post) => (
                   <Joins
                     key={post.id_post}
                     informacion={post}
@@ -171,25 +181,33 @@ function ForoJoins({ info }) {
                     onRefresh={() => handleSelectCategory(selectedCategory)}
                   />
                 ))
+              ) : (
+                <Typography
+                  variant="body1"
+                  sx={{ textAlign: "center", opacity: 0.8, mt: 4 }}
+                >
+                  No hay publicaciones todavía.
+                </Typography>
               )
             )}
           </Box>
         )}
 
-        {/* ---------- DETAILS + COMMENTS ---------- */}
+        {/* ---------- post detail ---------- */}
         {selectedPost && (
-          <Box sx={{ marginTop: "20px" }}>
-            <DetailPublish post={selectedPost} creator={selectedPost.User} />
-            <CommentsSection postId={selectedPost} />
-          </Box>
+          <Fade in={!!selectedPost}>
+            <Box sx={{ mt: 4 }}>
+              <DetailPublish post={selectedPost} creator={selectedPost.User} />
+              <CommentsSection postId={selectedPost} />
+            </Box>
+          </Fade>
         )}
 
-        {/* ---------- MODAL AUTH ---------- */}
         <ModalAuthPrev
           openModal={showAuthModal}
           handleCloseModal={() => setShowAuthModal(false)}
         />
-      </Box>
+      </Paper>
     </Box>
   );
 }
