@@ -144,7 +144,7 @@ const styleImage = {
   width: { xs: "50vh", md: "120vh" },
   height: { xs: "40vh", md: "70vh" },
   borderRadius: 2,
-  objectFit: "cover",   // 🔹 mantiene proporciones y recorta si sobra
+  objectFit: "cover",   
   display: "block",
 };
 
@@ -170,8 +170,8 @@ return (
       src={imageSrc}
       alt={newDetail.title || "imagen"}
       sx={{
-        width: { xs: "100%", md: "75%" }, // mejor que vh
-        height: "auto", // mantiene proporción
+        width: { xs: "100%", md: "75%" }, 
+        height: "auto", 
         borderRadius: {xs:0,md:2},
         objectFit: "cover" 
       }}
