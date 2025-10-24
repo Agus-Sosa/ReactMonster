@@ -67,9 +67,17 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!nombre || !descripcion || !imagen || !nombre.trim() || !descripcion.trim() || !imagen.trim()) {
-          toast.error("Se debe completar todos los campos antes de subir la arena.");
-          return;
-        }
+        toast.error("Se debe completar todos los campos antes de subir la arena.");
+      return;
+    }
+    if (nombre.length<4 || nombre.length>40) {
+        toast.error("El nombre de la arena debe ser mayor a 3 y menor o igual a 40 caracteres.");
+      return;
+    }
+    if (descripcion.length < 10 || descripcion.length >= 350) {
+        toast.error("La descripcion de la arena debe ser mayor a 10 y menor o igual a 350 caracteres.");
+      return;
+    }
     try {
       const response = await fetch(`http://localhost:8080/arenas/${arena.id}`, {
         method: "PUT",

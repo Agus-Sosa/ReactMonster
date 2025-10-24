@@ -70,6 +70,14 @@ const AddArena = ({ fetchArenas }) => {
             toast.error("Se debe completar todos los campos antes de subir la arena.");
         return;
         }
+        if (newArena.arena_name.length<4 || newArena.arena_name.length>40) {
+            toast.error("El nombre de la arena debe ser mayor a 3 y menor o igual a 40 caracteres.");
+        return;
+        }
+        if (newArena.arena_description.length < 10 || newArena.arena_description.length >= 350) {
+            toast.error("La descripcion de la arena debe ser mayor a 10 y menor o igual a 350 caracteres.");
+        return;
+        }
         try {
             const responeee = await fetch(`http://localhost:8080/arenas`, {
                 method: "post",
