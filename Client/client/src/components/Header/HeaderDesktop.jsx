@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import title_game from '../../assets/img/title_game.png'
 import { Link } from 'react-router-dom';
 import AuthButton from './AuthButton';
+import AdminBtn from './AdminBtn';
 const HeaderDesktop = ({user, logoutButton}) => {
   
 

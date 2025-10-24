@@ -8,7 +8,7 @@ const MenuButtonContainer = () => {
         {
             title: "Campaña",
             image: bg_campaing,
-            link:"/campaing"
+            link:"/game"
             
         },
         {
