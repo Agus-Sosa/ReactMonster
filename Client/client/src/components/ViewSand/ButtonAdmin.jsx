@@ -146,7 +146,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
             <Button
               variant="outlined"
               onClick={handlecOpenForm}
-              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3", fontFamily: "Anton" }}
+              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3" }}
             >
               editar
             </Button>
@@ -154,7 +154,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
             <Button
               variant="outlined"
               onClick={handlecOpenConf}
-              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3", fontFamily: "Anton" }}
+              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3"}}
             >
               eliminar
             </Button>

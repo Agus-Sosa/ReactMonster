@@ -119,13 +119,13 @@ const AddArena = ({ fetchArenas }) => {
                         alt="Create ARENA"
                     />
                     <CardContent sx={{ height: 128 }}>
-                        <Typography gutterBottom variant="h5" component="div" sx={{ color: "#E3E0C3", fontFamily: "Anton" }}>
+                        <Typography gutterBottom variant="h5" component="div" sx={{ color: "#E3E0C3" }}>
                             Nombre Arena
                         </Typography>
 
                         <Button
                             variant="outlined"
-                            sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3", fontFamily: "Anton" }}
+                            sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3" }}
                             onClick={handleOpenMod}
                         >
                             Agregar Arena
