@@ -14,7 +14,7 @@ const UpdateBtnModal = ({open,onUpdate, onClose, userRole, inputFields=[], initF
 
   
   return (
-    <ModalInputsCrud titleMessage='Actualizar elemento' resetData={true} onClose={onClose} formData={formData} setFormData={setFormData} open={open} onConfirm={onUpdate} userRole={userRole}  inputFields={inputFields} />
+    <ModalInputsCrud titleMessage='Actualizar elemento' resetData={false} onClose={onClose} formData={formData} setFormData={setFormData} open={open} onConfirm={onUpdate} userRole={userRole}  inputFields={inputFields} />
   )
 }
 

@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import { AuthContext } from "../../../context/AuthContext.jsx";
-import DeleteCommentButton from "../../Buttons/BtnDelete/DeleteBtn.jsx";
+import DeleteCommentButton from "../../Buttons/BtnDelete/DeleteCommentButton.jsx";
 import timeAgo from "./FormatedTime.js";
 
 function Comments({ comment, post_id, onCommentDeleted }) {

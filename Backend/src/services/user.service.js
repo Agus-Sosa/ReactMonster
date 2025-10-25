@@ -1,8 +1,10 @@
 import { User } from "../models/User.js";
 import bcrypt from 'bcrypt';
+import { Post } from "../models/Post.js";
 class UserService {
     constructor(){
         this.modelUser = User
+        this.modelPost = Post;
     }
 
 
@@ -23,7 +25,19 @@ class UserService {
     }
 
     async getUserById (id) {
-        const user = await this.modelUser.findByPk(id);
+        const user = await this.modelUser.findByPk(id, {
+            include: [{
+                model: this.modelPost,
+                as: 'Posts', // Sequelize pluraliza el nombre del modelo por defecto
+                attributes: [
+                    "id_post",
+                    "title",
+                    "resume",
+                    "id_category",
+                    "date",
+                ]
+            }]
+        });
     
             if(!user) {
                 const error = new Error("Usuario no encontrado");
