@@ -21,10 +21,10 @@ const [monster, setMonster]= useState([]);
         fetchMonsters();
     }, [])
     
-
+console.log("monsters:", monster)
   return (
     <Box sx={{display:"flex", flexWrap:"wrap", gap:2, justifyContent:"center", my:7}}>
-        {monster.map((monster)=> (
+        {monster.filter(m=> m && m.monster_id).map((monster)=> ( //Dia 8000 buscando el problema del monster undefined
             <MonstersCard id={monster.monster_id} description={monster.monster_description}
                 image={`http://localhost:8080${monster.monster_image_url}`}
                 name={monster.monster_name} role={monster.monster_role} key={monster.monster_id} />

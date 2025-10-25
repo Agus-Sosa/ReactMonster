@@ -1,21 +1,21 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
 
-const PostCardProfile = ({ title, resume, date, }) => {
+const PostCardProfile = ({ title, resume, date, onClick }) => {
 
   const formattedDate = new Date(date).toLocaleDateString('es-AR');
 
 
   return (
     <Card 
-      component={Link}
+      onClick={onClick}
       sx={{ 
         width: '100%', 
         backgroundColor: '#1e1e1e', 
         color: 'white',
         textDecoration: 'none',
         display: 'flex',
+        cursor: 'pointer',
         border: "solid 1px #3f3f3f",
         flexDirection: { xs: 'column', sm: 'row' },
         transition: 'transform 0.2s all, box-shadow 0.2s ease-in-out',
