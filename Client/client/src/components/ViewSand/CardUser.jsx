@@ -38,7 +38,7 @@ export default function CardUser({arena, fetchArenas}) {
           alt={`Imagen ${arena.arena_name}`}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily:"Anton"}}>
+          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily: '"Poppins", sans-serif'}}>
             {arena.arena_name}
           </Typography>
           <Button
@@ -99,10 +99,10 @@ export default function CardUser({arena, fetchArenas}) {
           />
   
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily:"Anton",fontSize:{ xs: '18px', sm: '25px' }, textAlign:'center' }}>
+          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily: '"Poppins", sans-serif',fontSize:{ xs: '18px', sm: '25px' }, textAlign:'center' }}>
             {arena.arena_name}
           </Typography>
-          <Typography variant="body2" sx={{ color: "#E3E0C3", fontFamily:"Anton",fontSize:'17px' }}>
+          <Typography variant="body2" sx={{ color: "#E3E0C3", fontFamily: '"Poppins", sans-serif',fontSize:'17px' }}>
             {arena.arena_description}
           </Typography>
         </CardContent>

@@ -121,8 +121,8 @@ const AddArena = ({ fetchArenas }) => {
                         image="https://placehold.co/200x200?text= Create Arena"
                         alt="Create ARENA"
                     />
-                    <CardContent sx={{ height: 128 }}>
-                        <Typography gutterBottom variant="h5" component="div" sx={{ color: "#E3E0C3" }}>
+                    <CardContent sx={{ height: 128, fontFamily: '"Poppins", sans-serif' }}>
+                        <Typography gutterBottom variant="h5" component="div" sx={{ color: "#E3E0C3", fontFamily: '"Poppins", sans-serif' }}>
                             Nombre Arena
                         </Typography>
 

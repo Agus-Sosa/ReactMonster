@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../../context/AuthContext'
 import { Box } from '@mui/material';
-import PageContainer from '../Layout/PageContainer/PageContainer';
 import { useParams ,useNavigate,} from 'react-router-dom';
-import EditProfileButton from './EditProfileButton';
-import InfoProfileCardContainer from './infoProfile/infoProfileCardContainer';
-import PostCardProfileContainer from './PostUserProfile/PostCardProfileContainer';
-import DesactivateUserButton from './DesactivateUserButton';
+import { AuthContext } from '../context/AuthContext';
+import PageContainer from '../components/Layout/PageContainer/PageContainer';
+import DesactivateUserButton from '../components/Profile/DesactivateUserButton';
+import InfoProfileCardContainer from '../components/Profile/infoProfile/infoProfileCardContainer';
+import PostCardProfileContainer from '../components/Profile/PostUserProfile/PostCardProfileContainer';
+import EditProfileButton from '../components/Profile/EditProfileButton';
 
 const ProfileUser = () => {
   const {user} = useContext(AuthContext);
