@@ -18,6 +18,7 @@ import AllNews from './components/News/AllNews';
 import SettingsProfile from './components/Profile/SettingsProfile';
 import PublicRoute from './components/ProtectedRoute/PublicRoute';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Admin from './pages/Admin';
 import GameMenu from './pages/GameMenu';
 import Game from'./pages/Game'
@@ -26,16 +27,8 @@ function App() {
   return (
     <>
     <AuthenticationContextProvider>
-      <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          pauseOnHover
-          theme="colored"
-        />
       <Router>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick pauseOnHover theme="colored" />
         <Routes>
           {/* Rutas que usan el LayoutLanding */}
           <Route element={<LayoutLanding />}>
@@ -47,7 +40,11 @@ function App() {
             <Route path='/monsters/:id'element={<MonsterDetail/>}/>
             <Route path="/arenas" element={<Sands />} />
             <Route path='/allnews' element={<AllNews/>}/>
-            <Route path='/profile/:id_user' element={<ProfileUser/>} />
+              <Route path='/profile/:id_user' element={
+                <ProtectedRoute>
+                <ProfileUser />
+                </ProtectedRoute>
+              } />
               <Route path='/admin' element={<ProtectedRoute requiredRole={"superadmin"}><Admin /></ProtectedRoute>} />
               <Route path="/game" element={
               <ProtectedRoute>

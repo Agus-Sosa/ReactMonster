@@ -1,6 +1,6 @@
 import { Router } from "express";
 import UserController from "../controller/user.controller.js";
-import { validateGetUserById, validateNewUser, verifyLogin } from "../middleware/validateUser.js";
+import { isUserOrAdmin, validateGetUserById, validateNewUser, verifyLogin } from "../middleware/validateUser.js";
 import { isAdmin, verifyToken } from "../middleware/validateUser.js";
 
 
@@ -25,7 +25,7 @@ router.get("/:id", validateGetUserById,async(req, res, next)=> {
 })  
 
 
-router.delete("/:id",validateGetUserById, async(req,res, next)=> {
+router.delete("/:id",verifyToken,isUserOrAdmin, async(req,res, next)=> {
     await userController.deleteUserById(req,res, next)
 })
 

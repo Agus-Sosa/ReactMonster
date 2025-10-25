@@ -9,6 +9,7 @@ import SearchInput from '../SearchInput/SearchInput'
 import BtnFloatingCreate from '../Buttons/BtnCreate/BtnFloatingCreate'
 import { AuthContext } from '../../context/AuthContext'
 import CreateBtnModal from '../Buttons/BtnCreate/CreateBtnModal'
+import { toast } from 'react-toastify'
 const AllNews = () => {
   const [openModal, setOpenModal] = useState(false);
   const {user, token} = useContext(AuthContext);
@@ -26,14 +27,20 @@ const AllNews = () => {
 
   
   useEffect(() => {
-      const fetchNews = () => {
-        fetch("http://localhost:8080/news/")
-            .then(res => res.json())
-    .then(data => {
-      setNews(data);
-    })
-    .catch(err => console.log(err));
-  };
+    const fetchNews = async () => {
+      try {
+        const res = await fetch("http://localhost:8080/news/");
+        if (!res.ok) {
+          toast.error("No se pudieron cargar las noticias.");
+          return;
+        }
+        const data = await res.json();
+        setNews(data);
+      } catch (err) {
+        toast.error("Error al conectar con el servidor.");
+        console.log(err);
+      }
+    };
   
   fetchNews();
 }, []);
@@ -51,17 +58,18 @@ const handleCreate =async (newNew) => {
         })
 
         if (!res.ok) {
-          console.log("Error al eliminar la noticia");
+          toast.error("Error al crear la noticia.");
           return;
         }
         const data = await res.json();
         const created = data.newNew;
         setNews(prev => [created, ...prev]); 
-
+        toast.success("Noticia creada con éxito.");
+        handleClose();
 
 
       } catch (error) {
-        console.log(error)
+        toast.error("Ocurrió un error inesperado al crear la noticia.");
       }
   }
 

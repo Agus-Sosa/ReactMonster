@@ -62,7 +62,7 @@ class UserService {
         return await this.modelUser.findByPk(id_user);
     }
 
-    async desactivateUserById(id) {
+    async deleteUserById(id) {
         const user = await this.modelUser.findByPk(id);
 
         if(!user) {
@@ -71,7 +71,7 @@ class UserService {
             throw error;
         }
 
-        return await user.update({count_state: false})
+        return await user.update({count_state: false, user_name: "Usuario eliminado"})
     }
 
 }

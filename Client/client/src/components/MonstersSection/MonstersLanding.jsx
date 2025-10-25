@@ -7,6 +7,7 @@ import CreateBtnModal from '../Buttons/BtnCreate/CreateBtnModal';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import BtnFloatingCreate from '../Buttons/BtnCreate/BtnFloatingCreate';
+import { toast } from 'react-toastify';
 function MonstersLanding() {
   const {token , user} = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
@@ -30,13 +31,14 @@ const handleCreate =async (newMonster) => {
         })
 
         if (!res.ok) {
-          console.log("Error al eliminar la noticia");
+          toast.error("Error al crear el monstruo.");
           return;
         }
-
+        toast.success("Monstruo creado con éxito. Refresca para verlo.");
+        handleClose();
 
       } catch (error) {
-        console.log(error)
+        toast.error("Ocurrió un error inesperado al crear el monstruo.");
       }
   }
 

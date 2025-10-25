@@ -6,6 +6,7 @@ import { useParams ,useNavigate,} from 'react-router-dom';
 import EditProfileButton from './EditProfileButton';
 import InfoProfileCardContainer from './infoProfile/infoProfileCardContainer';
 import PostCardProfileContainer from './PostUserProfile/PostCardProfileContainer';
+import DesactivateUserButton from './DesactivateUserButton';
 
 const ProfileUser = () => {
   const {user} = useContext(AuthContext);
@@ -13,7 +14,7 @@ const ProfileUser = () => {
   const {id_user} = useParams();
   const [notUser, setNotUser]= useState(false);
   const [posts, setPosts] = useState([]);
-
+  const [openModalDelete, setOpenModalDelete] = useState(false)
   const navigate = useNavigate();
 
     // const {user} = useContext(AuthContext);
@@ -44,6 +45,37 @@ const ProfileUser = () => {
     fetchGetUser();
 
   },[id_user])
+
+
+
+  const handleCancelDelete = async () => {
+    setOpenModalDelete(false);
+  }
+  const handleOpenDelete = async () => {
+    setOpenModalDelete(true);
+  }
+
+
+
+  const handleDeleteUser = async () => { 
+    try {
+      const res = await fetch(`http://localhost:8080/users/${id_user}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        method: "DELETE",
+      })
+
+      if (!res.ok) {
+        console.log("Error al elimiar usuario")
+        return;
+      };
+
+    } catch (error) {
+      
+    }
+  }
 
   const userInfo = userData;
 
@@ -131,10 +163,10 @@ const ProfileUser = () => {
       
 
         <Box>
-          <Box sx={{ display: "flex", gap: 1, color: "white", justifyContent:"space-between", width:"100%",  alignItems:'start' }}>
-            <Box sx={{ display: "flex", gap: 1, color: "white"}}>
+          <Box sx={{ display: "flex", gap: 1, color: "white", justifyContent:"space-between", flexDirection:{xs:"column",md:"row"}, width:"100%",  alignItems:'start' }}>
+            <Box sx={{ display: "flex", gap: 1, color: "white", flexDirection:{xs:"row",md:"row"},  flexWrap:"wrap" }}>
 
-          <Box component={"img"} src={ userData?.profile_picture}  sx={{width:{xs:"300px" ,md:"150px"}, borderRadius:1}}/>
+          <Box component={"img"} src={ userData?.profile_picture}  sx={{width:{xs:"200px" ,md:"150px"}, borderRadius:1}}/>
             <Box>
               <Box sx={{fontSize:"24px", fontWeight:"bold"}}>
                 {userData?.user_name}
@@ -145,7 +177,10 @@ const ProfileUser = () => {
                   </Box>
             </Box>
 
+            <Box>
                 <EditProfileButton user={user} userInfo={userInfo}/>
+              <DesactivateUserButton onDeleteUser={handleDeleteUser} onOpen={ handleOpenDelete}  open={openModalDelete} user={user}  userId={id_user} onClose={handleCancelDelete}/>
+            </Box>
 
           </Box>
         </Box>

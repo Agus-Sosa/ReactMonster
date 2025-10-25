@@ -12,14 +12,16 @@ const PostCardProfile = ({ title, resume, date, }) => {
       component={Link}
       sx={{ 
         width: '100%', 
-        backgroundColor: '#2a2a2a', 
+        backgroundColor: '#1e1e1e', 
         color: 'white',
         textDecoration: 'none',
         display: 'flex',
+        border: "solid 1px #3f3f3f",
         flexDirection: { xs: 'column', sm: 'row' },
-        transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
-        '&:hover': {
-          transform: 'scale(1.02)',
+        transition: 'transform 0.2s all, box-shadow 0.2s ease-in-out',
+        ":hover": {
+          border: "solid 1px #5a5a5aff",
+
         }
       }}
     >
