@@ -6,6 +6,7 @@ import { useParams ,useNavigate,} from 'react-router-dom';
 import EditProfileButton from './EditProfileButton';
 import InfoProfileCardContainer from './infoProfile/infoProfileCardContainer';
 import PostCardProfileContainer from './PostUserProfile/PostCardProfileContainer';
+import DesactivateUserButton from './DesactivateUserButton';
 
 const ProfileUser = () => {
   const {user} = useContext(AuthContext);
@@ -13,7 +14,7 @@ const ProfileUser = () => {
   const {id_user} = useParams();
   const [notUser, setNotUser]= useState(false);
   const [posts, setPosts] = useState([]);
-
+  const [openModalDelete, setOpenModalDelete] = useState(false)
   const navigate = useNavigate();
 
     // const {user} = useContext(AuthContext);
@@ -44,6 +45,37 @@ const ProfileUser = () => {
     fetchGetUser();
 
   },[id_user])
+
+
+
+  const handleCancelDelete = async () => {
+    setOpenModalDelete(false);
+  }
+  const handleOpenDelete = async () => {
+    setOpenModalDelete(true);
+  }
+
+
+
+  const handleDeleteUser = async () => { 
+    try {
+      const res = await fetch(`http://localhost:8080/users/${id_user}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        method: "DELETE",
+      })
+
+      if (!res.ok) {
+        console.log("Error al elimiar usuario")
+        return;
+      };
+
+    } catch (error) {
+      
+    }
+  }
 
   const userInfo = userData;
 
@@ -145,7 +177,10 @@ const ProfileUser = () => {
                   </Box>
             </Box>
 
+            <Box>
                 <EditProfileButton user={user} userInfo={userInfo}/>
+              <DesactivateUserButton onDeleteUser={handleDeleteUser} onOpen={ handleOpenDelete}  open={openModalDelete} user={user}  userId={id_user} onClose={handleCancelDelete}/>
+            </Box>
 
           </Box>
         </Box>

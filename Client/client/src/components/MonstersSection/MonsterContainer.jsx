@@ -1,15 +1,24 @@
 import { Box } from '@mui/material';
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { toast } from 'react-toastify';
 import MonstersCard from './MonstersCards';
 
 const MonsterContainer = () => {
 const [monster, setMonster]= useState([]);
-    useEffect(()=> {
-        fetch("http://localhost:8080/monsters/")
-        .then(res=> res.json())
-        .then((data)=> setMonster(data.monsters))
-        .catch(error => console.log(error))
+    useEffect(() => {
+        const fetchMonsters = async () => {
+            try {
+                const res = await fetch("http://localhost:8080/monsters/");
+                if (!res.ok) {
+                    toast.error("No se pudieron cargar los monstruos.");
+                    return;
+                }
+                const data = await res.json();
+                setMonster(data.monsters);
+            } catch (error) { toast.error("Error al conectar con el servidor."); }
+        }
+        fetchMonsters();
     }, [])
     
 

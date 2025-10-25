@@ -71,7 +71,7 @@ class UserService {
             throw error;
         }
 
-        return await user.update({count_state: false})
+        return await user.update({count_state: false, user_name: "Usuario eliminado"})
     }
 
 }
