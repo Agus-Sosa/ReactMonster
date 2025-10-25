@@ -62,7 +62,7 @@ class UserService {
         return await this.modelUser.findByPk(id_user);
     }
 
-    async desactivateUserById(id) {
+    async deleteUserById(id) {
         const user = await this.modelUser.findByPk(id);
 
         if(!user) {

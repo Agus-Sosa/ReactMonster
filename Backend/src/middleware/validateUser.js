@@ -101,6 +101,14 @@ export const validateGetUserById= async(req, res, next)=> {
 
 
 
+export const isUserOrAdmin = (req, res, next) => {
+  const userId = parseInt(req.params.id, 10);
+  if (!req.user || (req.user.id !== userId && req.user.role !== 'admin' && req.user.role !== 'superadmin') ){
+    const error = new Error("No cuenta con los permisos necesarios")
+    error.status = 404
+    throw error
+  }
+}
 export const isAdmin=(req, res, next)=> {
   if (!req.user.role ||(req.user.role !== 'admin' && req.user.role !== 'superadmin')) {
     const error = new Error("No cuenta con los permisos necesarios");

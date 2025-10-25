@@ -131,10 +131,10 @@ const ProfileUser = () => {
       
 
         <Box>
-          <Box sx={{ display: "flex", gap: 1, color: "white", justifyContent:"space-between", width:"100%",  alignItems:'start' }}>
-            <Box sx={{ display: "flex", gap: 1, color: "white"}}>
+          <Box sx={{ display: "flex", gap: 1, color: "white", justifyContent:"space-between", flexDirection:{xs:"column",md:"row"}, width:"100%",  alignItems:'start' }}>
+            <Box sx={{ display: "flex", gap: 1, color: "white", flexDirection:{xs:"row",md:"row"},  flexWrap:"wrap" }}>
 
-          <Box component={"img"} src={ userData?.profile_picture}  sx={{width:{xs:"300px" ,md:"150px"}, borderRadius:1}}/>
+          <Box component={"img"} src={ userData?.profile_picture}  sx={{width:{xs:"200px" ,md:"150px"}, borderRadius:1}}/>
             <Box>
               <Box sx={{fontSize:"24px", fontWeight:"bold"}}>
                 {userData?.user_name}

@@ -47,7 +47,11 @@ function App() {
             <Route path='/monsters/:id'element={<MonsterDetail/>}/>
             <Route path="/arenas" element={<Sands />} />
             <Route path='/allnews' element={<AllNews/>}/>
-            <Route path='/profile/:id_user' element={<ProfileUser/>} />
+              <Route path='/profile/:id_user' element={
+                <ProtectedRoute>
+                <ProfileUser />
+                </ProtectedRoute>
+              } />
               <Route path='/admin' element={<ProtectedRoute requiredRole={"superadmin"}><Admin /></ProtectedRoute>} />
               <Route path="/game" element={
               <ProtectedRoute>

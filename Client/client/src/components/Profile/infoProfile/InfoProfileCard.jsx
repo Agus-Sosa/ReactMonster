@@ -6,7 +6,7 @@ const InfoProfileCard = ({title, detail}) => {
     <Box sx={{
       border: "solid 1px #3f3f3f",
       p: 2,
-      minHeight: "150px",
+      maxHeight: "150px",
       minWidth: "150px",
       display: "flex",
       flexDirection: "column",
@@ -19,10 +19,10 @@ const InfoProfileCard = ({title, detail}) => {
         borderColor: '#5a5a5aff',
       }
     }}>
-      <Typography variant="body1" sx={{ color: "grey.500", textTransform: 'capitalize' }}>
+      <Typography variant="body1" sx={{ color: "grey.500", textTransform: 'capitalize', fontSize:{md:"20px", xs:"14px"} }}>
         {title}
       </Typography>
-      <Typography variant="h4" sx={{ color: "white", fontWeight: 'bold' }}>
+      <Typography variant="h4" sx={{ color: "white", fontWeight: 'bold', fontSize:{md:"20px", xs:"17px"} }}>
         {detail}
       </Typography>
     </Box>

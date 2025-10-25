@@ -23,7 +23,8 @@ const DesactivateUserButton = ({isDeleted, idUser}) => {
 
 
     return (
-    
+        <>
+        </>
   )
 }
 
