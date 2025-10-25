@@ -67,16 +67,16 @@ const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
       </Tooltip>
 
       {/* modal to confirm deletion*/}
-      <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
-        <DialogTitle sx={{ fontWeight: 600, textAlign: 'center' }}>
+      <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth sx={{backgroundColor: '#31313113'}}>
+        <DialogTitle sx={{ fontWeight: 600, textAlign: 'center', backgroundColor: '#636161ff' }}>
           Eliminar comentario
         </DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{backgroundColor: '#313131ff', color:"white"}}>
           <Typography align="center" sx={{ mt: 1 }}>
             ¿Seguro que querés eliminar este comentario? Esta acción no se puede deshacer.
           </Typography>
         </DialogContent>
-        <DialogActions sx={{ justifyContent: 'center', mb: 1 }}>
+        <DialogActions sx={{ justifyContent: 'center', mb: 1,backgroundColor: '#313131ff', color:"white" }}>
           <Button onClick={handleClose} variant="outlined" color="inherit">
             Cancelar
           </Button>

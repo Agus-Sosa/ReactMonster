@@ -1,6 +1,6 @@
 [
 null,
 {"id":1,"expanded":false,"name":"intro","order":1,"parentId":0,"scrollX":1082.6666666666667,"scrollY":604},
-{"id":2,"expanded":true,"name":"Afueras de Hatemel","order":2,"parentId":0,"scrollX":1081.3333333333333,"scrollY":604},
+{"id":2,"expanded":true,"name":"Afueras de Hatemel","order":2,"parentId":0,"scrollX":1081.3333333333333,"scrollY":1110.6666666666667},
 {"id":3,"expanded":false,"name":"Torre Hatamel","order":3,"parentId":2,"scrollX":1092,"scrollY":614.6666666666666}
 ]
