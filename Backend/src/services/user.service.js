@@ -34,6 +34,8 @@ class UserService {
                     "title",
                     "resume",
                     "id_category",
+                    "content",
+                    "imgContent",
                     "date",
                 ]
             }]
