@@ -2,7 +2,7 @@ import { User } from "../models/User.js";
 import bcrypt from 'bcrypt'
 export const tempUserData = async () => {
   const count = await User.count();
-  if (count > 0) return; // ya existen usuarios, no hace nada
+  if (count > 0) return; // ya existen usuarios, no hace nada!
 
 const users = [
     {
