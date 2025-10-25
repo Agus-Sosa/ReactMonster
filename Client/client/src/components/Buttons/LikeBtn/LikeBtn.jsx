@@ -5,7 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { AuthContext } from '../../../context/AuthContext.jsx'
 
 export default function LikeButton({ postId }) {
-  const { user } = useContext(AuthContext); 
+  const { user,token } = useContext(AuthContext); 
 
   if(!user) return null; // If there is no user, do not show the button
   const userId = user.id;
@@ -37,7 +37,8 @@ export default function LikeButton({ postId }) {
   try {
     const res = await fetch(`http://localhost:8080/likes/post/${postId}/user/${userId}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" ,
+      Authorization: `Bearer ${token}`,}
     });
 
     if (!res.ok) throw new Error(`Error ${res.status}`);
