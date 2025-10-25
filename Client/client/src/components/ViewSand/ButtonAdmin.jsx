@@ -181,11 +181,11 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
           p: 4,
         }}
       >
-        <Typography variant="h6" sx={{ mb: 2 }}>
+        <Typography variant="h6" sx={{ mb: 2, fontFamily: '"Poppins", sans-serif' }}>
           Borrar elemento
         </Typography>
 
-        <Typography sx={{ mb: 3 }}>
+        <Typography sx={{ mb: 3, fontFamily: '"Poppins", sans-serif' }}>
           ¿Estás seguro de que deseas eliminar esto? Esta acción no se puede deshacer.
         </Typography>
 
@@ -273,5 +273,3 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
     </>
   );
 }
-
-

@@ -25,7 +25,7 @@ const DesactivateUserButton = ({onDeleteUser, user,onOpen,  onClose, open, userI
 
     return (
         <>
-        <Button onClick={onOpen}>
+        <Button onClick={onOpen} variant='contained' color='error'>
             Eliminar Usuario
             </Button>
             <ModalConfirm onConfirm={handleDelete} onClose={handleClose} open={open}   />
