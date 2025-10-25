@@ -1,6 +1,6 @@
 import { Router } from "express";
 import ArenaController from "../controller/arena.controller.js";
-import { validateIdArena, validateNameArena } from "../middleware/validateArena.js";
+import { validateIdArena, validateNameArena, validateInputArena } from "../middleware/validateArena.js";
 import { isAdmin, verifyToken } from "../middleware/validateUser.js";
 
 
@@ -19,13 +19,13 @@ router.get("/name", validateNameArena, async (req, res, next) => {
     return await arenaController.create(req, res, next);
 });
 
-router.put("/:id",   validateIdArena, async (req, res, next) => {
+router.put("/:id", verifyToken, isAdmin, validateInputArena, validateIdArena, async (req, res, next) => {
     return await arenaController.update(req, res, next);
 })
-router.delete("/:id",  validateIdArena, async (req, res, next) => {
+router.delete("/:id", verifyToken, isAdmin, validateIdArena, async (req, res, next) => {
     return await arenaController.delete(req, res, next);
 })
-router.post("/",  async (req, res, next) => {
+router.post("/", verifyToken, isAdmin, validateInputArena, async (req, res, next) => {
     return await arenaController.create(req, res, next);
 })
 

@@ -5,7 +5,9 @@ class ArenaController {
     constructor() {
         this.arenaService = new ArenaService();
     }
-/* Obtener todas las arenas */
+
+    // Get all Arenas 
+    
     async getAllArenas(req, res, next) {
         try {
             const arenas = await this.arenaService.getAllArenas();
@@ -18,7 +20,9 @@ class ArenaController {
             next(error);
         }
     }
-/*Obtiene las arenas por id */
+
+    //Gets the arenas by id 
+
     async getArenaById(req, res, next) {
         try {
             const { id } = req.params;
@@ -33,7 +37,7 @@ class ArenaController {
         }
     }
 
-    // actualizar arenas
+    // update arenas
 
     async update(req, res, next) {
         const { id } = req.params;
@@ -51,7 +55,8 @@ class ArenaController {
         }
     }
 
-    // eliminar Arenas
+    
+// remove Arenas
 
      async delete(req, res, next) {
         const { id } = req.params;
@@ -63,14 +68,16 @@ class ArenaController {
         }
     }
     
-    //crear arenas
-
+    
+    //create arenas
+    
     async create(req, res, next) {
         const { arena_name, arena_description, arena_image_url } = req.body;
         const data = {
             arena_name,
             arena_description,
-            arena_image_url
+            arena_image_url,
+            
         }
         try {
             await this.arenaService.createArena(data)
@@ -85,12 +92,8 @@ class ArenaController {
     }
 
 
-
-        
-        
-
-
-/*Obtiene las arenas por nombre */
+    /*Gets the arenas by name */
+    
     async getArenaByName(req, res, next) {
         try {
             const { arena_name } = req.body;

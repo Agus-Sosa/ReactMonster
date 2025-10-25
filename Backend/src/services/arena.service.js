@@ -39,8 +39,8 @@ class ArenaService {
         return {message : "arena eliminada correctamente"};
     }
 
-    async createArena(data) {
-        const newArena = await Arena.create(data);
+    async createArena(data, id_user) {
+        const newArena = await Arena.create(data,id_user);
         return newArena
     }
 }

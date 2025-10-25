@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Modal, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import ButtonAdmin from './ButtonAdmin';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function CardUser({arena, fetchArenas}) {
 
@@ -43,7 +44,7 @@ export default function CardUser({arena, fetchArenas}) {
           <Button
               variant="outlined"
               onClick={handleOpen}
-              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3", fontFamily: "Anton" }}
+              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3" }}
             >
               Ver más
           </Button>
@@ -86,7 +87,7 @@ export default function CardUser({arena, fetchArenas}) {
                   lineHeight: 1,
                   padding: 0,
                 }} >
-            X
+            <CloseIcon/>
             </Button>
           </Box>
 
