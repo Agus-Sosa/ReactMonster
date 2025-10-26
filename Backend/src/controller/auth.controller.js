@@ -9,9 +9,8 @@ class AuthController {
     async login (req,res,next) {
         try {
         const {user_email, user_password} = req.body;
-        const user = await this.authService.login(user_email, user_password);
-        console.log("user auth:", user.role)
-    
+            const user = await this.authService.login(user_email, user_password);
+            
             const token = jwt.sign(
                 
                 {id:user.id_user, user_name: user.user_name, user_email: user.user_email , role:user.role, profile_picture: user.profile_picture },

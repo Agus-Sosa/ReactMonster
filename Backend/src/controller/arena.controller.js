@@ -83,7 +83,6 @@ class ArenaController {
             await this.arenaService.createArena(data)
             res.status(200).json({status: "success", message:"arena creada", data: data})
         } catch (error) {
-            console.error("Error al crear la arena:", error);
             res.status(500).json({
                 status: "error",
                 message: "No se pudo crear la arena"

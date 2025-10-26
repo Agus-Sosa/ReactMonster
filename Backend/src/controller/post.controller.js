@@ -45,13 +45,10 @@ class PostController {
     const id_user = req.user.id;
 
     const newPostData = { title, resume, content, id_category, id_user, imgContent }; 
- 
-      console.log("createNewPost →", newPostData);
 
       const post = await this.postService.createNewPost(newPostData);
       return res.status(201).json({ status: "success", newPost: post });
     } catch (error) {
-      console.error("/post/newPost error:", error.name, error.message, error.errors);
       next(error);
     }
   }

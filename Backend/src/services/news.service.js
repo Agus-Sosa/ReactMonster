@@ -34,7 +34,6 @@ class NewService{
     }
     // delete a news item by its ID
     async deleteNewById(id) {
-        console.log("Deleting news item with ID:", id);
         return await this.modelNew.update({ state: false }, {where:{id_news:id}});
     }
     // I got tired, the name tells you what it does
