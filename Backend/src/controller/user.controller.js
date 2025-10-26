@@ -51,8 +51,8 @@ class UserController {
     async deleteUserById (req, res, next) {
         try {
             const {id}= req.params;
-            await this.userService.deleteUserById(id);
-            await res.status(200).json({status:"success", messgae:"Usuario eliminado con exito"})
+            const deletedUser = await this.userService.deleteUserById(id);
+            res.status(200).json({status:"success", messgae:"Usuario eliminado con exito", deletedUser:deletedUser});
         } catch (error) {
             next(error)
         }
