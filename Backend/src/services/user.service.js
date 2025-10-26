@@ -54,7 +54,7 @@ class UserService {
 
     async updateUser (id_user,newUpdate) {
         
-        const [updateData]= await this.modelUser.update(newUpdate, {where:{id_user}});
+        const [updateData]= await this.modelUser.update(newUpdate, {where:{id_user: id_user}});
     
     
         if(updateData ===0) {
