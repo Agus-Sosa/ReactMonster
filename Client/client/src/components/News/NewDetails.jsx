@@ -6,6 +6,8 @@ import { AuthContext } from '../../context/AuthContext';
 import DeleteBtnModal from '../Buttons/BtnDelete/DeleteBtnModal';
 import UpdateBtn from '../Buttons/BtnUpdate/UpdateBtn';
 import UpdateBtnModal from '../Buttons/BtnUpdate/UpdateBtnModal';
+import { toast } from 'react-toastify';
+
 
 const NewDetails = () => {
   const { user, token } = useContext(AuthContext);
@@ -43,12 +45,14 @@ const NewDetails = () => {
 
         if (!res.ok) {
           setNotNew(true);
+          toast.error("No se pudo cargar la noticia.");
           return;
         }
         const data = await res.json();
         setNewDetail(data.new);
       
       } catch (error) {
+        toast.error("Error al conectar con el servidor.");
         console.log(error);
         setNotNew(true);
       }
@@ -74,14 +78,15 @@ const NewDetails = () => {
       })
 
       if (!res.ok) {
-        console.log("Error al eliminar la noticia");
+        toast.error("Error al eliminar la noticia.");
         return;
       }
+      toast.success("Noticia eliminada correctamente.");
       navigate('/allnews');
 
 
     } catch (error) {
-      console.log(error)
+      toast.error("Ocurrió un error inesperado al eliminar.");
     }
   }
 
@@ -116,15 +121,18 @@ const NewDetails = () => {
 
 
       if (!res.ok) { 
-        console.log("Error al actualizar la noticia");
+        toast.error("Error al actualizar la noticia.");
         return;
       }
 
       const data = await res.json();
       setNewDetail(data.updatedNew);
+      toast.success("Noticia actualizada con éxito.");
 
     }
-    catch (error) { }
+    catch (error) {
+      toast.error("Ocurrió un error inesperado al actualizar.");
+     }
   }
 
 

@@ -1,29 +1,27 @@
+import { Button } from '@mui/material';
 import React from 'react'
+import ModalConfirm from '../Buttons/ModalCrud/ModalConfirm';
 
-const DesactivateUserButton = ({isDeleted, idUser}) => {
-  
+const DesactivateUserButton = ({onDeleteUser, myUser,onOpen,  onClose, open, userView}) => {
+    const userRole = myUser?.role;
 
-    const handleDesactivate = async()=> {
-        try {
-            const res = await fetch(`http://localhost:8080/users/desactivate/${isDeleted.id}`, {
-                    headers: { "Content-Type": "application/json" },
-                    method:"PUT",
-            })
 
-            if(!res.ok) {
-                console.log("Error al desactivar el usuario", res);
+    if (!userRole || (userRole !== "admin" && userRole !== "superadmin") ||myUser?.id == userView.id_user  || userView.count_state === false) return null;
+    
+ 
 
-            }
-            
-
-        } catch (error) {
-            console.log(error)
-        }
+    const handleClose = async () => {
+        onClose();
     }
 
 
     return (
-    
+        <>
+        <Button onClick={onOpen} variant='contained' color='error'>
+            Eliminar Usuario
+            </Button>
+            <ModalConfirm onConfirm={onDeleteUser} onClose={handleClose} open={open}   />
+        </>
   )
 }
 

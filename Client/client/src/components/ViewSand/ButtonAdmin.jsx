@@ -19,7 +19,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
 
   
   // create the states and initialize them
-  // creo los estados y los inicializo
+
   
   const [confirmacion, setConfirmacion] = React.useState(false);
   const [formulario, setFormulario] = React.useState(false);
@@ -28,10 +28,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
   const [descripcion, setDescripcion] = React.useState(arena.arena_description);
   
   // constant that is assigned the user's role and depending on his or her role, the component is rendered or not
-  // constante que se le asigna el rol de el usuario y dependiendo su rol renderiza o no el componente
-  
   //use the useContext to bring the token and the user data
-  //utiliza el useContext para traer el token y los datos de el usuario
   const { user, token } = React.useContext(AuthContext)
   const isAdmin = user?.role === 'admin' || user?.role === 'superadmin';
   if (!isAdmin) {
@@ -62,14 +59,21 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
     }
   }
   //function to edit an arena, what it does inside it is a validation and sends it to the back
-  //funcion para editar una arena, lo que hace dentro de ella es una validacion y lo envia al back
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!nombre || !descripcion || !imagen || !nombre.trim() || !descripcion.trim() || !imagen.trim()) {
-          toast.error("Se debe completar todos los campos antes de subir la arena.");
-          return;
-        }
+        toast.error("Se debe completar todos los campos antes de subir la arena.");
+      return;
+    }
+    if (nombre.length<4 || nombre.length>40) {
+        toast.error("El nombre de la arena debe ser mayor a 3 y menor o igual a 40 caracteres.");
+      return;
+    }
+    if (descripcion.length < 10 || descripcion.length >= 350) {
+        toast.error("La descripcion de la arena debe ser mayor a 10 y menor o igual a 350 caracteres.");
+      return;
+    }
     try {
       const response = await fetch(`http://localhost:8080/arenas/${arena.id}`, {
         method: "PUT",
@@ -92,11 +96,9 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
       toast.success('Arena editada correctamente.');
       
       // close modal
-      // cerrar modal
       handleCloseForm();
       fetchArenas();
       //refresh data in the front
-      //refrescar datos en el front
       fetchArenas();
       
     } catch (err) {
@@ -105,7 +107,6 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
     }
   };
   // functions to handle states, dialog and modal
-  // funciones para manejar estados, dialgo y modal
   const handleImagen = (e) => {
     setImagen(e.target.value)
   }
@@ -141,12 +142,11 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
     <>
       
           {/* buttons that are rendered if the user is admin or superadmin */}
-          {/* botones que se renderizan si el usuario es admin o superadmin */}
           <Box>
             <Button
               variant="outlined"
               onClick={handlecOpenForm}
-              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3", fontFamily: "Anton" }}
+              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3" }}
             >
               editar
             </Button>
@@ -154,14 +154,14 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
             <Button
               variant="outlined"
               onClick={handlecOpenConf}
-              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3", fontFamily: "Anton" }}
+              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3"}}
             >
               eliminar
             </Button>
           </Box>
         
       {/* confirmation dialog that will appear when you want to delete an arena */}
-      {/* dialog de confirmacion que se habre al querer eliminar una arena */}
+
 
 
       
@@ -181,11 +181,11 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
           p: 4,
         }}
       >
-        <Typography variant="h6" sx={{ mb: 2 }}>
+        <Typography variant="h6" sx={{ mb: 2, fontFamily: '"Poppins", sans-serif' }}>
           Borrar elemento
         </Typography>
 
-        <Typography sx={{ mb: 3 }}>
+        <Typography sx={{ mb: 3, fontFamily: '"Poppins", sans-serif' }}>
           ¿Estás seguro de que deseas eliminar esto? Esta acción no se puede deshacer.
         </Typography>
 
@@ -203,8 +203,7 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
 
 
 
-       {/* modal that is rendered when you want to edit an arena 
-       modal que se renderiza al querer editar una arena  */}
+       {/* modal that is rendered when you want to edit an arena */}
 
       
 
@@ -274,5 +273,3 @@ export default function ButtonAdmin({ arena, fetchArenas }) {
     </>
   );
 }
-
-

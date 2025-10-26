@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Modal, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import ButtonAdmin from './ButtonAdmin';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function CardUser({arena, fetchArenas}) {
 
@@ -21,7 +22,6 @@ export default function CardUser({arena, fetchArenas}) {
   return (
     <>
       {/* the letter loaded with the information brought from the viewUser */}
-      {/* la carta cargada con la informacion traida de la viewUser */}
       <Card sx={{
         width: { xs: "100%", sm: 300, md: 345 },
         height: { xs: 400, sm: 450 },
@@ -38,13 +38,13 @@ export default function CardUser({arena, fetchArenas}) {
           alt={`Imagen ${arena.arena_name}`}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily:"Anton"}}>
+          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily: '"Poppins", sans-serif'}}>
             {arena.arena_name}
           </Typography>
           <Button
               variant="outlined"
               onClick={handleOpen}
-              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3", fontFamily: "Anton" }}
+              sx={{ mt: 1, borderColor: "#E3E0C3", color: "#E3E0C3" }}
             >
               Ver más
           </Button>
@@ -54,7 +54,6 @@ export default function CardUser({arena, fetchArenas}) {
     </Card>
     
     {/* the modal that appears (letter) when you click on see more and gives more information about the arena */}
-    {/* el modal que se habre(carta) al hacer click en ver mas y da mas informacion sbre la arena */}
     <Modal
       open={carta}
       onClose={handleClose}
@@ -88,7 +87,7 @@ export default function CardUser({arena, fetchArenas}) {
                   lineHeight: 1,
                   padding: 0,
                 }} >
-            X
+            <CloseIcon/>
             </Button>
           </Box>
 
@@ -100,10 +99,10 @@ export default function CardUser({arena, fetchArenas}) {
           />
   
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily:"Anton",fontSize:{ xs: '18px', sm: '25px' }, textAlign:'center' }}>
+          <Typography gutterBottom variant="h5" component="div" sx={{color: "#E3E0C3", fontFamily: '"Poppins", sans-serif',fontSize:{ xs: '18px', sm: '25px' }, textAlign:'center' }}>
             {arena.arena_name}
           </Typography>
-          <Typography variant="body2" sx={{ color: "#E3E0C3", fontFamily:"Anton",fontSize:'17px' }}>
+          <Typography variant="body2" sx={{ color: "#E3E0C3", fontFamily: '"Poppins", sans-serif',fontSize:'17px' }}>
             {arena.arena_description}
           </Typography>
         </CardContent>

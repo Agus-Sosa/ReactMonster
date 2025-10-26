@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import MonsterDetailMobile from './MonsterDetailMobile';
 import MonsterDetailDesktop from './MonsterDetailDesktop';
 import { AuthContext } from '../../context/AuthContext';
+import { toast } from 'react-toastify';
 const MonsterDetail = () => {
     const { id } = useParams();
     const { token, user } = useContext(AuthContext);
@@ -13,12 +14,22 @@ const MonsterDetail = () => {
 
     const mobile = useMediaQuery('(max-width:750px)');
 
-    useEffect(()=> {
-        fetch(`http://localhost:8080/monsters/${id}`)
-        .then(res=> res.json())
-        .then((data)=> setMonster(data.monster))
-        .catch(error => console.log(error))
-    }, [id])
+    useEffect(() => {
+        const fetchMonster = async () => {
+            try {
+                const res = await fetch(`http://localhost:8080/monsters/${id}`);
+                if (!res.ok) {
+                    toast.error("No se pudo encontrar el monstruo.");
+                    return;
+                }
+                const data = await res.json();
+                setMonster(data.monster);
+            } catch (error) {
+                toast.error("Error al cargar los detalles del monstruo.");
+            }
+        };
+        fetchMonster();
+    }, [id]);
 
 const handleDelete =async () => { 
       try {
@@ -31,14 +42,15 @@ const handleDelete =async () => {
         })
 
         if (!res.ok) {
-          console.log("Error al eliminar la noticia");
+          toast.error("Error al eliminar el monstruo.");
           return;
         }
+        toast.success("Monstruo eliminado correctamente.");
         navigate('/monsters');
 
 
       } catch (error) {
-        console.log(error)
+        toast.error("Ocurrió un error inesperado al eliminar.");
       }
     }
     
@@ -58,17 +70,17 @@ const handleDelete =async () => {
 
 
       if (!res.ok) { 
-        console.log("Error al actualizar la noticia");
+        toast.error("Error al actualizar el monstruo.");
         return;
       }
 
       const data = await res.json();
       setMonster(data.updatedMonster);
+      toast.success("Monstruo actualizado con éxito.");
 
     }
     catch (error) { 
-      console.log(error)
-
+      toast.error("Ocurrió un error inesperado al actualizar.");
     }
   }
       const inputFields = [

@@ -51,8 +51,8 @@ class UserController {
     async deleteUserById (req, res, next) {
         try {
             const {id}= req.params;
-            await this.userService.desactivateUserById(id);
-            await res.status(200).json({status:"success", messgae:"Usuario eliminado con exito"})
+            const deletedUser = await this.userService.deleteUserById(id);
+            res.status(200).json({status:"success", messgae:"Usuario eliminado con exito", deletedUser:deletedUser});
         } catch (error) {
             next(error)
         }
@@ -60,11 +60,15 @@ class UserController {
 
     async updateUser(req,res,next) {
         try {
-            const {id}=req.params;
+            // Se usa req.params.id porque la ruta está protegida por el middleware isUserOrAdmin.
+            // 1. Si es un usuario normal, isUserOrAdmin ya verificó que req.params.id === req.user.id.
+            // 2. Si es un admin, le permite modificar a otros usuarios usando el ID de la URL.
+            // Usar req.user.id aquí haría que un admin solo pudiera modificarse a sí mismo.
+            const { id } = req.params;
             const newData = req.body;
 
             const updateUser = await this.userService.updateUser(id, newData);
-            res.status(200).json({status: "success", data:updateUser})
+            res.status(200).json({status: "success", updatedUser:updateUser})
 
         } catch (error) {
             next(error);
