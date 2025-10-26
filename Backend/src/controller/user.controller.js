@@ -60,7 +60,11 @@ class UserController {
 
     async updateUser(req,res,next) {
         try {
-            const id = req.user.id;
+            // Se usa req.params.id porque la ruta está protegida por el middleware isUserOrAdmin.
+            // 1. Si es un usuario normal, isUserOrAdmin ya verificó que req.params.id === req.user.id.
+            // 2. Si es un admin, le permite modificar a otros usuarios usando el ID de la URL.
+            // Usar req.user.id aquí haría que un admin solo pudiera modificarse a sí mismo.
+            const { id } = req.params;
             const newData = req.body;
 
             const updateUser = await this.userService.updateUser(id, newData);
