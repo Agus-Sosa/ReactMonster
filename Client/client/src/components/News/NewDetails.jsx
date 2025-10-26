@@ -49,7 +49,6 @@ const NewDetails = () => {
         setNewDetail(data.new);
       
       } catch (error) {
-        console.log(error);
         setNotNew(true);
       }
     
@@ -74,14 +73,12 @@ const NewDetails = () => {
       })
 
       if (!res.ok) {
-        console.log("Error al eliminar la noticia");
         return;
       }
       navigate('/allnews');
 
 
     } catch (error) {
-      console.log(error)
     }
   }
 
@@ -116,7 +113,6 @@ const NewDetails = () => {
 
 
       if (!res.ok) { 
-        console.log("Error al actualizar la noticia");
         return;
       }
 

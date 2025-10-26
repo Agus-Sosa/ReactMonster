@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import NewCard from './NewCard';
 
 const NewCarouselMobile = ({ inf }) => {
-  console.log("inf en NewCarouselMobile:", inf);
   return (
     <Box
       sx={{

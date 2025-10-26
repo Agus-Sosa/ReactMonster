@@ -28,7 +28,6 @@ function CommentsSection({ postId }) {
       setComments(data.comments);
       setTotalPages(data.totalPages);
     } catch (err) {
-      console.error(err);
     } finally {
       setLoading(false);
     }

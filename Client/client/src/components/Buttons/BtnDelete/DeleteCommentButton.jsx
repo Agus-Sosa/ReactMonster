@@ -42,8 +42,7 @@ const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
       onDeleted?.(data);
       toast.success('Comentario eliminado correctamente.');
       handleClose();
-    } catch (error) {
-      console.error(error);
+    } catch (error) {     
       toast.error('No se pudo eliminar el comentario.');
     } finally {
       setLoading(false);
@@ -71,7 +70,7 @@ const DeleteCommentButton = ({ postId, commentId, userId, onDeleted }) => {
         <DialogTitle sx={{ fontWeight: 600, textAlign: 'center', backgroundColor: '#636161ff' }}>
           Eliminar comentario
         </DialogTitle>
-        <DialogContent sx={{backgroundColor: '#313131ff', color:"white"}}>
+        <DialogContent sx={{backgroundColor: '#313131ff', color:"white"}}>c
           <Typography align="center" sx={{ mt: 1 }}>
             ¿Seguro que querés eliminar este comentario? Esta acción no se puede deshacer.
           </Typography>

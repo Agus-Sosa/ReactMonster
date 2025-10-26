@@ -9,8 +9,6 @@ export default function LikeButton({ postId }) {
 
   if(!user) return null; // If there is no user, do not show the button
   const userId = user.id;
-  
- console.log(userId)
 
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
@@ -23,7 +21,6 @@ export default function LikeButton({ postId }) {
         const dataLikes = await resLikes.json();
         setLikesCount(dataLikes.likes);
       } catch (err) {
-        console.error("Error cargando likes:", err);
       }
     };
 
@@ -49,7 +46,6 @@ export default function LikeButton({ postId }) {
     //If the user liked it, add +1, if they liked it, subtract -1
     setLikesCount((prev) => data.liked ? prev + 1 : prev - 1);
   } catch (err) {
-    console.error("Error toggling like:", err);
   }
 };
   return (

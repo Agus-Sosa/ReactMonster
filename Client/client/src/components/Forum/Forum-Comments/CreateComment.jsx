@@ -34,7 +34,6 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
     try {
       setLoading(true);
       setError("");
-      console.log(user.id);
       const response = await fetch(
         `http://localhost:8080/comments/${id_post}`,
         {
@@ -59,7 +58,6 @@ const CommentForm = ({ id_post, id_user, onCommentCreated }) => {
 
       setComment("");
     } catch (err) {
-      console.error(err);
       setError("Error al enviar el comentario. Intenta nuevamente.");
     } finally {
       setLoading(false);

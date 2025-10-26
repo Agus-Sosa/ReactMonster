@@ -51,7 +51,6 @@ const handleCreate =async (newNew) => {
         })
 
         if (!res.ok) {
-          console.log("Error al eliminar la noticia");
           return;
         }
         const data = await res.json();
@@ -61,7 +60,6 @@ const handleCreate =async (newNew) => {
 
 
       } catch (error) {
-        console.log(error)
       }
   }
 
