@@ -2,25 +2,17 @@ import { Button } from '@mui/material';
 import React from 'react'
 import ModalConfirm from '../Buttons/ModalCrud/ModalConfirm';
 
-const DesactivateUserButton = ({onDeleteUser, user,onOpen,  onClose, open, userId}) => {
+const DesactivateUserButton = ({onDeleteUser, myUser,onOpen,  onClose, open, userView}) => {
+    const userRole = myUser?.role;
 
-    const userRole = user?.role;
 
-
-    if (!userRole || (userRole !== "admin" && userRole !== "superadmin") ||user?.id == userId ) return null;
+    if (!userRole || (userRole !== "admin" && userRole !== "superadmin") ||myUser?.id == userView.id_user  || userView.count_state === false) return null;
     
-    
-
-    const handleDelete = async () => {
-        onDeleteUser();
-    }   
+ 
 
     const handleClose = async () => {
         onClose();
     }
-
-
-
 
 
     return (
@@ -28,7 +20,7 @@ const DesactivateUserButton = ({onDeleteUser, user,onOpen,  onClose, open, userI
         <Button onClick={onOpen} variant='contained' color='error'>
             Eliminar Usuario
             </Button>
-            <ModalConfirm onConfirm={handleDelete} onClose={handleClose} open={open}   />
+            <ModalConfirm onConfirm={onDeleteUser} onClose={handleClose} open={open}   />
         </>
   )
 }

@@ -47,7 +47,7 @@ export const verifyToken =(req, res , next)=> {
   try {
     const decodedToken = jwt.verify(token, "react_monsters");
     req.user = decodedToken;
-
+    console.log("decodedToken:", decodedToken);
   next()
 
   } catch (error) {
@@ -102,12 +102,15 @@ export const validateGetUserById= async(req, res, next)=> {
 
 
 export const isUserOrAdmin = (req, res, next) => {
+  
   const userId = parseInt(req.params.id, 10);
   if (!req.user || (req.user.id !== userId && req.user.role !== 'admin' && req.user.role !== 'superadmin') ){
     const error = new Error("No cuenta con los permisos necesarios")
     error.status = 404
     throw error
   }
+
+  next();
 }
 export const isAdmin=(req, res, next)=> {
   if (!req.user.role ||(req.user.role !== 'admin' && req.user.role !== 'superadmin')) {

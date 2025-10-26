@@ -6,10 +6,11 @@ import PageContainer from '../components/Layout/PageContainer/PageContainer';
 import DesactivateUserButton from '../components/Profile/DesactivateUserButton';
 import InfoProfileCardContainer from '../components/Profile/infoProfile/infoProfileCardContainer';
 import PostCardProfileContainer from '../components/Profile/PostUserProfile/PostCardProfileContainer';
+import { toast } from 'react-toastify';
 import EditProfileButton from '../components/Profile/EditProfileButton';
 
 const ProfileUser = () => {
-  const {user} = useContext(AuthContext);
+  const {user, token} = useContext(AuthContext);
   const [userData, setUserData] = useState({});
   const {id_user} = useParams();
   const [notUser, setNotUser]= useState(false);
@@ -26,18 +27,18 @@ const ProfileUser = () => {
 
         if(!res.ok) {
           setNotUser(true);
+          toast.error("No se pudo cargar el perfil del usuario.");
           return;
         }
 
         const data = await res.json();
-        console.log(data)
         setNotUser(false);
         setUserData(data.user);
         setPosts(data.user.Posts);
 
 
       } catch (error) {
-        console.log(error)
+        toast.error("Error al conectar con el servidor.");
         setNotUser(true);
       }
     }
@@ -68,12 +69,17 @@ const ProfileUser = () => {
       })
 
       if (!res.ok) {
-        console.log("Error al elimiar usuario")
+        toast.error("Error al desactivar el usuario.");
         return;
       };
 
+      const data = await res.json();
+      setUserData(data.deletedUser);
+      toast.success("Usuario desactivado correctamente.");
+      handleCancelDelete();
+
     } catch (error) {
-      
+      toast.error("Ocurrió un error inesperado al desactivar el usuario.");
     }
   }
 
@@ -109,59 +115,7 @@ const ProfileUser = () => {
   return (
     <Box sx={{minHeight:"80vh", py:2}}>
       <PageContainer>
-        {/* <Box sx={{display:'flex',justifyContent:"space-between", alignItems:"start" ,p:5, background:"#1e1e1e", border:"solid 0.5px gray", borderRadius:2}}>
-
-      <Box sx={{display:"flex", gap:5, alignItems:"center", justifyContent:"center",flexWrap:"wrap", textAlign:{xs:"center", md:"left"}}}>
-
-
-        <Box sx={{width:"250px", height:"250px", borderRadius:"50%", overflow:"hidden"}}>
-          <Box component="img" sx={{width:"100%"}} src={userInfo.user?.profile_picture}/>
-        </Box>
-        <Box sx={{color:'white'}}>
-          <Box component="h1" sx={{fontSize:"40px", mb:2 }}>
-              {userInfo.user?.user_name}
-          </Box>
-          <Box>
-            Rango: {userInfo.user?.range}
-          </Box>
-          <Box>
-            Ultima Conexion: {new Date(userInfo.user?.last_connection).toLocaleDateString('es-AR')}
-          </Box>
-          <Box>
-            Miembro desde: {new Date(userInfo.user?.createdAt).toLocaleDateString('es-AR')}
-          </Box>
-        </Box>
-              </Box>
-        <Box sx={{display:{xs:"none",md:"block"}}}>
-        <EditProfileButton user={user} userInfo={userInfo}/>
-
-        </Box>
-        </Box>
-            <Box sx={{ display: "flex",flexDirection:{xs:"column",md:"row"}, gap: {xs:2,md:5}, mt: {xs:2,md:5}, color: "white", flexWrap: "wrap" }}>
-              <Box sx={{ flex: 1, backgroundColor: "#1e1e1e", p: 2 ,  border:"solid 0.5px gray", borderRadius:2}}>
-                <Box component="h2" sx={{ fontSize: "30px", my: 3 }}>Juego</Box>
-                <Box>
-                  Rango {userInfo.user?.range}
-                </Box>
-              </Box>
-
-                <Box sx={{ flex: 1, backgroundColor: "#1e1e1e", p: 2,  border:"solid 0.5px gray" , borderRadius:2}}>
-                  <Box component="h2" sx={{ fontSize: "30px", my: 3 }}>Foro</Box>
-                  <Box>Publicaciones: {userData.user?.total_post}</Box>
-                  <Box>Comentarios: {userData.user?.total_comments}</Box>
-                  <Box>Megustas recibidos: {userData.user?.total_get_like}</Box>
-                  <Box>Megustas Dados: {userData.user?.total_give_like}</Box>
-
-                </Box>
-      </Box>
-      <Box sx={{display:{xs:"block",md:"none"}, my:5}}>
-        <EditProfileButton user={user} userInfo={userInfo}/>
-
-        </Box> */}
-      
-        
-      
-
+    
         <Box>
           <Box sx={{ display: "flex", gap: 1, color: "white", justifyContent:"space-between", flexDirection:{xs:"column",md:"row"}, width:"100%",  alignItems:'start' }}>
             <Box sx={{ display: "flex", gap: 1, color: "white", flexDirection:{xs:"row",md:"row"},  flexWrap:"wrap" }}>
@@ -177,9 +131,9 @@ const ProfileUser = () => {
                   </Box>
             </Box>
 
-            <Box>
+            <Box my={2}>
                 <EditProfileButton user={user} userInfo={userInfo}/>
-              <DesactivateUserButton onDeleteUser={handleDeleteUser} onOpen={ handleOpenDelete}  open={openModalDelete} user={user}  userId={id_user} onClose={handleCancelDelete}/>
+              <DesactivateUserButton onDeleteUser={handleDeleteUser} onOpen={ handleOpenDelete}  open={openModalDelete} myUser={user}  userView={userData} onClose={handleCancelDelete}/>
             </Box>
 
           </Box>

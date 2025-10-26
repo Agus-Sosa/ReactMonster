@@ -51,8 +51,8 @@ class UserController {
     async deleteUserById (req, res, next) {
         try {
             const {id}= req.params;
-            await this.userService.deleteUserById(id);
-            await res.status(200).json({status:"success", messgae:"Usuario eliminado con exito"})
+            const deletedUser = await this.userService.deleteUserById(id);
+            res.status(200).json({status:"success", messgae:"Usuario eliminado con exito", deletedUser:deletedUser});
         } catch (error) {
             next(error)
         }
@@ -60,11 +60,11 @@ class UserController {
 
     async updateUser(req,res,next) {
         try {
-            const {id}=req.params;
+            const id = req.user.id;
             const newData = req.body;
 
             const updateUser = await this.userService.updateUser(id, newData);
-            res.status(200).json({status: "success", data:updateUser})
+            res.status(200).json({status: "success", updatedUser:updateUser})
 
         } catch (error) {
             next(error);

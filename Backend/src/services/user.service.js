@@ -54,7 +54,7 @@ class UserService {
 
     async updateUser (id_user,newUpdate) {
         
-        const [updateData]= await this.modelUser.update(newUpdate, {where:{id_user}});
+        const [updateData]= await this.modelUser.update(newUpdate, {where:{id_user: id_user}});
     
     
         if(updateData ===0) {
@@ -65,6 +65,7 @@ class UserService {
     }
 
     async deleteUserById(id) {
+        console.log("user id:", id)
         const user = await this.modelUser.findByPk(id);
 
         if(!user) {
@@ -73,10 +74,11 @@ class UserService {
             throw error;
         }
 
-        return await user.update({count_state: false, user_name: "Usuario eliminado"})
+        const deletedUser =  await user.update({ count_state: false, user_name: "Usuario eliminado" , profile_picture: "https://i.ibb.co/67w66kC8/20251025-2346-Avatar-de-Despedida-simple-compose-01k8f6fn84fyeb1pxqs5pemc4e.png"})
+        return deletedUser;
     }
 
 }
 
 
-export default UserService;
+export default UserService; 
