@@ -34,7 +34,7 @@ router.post('/register',validateNewUser, async(req, res, next)=>{
     await userController.createNewUser(req, res, next)
 })
 
-router.put('/',verifyToken, async(req, res, next)=> {
+router.put('/:id', verifyToken, isUserOrAdmin, async(req, res, next)=> {
     await userController.updateUser(req, res, next)
 } )
 
