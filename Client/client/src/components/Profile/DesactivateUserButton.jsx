@@ -3,15 +3,14 @@ import React from 'react'
 import ModalConfirm from '../Buttons/ModalCrud/ModalConfirm';
 
 const DesactivateUserButton = ({onDeleteUser, myUser,onOpen,  onClose, open, userView}) => {
-    const userRole = myUser?.role;
-
-
-    if (!userRole || (userRole !== "admin" && userRole !== "superadmin") ||myUser?.id == userView.id_user  || userView.count_state === false) return null;
+    const hasAdminPermissions = myUser?.role === "admin" || myUser?.role === "superadmin";
     
- 
+    const isViewingOwnProfile = myUser?.id === userView?.id;
 
-    const handleClose = async () => {
-        onClose();
+    const isUserInactive = userView?.count_state === false;
+
+    if (!hasAdminPermissions || isViewingOwnProfile || isUserInactive) {
+        return null;
     }
 
 
@@ -20,7 +19,7 @@ const DesactivateUserButton = ({onDeleteUser, myUser,onOpen,  onClose, open, use
         <Button onClick={onOpen} variant='contained' color='error'>
             Eliminar Usuario
             </Button>
-            <ModalConfirm onConfirm={onDeleteUser} onClose={handleClose} open={open}   />
+            <ModalConfirm onConfirm={onDeleteUser} onClose={onClose} open={open}   />
         </>
   )
 }

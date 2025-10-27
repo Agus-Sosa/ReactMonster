@@ -2,7 +2,8 @@ import { Alert, Box, Button, FormControl, Input, InputBase, useMediaQuery } from
 import React, { useContext } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {toast, ToastContainer} from 'react-toastify'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../context/AuthContext'
 
 const AuthForm = ({ isForLogin}) => {
@@ -84,7 +85,9 @@ const AuthForm = ({ isForLogin}) => {
             handleUserLogin(data.token);
             navigate('/');
         } else {
-            navigate('/login')
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000); 
         }
 
         setError({})
@@ -118,9 +121,6 @@ const AuthForm = ({ isForLogin}) => {
             {isForLogin ? "Iniciar Sesion" :"Registrarse"}
         </Button>
         </Box>
-
-                <ToastContainer />
-
        
     </>
 )

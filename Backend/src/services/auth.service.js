@@ -9,7 +9,6 @@ class AuthService {
 
     
     async createNewUser (newUser) {
-        console.log(newUser)
         const existingEmail = await this.modelUser.findOne({where: {user_email: newUser.user_email}})
         const existingName = await this.modelUser.findOne({where: {user_name: newUser.user_name}})
         
@@ -39,7 +38,7 @@ class AuthService {
     async login (email, password) {
         
 
-        const user = await User.findOne({where: {user_email:email}});
+        const user = await User.findOne({where: {user_email:email, count_state:true}});
         if(!user) {
             const error = new Error("Usuario no encontrado, por favor verifique sus credenciales");
             error.status = 404;
