@@ -46,7 +46,6 @@ class PostController {
 
     const newPostData = { title, resume, content, id_category, id_user, imgContent }; 
  
-      console.log("createNewPost →", newPostData);
 
       const post = await this.postService.createNewPost(newPostData);
       return res.status(201).json({ status: "success", newPost: post });
